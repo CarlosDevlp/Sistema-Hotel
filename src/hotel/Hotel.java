@@ -49,7 +49,7 @@ public class Hotel {
        //ejemplo de ver si la tabla está vacía
        /**/
        System.out.println("verificando si la tabla está vacía de una base de datos en cloud");
-       if(BasicDao.isTableEmpty("testtable2"))
+       if(BasicDao.isTableEmpty("testtable"))
             System.out.println("la tabla está vacía");
        else System.out.println("la tabla NO está vacía");           
        /**/ 
@@ -63,12 +63,18 @@ public class Hotel {
             /*
             System.out.println("obteniendo los datos de una base de datos en cloud");
             ArrayList<Map<String,String>> result=BasicDao.select("testtable",new String[]{"*"}, "table_id=1");
-            //obtenemos la primera fila
-            Map<String,String> row= result.get(0);            
-            System.out.println("columna1 - "+row.get("column1"));            
+            //obtenemos la primera fila            
+            Set<String> colsNameSet;
+            for(Map<String,String> row :result){
+                colsNameSet=row.keySet();
+                for(String colName: colsNameSet)
+                    System.out.println(colName+" - "+row.get(colName));       
+                System.out.println("_____________________________________");
+            }                        
             */           
        }
-
+       
+       
 
         {  
             //ejemplo de select join
@@ -85,15 +91,54 @@ public class Hotel {
            }
             */
         }
+               
+        {
+           //ejemplo de select last row
+            //permite seleccionar la última fila
+            /**/
+            System.out.println("obteniendo la última fila de una tabla de una base de datos en cloud");
+            Map<String,String> lastRow=BasicDao.selectLastRow("testtable",new String[]{"*"}, "table_id");
+            //obtenemos la última fila
+            System.out.println("table_id - "+lastRow.get("table_id"));
+            System.out.println("columna1 - "+lastRow.get("column1"));
+            System.out.println("columna2 - "+lastRow.get("column2"));
+            System.out.println("_______________________________________________________");
+            /**/           
+       }
         
         
         
-        
-        
+                
         {
            //ejemplo de call (procedimientos)
+            /*            
+            El método call ,de BasicDao, puede llamar a cualquier procedimiento de cualquier complejidad
+            que se crea en la base de datos.
+            */
+            
+            
+            
             /*
-            Procedimiento a llamar
+            1)Si el método no tiene parámetros, proporcionar null o un arreglo vacío su lugar
+            ArrayList<Map<String,String>> result=BasicDao.call("getFirstRow", null);
+            
+            _________________________________________________________
+            2)si el método no devuelve nada, no recepcionar los datos
+            BasicDao.call("getFirstRow", null);            
+            procedimiento a llamar
+            CREATE PROCEDURE addNewTesttable(IN descp VARCHAR(50))
+            BEGIN
+               INSERT INTO testtable (column1,column2) VALUES(descp,NOW());
+            END;
+            //
+            */            
+            BasicDao.call("addNewTesttable", new String []{"'holi XDDDDD :P'"});
+            
+            
+            /*
+            __________________________________________________________
+            3)si el método requiere de parámetros y devuelve datos. Como el siguiente caso.            
+            Procedimiento a llamar:
             CREATE PROCEDURE getNRows(IN amount INT, IN tableNumber INT)
             BEGIN    
                 IF tableNumber=1 THEN 
@@ -103,17 +148,9 @@ public class Hotel {
                  END IF;
             END;
             //            
-            El método call ,de BasicDao, puede llamar a cualquier procedimiento de cualquier complejidad
-            que se cree en la base de datos.
-            */
-            System.out.println("realizando un llamado a un procedimiento en base de datos en cloud");
-            //getFirstRow, 
+             */
             ArrayList<Map<String,String>> result=BasicDao.call("getNRows", new String[]{"2","1"});
-            /*
-            Si el método no tiene procedimientos, proporcionar null o un arreglo vacío
-            ArrayList<Map<String,String>> result=BasicDao.call("getFirstRow", null);
-            */
-            //obtenemos la primera fila
+            System.out.println("realizando un llamado a un procedimiento en base de datos en cloud");
             Map<String,String> row= result.get(1);    
             
             System.out.println("tam -> "+result.size());
@@ -123,7 +160,20 @@ public class Hotel {
             /**/
        }
         
-        
+        /*ejemplo extra de procedimientos xd
+            CREATE PROCEDURE getSizeTesttable()
+            BEGIN 
+              SELECT COUNT(*) FROM testtable;
+            END;
+            //        
+        {                        
+            ArrayList<Map<String,String>> result=BasicDao.call("getSizeTesttable", null);
+            Set<String> colsNameSet;
+            Map<String,String> row=result.get(0);
+            System.out.println("el tamaño de la table testtable es-> "+row.get("COUNT(*)"));            
+           
+        } 
+        */
        
     }
     

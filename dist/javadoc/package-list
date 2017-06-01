@@ -1,7 +1,9 @@
 assets.values
 conexion
+controlador
 dao
 dto
 hotel
 interfaces
+modelo
 vista

@@ -112,7 +112,7 @@ abstract public class BasicDao {
                 ArrayList<String> columns=new ArrayList();      
                 int tam;
                 if(col[0].compareTo("*")==0){//todas las columnas                 
-                    ResultSetMetaData meta=r.getMetaData();
+                    ResultSetMetaData meta=r.getMetaData();                    
                     tam= meta.getColumnCount();                    
                     for(int i=1;i<=tam;i++)
                            columns.add(meta.getColumnName(i));
@@ -122,17 +122,20 @@ abstract public class BasicDao {
                     tam=columns.size();
                 }
 
+                System.out.println();
                 //iteración para obtener cada elemento del resultado
                 int row=0;
                 String columnName;
-                while(r.next()){                     
-                    cols.add(new HashMap<String,String>());
-                    for(int i=0;i<tam;i++){
-                       columnName=columns.get(i);
-                       cols.get(row).put(columnName,r.getString(columnName)); 
+                //System.out.println("size: "+tam);
+                if(tam>0)
+                    while(r.next()){                     
+                        cols.add(new HashMap<String,String>());
+                        for(int i=0;i<tam;i++){
+                           columnName=columns.get(i);
+                           cols.get(row).put(columnName,r.getString(columnName)); 
+                        }
+                        row++;
                     }
-                    row++;
-                }
     }
 
 
@@ -170,9 +173,9 @@ abstract public class BasicDao {
         }catch(Exception err){                        
             System.err.println(LOG_TAG_ERROR+" On select: ");
             err.printStackTrace(System.err);            
-        }finally{ 
-            return result;
-        }
+        }   
+        return result;
+        
     }
     
     
@@ -353,21 +356,27 @@ abstract public class BasicDao {
      * 
      *@return arreglo con los datos de la fila
     */ 
-    public static ArrayList<String> selectLastRow(String table,String col,String columnToOrderBy){
+    public static Map<String,String> selectLastRow(String table,String []col,String columnToOrderBy){
         ResultSet r;                
-        ArrayList<ArrayList<String>> cols=new ArrayList();                
+        ArrayList<Map<String,String>> cols=new ArrayList();        
         try{ 
-            //ejecución  del código sql
             
-            r=BasicDao.DB.query("SELECT "+col+" FROM "+table+" ORDER BY "+columnToOrderBy+" DESC LIMIT 1","SELECT");
+            String colSeq="";
+            for(int i=0;i<col.length;i++){
+                if(i>0) colSeq+=",";
+                colSeq+=col[i];  
+            }
+            
+            //ejecución  del código sql                                    
+            r=BasicDao.DB.query("SELECT "+colSeq+" FROM "+table+" ORDER BY "+columnToOrderBy+" DESC LIMIT 1","SELECT");
             //proceso de conversión de datos a array
-            BasicDao.result(cols,r,col);                
+            BasicDao.mapResult(cols,r,col);
         }catch(Exception err){
               System.err.println(LOG_TAG_ERROR+" on selectLastRow method: "+err);              
-        }finally{ 
-            return cols.get(0);
         }
         
+        return cols.get(0);
+                
     }
  
     
