@@ -61,6 +61,15 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>static java.util.ArrayList&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#call-java.lang.String-java.lang.String:A-">call</a></span>(java.lang.String&nbsp;name,
+    java.lang.String[]&nbsp;params)</code>
+<div class="block">CALL <br>
+ permite llamar a procedimientos 
+ ya definidos a nivel de SQL</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#delete-java.lang.String-java.lang.String-">delete</a></span>(java.lang.String&nbsp;table,
       java.lang.String&nbsp;where)</code>
@@ -69,13 +78,13 @@ eliminar datos <br>
 Permite insertar datos nuevos a una tabla</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#init--">init</a></span>()</code>
 <div class="block">INIT, permite inicializar la conexión de BasicDao con la base de datos.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#insert-java.lang.String-java.lang.String:A-java.lang.String:A-">insert</a></span>(java.lang.String&nbsp;table,
       java.lang.String[]&nbsp;cols,
@@ -85,14 +94,14 @@ Inserción de datos <br>
 Permite insertar datos nuevos a una tabla</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#isTableEmpty-java.lang.String-">isTableEmpty</a></span>(java.lang.String&nbsp;table)</code>
 <div class="block">verificación de tabla vacía <br>
 Permite verificar si la tabla está vacía</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static java.util.ArrayList&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#select-java.lang.String:A-java.lang.String:A-java.lang.String:A-java.lang.String-">select</a></span>(java.lang.String[]&nbsp;table,
       java.lang.String[]&nbsp;col,
@@ -103,7 +112,7 @@ Selección  con joins <br>
 Permite seleccionar los datos de varias tablas al mismo tiempo con Joins</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static java.util.ArrayList&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#select-java.lang.String-java.lang.String:A-java.lang.String-">select</a></span>(java.lang.String&nbsp;table,
       java.lang.String[]&nbsp;col,
@@ -113,16 +122,16 @@ Selección  básica <br>
 Permite seleccionar los datos de una tabla</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>static java.util.ArrayList&lt;java.lang.String&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#selectLastRow-java.lang.String-java.lang.String-java.lang.String-">selectLastRow</a></span>(java.lang.String&nbsp;table,
-             java.lang.String&nbsp;col,
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>static java.util.Map&lt;java.lang.String,java.lang.String&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#selectLastRow-java.lang.String-java.lang.String:A-java.lang.String-">selectLastRow</a></span>(java.lang.String&nbsp;table,
+             java.lang.String[]&nbsp;col,
              java.lang.String&nbsp;columnToOrderBy)</code>
 <div class="block">seleccionar última fila <br>
 Permite seleccionar la última fila de la tabla <br></div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#update-java.lang.String-java.lang.String:A-java.lang.String:A-java.lang.String-">update</a></span>(java.lang.String&nbsp;table,
       java.lang.String[]&nbsp;cols,
@@ -304,15 +313,15 @@ Permite verificar si la tabla está vacía</div>
 </dl>
 </li>
 </ul>
-<a name="selectLastRow-java.lang.String-java.lang.String-java.lang.String-">
+<a name="selectLastRow-java.lang.String-java.lang.String:A-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>selectLastRow</h4>
-<pre>public static&nbsp;java.util.ArrayList&lt;java.lang.String&gt;&nbsp;selectLastRow(java.lang.String&nbsp;table,
-                                                                  java.lang.String&nbsp;col,
-                                                                  java.lang.String&nbsp;columnToOrderBy)</pre>
+<pre>public static&nbsp;java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;selectLastRow(java.lang.String&nbsp;table,
+                                                                             java.lang.String[]&nbsp;col,
+                                                                             java.lang.String&nbsp;columnToOrderBy)</pre>
 <div class="block">seleccionar última fila <br>
 Permite seleccionar la última fila de la tabla <br></div>
 <dl>
@@ -322,6 +331,27 @@ Permite seleccionar la última fila de la tabla <br></div>
 <dd><code>columnToOrderBy</code> - nombre de la columna por la que se ordenará</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>arreglo con los datos de la fila</dd>
+</dl>
+</li>
+</ul>
+<a name="call-java.lang.String-java.lang.String:A-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>call</h4>
+<pre>public static&nbsp;java.util.ArrayList&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;&nbsp;call(java.lang.String&nbsp;name,
+                                                                                         java.lang.String[]&nbsp;params)</pre>
+<div class="block">CALL <br>
+ permite llamar a procedimientos 
+ ya definidos a nivel de SQL</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>name</code> - es el nombre del procedimiento a llamar</dd>
+<dd><code>params</code> - son los parámetros (sus valores) en el orden que el procedimiento requiere.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>si el procedimiento a llamar retorna un valor o conjunto de valores, 
+ recepcionarlo.</dd>
 </dl>
 </li>
 </ul>
