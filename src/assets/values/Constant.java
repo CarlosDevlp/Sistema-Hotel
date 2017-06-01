@@ -6,7 +6,9 @@
 package assets.values;
 
 /**
- *
+ * La clase Constant, permite declarar valores globales
+ * que pueden ser usados en todo el software. 
+ *  
  * @author Carlos
  */
 public abstract class Constant {

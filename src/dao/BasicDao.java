@@ -172,7 +172,7 @@ abstract public class BasicDao {
             err.printStackTrace(System.err);            
         }finally{ 
             return result;
-        }        
+        }
     }
     
     
@@ -369,6 +369,46 @@ abstract public class BasicDao {
         }
         
     }
+ 
     
+    /**
+     * CALL <br>
+     * permite llamar a procedimientos 
+     * ya definidos a nivel de SQL
+     * 
+     * @param name es el nombre del procedimiento a llamar
+     * @param params son los parámetros (sus valores) en el orden que el procedimiento requiere.
+     * 
+     * @return si el procedimiento a llamar retorna un valor o conjunto de valores, 
+     * recepcionarlo.
+     */
+    public static ArrayList<Map<String,String>> call(String name,String []params){
+        ResultSet r;                
+        ArrayList<Map<String,String>> result=new ArrayList();                
+        try{ 
+            String paramsSeq="";
+            
+            if(params!=null){
+                paramsSeq="(";
+                for(int i=0;i<params.length;i++){
+                    if(i>0) paramsSeq+=",";
+                    paramsSeq+=params[i];  
+                }
+                paramsSeq+=")";
+            }
+            
+            //System.out.println("CALL "+name+paramsSeq);
+            
+            //ejecución  del código sql
+            r=BasicDao.DB.query("CALL "+name+paramsSeq,"PROCEDURE");
+            //proceso de conversión de datos a array de mapas
+            BasicDao.mapResult(result,r,new String[]{"*"});
+            
+        }catch(Exception err){                        
+            System.err.println(LOG_TAG_ERROR+" On call: ");
+            err.printStackTrace(System.err);            
+        }        
+        return result;        
+    }
     
 }

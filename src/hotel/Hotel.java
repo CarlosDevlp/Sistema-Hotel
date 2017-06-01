@@ -60,13 +60,13 @@ public class Hotel {
        
        {
            //ejemplo de select 
-            /**/
+            /*
             System.out.println("obteniendo los datos de una base de datos en cloud");
             ArrayList<Map<String,String>> result=BasicDao.select("testtable",new String[]{"*"}, "table_id=1");
             //obtenemos la primera fila
             Map<String,String> row= result.get(0);            
             System.out.println("columna1 - "+row.get("column1"));            
-            /**/           
+            */           
        }
 
 
@@ -85,6 +85,45 @@ public class Hotel {
            }
             */
         }
+        
+        
+        
+        
+        
+        {
+           //ejemplo de call (procedimientos)
+            /*
+            Procedimiento a llamar
+            CREATE PROCEDURE getNRows(IN amount INT, IN tableNumber INT)
+            BEGIN    
+                IF tableNumber=1 THEN 
+                   SELECT * FROM  testtable LIMIT amount;   
+                ELSE 
+                   SELECT * FROM  testtable2 LIMIT amount;   
+                 END IF;
+            END;
+            //            
+            El método call ,de BasicDao, puede llamar a cualquier procedimiento de cualquier complejidad
+            que se cree en la base de datos.
+            */
+            System.out.println("realizando un llamado a un procedimiento en base de datos en cloud");
+            //getFirstRow, 
+            ArrayList<Map<String,String>> result=BasicDao.call("getNRows", new String[]{"2","1"});
+            /*
+            Si el método no tiene procedimientos, proporcionar null o un arreglo vacío
+            ArrayList<Map<String,String>> result=BasicDao.call("getFirstRow", null);
+            */
+            //obtenemos la primera fila
+            Map<String,String> row= result.get(1);    
+            
+            System.out.println("tam -> "+result.size());
+            System.out.println("id - "+row.get("table_id"));
+            System.out.println("columna1 - "+row.get("column1"));
+            System.out.println("columna2 - "+row.get("column2"));
+            /**/
+       }
+        
+        
        
     }
     
