@@ -5,17 +5,41 @@
  */
 package vista;
 
+import assets.values.Constant;
+import controlador.CtrLogin;
+import controlador.CtrMain;
+import controlador.CtrMantenerUsuario;
+import controlador.CtrNSeguridad;
 /**
- *
- * @author JUAN
+ * 
+ * @author Carlos Chavez Laguna
  */
-public class frmMain extends javax.swing.JFrame {
-
+public class FrmMain extends StandardForm {
+    private CtrMain mCtrMain;    
+    private CtrNSeguridad mCtrNSeguridad;
     /**
      * Creates new form frmMain
      */
-    public frmMain() {
-        initComponents();
+    public FrmMain() {
+        initComponents();        
+        mCtrMain =new CtrMain(this);
+        //controladora de negocio facturación
+        mCtrNSeguridad = new CtrNSeguridad();                
+            //controlador login
+            CtrLogin ctrLogin= new CtrLogin(new FrmLogin());
+            mCtrNSeguridad.setCtrLogin(ctrLogin);
+            //controlador mantener usuario
+            CtrMantenerUsuario ctrMantenerUsuario= new CtrMantenerUsuario(new FrmMantenerUsuario());
+            mCtrNSeguridad.setCtrMantenerUsuario(ctrMantenerUsuario);
+                                
+        
+            
+
+         mCtrMain.setCtrNSeguridad(mCtrNSeguridad);
+         
+        //inicializar sistema y su configuración
+         mCtrMain.init();
+        
     }
 
     /**
@@ -38,6 +62,7 @@ public class frmMain extends javax.swing.JFrame {
         MnFacturacion = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle(Constant.APP_NAME);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -45,18 +70,21 @@ public class frmMain extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 532, Short.MAX_VALUE)
+            .addGap(0, 667, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addGap(0, 387, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Usuario");
 
         MnAdministrador.setText("Administrador");
+        MnAdministrador.setEnabled(false);
+        MnAdministrador.setName("padministrador"); // NOI18N
 
         SmnMantenerUsuario.setText("Mantener Usuario");
+        SmnMantenerUsuario.setName("pmantenerusuario"); // NOI18N
         SmnMantenerUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SmnMantenerUsuarioActionPerformed(evt);
@@ -70,6 +98,7 @@ public class frmMain extends javax.swing.JFrame {
         jMenu1.add(MnAdministrador);
 
         MnVerPerfil.setText("Ver Perfil");
+        MnVerPerfil.setName("pperfil"); // NOI18N
         jMenu1.add(MnVerPerfil);
 
         MnSalir.setText("Salir");
@@ -83,6 +112,8 @@ public class frmMain extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         MnFacturacion.setText("Facturación");
+        MnFacturacion.setEnabled(false);
+        MnFacturacion.setName("pfacturacion"); // NOI18N
         jMenuBar1.add(MnFacturacion);
 
         setJMenuBar(jMenuBar1);
@@ -126,30 +157,31 @@ public class frmMain extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmMain().setVisible(true);
+                new FrmMain().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu MnAdministrador;
-    private javax.swing.JMenu MnFacturacion;
+    public javax.swing.JMenu MnAdministrador;
+    public javax.swing.JMenu MnFacturacion;
     private javax.swing.JMenuItem MnSalir;
     private javax.swing.JMenuItem MnVerPerfil;
-    private javax.swing.JMenuItem SmnMantenerUsuario;
+    public javax.swing.JMenuItem SmnMantenerUsuario;
     private javax.swing.JMenuItem SmnReporteSesiones;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

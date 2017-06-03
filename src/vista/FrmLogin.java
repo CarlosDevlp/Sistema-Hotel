@@ -5,22 +5,19 @@
  */
 package vista;
 
-import controlador.CtrLogin;
+import assets.values.Constant;
 /**
  * frmLogin - Formulario de login 
  * @author Carlos Chavez Laguna
  */
 public class FrmLogin extends StandardForm {
-
-    private CtrLogin mCtrLogin;
+    
     /**
      * 
      * Creates new form frmLogin
      */
     public FrmLogin() {               
-        initComponents();
-                        
-         mCtrLogin=new CtrLogin(this);
+        initComponents();                           
     }
 
     
@@ -44,21 +41,29 @@ public class FrmLogin extends StandardForm {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 0, 24)); // NOI18N
-        jLabel1.setText("appName");
+        jLabel1.setText(Constant.APP_NAME);
 
         jLabel2.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
         jLabel2.setText("Login");
 
+        TxtUsername.setBackground(new java.awt.Color(255, 255, 255));
         TxtUsername.setName("txtUsername"); // NOI18N
+        TxtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtUsernameKeyPressed(evt);
+            }
+        });
 
         BtnEnter.setText("Entrar");
         BtnEnter.setName("btnEntrar"); // NOI18N
 
+        TxtPassword.setBackground(new java.awt.Color(255, 255, 255));
         TxtPassword.setName("txtPassword"); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
@@ -127,6 +132,10 @@ public class FrmLogin extends StandardForm {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TxtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtUsernameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtUsernameKeyPressed
 
     /**
      * @param args the command line arguments

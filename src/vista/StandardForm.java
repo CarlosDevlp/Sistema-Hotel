@@ -5,6 +5,7 @@
  */
 package vista;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,15 +17,36 @@ abstract public class StandardForm extends javax.swing.JFrame{
 
     
     public void messageBox(String title,String message){
-        JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
     }    
     
     public void messageBoxAlert(String title,String message){
-        JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, message, title, JOptionPane.WARNING_MESSAGE);
     }    
     
     public void messageBoxError(String title,String message){
-        JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, message, title, JOptionPane.ERROR_MESSAGE);
     }
+    
+    /**
+     * maximize <br>
+     * maximizar el tamaño de la ventana
+     *      
+    */ 
+    public void maximize(){        
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+    }
+    
+   
+    /**
+     * windowAlignCenter <br>
+     * ubicar la ventana justo al centro de la pantalla
+     *      
+    */ 
+    public void windowAlignCenter(){
+        this.setLocationRelativeTo(null);
+    }
+    
+    
     
 }

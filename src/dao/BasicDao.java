@@ -420,4 +420,18 @@ abstract public class BasicDao {
         return result;        
     }
     
+    /**
+     * Row Exists <br>
+     * permite saber si existe una fila en una tabla 
+     * para una serie de condiciones
+     * 
+     * @param table nombre de la tabla
+     * @param cond  condición que debe cumplir la fila
+     * 
+     * @return verdadero o falso si existe o no la fila
+     */
+    public static boolean rowExists(String table,String cond){
+        ArrayList<Map<String,String>> result=select(table,new String[]{"*"},cond);
+        return result.size()>0;
+    }
 }
