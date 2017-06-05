@@ -77,7 +77,12 @@ public class Rol {
     }
     
     
-    //
+    /**
+     * obtener toda la lista de roles existentes
+     * en la base de datos.
+     * 
+     * @return retorna una arraylist de roles
+     */
     public static ArrayList<Rol> getRolList(){
         ArrayList<Map<String,String>> result=BasicDao.select("roles", new String[]{"*"}, null);
         ArrayList<Rol> rolList=new ArrayList();

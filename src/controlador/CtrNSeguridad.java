@@ -70,7 +70,7 @@ public class CtrNSeguridad {
         mCtrMantenerUsuario.showFrmMantenerUsuario();
     }
     
-    public void loadRoles(){
-        mCtrMantenerUsuario.loadRoles();
+    public void loadData(){
+        mCtrMantenerUsuario.loadData();
     }
 }

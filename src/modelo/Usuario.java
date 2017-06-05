@@ -115,6 +115,22 @@ public class Usuario {
      */
     public void save(){
         BasicDao.update("user", new String []{"UsuarioUser","PassUser"}, new String []{this.usuarioUser,this.passUser}, "idUser="+this.idUser);
+    }        
+    
+    /**
+     * obtener toda la lista de usuarios existentes
+     * en la base de datos.
+     * 
+     * @return retorna una arraylist de roles
+     */
+    public static ArrayList<Usuario> getUsuarioList(){
+        ArrayList<Map<String,String>> result=BasicDao.select("user", new String[]{"*"}, null);
+        ArrayList<Usuario> userList=new ArrayList();
+        for(Map<String,String> row:result){ 
+            userList.add(new Usuario(row));
+            userList.get(userList.size()-1).setRolUser(Rol.getRol(row.get("Roles_idRoles")));
+        }
+        return userList;
     }
    
 }

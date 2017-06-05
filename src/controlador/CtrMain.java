@@ -72,7 +72,7 @@ public class CtrMain implements ActionListener{
         mCtrNSeguridad.showFrmLogin();                
         
         
-        mCtrNSeguridad.loadRoles();
+        mCtrNSeguridad.loadData();
         //cuando el usuario se logea, esto debe pasar
         mCtrNSeguridad.setOnUserLogged(new Callback(){
             @Override

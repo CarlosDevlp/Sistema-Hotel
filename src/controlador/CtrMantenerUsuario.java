@@ -6,8 +6,11 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 import modelo.Rol;
+import modelo.Usuario;
 import vista.FrmMantenerUsuario;
 
 /**
@@ -17,6 +20,14 @@ import vista.FrmMantenerUsuario;
 public class CtrMantenerUsuario {
     private FrmMantenerUsuario mFrmMantenerUsuario;
     
+    //ROL
+    private ArrayList<Rol> mRolList;
+    private ArrayList<String> mRolNameList;
+    
+    //USER TABLE
+    private ArrayList<Usuario> mUserList;
+    private DefaultTableModel mUserTableModel;
+    private final String []USER_TABLE_COLUMN_NAMES={"Nombres y apellidos","Nombre de usuario","Rol"};
     //constructores
     public CtrMantenerUsuario(FrmMantenerUsuario frmMantenerUsuario) {
         this.mFrmMantenerUsuario = frmMantenerUsuario;        
@@ -30,14 +41,34 @@ public class CtrMantenerUsuario {
         this.mFrmMantenerUsuario.setVisible(false);
     }
     
+    /**
+     * Pre-cargar data en el formulario.
+     */
+    public void loadData(){
+
+        //cargar lista de roles en cmbRol
+        mRolList= Rol.getRolList();
+        mRolNameList=new ArrayList();
+        
+        for(Rol rol:mRolList)
+            mRolNameList.add(rol.getNombreRol());
+        
+        this.mFrmMantenerUsuario.cmbRol.setModel(new DefaultComboBoxModel(mRolNameList.toArray()));
+
+        
+        //cargar usuarios en la tabla tbUser
+        clearTable();
+        mUserList= Usuario.getUsuarioList();
+        for(Usuario usuario:mUserList)        
+            mUserTableModel.addRow(new String[]{"",usuario.getUsuario(),usuario.getRolUser().getNombreRol()});        
+        this.mFrmMantenerUsuario.tbUser.setModel(mUserTableModel);
+                
+    }
     
-    public void loadRoles(){
-        ArrayList<Rol> rolList= Rol.getRolList();
-        ArrayList<String> rolNameList=new ArrayList();
-        
-        for(Rol rol:rolList)
-            rolNameList.add(rol.getNombreRol());
-        
-        this.mFrmMantenerUsuario.cmbRol.setModel(new DefaultComboBoxModel(rolNameList.toArray()));
+    
+    //vaciar la tabla
+    private void clearTable(){        
+        mUserTableModel = new DefaultTableModel(null,USER_TABLE_COLUMN_NAMES);
+         this.mFrmMantenerUsuario.tbUser.setModel(mUserTableModel);
     }
 }

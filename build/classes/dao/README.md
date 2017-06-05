@@ -102,6 +102,15 @@ Permite verificar si la tabla está vacía</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
+<td class="colFirst"><code>static boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#rowExists-java.lang.String-java.lang.String-">rowExists</a></span>(java.lang.String&nbsp;table,
+         java.lang.String&nbsp;cond)</code>
+<div class="block">Row Exists <br>
+ permite saber si existe una fila en una tabla 
+ para una serie de condiciones</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static java.util.ArrayList&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#select-java.lang.String:A-java.lang.String:A-java.lang.String:A-java.lang.String-">select</a></span>(java.lang.String[]&nbsp;table,
       java.lang.String[]&nbsp;col,
@@ -112,7 +121,7 @@ Selección  con joins <br>
 Permite seleccionar los datos de varias tablas al mismo tiempo con Joins</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static java.util.ArrayList&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#select-java.lang.String-java.lang.String:A-java.lang.String-">select</a></span>(java.lang.String&nbsp;table,
       java.lang.String[]&nbsp;col,
@@ -122,7 +131,7 @@ Selección  básica <br>
 Permite seleccionar los datos de una tabla</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static java.util.Map&lt;java.lang.String,java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#selectLastRow-java.lang.String-java.lang.String:A-java.lang.String-">selectLastRow</a></span>(java.lang.String&nbsp;table,
              java.lang.String[]&nbsp;col,
@@ -131,7 +140,7 @@ Permite seleccionar los datos de una tabla</div>
 Permite seleccionar la última fila de la tabla <br></div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../dao/BasicDao.html#update-java.lang.String-java.lang.String:A-java.lang.String:A-java.lang.String-">update</a></span>(java.lang.String&nbsp;table,
       java.lang.String[]&nbsp;cols,
@@ -337,7 +346,7 @@ Permite seleccionar la última fila de la tabla <br></div>
 <a name="call-java.lang.String-java.lang.String:A-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>call</h4>
 <pre>public static&nbsp;java.util.ArrayList&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;&nbsp;call(java.lang.String&nbsp;name,
@@ -352,6 +361,26 @@ Permite seleccionar la última fila de la tabla <br></div>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>si el procedimiento a llamar retorna un valor o conjunto de valores, 
  recepcionarlo.</dd>
+</dl>
+</li>
+</ul>
+<a name="rowExists-java.lang.String-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>rowExists</h4>
+<pre>public static&nbsp;boolean&nbsp;rowExists(java.lang.String&nbsp;table,
+                                java.lang.String&nbsp;cond)</pre>
+<div class="block">Row Exists <br>
+ permite saber si existe una fila en una tabla 
+ para una serie de condiciones</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>table</code> - nombre de la tabla</dd>
+<dd><code>cond</code> - condición que debe cumplir la fila</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>verdadero o falso si existe o no la fila</dd>
 </dl>
 </li>
 </ul>
