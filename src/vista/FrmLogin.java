@@ -6,21 +6,27 @@
 package vista;
 
 import assets.values.Constant;
+import controlador.CtrLogin;
 /**
  * frmLogin - Formulario de login 
  * @author Carlos Chavez Laguna
  */
 public class FrmLogin extends StandardForm {
-    
+    CtrLogin ctrLogin;        
     /**
      * 
      * Creates new form frmLogin
      */
     public FrmLogin() {               
         initComponents();                           
+        
+        ctrLogin= new CtrLogin(this);
+        
     }
 
-    
+    public CtrLogin getController(){
+        return ctrLogin;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

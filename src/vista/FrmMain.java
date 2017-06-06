@@ -24,7 +24,7 @@ public class FrmMain extends StandardForm {
         initComponents();        
         mCtrMain =new CtrMain(this);
         //controladora de negocio facturación
-        mCtrNSeguridad = new CtrNSeguridad();                
+        mCtrNSeguridad = new CtrNSeguridad();
             //controlador login
             CtrLogin ctrLogin= new CtrLogin(new FrmLogin());
             mCtrNSeguridad.setCtrLogin(ctrLogin);

@@ -11,18 +11,30 @@ package modelo;
  * @author carlos
  */
 public class Empleado  extends Persona{
-    private static int id=0;
-    private String _idEmpleado,_cargo;
-    private Usuario _usuario;
-    Empleado(String _nombre,String _cargo, Usuario _usuario,String _dni, String _direccion, String _idDistrito, String _idProvincia, String _idDepartamento, int _telefono){
+    private String _idEmpleado;
+    private float sueldo;
+    private Usuario usuario;    
+    private String  tipoEmpleado;
+   
+    
+
+    //constructores
+   
+    Empleado(String idEmpleado,String _nombre, Usuario _usuario,String _dni, String _direccion, String _idDistrito, String _idProvincia, String _idDepartamento, int _telefono){
         //super(_nombre,  _dni, _direccion, _idDistrito, _idProvincia, _idDepartamento, _telefono);
-        this._idEmpleado="EMP"+Empleado.generador();        
-        this._cargo=_cargo;
-        this._usuario=_usuario;
+        this._idEmpleado=idEmpleado;        
+        this.usuario=_usuario;
     }
-    private static int generador(){       
-        id++;
-        return id;
+    
+    
+    
+    //setters and getters
+    public String getTipoEmpleado() {
+        return tipoEmpleado;
+    }
+
+    public void setTipoEmpleado(String tipoEmpleado) {
+        this.tipoEmpleado = tipoEmpleado;
     }
     
 }

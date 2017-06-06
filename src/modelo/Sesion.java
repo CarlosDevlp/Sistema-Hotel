@@ -7,12 +7,18 @@ package modelo;
 
 /**
  * Objeto sesión, (considerar hacerlo a nivel de bd)
- * @author 
+ * @author Carlos Chavez Laguna
  */
 public class Sesion {
     private String idSesion;
     private String hosnameSes;
     private String timeStampSes;
     private String idUser;
+
+    
+    //constructores
+    public Sesion() {
+    }
+       
     
 }
