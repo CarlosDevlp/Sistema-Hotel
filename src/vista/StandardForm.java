@@ -46,7 +46,20 @@ abstract public class StandardForm extends javax.swing.JFrame{
     public void windowAlignCenter(){
         this.setLocationRelativeTo(null);
     }
+
+    /**
+     * Sobreescribir método para obtener generar controlador
+     */
+    public void createController(){
+        //...
+    }
     
+    /**
+     * Permite obtener el controlador de la vista
+     * 
+     * @return objeto que se convertirá en el controlador
+     */
+    public abstract Object getViewController();
     
     
 }

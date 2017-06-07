@@ -16,6 +16,7 @@ import java.sql.*;
 abstract public class BasicDao {
 
     private static final String LOG_TAG="BasicDao",LOG_TAG_ERROR="BasicDao";
+    public static boolean DEBUG=false;
     private interface DBConnection{
             public void init(String _database,String usr,String pass);
             public ResultSet query(String Qry,String command) throws Exception;
@@ -165,6 +166,8 @@ abstract public class BasicDao {
                 colSeq+=col[0];  
             }
         
+            if(DEBUG)
+                System.out.println("SELECT "+colSeq+" FROM "+table+((where==null)?"":" WHERE "+where));
             //ejecución  del código sql
             r=BasicDao.DB.query("SELECT "+colSeq+" FROM "+table+((where==null)?"":" WHERE "+where),"SELECT");
             //proceso de conversión de datos a array

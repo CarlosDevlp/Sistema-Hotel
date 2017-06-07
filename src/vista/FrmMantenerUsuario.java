@@ -5,12 +5,15 @@
  */
 package vista;
 
+
+import controlador.CtrMantenerUsuario;
+
 /**
  *
  * @author Carlos Chavez Laguna
  */
-public class FrmMantenerUsuario extends javax.swing.JFrame {
-
+public class FrmMantenerUsuario extends StandardForm {
+    private CtrMantenerUsuario mCtrMantenerUsuario;
     /**
      * Creates new form FrmMantenerUsuario
      */
@@ -41,8 +44,6 @@ public class FrmMantenerUsuario extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        txtPasswordRepeat = new javax.swing.JFormattedTextField();
-        txtPassword = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         btnSearchEmployee = new javax.swing.JButton();
         txtLastname = new javax.swing.JTextField();
@@ -52,6 +53,8 @@ public class FrmMantenerUsuario extends javax.swing.JFrame {
         tbLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbUser = new javax.swing.JTable();
+        txtPasswordRepeat = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
 
         setTitle("Mantener Usuario");
 
@@ -97,15 +100,6 @@ public class FrmMantenerUsuario extends javax.swing.JFrame {
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setName("btnLimpiar"); // NOI18N
 
-        txtPasswordRepeat.setName("txtPasswordRepeat"); // NOI18N
-        txtPasswordRepeat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordRepeatActionPerformed(evt);
-            }
-        });
-
-        txtPassword.setName("txtPassword"); // NOI18N
-
         jLabel7.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("<html>\nRepetir <br> \nContraseña\n</html>");
@@ -138,6 +132,18 @@ public class FrmMantenerUsuario extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 260));
 
+        txtPasswordRepeat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordRepeatActionPerformed(evt);
+            }
+        });
+
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -145,57 +151,57 @@ public class FrmMantenerUsuario extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSeparator1)
+                        .addGap(127, 127, 127))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(btnLimpiar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel3))
-                                .addGap(2, 2, 2)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(btnLimpiar))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel3))
+                                        .addGap(2, 2, 2)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnEliminar)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(cmbRol, javax.swing.GroupLayout.Alignment.LEADING, 0, 139, Short.MAX_VALUE)
-                                        .addComponent(txtPasswordRepeat, javax.swing.GroupLayout.Alignment.LEADING)))
-                                .addGap(13, 13, 13)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnModificar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnGuardar))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnSearchEmployee)
-                                .addGap(32, 32, 32))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(btnEliminar)
+                                                .addGap(18, 18, 18))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel8)
+                                                    .addComponent(jLabel4))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(cmbRol, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtPasswordRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(13, 13, 13)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(btnModificar)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnGuardar))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(btnSearchEmployee)
+                                                .addGap(32, 32, 32))))))
+                            .addComponent(jLabel6))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,15 +225,15 @@ public class FrmMantenerUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPasswordRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPasswordRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnModificar)
@@ -253,6 +259,10 @@ public class FrmMantenerUsuario extends javax.swing.JFrame {
     private void txtPasswordRepeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordRepeatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordRepeatActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,14 +294,17 @@ public class FrmMantenerUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMantenerUsuario().setVisible(true);
+                FrmMantenerUsuario mFrmMantenerUsuario= new FrmMantenerUsuario();
+                mFrmMantenerUsuario.setVisible(true);
+                mFrmMantenerUsuario.createController();
+                System.out.println("FRM MANTENER USUARIO");
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSearchEmployee;
@@ -312,8 +325,20 @@ public class FrmMantenerUsuario extends javax.swing.JFrame {
     public javax.swing.JTable tbUser;
     public javax.swing.JTextField txtLastname;
     public javax.swing.JTextField txtName;
-    public javax.swing.JFormattedTextField txtPassword;
-    public javax.swing.JFormattedTextField txtPasswordRepeat;
+    public javax.swing.JPasswordField txtPassword;
+    public javax.swing.JPasswordField txtPasswordRepeat;
     public javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    
+    
+    @Override
+    public void createController() {
+        mCtrMantenerUsuario=new CtrMantenerUsuario(this);
+    }
+    
+    @Override
+    public Object getViewController() {
+        return mCtrMantenerUsuario;
+    }
 }

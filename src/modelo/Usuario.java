@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import assets.values.Constant;
 import dao.BasicDao;
 import java.util.ArrayList;
 import java.util.Map;
@@ -43,9 +44,11 @@ public class Usuario {
     
     //constructores
     public Usuario() {
+        this.idUser="0";
     }
 
     public Usuario(String username, String password) {
+        this();
         this.usuarioUser = username;
         this.passUser = password;
     }
@@ -55,6 +58,8 @@ public class Usuario {
      *  @param args ,el mapa que contiene los valores del objeto
      */
     public Usuario(Map<String,String> args) {
+        this();
+        this.idUser = args.get("idUser");
         this.usuarioUser = args.get("UsuarioUser");
         this.passUser = args.get("PassUser");
     }
@@ -98,7 +103,7 @@ public class Usuario {
      * del usuario en la base de datos
      */
     public static boolean userExists(String username,String password){        
-        ArrayList<Map<String,String>> result=BasicDao.select("user",new String[]{"*"},"UsuarioUser='"+username+"' AND PassUser='"+password+"'");
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO,new String[]{"*"},"UsuarioUser='"+username+"' AND PassUser='"+password+"'");
         boolean exists= result.size()>0;
         //si existe el usuario, de forma implícita, crear al usuario   
         if(exists){
@@ -114,7 +119,11 @@ public class Usuario {
      * Guardar datos en la base de datos
      */
     public void save(){
-        BasicDao.update("user", new String []{"UsuarioUser","PassUser"}, new String []{this.usuarioUser,this.passUser}, "idUser="+this.idUser);
+        //si el usuario existe
+        if(BasicDao.rowExists(Constant.DB_TABLE_USUARIO, "idUser="+idUser)) //actualizar sus datos
+            BasicDao.update(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUser","PassUser"}, new String []{this.usuarioUser,this.passUser}, "idUser="+this.idUser);
+        else //crear al usuario con los datos actuales
+            BasicDao.insert(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUser","PassUser","Roles_idRoles"}, new String []{this.usuarioUser,this.passUser,this.rolUser.getIdRoles()});
     }        
     
     /**
@@ -124,7 +133,7 @@ public class Usuario {
      * @return retorna una arraylist de roles
      */
     public static ArrayList<Usuario> getUsuarioList(){
-        ArrayList<Map<String,String>> result=BasicDao.select("user", new String[]{"*"}, null);
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO, new String[]{"*"}, null);
         ArrayList<Usuario> userList=new ArrayList();
         for(Map<String,String> row:result){ 
             userList.add(new Usuario(row));

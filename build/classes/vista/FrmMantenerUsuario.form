@@ -46,76 +46,78 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jSeparator1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtUsername" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
-                                      <Component id="txtName" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="txtPassword" min="-2" pref="147" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtLastname" min="-2" pref="166" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="cmbRol" alignment="0" pref="139" max="32767" attributes="0"/>
-                                          <Component id="txtPasswordRepeat" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jSeparator1" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jPanel2" pref="718" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                          <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtUsername" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                                              <Component id="txtName" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
+                                              <Component id="txtPassword" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="txtLastname" min="-2" pref="166" max="-2" attributes="0"/>
+                                                      <Component id="cmbRol" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                                      <Component id="txtPasswordRepeat" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="btnSearchEmployee" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="btnSearchEmployee" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="jPanel2" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -143,16 +145,16 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtPasswordRepeat" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPasswordRepeat" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" pref="262" max="-2" attributes="0"/>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -263,6 +265,9 @@
             <Property name="text" type="java.lang.String" value="Guardar"/>
             <Property name="name" type="java.lang.String" value="btnGuardar" noResource="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnEliminar">
           <Properties>
@@ -281,25 +286,6 @@
             <Property name="text" type="java.lang.String" value="Limpiar"/>
             <Property name="name" type="java.lang.String" value="btnLimpiar" noResource="true"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPasswordRepeat">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="txtPasswordRepeat" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordRepeatActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPassword">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="txtPassword" noResource="true"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
@@ -392,6 +378,22 @@
             </Container>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JPasswordField" name="txtPasswordRepeat">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordRepeatActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtPassword">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

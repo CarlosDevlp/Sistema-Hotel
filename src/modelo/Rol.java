@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import assets.values.Constant;
 import dao.BasicDao;
 import java.util.ArrayList;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class Rol {
      * Permite definir un caracter separador para poder cortar strings
      * y volverlos en arrays
      */
-    private static final String DELIMETER="|";
+    private static final String DELIMETER=",";
     
 //constructor
     public Rol() {
@@ -48,11 +49,22 @@ public class Rol {
      */
     public Rol(Map<String,String> args) {
         this.idRoles = args.get("idRoles");
-        this.nombreRol = args.get("nombreRol");
-        this.pestanasHabilitadas = args.get("pestanasHabilitadas").split(DELIMETER);
+        this.nombreRol = args.get("NombreRol");                
+        this.pestanasHabilitadas = args.get("PestanasRol").split(DELIMETER);  
     }
-        
-    //setters and getters            
+    
+    
+    
+    //setters and getters
+    public String getIdRoles() {
+        return idRoles;
+    }
+
+    
+    public void setIdRoles(String idRoles) {
+        this.idRoles = idRoles;
+    }
+
     public String getNombreRol() {
         return nombreRol;
     }
@@ -72,7 +84,7 @@ public class Rol {
 
     //otros métodos    
     public static Rol getRol(String roleId){
-        ArrayList<Map<String,String>> result=BasicDao.select("roles", new String[]{"*"}, "idRoles="+roleId);
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_ROLES, new String[]{"*"}, "idRoles="+roleId);
         return new Rol(result.get(0));
     }
     
@@ -84,7 +96,7 @@ public class Rol {
      * @return retorna una arraylist de roles
      */
     public static ArrayList<Rol> getRolList(){
-        ArrayList<Map<String,String>> result=BasicDao.select("roles", new String[]{"*"}, null);
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_ROLES, new String[]{"*"}, null);
         ArrayList<Rol> rolList=new ArrayList();
         for(Map<String,String> row:result) rolList.add(new Rol(row));        
         return rolList;

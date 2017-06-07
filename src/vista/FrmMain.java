@@ -16,7 +16,7 @@ import controlador.CtrNSeguridad;
  */
 public class FrmMain extends StandardForm {
     private CtrMain mCtrMain;    
-    private CtrNSeguridad mCtrNSeguridad;
+    
     /**
      * Creates new form frmMain
      */
@@ -24,15 +24,14 @@ public class FrmMain extends StandardForm {
         initComponents();        
         mCtrMain =new CtrMain(this);
         //controladora de negocio facturación
-        mCtrNSeguridad = new CtrNSeguridad();
+        CtrNSeguridad  mCtrNSeguridad = new CtrNSeguridad();
             //controlador login
             CtrLogin ctrLogin= new CtrLogin(new FrmLogin());
             mCtrNSeguridad.setCtrLogin(ctrLogin);
             //controlador mantener usuario
             CtrMantenerUsuario ctrMantenerUsuario= new CtrMantenerUsuario(new FrmMantenerUsuario());
             mCtrNSeguridad.setCtrMantenerUsuario(ctrMantenerUsuario);
-                                
-        
+                                        
             
 
          mCtrMain.setCtrNSeguridad(mCtrNSeguridad);
@@ -52,6 +51,7 @@ public class FrmMain extends StandardForm {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MnAdministrador = new javax.swing.JMenu();
@@ -66,15 +66,21 @@ public class FrmMain extends StandardForm {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/main_background.jpg"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 387, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 832, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Usuario");
@@ -102,6 +108,7 @@ public class FrmMain extends StandardForm {
         jMenu1.add(MnVerPerfil);
 
         MnSalir.setText("Salir");
+        MnSalir.setName("exit"); // NOI18N
         MnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnSalirActionPerformed(evt);
@@ -122,11 +129,11 @@ public class FrmMain extends StandardForm {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -171,7 +178,10 @@ public class FrmMain extends StandardForm {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMain().setVisible(true);
+                FrmMain mFrmMain=new FrmMain();
+                mFrmMain.setVisible(true);
+                //mFrmMain.createController();
+                System.out.println("FRM MAIN");
             }
         });
     }
@@ -179,12 +189,25 @@ public class FrmMain extends StandardForm {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenu MnAdministrador;
     public javax.swing.JMenu MnFacturacion;
-    private javax.swing.JMenuItem MnSalir;
+    public javax.swing.JMenuItem MnSalir;
     private javax.swing.JMenuItem MnVerPerfil;
     public javax.swing.JMenuItem SmnMantenerUsuario;
     private javax.swing.JMenuItem SmnReporteSesiones;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    
+
+    @Override
+    public void createController() {
+        mCtrMain=new CtrMain(this);
+    }
+    
+    @Override
+    public Object getViewController() {        
+        return mCtrMain;
+    }
 }

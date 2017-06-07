@@ -33,6 +33,7 @@ public class CtrMain implements ActionListener{
     public CtrMain(FrmMain frmMain) {        
         mFrmMain=frmMain;
         mFrmMain.SmnMantenerUsuario.addActionListener(this);
+        mFrmMain.MnSalir.addActionListener(this);        
     }
     
     /**
@@ -48,8 +49,11 @@ public class CtrMain implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         JComponent obj=(JComponent) e.getSource();
         switch(obj.getName()){
-            case "pmantenerusuario":
+            case "pmantenerusuario":    
                 this.mCtrNSeguridad.showFrmMantenerUsuario();
+                break;
+            case "exit":
+                System.exit(0);                
                 break;
         }
         
@@ -64,6 +68,7 @@ public class CtrMain implements ActionListener{
     public void init(){            
         //inicializar la conexión de base de datos
         BasicDao.init();        
+        BasicDao.DEBUG=false;
         //maximizar la ventana principal
         mFrmMain.maximize();
         //inhabilitar el formulario principal
@@ -105,15 +110,19 @@ public class CtrMain implements ActionListener{
         
         System.out.println(userRol.getNombreRol());
         //iterar cada  pestaña que se va a habilitar 
-        for(String pestana :pestanaList)                
+        for(String pestana :pestanaList) {
+            System.out.println(pestana);
             switch(pestana){
                 case "pfacturacion":
                     mFrmMain.MnFacturacion.setEnabled(true);
                     break;
-                default:
+                case "all":
                     mFrmMain.MnAdministrador.setEnabled(true);
-                    mFrmMain.MnFacturacion.setEnabled(true);                                       
+                    mFrmMain.MnFacturacion.setEnabled(true);
+                    
             }
+        }
+            
     }
     
     

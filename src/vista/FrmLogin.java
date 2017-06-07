@@ -12,21 +12,15 @@ import controlador.CtrLogin;
  * @author Carlos Chavez Laguna
  */
 public class FrmLogin extends StandardForm {
-    CtrLogin ctrLogin;        
+    CtrLogin mCtrLogin;
     /**
      * 
      * Creates new form frmLogin
      */
     public FrmLogin() {               
-        initComponents();                           
-        
-        ctrLogin= new CtrLogin(this);
-        
+        initComponents();                
     }
 
-    public CtrLogin getController(){
-        return ctrLogin;
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,7 +168,10 @@ public class FrmLogin extends StandardForm {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmLogin().setVisible(true);
+                FrmLogin mFrmLogin=new FrmLogin();
+                mFrmLogin.setVisible(true);
+                mFrmLogin.createController();
+                System.out.println("FRM LOGIN");
             }
         });
     }
@@ -189,4 +186,14 @@ public class FrmLogin extends StandardForm {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void createController() {
+        mCtrLogin=new CtrLogin(this);
+    }
+    
+    @Override
+    public Object getViewController() {
+        return mCtrLogin;
+    }
 }
