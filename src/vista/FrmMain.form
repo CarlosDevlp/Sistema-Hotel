@@ -68,6 +68,26 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="MnReserva">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Reserva"/>
+            <Property name="name" type="java.lang.String" value="preserva" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="MnGenerarReserva">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="GenerarReserva"/>
+                <Property name="name" type="java.lang.String" value="pGenerarReserva" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>

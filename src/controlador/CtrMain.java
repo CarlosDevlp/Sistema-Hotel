@@ -23,6 +23,7 @@ public class CtrMain implements ActionListener{
     private FrmMain mFrmMain;
     private Usuario mUsuario;      
     private CtrNSeguridad mCtrNSeguridad;
+    private CtrNReserva mCtrNReserva;    
     
     private final String LOG_TAG="CtrMain",LOG_TAG_ERROR="CtrMain-error";
     
@@ -33,6 +34,7 @@ public class CtrMain implements ActionListener{
     public CtrMain(FrmMain frmMain) {        
         mFrmMain=frmMain;
         mFrmMain.SmnMantenerUsuario.addActionListener(this);
+        mFrmMain.MnGenerarReserva.addActionListener(this);        
         mFrmMain.MnSalir.addActionListener(this);        
     }
     
@@ -48,9 +50,13 @@ public class CtrMain implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         JComponent obj=(JComponent) e.getSource();
+        System.out.println(obj.getName());
         switch(obj.getName()){
             case "pmantenerusuario":    
                 this.mCtrNSeguridad.showFrmMantenerUsuario();
+                break;
+            case "pGenerarReserva":
+                this.mCtrNReserva.showGenerarReserva();                
                 break;
             case "exit":
                 System.exit(0);                
@@ -98,6 +104,15 @@ public class CtrMain implements ActionListener{
         this.mCtrNSeguridad = ctrNSeguridad;
     }
     
+    public CtrNReserva getCtrNReserva() {
+        return mCtrNReserva;
+    }
+
+    public void setCtrNReserva(CtrNReserva mCtrNReserva) {
+        this.mCtrNReserva = mCtrNReserva;
+    }
+
+    
     /**
      * Permite habilitar y desabilitar menus dependiendo
      * del tipo de rol que el usuario principal tiene.
@@ -115,6 +130,9 @@ public class CtrMain implements ActionListener{
             switch(pestana){
                 case "pfacturacion":
                     mFrmMain.MnFacturacion.setEnabled(true);
+                    break;
+                case "preserva":
+                    mFrmMain.MnReserva.setEnabled(true);
                     break;
                 case "all":
                     mFrmMain.MnAdministrador.setEnabled(true);
@@ -164,6 +182,8 @@ public class CtrMain implements ActionListener{
     private void enableFrmMain(){
         mFrmMain.setEnabled(true);        
     }
+
+    
             
     
 }

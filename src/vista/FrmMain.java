@@ -9,7 +9,9 @@ import assets.values.Constant;
 import controlador.CtrLogin;
 import controlador.CtrMain;
 import controlador.CtrMantenerUsuario;
+import controlador.CtrNReserva;
 import controlador.CtrNSeguridad;
+import controlador.ctrGenerarReserva;
 /**
  * 
  * @author Carlos Chavez Laguna
@@ -32,10 +34,14 @@ public class FrmMain extends StandardForm {
             CtrMantenerUsuario ctrMantenerUsuario= new CtrMantenerUsuario(new FrmMantenerUsuario());
             mCtrNSeguridad.setCtrMantenerUsuario(ctrMantenerUsuario);
                                         
-            
+       //controladora de negocio reserva
+        CtrNReserva mCtrNReserva= new CtrNReserva();
+                ctrGenerarReserva ctrGenerarReservax=new ctrGenerarReserva(this);                
+                ctrGenerarReservax.setVistaGenerarReserva(new frmGenerarReserva());
+                mCtrNReserva.setCtrGenerarReserva(ctrGenerarReservax);     
 
          mCtrMain.setCtrNSeguridad(mCtrNSeguridad);
-         
+         mCtrMain.setCtrNReserva(mCtrNReserva);
         //inicializar sistema y su configuración
          mCtrMain.init();
         
@@ -60,6 +66,8 @@ public class FrmMain extends StandardForm {
         MnVerPerfil = new javax.swing.JMenuItem();
         MnSalir = new javax.swing.JMenuItem();
         MnFacturacion = new javax.swing.JMenu();
+        MnReserva = new javax.swing.JMenu();
+        MnGenerarReserva = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Constant.APP_NAME);
@@ -122,6 +130,15 @@ public class FrmMain extends StandardForm {
         MnFacturacion.setEnabled(false);
         MnFacturacion.setName("pfacturacion"); // NOI18N
         jMenuBar1.add(MnFacturacion);
+
+        MnReserva.setText("Reserva");
+        MnReserva.setName("preserva"); // NOI18N
+
+        MnGenerarReserva.setText("GenerarReserva");
+        MnGenerarReserva.setName("pGenerarReserva"); // NOI18N
+        MnReserva.add(MnGenerarReserva);
+
+        jMenuBar1.add(MnReserva);
 
         setJMenuBar(jMenuBar1);
 
@@ -189,6 +206,8 @@ public class FrmMain extends StandardForm {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenu MnAdministrador;
     public javax.swing.JMenu MnFacturacion;
+    public javax.swing.JMenuItem MnGenerarReserva;
+    public javax.swing.JMenu MnReserva;
     public javax.swing.JMenuItem MnSalir;
     private javax.swing.JMenuItem MnVerPerfil;
     public javax.swing.JMenuItem SmnMantenerUsuario;

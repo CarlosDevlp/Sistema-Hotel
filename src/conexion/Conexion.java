@@ -19,7 +19,7 @@ public class Conexion {
     public static Conexion instancia;
     private Connection con;
     
-    private Conexion(){
+    public Conexion(){
         
         try{
             
