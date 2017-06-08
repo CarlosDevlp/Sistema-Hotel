@@ -31,6 +31,11 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="smMantenerRoles">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Mantener Roles"/>
+                  </Properties>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="SmnReporteSesiones">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Reporte Sesiones"/>
@@ -67,10 +72,31 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="smRegistrarCobro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Registrar Cobro"/>
+                <Property name="name" type="java.lang.String" value="smRegistrarCobro" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="smBuscarCliente">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buscar Cliente"/>
+                <Property name="name" type="java.lang.String" value="smBuscarCliente" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="MnReserva">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reserva"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="preserva" noResource="true"/>
           </Properties>
           <AuxValues>
@@ -81,6 +107,43 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="GenerarReserva"/>
                 <Property name="name" type="java.lang.String" value="pGenerarReserva" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="MnAlojamiento">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Alojamiento"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="hola"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Servicio"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="smServicioHabitacion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Servicio Habitaci&#xf3;n"/>
+                <Property name="name" type="java.lang.String" value="pServicioHabitacion" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="smServicioExtra">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Servicio Extra"/>
+                <Property name="name" type="java.lang.String" value="pServicioExtra" noResource="true"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

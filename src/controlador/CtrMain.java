@@ -24,7 +24,9 @@ public class CtrMain implements ActionListener{
     private Usuario mUsuario;      
     private CtrNSeguridad mCtrNSeguridad;
     private CtrNReserva mCtrNReserva;    
-    
+    private CtrNServicio mCtrNServicio;
+
+   
     private final String LOG_TAG="CtrMain",LOG_TAG_ERROR="CtrMain-error";
     
     //constructores
@@ -36,6 +38,8 @@ public class CtrMain implements ActionListener{
         mFrmMain.SmnMantenerUsuario.addActionListener(this);
         mFrmMain.MnGenerarReserva.addActionListener(this);        
         mFrmMain.MnSalir.addActionListener(this);        
+        mFrmMain.smServicioExtra.addActionListener(this);
+        mFrmMain.smServicioHabitacion.addActionListener(this);
     }
     
     /**
@@ -57,6 +61,12 @@ public class CtrMain implements ActionListener{
                 break;
             case "pGenerarReserva":
                 this.mCtrNReserva.showGenerarReserva();                
+                break;
+            case "pServicioHabitacion":
+                this.mCtrNServicio.showFrmServicioHabitacion();
+                break;
+            case "pServicioExtra":
+                this.mCtrNServicio.showFrmServicioExtra();
                 break;
             case "exit":
                 System.exit(0);                
@@ -112,6 +122,13 @@ public class CtrMain implements ActionListener{
         this.mCtrNReserva = mCtrNReserva;
     }
 
+    public CtrNServicio getCtrNServicio() {
+        return mCtrNServicio;
+    }
+
+    public void setCtrNServicio(CtrNServicio ctrNServicio) {
+        this.mCtrNServicio = ctrNServicio;
+    }
     
     /**
      * Permite habilitar y desabilitar menus dependiendo

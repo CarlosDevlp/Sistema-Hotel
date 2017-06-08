@@ -11,6 +11,7 @@ import controlador.CtrMain;
 import controlador.CtrMantenerUsuario;
 import controlador.CtrNReserva;
 import controlador.CtrNSeguridad;
+import controlador.CtrNServicio;
 import controlador.ctrGenerarReserva;
 /**
  * 
@@ -42,6 +43,7 @@ public class FrmMain extends StandardForm {
 
          mCtrMain.setCtrNSeguridad(mCtrNSeguridad);
          mCtrMain.setCtrNReserva(mCtrNReserva);
+         mCtrMain.setCtrNServicio(new CtrNServicio());
         //inicializar sistema y su configuración
          mCtrMain.init();
         
@@ -62,12 +64,20 @@ public class FrmMain extends StandardForm {
         jMenu1 = new javax.swing.JMenu();
         MnAdministrador = new javax.swing.JMenu();
         SmnMantenerUsuario = new javax.swing.JMenuItem();
+        smMantenerRoles = new javax.swing.JMenuItem();
         SmnReporteSesiones = new javax.swing.JMenuItem();
         MnVerPerfil = new javax.swing.JMenuItem();
         MnSalir = new javax.swing.JMenuItem();
         MnFacturacion = new javax.swing.JMenu();
+        smRegistrarCobro = new javax.swing.JMenuItem();
+        smBuscarCliente = new javax.swing.JMenuItem();
         MnReserva = new javax.swing.JMenu();
         MnGenerarReserva = new javax.swing.JMenuItem();
+        MnAlojamiento = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        smServicioHabitacion = new javax.swing.JMenuItem();
+        smServicioExtra = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Constant.APP_NAME);
@@ -106,6 +116,9 @@ public class FrmMain extends StandardForm {
         });
         MnAdministrador.add(SmnMantenerUsuario);
 
+        smMantenerRoles.setText("Mantener Roles");
+        MnAdministrador.add(smMantenerRoles);
+
         SmnReporteSesiones.setText("Reporte Sesiones");
         MnAdministrador.add(SmnReporteSesiones);
 
@@ -129,9 +142,19 @@ public class FrmMain extends StandardForm {
         MnFacturacion.setText("Facturación");
         MnFacturacion.setEnabled(false);
         MnFacturacion.setName("pfacturacion"); // NOI18N
+
+        smRegistrarCobro.setText("Registrar Cobro");
+        smRegistrarCobro.setName("smRegistrarCobro"); // NOI18N
+        MnFacturacion.add(smRegistrarCobro);
+
+        smBuscarCliente.setText("Buscar Cliente");
+        smBuscarCliente.setName("smBuscarCliente"); // NOI18N
+        MnFacturacion.add(smBuscarCliente);
+
         jMenuBar1.add(MnFacturacion);
 
         MnReserva.setText("Reserva");
+        MnReserva.setEnabled(false);
         MnReserva.setName("preserva"); // NOI18N
 
         MnGenerarReserva.setText("GenerarReserva");
@@ -139,6 +162,25 @@ public class FrmMain extends StandardForm {
         MnReserva.add(MnGenerarReserva);
 
         jMenuBar1.add(MnReserva);
+
+        MnAlojamiento.setText("Alojamiento");
+
+        jMenuItem1.setText("hola");
+        MnAlojamiento.add(jMenuItem1);
+
+        jMenuBar1.add(MnAlojamiento);
+
+        jMenu2.setText("Servicio");
+
+        smServicioHabitacion.setText("Servicio Habitación");
+        smServicioHabitacion.setName("pServicioHabitacion"); // NOI18N
+        jMenu2.add(smServicioHabitacion);
+
+        smServicioExtra.setText("Servicio Extra");
+        smServicioExtra.setName("pServicioExtra"); // NOI18N
+        jMenu2.add(smServicioExtra);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -205,6 +247,7 @@ public class FrmMain extends StandardForm {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenu MnAdministrador;
+    private javax.swing.JMenu MnAlojamiento;
     public javax.swing.JMenu MnFacturacion;
     public javax.swing.JMenuItem MnGenerarReserva;
     public javax.swing.JMenu MnReserva;
@@ -214,8 +257,15 @@ public class FrmMain extends StandardForm {
     private javax.swing.JMenuItem SmnReporteSesiones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JMenuItem smBuscarCliente;
+    private javax.swing.JMenuItem smMantenerRoles;
+    public javax.swing.JMenuItem smRegistrarCobro;
+    public javax.swing.JMenuItem smServicioExtra;
+    public javax.swing.JMenuItem smServicioHabitacion;
     // End of variables declaration//GEN-END:variables
 
     
