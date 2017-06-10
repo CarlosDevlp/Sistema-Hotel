@@ -29,12 +29,17 @@ public class CtrLogin implements ActionListener, KeyListener{
     
     private final String LOG_TAG="CtrLogin",LOG_TAG_ERROR="CtrLogin-error";
 
+    //constructor
+
+    public CtrLogin() {
+        //creación de vista implícita
+        this(new FrmLogin());
+    }
+    
+    
     public CtrLogin(FrmLogin frmLogin) {
         mFrmLogin = frmLogin;        
-        
-        
-              
-        
+                                      
         //configurando la vista
         //botón        
         mFrmLogin.TxtUsername.addKeyListener(this);

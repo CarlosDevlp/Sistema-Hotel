@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hotel;
+package example;
 
 /**
  *
@@ -60,9 +60,10 @@ public class Hotel {
        
        {
            //ejemplo de select 
-            /*
+            
             System.out.println("obteniendo los datos de una base de datos en cloud");
             ArrayList<Map<String,String>> result=BasicDao.select("testtable",new String[]{"*"}, "table_id=1");
+            
             //obtenemos la primera fila            
             Set<String> colsNameSet;
             for(Map<String,String> row :result){
@@ -71,7 +72,7 @@ public class Hotel {
                     System.out.println(colName+" - "+row.get(colName));       
                 System.out.println("_____________________________________");
             }                        
-            */           
+            
        }
        
        

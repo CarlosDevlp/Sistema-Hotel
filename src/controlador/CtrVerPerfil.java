@@ -15,7 +15,8 @@ import modelo.Usuario;
 import vista.FrmVerPerfil;
 
 /**
- *
+ * 
+ * Controlador de la vista del perfil
  * @author Carlos Chavez Laguna
  */
 public class CtrVerPerfil implements ActionListener{
@@ -23,21 +24,15 @@ public class CtrVerPerfil implements ActionListener{
     private Usuario mUsuario;
     //constructores    
     public CtrVerPerfil() {
-        this.mFrmVerPerfil = new FrmVerPerfil();        
+        //creación de vista implícita
+        this(new FrmVerPerfil());
     }
 
     public CtrVerPerfil(FrmVerPerfil mFrmVerPerfil) {
         this.mFrmVerPerfil = mFrmVerPerfil;
         this.mFrmVerPerfil.btnCancel.addActionListener(this);
         this.mFrmVerPerfil.btnSave.addActionListener(this);
-        this.mFrmVerPerfil.tbtnEdit.addActionListener(this);        
-        setIfEnableAll(false);
-        
-        this.selfInit();
-        mUsuario=Usuario.getInstance();        
-        
-        clearForm();
-        loadData();
+        this.mFrmVerPerfil.tbtnEdit.addActionListener(this);                
     }
     
     /**
@@ -45,7 +40,7 @@ public class CtrVerPerfil implements ActionListener{
      * el formulario funcione
      * @deprecated NO usar en producción 
      */
-    private void selfInit(){
+    public void selfInit(){
         Usuario.userExists("carlosplusplus", "20F3765880A5C269B747E1E906054A4B4A3A991259F1E16B5DDE4742CEC2319A");
     }
     
@@ -70,10 +65,8 @@ public class CtrVerPerfil implements ActionListener{
                 setIfEnableAll(false);
                 this.mFrmVerPerfil.tbtnEdit.setSelected(false);
                break;            
-            case "btnCancel":
-                clearForm();
-                loadData();
-                setIfEnableAll(false);
+            case "btnCancel":    
+                loadData();                
                 this.mFrmVerPerfil.tbtnEdit.setSelected(false);
                 break;
             case "tbtnEdit":
@@ -82,6 +75,21 @@ public class CtrVerPerfil implements ActionListener{
                 setIfEnableAll(enable);
                 break;
         }                
+    }
+    //---------------------------------------------------------------------------------------
+    
+    /**
+     * Mostrar formulario ver perfil
+     */
+    public void showFrmVerPerfil(){
+        this.mFrmVerPerfil.setVisible(true);        
+    }
+    
+    /**
+     * Esconder formulario ver perfil
+     */
+    public void hideFrmVerPerfil(){
+        this.mFrmVerPerfil.setVisible(false);
     }
     
     /**
@@ -103,12 +111,18 @@ public class CtrVerPerfil implements ActionListener{
         //datos de usuario
         this.mFrmVerPerfil.txtUsername.setEnabled(enable);
     }
-    
+        
     /**
-     * Cargar toda la data de la bd al formulario
+     * 
+     * Cargar toda la data de la bd al formulario,
+     * también, deshabilita y limpia los campos del formulario.
      */
-    private void loadData(){
+    public void loadData(){
+        setIfEnableAll(false);
+        clearForm();                     
         //datos de usuario        
+        mUsuario=Usuario.getInstance();
+        
             //nombre de usuario        
             this.mFrmVerPerfil.txtUsername.setText(mUsuario.getUsuario());
             //rol de usuario
@@ -118,7 +132,7 @@ public class CtrVerPerfil implements ActionListener{
     /**
      * eliminar todos los datos de la caja de texto
      */
-    private void clearForm(){
+    private void clearForm(){        
         //datos personales        
         this.mFrmVerPerfil.txtName.setText("");
         this.mFrmVerPerfil.txtDniRuc.setText("");

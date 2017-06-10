@@ -153,11 +153,6 @@ public class FrmVerPerfil extends StandardForm {
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         btnSave.setName("btnSave"); // NOI18N
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
         btnCancel.setName("btnCancel"); // NOI18N
@@ -213,11 +208,8 @@ public class FrmVerPerfil extends StandardForm {
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 10, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -317,10 +309,6 @@ public class FrmVerPerfil extends StandardForm {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -355,9 +343,8 @@ public class FrmVerPerfil extends StandardForm {
                 BasicDao.init();
                 FrmVerPerfil frmVerPerfil=new FrmVerPerfil();                
                 frmVerPerfil.createController();
-                frmVerPerfil.setVisible(true);
-                
-                
+                frmVerPerfil.loadControllerData();
+                frmVerPerfil.setVisible(true);                               
             }
         });
     }
@@ -395,11 +382,21 @@ public class FrmVerPerfil extends StandardForm {
     public javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    
+    /**
+     * 
+     * Cargar la data que requiere el controlador
+     * para poder mostrarla en el formulario
+     * @deprecated  NO usar en producción
+     */
+    public void loadControllerData(){
+        mCtrVerPerfil.selfInit();
+        mCtrVerPerfil.loadData();        
+    }
 
     @Override
     public void createController() {
         mCtrVerPerfil=new CtrVerPerfil(this);
+        
     }
     
     @Override

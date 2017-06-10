@@ -25,7 +25,8 @@ public class CtrMain implements ActionListener{
     private CtrNSeguridad mCtrNSeguridad;
     private CtrNReserva mCtrNReserva;    
     private CtrNServicio mCtrNServicio;
-
+    private CtrNAlojamiento mCtrNAlojamiento;
+    
    
     private final String LOG_TAG="CtrMain",LOG_TAG_ERROR="CtrMain-error";
     
@@ -36,10 +37,12 @@ public class CtrMain implements ActionListener{
     public CtrMain(FrmMain frmMain) {        
         mFrmMain=frmMain;
         mFrmMain.SmnMantenerUsuario.addActionListener(this);
+        mFrmMain.MnVerPerfil.addActionListener(this);
         mFrmMain.MnGenerarReserva.addActionListener(this);        
-        mFrmMain.MnSalir.addActionListener(this);        
+        mFrmMain.MnSalir.addActionListener(this);                
         mFrmMain.smServicioExtra.addActionListener(this);
         mFrmMain.smServicioHabitacion.addActionListener(this);
+        mFrmMain.smRegistrarAlojamiento.addActionListener(this);
     }
     
     /**
@@ -59,6 +62,9 @@ public class CtrMain implements ActionListener{
             case "pmantenerusuario":    
                 this.mCtrNSeguridad.showFrmMantenerUsuario();
                 break;
+            case "pperfil":
+                this.mCtrNSeguridad.showFrmVerPerfil();
+                break;
             case "pGenerarReserva":
                 this.mCtrNReserva.showGenerarReserva();                
                 break;
@@ -67,6 +73,9 @@ public class CtrMain implements ActionListener{
                 break;
             case "pServicioExtra":
                 this.mCtrNServicio.showFrmServicioExtra();
+                break;
+            case "pRegistrarAlojamiento":
+                this.mCtrNAlojamiento.showFrmAlojamiento();
                 break;
             case "exit":
                 System.exit(0);                
@@ -129,7 +138,14 @@ public class CtrMain implements ActionListener{
     public void setCtrNServicio(CtrNServicio ctrNServicio) {
         this.mCtrNServicio = ctrNServicio;
     }
-    
+
+    public CtrNAlojamiento getCtrNAlojamiento() {
+        return mCtrNAlojamiento;
+    }
+
+    public void setCtrNAlojamiento(CtrNAlojamiento ctrNAlojamiento) {
+        this.mCtrNAlojamiento = ctrNAlojamiento;
+    }    
     /**
      * Permite habilitar y desabilitar menus dependiendo
      * del tipo de rol que el usuario principal tiene.
@@ -153,7 +169,11 @@ public class CtrMain implements ActionListener{
                     break;
                 case "all":
                     mFrmMain.MnAdministrador.setEnabled(true);
-                    mFrmMain.MnFacturacion.setEnabled(true);
+                    mFrmMain.MnFacturacion.setEnabled(true);                    
+                    mFrmMain.MnReserva.setEnabled(true);
+                    mFrmMain.MnAlojamiento.setEnabled(true);
+                    mFrmMain.MnServicio.setEnabled(true);
+                    
                     
             }
         }

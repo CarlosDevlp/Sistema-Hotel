@@ -9,9 +9,14 @@ import assets.values.Constant;
 import helpers.Hashing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.DatatypeConverter;
 import modelo.Rol;
@@ -22,7 +27,7 @@ import vista.FrmMantenerUsuario;
  * Controlador Mantener Usuario
  * @author Carlos Chavez Laguna
  */
-public class CtrMantenerUsuario implements ActionListener{
+public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretListener{
     private FrmMantenerUsuario mFrmMantenerUsuario;
     
     //ROL
@@ -33,11 +38,26 @@ public class CtrMantenerUsuario implements ActionListener{
     private ArrayList<Usuario> mUserList;
     private DefaultTableModel mUserTableModel;
     private final String []USER_TABLE_COLUMN_NAMES={"Nombres y apellidos","Nombre de usuario","Rol"};
+    
+    //ICONS
+    private final ImageIcon ICON_GOOD=new javax.swing.ImageIcon(getClass().getResource("/assets/images/good.png"));
+    private final ImageIcon ICON_BAD=new javax.swing.ImageIcon(getClass().getResource("/assets/images/bad.png"));
     //constructores
+    public CtrMantenerUsuario() {
+        //creación implícita de vista
+        this(new FrmMantenerUsuario());
+    }
+    
+    
     public CtrMantenerUsuario(FrmMantenerUsuario frmMantenerUsuario) {
         this.mFrmMantenerUsuario = frmMantenerUsuario;
         this.mFrmMantenerUsuario.btnGuardar.addActionListener(this);
+        this.mFrmMantenerUsuario.txtPassword.addCaretListener(this);
+        this.mFrmMantenerUsuario.txtPasswordRepeat.addCaretListener(this);
+        this.mFrmMantenerUsuario.lblPasswordValidation.setVisible(false);
     }
+
+    
 
     //____________________________________________________________________________________________
     /**
@@ -61,6 +81,35 @@ public class CtrMantenerUsuario implements ActionListener{
         }                
     }
     
+    @Override
+    public void keyTyped(KeyEvent e) {
+    
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        JComponent obj=(JComponent) e.getSource();
+        //System.out.println(obj.getName());        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+    }
+    
+    
+    @Override
+    public void caretUpdate(CaretEvent e) {
+        JComponent obj=(JComponent) e.getSource();
+        
+        switch(obj.getName()){
+            case "txtPassword":
+            case "txtPasswordRepeat":
+                this.checkPasswords();
+                break;
+        }
+        
+    }
     //____________________________________________________________________________________________    
     //otros métodos
     
@@ -87,6 +136,7 @@ public class CtrMantenerUsuario implements ActionListener{
      */
     public void loadData(){
 
+        
         //cargar lista de roles en cmbRol
         mRolList= Rol.getRolList();
         mRolNameList=new ArrayList();
@@ -100,15 +150,40 @@ public class CtrMantenerUsuario implements ActionListener{
         //cargar usuarios en la tabla tbUser
         clearTable();
         mUserList= Usuario.getUsuarioList();
+        
+        this.mFrmMantenerUsuario.lblEmptyTable.setVisible(mUserList.isEmpty());
         for(Usuario usuario:mUserList)        
             mUserTableModel.addRow(new String[]{"",usuario.getUsuario(),usuario.getRolUser().getNombreRol()});        
         this.mFrmMantenerUsuario.tbUser.setModel(mUserTableModel);
         
+        //ocultar el preloader
+        this.mFrmMantenerUsuario.pbFormPreloader.setVisible(false);                        
         
                 
     }
     
-    
+    /**
+     * 
+     */
+    public void checkPasswords(){
+        String password=String.valueOf(this.mFrmMantenerUsuario.txtPassword.getPassword());
+        String passwordRepeated=String.valueOf(this.mFrmMantenerUsuario.txtPasswordRepeat.getPassword());
+       
+        
+        this.mFrmMantenerUsuario.lblPasswordValidation.setVisible(!password.isEmpty());
+        //contraseña correctamente ingresada
+        if(passwordRepeated.equals(password)){
+            this.mFrmMantenerUsuario.lblPasswordValidation.setIcon(ICON_GOOD);
+            this.mFrmMantenerUsuario.lblPasswordValidation.setForeground(Constant.COLOR_GREEN);
+            this.mFrmMantenerUsuario.lblPasswordValidation.setText("Contraseñas iguales");
+        }
+        else{
+            this.mFrmMantenerUsuario.lblPasswordValidation.setIcon(ICON_BAD);
+            this.mFrmMantenerUsuario.lblPasswordValidation.setForeground(Constant.COLOR_RED);
+            this.mFrmMantenerUsuario.lblPasswordValidation.setText("Contraseñas no iguales");
+        }
+        
+    }
     
     /**
      * 
@@ -136,4 +211,6 @@ public class CtrMantenerUsuario implements ActionListener{
     public void hideFrmMantenerUsuario(){
         this.mFrmMantenerUsuario.setVisible(false);
     }
+
+
 }

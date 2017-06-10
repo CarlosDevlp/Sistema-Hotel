@@ -6,9 +6,8 @@
 package vista;
 
 import assets.values.Constant;
-import controlador.CtrLogin;
 import controlador.CtrMain;
-import controlador.CtrMantenerUsuario;
+import controlador.CtrNAlojamiento;
 import controlador.CtrNReserva;
 import controlador.CtrNSeguridad;
 import controlador.CtrNServicio;
@@ -26,24 +25,27 @@ public class FrmMain extends StandardForm {
     public FrmMain() {
         initComponents();        
         mCtrMain =new CtrMain(this);
+        
+        
+        //controladora de negocio seguridad
+        mCtrMain.setCtrNSeguridad(new CtrNSeguridad());
+        
         //controladora de negocio facturación
-        CtrNSeguridad  mCtrNSeguridad = new CtrNSeguridad();
-            //controlador login
-            CtrLogin ctrLogin= new CtrLogin(new FrmLogin());
-            mCtrNSeguridad.setCtrLogin(ctrLogin);
-            //controlador mantener usuario
-            CtrMantenerUsuario ctrMantenerUsuario= new CtrMantenerUsuario(new FrmMantenerUsuario());
-            mCtrNSeguridad.setCtrMantenerUsuario(ctrMantenerUsuario);
-                                        
+            //.....
        //controladora de negocio reserva
         CtrNReserva mCtrNReserva= new CtrNReserva();
                 ctrGenerarReserva ctrGenerarReservax=new ctrGenerarReserva(this);                
                 ctrGenerarReservax.setVistaGenerarReserva(new frmGenerarReserva());
-                mCtrNReserva.setCtrGenerarReserva(ctrGenerarReservax);     
-
-         mCtrMain.setCtrNSeguridad(mCtrNSeguridad);
+                mCtrNReserva.setCtrGenerarReserva(ctrGenerarReservax);             
          mCtrMain.setCtrNReserva(mCtrNReserva);
+                 
+         
+        //controladora de negocio de servicio
          mCtrMain.setCtrNServicio(new CtrNServicio());
+        
+        //controladora de negocio alojamiento
+        mCtrMain.setCtrNAlojamiento(new CtrNAlojamiento());
+        
         //inicializar sistema y su configuración
          mCtrMain.init();
         
@@ -74,10 +76,11 @@ public class FrmMain extends StandardForm {
         MnReserva = new javax.swing.JMenu();
         MnGenerarReserva = new javax.swing.JMenuItem();
         MnAlojamiento = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        smRegistrarAlojamiento = new javax.swing.JMenuItem();
+        MnServicio = new javax.swing.JMenu();
         smServicioHabitacion = new javax.swing.JMenuItem();
         smServicioExtra = new javax.swing.JMenuItem();
+        MnMantenimiento = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Constant.APP_NAME);
@@ -109,11 +112,6 @@ public class FrmMain extends StandardForm {
 
         SmnMantenerUsuario.setText("Mantener Usuario");
         SmnMantenerUsuario.setName("pmantenerusuario"); // NOI18N
-        SmnMantenerUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SmnMantenerUsuarioActionPerformed(evt);
-            }
-        });
         MnAdministrador.add(SmnMantenerUsuario);
 
         smMantenerRoles.setText("Mantener Roles");
@@ -164,23 +162,29 @@ public class FrmMain extends StandardForm {
         jMenuBar1.add(MnReserva);
 
         MnAlojamiento.setText("Alojamiento");
+        MnAlojamiento.setEnabled(false);
 
-        jMenuItem1.setText("hola");
-        MnAlojamiento.add(jMenuItem1);
+        smRegistrarAlojamiento.setText("Registrar Alojamiento");
+        smRegistrarAlojamiento.setName("pRegistrarAlojamiento"); // NOI18N
+        MnAlojamiento.add(smRegistrarAlojamiento);
 
         jMenuBar1.add(MnAlojamiento);
 
-        jMenu2.setText("Servicio");
+        MnServicio.setText("Servicio");
+        MnServicio.setEnabled(false);
 
         smServicioHabitacion.setText("Servicio Habitación");
         smServicioHabitacion.setName("pServicioHabitacion"); // NOI18N
-        jMenu2.add(smServicioHabitacion);
+        MnServicio.add(smServicioHabitacion);
 
         smServicioExtra.setText("Servicio Extra");
         smServicioExtra.setName("pServicioExtra"); // NOI18N
-        jMenu2.add(smServicioExtra);
+        MnServicio.add(smServicioExtra);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(MnServicio);
+
+        MnMantenimiento.setText("Mantenimiento");
+        jMenuBar1.add(MnMantenimiento);
 
         setJMenuBar(jMenuBar1);
 
@@ -201,10 +205,6 @@ public class FrmMain extends StandardForm {
     private void MnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSalirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MnSalirActionPerformed
-
-    private void SmnMantenerUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SmnMantenerUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SmnMantenerUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,22 +247,23 @@ public class FrmMain extends StandardForm {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenu MnAdministrador;
-    private javax.swing.JMenu MnAlojamiento;
+    public javax.swing.JMenu MnAlojamiento;
     public javax.swing.JMenu MnFacturacion;
     public javax.swing.JMenuItem MnGenerarReserva;
+    public javax.swing.JMenu MnMantenimiento;
     public javax.swing.JMenu MnReserva;
     public javax.swing.JMenuItem MnSalir;
-    private javax.swing.JMenuItem MnVerPerfil;
+    public javax.swing.JMenu MnServicio;
+    public javax.swing.JMenuItem MnVerPerfil;
     public javax.swing.JMenuItem SmnMantenerUsuario;
     private javax.swing.JMenuItem SmnReporteSesiones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JMenuItem smBuscarCliente;
     private javax.swing.JMenuItem smMantenerRoles;
+    public javax.swing.JMenuItem smRegistrarAlojamiento;
     public javax.swing.JMenuItem smRegistrarCobro;
     public javax.swing.JMenuItem smServicioExtra;
     public javax.swing.JMenuItem smServicioHabitacion;

@@ -16,9 +16,15 @@ public class CtrNSeguridad {
     
     private CtrLogin mCtrLogin;
     private CtrMantenerUsuario mCtrMantenerUsuario;
+    private CtrVerPerfil mCtrVerPerfil;
     
-    //constructor
+    
+    //constructor    
     public CtrNSeguridad() {
+        //creación implicita de controladores
+        mCtrLogin=new CtrLogin();
+        mCtrMantenerUsuario=new CtrMantenerUsuario();
+        mCtrVerPerfil=new CtrVerPerfil();
     }
     
     public CtrNSeguridad(CtrLogin ctrLogin) {
@@ -40,6 +46,14 @@ public class CtrNSeguridad {
 
     public void setCtrMantenerUsuario(CtrMantenerUsuario ctrMantenerUsuario) {
         this.mCtrMantenerUsuario = ctrMantenerUsuario;
+    }
+
+    public CtrVerPerfil getmCtrVerPerfil() {
+        return mCtrVerPerfil;
+    }
+
+    public void setmCtrVerPerfil(CtrVerPerfil mCtrVerPerfil) {
+        this.mCtrVerPerfil = mCtrVerPerfil;
     }
     
     /**
@@ -64,13 +78,24 @@ public class CtrNSeguridad {
     }
     
     /**
-     * 
+     * mostrar el fomrulario mantener usuario
      */            
     public void showFrmMantenerUsuario(){
         mCtrMantenerUsuario.showFrmMantenerUsuario();
     }
     
+    /**
+     * mostrar el fomrulario mantener usuario
+     */            
+    public void showFrmVerPerfil(){
+       mCtrVerPerfil.showFrmVerPerfil();
+       mCtrVerPerfil.loadData();
+    }
+    
+    /**
+     * cargar los datos de los formularios
+     */
     public void loadData(){
-        mCtrMantenerUsuario.loadData();
+        mCtrMantenerUsuario.loadData();        
     }
 }

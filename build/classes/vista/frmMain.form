@@ -24,9 +24,6 @@
                     <Property name="text" type="java.lang.String" value="Mantener Usuario"/>
                     <Property name="name" type="java.lang.String" value="pmantenerusuario" noResource="true"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SmnMantenerUsuarioActionPerformed"/>
-                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -48,6 +45,9 @@
                 <Property name="text" type="java.lang.String" value="Ver Perfil"/>
                 <Property name="name" type="java.lang.String" value="pperfil" noResource="true"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MnSalir">
               <Properties>
@@ -117,19 +117,31 @@
         <Menu class="javax.swing.JMenu" name="MnAlojamiento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Alojamiento"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="smRegistrarAlojamiento">
               <Properties>
-                <Property name="text" type="java.lang.String" value="hola"/>
+                <Property name="text" type="java.lang.String" value="Registrar Alojamiento"/>
+                <Property name="name" type="java.lang.String" value="pRegistrarAlojamiento" noResource="true"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="MnServicio">
           <Properties>
             <Property name="text" type="java.lang.String" value="Servicio"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="smServicioHabitacion">
               <Properties>
@@ -150,6 +162,14 @@
               </AuxValues>
             </MenuItem>
           </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="MnMantenimiento">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mantenimiento"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Menu>
       </SubComponents>
     </Menu>

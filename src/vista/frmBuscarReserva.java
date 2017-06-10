@@ -9,13 +9,38 @@ package vista;
  *
  * @author Luis Fernando
  */
+import controlador.CtrAlojamiento;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+/**
+ * GRUPO ALOJAMIENTO
+ * Formulario de buscar reserva
+ */
+
+
 public class frmBuscarReserva extends javax.swing.JFrame {
 
     /**
      * Creates new form frmBuscarCliente
      */
+    //private DefaultTableModel modelo_detalle_reserva;
+    
+    CtrAlojamiento Alojamiento = new CtrAlojamiento();
+
+    
+    
+    
     public frmBuscarReserva() {
         initComponents();
+
+        Alojamiento.interfaz_busqueda_reserva();
+        Alojamiento.tamaño_tabla_reserva();
+        Alojamiento.interfaz_detalle_huesped_alojamiento();
+        Alojamiento.tamaño_tabla_huesped_alojamiento();
+        
     }
 
     /**
@@ -27,52 +52,157 @@ public class frmBuscarReserva extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDatosReserva = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        TB_Buscar_Reserva = new javax.swing.JTable();
+        btnBuscarReserva = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnSeleccionar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        cmbBuscarpor = new javax.swing.JComboBox();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Buscar ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 221, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Codigo", "Nombre", "DNI", "Telefono", "Estado", "F. Reserva", "F.Salida"
+        txtDatosReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDatosReservaKeyTyped(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+        getContentPane().add(txtDatosReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 221, 25));
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 660, 90));
+        jScrollPane1.setViewportView(TB_Buscar_Reserva);
 
-        jButton1.setText("Buscar");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 790, 110));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Buscar Reserva");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
+        btnBuscarReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Búsqueda.png"))); // NOI18N
+        btnBuscarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarReservaActionPerformed(evt);
+            }
+        });
+        btnBuscarReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btnBuscarReservaKeyTyped(evt);
+            }
+        });
+        getContentPane().add(btnBuscarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 50, 25));
 
-        jButton2.setText("Seleccionar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 120, -1));
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel2.setText("LISTA DE RESERVA");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
-        jButton3.setText("Cancelar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 130, -1));
+        btnSeleccionar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSeleccionar.setText("Aceptar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 120, -1));
 
-        pack();
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setText("Cerrar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, 130, -1));
+
+        cmbBuscarpor.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        cmbBuscarpor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Codigo", "Nombre" }));
+        cmbBuscarpor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmbBuscarporKeyTyped(evt);
+            }
+        });
+        getContentPane().add(cmbBuscarpor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 100, 25));
+
+        setSize(new java.awt.Dimension(822, 383));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         this.setVisible(false);
+         
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnBuscarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarReservaActionPerformed
+        // TODO add your handling code here:
+        
+        Alojamiento.VCTextoBIdR();
+        if("Codigo".equals(this.cmbBuscarpor.getSelectedItem().toString()))
+        {
+        Alojamiento.Limpiar_Tabla();
+        Alojamiento.Buscar_Reserva_id();
+        
+        
+        }
+         if("Nombre".equals(this.cmbBuscarpor.getSelectedItem().toString())){
+        Alojamiento.Limpiar_Tabla();
+        Alojamiento.Buscar_Reserva_Nombre_Cliente();
+        }
+    }//GEN-LAST:event_btnBuscarReservaActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        
+        Alojamiento.habilitar();
+        try {
+            // TODO add your handling code here:
+            Alojamiento.Enviar_Datos_Alojamiento();
+            Alojamiento.Llenar_detalle_huesped_alojamiento();
+      
+        } catch (ParseException ex) {
+            Logger.getLogger(frmBuscarReserva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setVisible(false);
+        
+        
+        
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void btnBuscarReservaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarReservaKeyTyped
+        // TODO add your handling code here:
+
+        
+    }//GEN-LAST:event_btnBuscarReservaKeyTyped
+
+    private void txtDatosReservaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDatosReservaKeyTyped
+        // TODO add your handling code here:
+        //Codigo para validar campos
+        if("Codigo".equals(this.cmbBuscarpor.getSelectedItem().toString()))
+        {
+            char validar = evt.getKeyChar();
+            if(Character.isLetter(validar))
+            {
+                getToolkit().beep();
+                evt.consume();
+                JOptionPane.showMessageDialog(rootPane, "Ingrese solo número");
+                txtDatosReserva.setText("");
+            }
+        }
+         if("Nombre".equals(this.cmbBuscarpor.getSelectedItem().toString())){
+             char validar = evt.getKeyChar();
+             if(Character.isDigit(validar))
+             {
+                 getToolkit().beep();
+                 evt.consume();
+                 JOptionPane.showMessageDialog(rootPane, "Ingrese solo letras");
+                 txtDatosReserva.setText("");
+             } 
+        }
+    }//GEN-LAST:event_txtDatosReservaKeyTyped
+
+    private void cmbBuscarporKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbBuscarporKeyTyped
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_cmbBuscarporKeyTyped
+
+ 
+    
     /**
      * @param args the command line arguments
      */
@@ -106,6 +236,14 @@ public class frmBuscarReserva extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -116,13 +254,13 @@ public class frmBuscarReserva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public static javax.swing.JTable TB_Buscar_Reserva;
+    private javax.swing.JButton btnBuscarReserva;
+    private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JComboBox cmbBuscarpor;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField txtDatosReserva;
     // End of variables declaration//GEN-END:variables
 }
