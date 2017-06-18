@@ -43,6 +43,7 @@ public class CtrMain implements ActionListener{
         mFrmMain.smServicioExtra.addActionListener(this);
         mFrmMain.smServicioHabitacion.addActionListener(this);
         mFrmMain.smRegistrarAlojamiento.addActionListener(this);
+        mFrmMain.smReporteAlojamiento.addActionListener(this);
     }
     
     /**
@@ -76,6 +77,9 @@ public class CtrMain implements ActionListener{
                 break;
             case "pRegistrarAlojamiento":
                 this.mCtrNAlojamiento.showFrmAlojamiento();
+                break;
+            case "pReporteAlojamiento":
+                this.mCtrNAlojamiento.showFrmReporteAlojamiento();
                 break;
             case "exit":
                 System.exit(0);                
@@ -173,7 +177,7 @@ public class CtrMain implements ActionListener{
                     mFrmMain.MnReserva.setEnabled(true);
                     mFrmMain.MnAlojamiento.setEnabled(true);
                     mFrmMain.MnServicio.setEnabled(true);
-                    
+                 
                     
             }
         }

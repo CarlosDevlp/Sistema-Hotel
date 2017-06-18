@@ -132,6 +132,15 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="smReporteAlojamiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reporte Alojamiento"/>
+                <Property name="name" type="java.lang.String" value="pRegistrarAlojamiento" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="MnServicio">

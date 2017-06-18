@@ -21,16 +21,19 @@ public abstract class Constant {
     
     //constantes de la base de datos    
     /*cloud*/
+    /*
     public final static String DB_SERVER="sl-us-south-1-portal.2.dblayer.com:16643";
     public final static String DB_NAME="CalidadT3";
     public final static String DB_USER_NAME="admin";
     public final static String DB_USER_PASSWORD="LTKIKOECRZFJOEUM";
-    /*local
+    */
+    /*local*/
+    
     public final static String DB_SERVER="localhost";
     public final static String DB_NAME="calidadt3";
     public final static String DB_USER_NAME="root";
-    public final static String DB_USER_PASSWORD="admin";
-    */
+    public final static String DB_USER_PASSWORD="masterhg12";
+    
     //nombre de las tablas
     public final static String DB_TABLE_ROLES="Roles";
     public final static String DB_TABLE_USUARIO="User";

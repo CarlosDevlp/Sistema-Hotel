@@ -77,6 +77,7 @@ public class FrmMain extends StandardForm {
         MnGenerarReserva = new javax.swing.JMenuItem();
         MnAlojamiento = new javax.swing.JMenu();
         smRegistrarAlojamiento = new javax.swing.JMenuItem();
+        smReporteAlojamiento = new javax.swing.JMenuItem();
         MnServicio = new javax.swing.JMenu();
         smServicioHabitacion = new javax.swing.JMenuItem();
         smServicioExtra = new javax.swing.JMenuItem();
@@ -167,6 +168,10 @@ public class FrmMain extends StandardForm {
         smRegistrarAlojamiento.setText("Registrar Alojamiento");
         smRegistrarAlojamiento.setName("pRegistrarAlojamiento"); // NOI18N
         MnAlojamiento.add(smRegistrarAlojamiento);
+
+        smReporteAlojamiento.setText("Reporte Alojamiento");
+        smReporteAlojamiento.setName("pRegistrarAlojamiento"); // NOI18N
+        MnAlojamiento.add(smReporteAlojamiento);
 
         jMenuBar1.add(MnAlojamiento);
 
@@ -265,6 +270,7 @@ public class FrmMain extends StandardForm {
     private javax.swing.JMenuItem smMantenerRoles;
     public javax.swing.JMenuItem smRegistrarAlojamiento;
     public javax.swing.JMenuItem smRegistrarCobro;
+    public javax.swing.JMenuItem smReporteAlojamiento;
     public javax.swing.JMenuItem smServicioExtra;
     public javax.swing.JMenuItem smServicioHabitacion;
     // End of variables declaration//GEN-END:variables

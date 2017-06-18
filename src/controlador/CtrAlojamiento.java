@@ -7,6 +7,7 @@ package controlador;
 
 /**
  * GRUPO ALOJAMIENTO
+ *
  * @author VAIO
  */
 import assets.values.Constant;
@@ -29,11 +30,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import modelo.Usuario;
+import vista.FrmReporteAlojamiento;
 
 public class CtrAlojamiento {
 
     private DefaultTableModel modelo_detalle_reserva;
     private DefaultTableModel modelo_detalle_huesped;
+    private DefaultTableModel modelo_detalle_alojamiento;
 
     public void Registrar_alojamiento() {
 
@@ -45,9 +48,8 @@ public class CtrAlojamiento {
             + "Reserva_idReserva,Empleado_Persona_idPersona"},
                 new String[]{frmAlojamiento.txtidAlojamiento.getText(), Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate()),
                     Date_Format.format(frmAlojamiento.txtfechaSalida.getDate()), frmAlojamiento.txtidReserva.getText(), "3"});
-        
-        
-        BasicDao.update("reserva", new String[]{"EstadoRes"}, new String[]{"Alojado"}, "idreserva="+frmAlojamiento.txtidReserva.getText());  
+
+        BasicDao.update("reserva", new String[]{"EstadoRes"}, new String[]{"Alojado"}, "idreserva=" + frmAlojamiento.txtidReserva.getText());
 
         //JOptionPane.showMessageDialog(null, "El registro se realizo satisfactoriamente"+frmAlojamiento.txtidAlojamiento.getText());
         JOptionPane.showMessageDialog(null, "El registro se realizo satisfactoriamente");
@@ -56,8 +58,7 @@ public class CtrAlojamiento {
 
     public void Conusltar_Reserva() throws ParseException {
 
-        
-            ArrayList<Map<String, String>> RConreserva = BasicDao.select("cliente t1 inner join reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join persona t3 \n"
+        ArrayList<Map<String, String>> RConreserva = BasicDao.select("cliente t1 inner join reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join persona t3 \n"
                 + "on t2.Cliente_Persona_idPersona = t3.idPersona inner join razonsocial t4 on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
                 new String[]{"*"}, "t2.idReserva =" + frmAlojamiento.txtidReserva.getText());
 
@@ -96,7 +97,7 @@ public class CtrAlojamiento {
             modelo_detalle_huesped.setValueAt(rowe.get("DNIHue"), s, 2);
 
         }
-        
+
         habilitar();
 
     }
@@ -167,10 +168,10 @@ public class CtrAlojamiento {
 
     public void Buscar_Reserva_id() {
 
-        ArrayList<Map<String, String>> result = BasicDao.select("cliente t1 inner join reserva t2 on\n" +
-" t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join persona t3 \n" +
-"on t2.Cliente_Persona_idPersona = t3.idPersona inner join razonsocial t4\n" +
-" on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
+        ArrayList<Map<String, String>> result = BasicDao.select("cliente t1 inner join reserva t2 on\n"
+                + " t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join persona t3 \n"
+                + "on t2.Cliente_Persona_idPersona = t3.idPersona inner join razonsocial t4\n"
+                + " on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
                 new String[]{"*"}, "t2.idReserva =" + frmBuscarReserva.txtDatosReserva.getText());
 
         for (int i = 0; i < result.size(); i++) {
@@ -192,8 +193,8 @@ public class CtrAlojamiento {
 
     public void Buscar_Reserva_Nombre_Cliente() {
 
-        ArrayList<Map<String, String>> result = BasicDao.select("cliente t1 inner join reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join persona t3 \n" +
-" on t2.Cliente_Persona_idPersona = t3.idPersona inner join razonsocial t4 on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
+        ArrayList<Map<String, String>> result = BasicDao.select("cliente t1 inner join reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join persona t3 \n"
+                + " on t2.Cliente_Persona_idPersona = t3.idPersona inner join razonsocial t4 on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
                 new String[]{"*"}, "t3.FullNamePer ='" + frmBuscarReserva.txtDatosReserva.getText() + "'");
 
         Map<String, String> row = result.get(0);
@@ -250,30 +251,26 @@ public class CtrAlojamiento {
     /**
      * *********************************************************
      * @param idReserva
-     * @return 
+     * @return
      */
-    
-   /* public void idRExists(String idReserva){        
-        ArrayList<Map<String,String>> result=BasicDao.select("reserva r",new String[]{"*"},"r.idReserva='"+idReserva+"'");
-        boolean exists= result.size()>0;
-        //si existe el usuario, de forma implícita, crear al usuario   
-        if(!exists){
-            JOptionPane.showMessageDialog(null, "No existe");
-        }
-    }
-    */
-    
+    /* public void idRExists(String idReserva){        
+     ArrayList<Map<String,String>> result=BasicDao.select("reserva r",new String[]{"*"},"r.idReserva='"+idReserva+"'");
+     boolean exists= result.size()>0;
+     //si existe el usuario, de forma implícita, crear al usuario   
+     if(!exists){
+     JOptionPane.showMessageDialog(null, "No existe");
+     }
+     }
+     */
     public void VCTextoIdR(String idReserva) {
-        
-        ArrayList<Map<String,String>> result=BasicDao.select("reserva r",new String[]{"*"},"r.idReserva='"+idReserva+"'");
-        boolean exists= result.size()>0;
-        
+
+        ArrayList<Map<String, String>> result = BasicDao.select("reserva r", new String[]{"*"}, "r.idReserva='" + idReserva + "'");
+        boolean exists = result.size() > 0;
+
         if (frmAlojamiento.txtidReserva.getText().length() == 00) {
             JOptionPane.showMessageDialog(null, "Ingrese Código de Reserva");
             frmAlojamiento.txtidReserva.requestFocus();
-        } 
-        else if(!exists) 
-        {
+        } else if (!exists) {
             frmAlojamiento.txtidReserva.setText("");
             frmAlojamiento.txtidReserva.requestFocus();
             JOptionPane.showMessageDialog(null, "No existe");
@@ -398,6 +395,60 @@ public class CtrAlojamiento {
             }
 
         });
+
+    }
+
+    /*------------REPORTE------------*/
+    public void Reporte_Alojamiento() {
+
+        
+
+                    ArrayList<Map<String, String>> resultreporte = BasicDao.select("alojamiento t1 inner join \n"
+                            + "reserva t2 \n"
+                            + "on t1.Reserva_idReserva = t2.idReserva inner join cliente t3 on \n"
+                            + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
+                            + "inner join persona t4 on\n"
+                            + " t3.Persona_idPersona = t4.idPersona ",
+                            new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + FrmReporteAlojamiento.txtFecInicAloReport.getDateFormatString()
+                            + "'" + FrmReporteAlojamiento.txtFecFinAloReport.getDateFormatString() + "'");
+
+                    for (int i = 0; i < resultreporte.size(); i++) {
+
+                        Map<String, String> row = resultreporte.get(i);
+                        modelo_detalle_alojamiento.insertRow(i, new Object[]{});
+
+                        modelo_detalle_alojamiento.setValueAt(row.get("idAlojamiento"), i, 0);
+                        modelo_detalle_alojamiento.setValueAt(row.get("FechaInicioAlo"), i, 1);
+                        modelo_detalle_alojamiento.setValueAt(row.get("FechaFinAlo"), i, 2);
+
+                    }
+                }
+
+
+    public final void interfaz_detalle_alojamiento() {
+
+        String data[][] = {};
+        String col[] = {"Codigo", "Fecha Inicio Alojamiento", "Fecha Final Alojamiento"};
+        modelo_detalle_alojamiento = new DefaultTableModel(data, col);
+        FrmReporteAlojamiento.TB_Reporte_Alojamiento.setModel(modelo_detalle_alojamiento);
+
+    }
+
+    public void tamaño_tabla_alojamiento() {
+
+        FrmReporteAlojamiento.TB_Reporte_Alojamiento.getColumnModel().getColumn(0).setPreferredWidth(30);
+        FrmReporteAlojamiento.TB_Reporte_Alojamiento.getColumnModel().getColumn(1).setPreferredWidth(200);
+        FrmReporteAlojamiento.TB_Reporte_Alojamiento.getColumnModel().getColumn(2).setPreferredWidth(50);
+
+
+    }
+
+    public void Limpiar_Tabla_alojamiento() {
+
+        for (int i = 0; i < FrmReporteAlojamiento.TB_Reporte_Alojamiento.getRowCount(); i++) {
+            modelo_detalle_alojamiento.removeRow(i);
+            i -= 1;
+        }
 
     }
 

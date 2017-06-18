@@ -103,7 +103,7 @@ public class Usuario {
      * del usuario en la base de datos
      */
     public static boolean userExists(String username,String password){        
-        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO,new String[]{"*"},"UsuarioUser='"+username+"' AND PassUser='"+password+"'");
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO,new String[]{"*"},"UsuarioUse='"+username+"' AND PassUse='"+password+"'");
         boolean exists= result.size()>0;
         //si existe el usuario, de forma implícita, crear al usuario   
         if(exists){
