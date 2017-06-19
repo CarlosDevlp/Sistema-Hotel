@@ -170,7 +170,7 @@ public class FrmMain extends StandardForm {
         MnAlojamiento.add(smRegistrarAlojamiento);
 
         smReporteAlojamiento.setText("Reporte Alojamiento");
-        smReporteAlojamiento.setName("pRegistrarAlojamiento"); // NOI18N
+        smReporteAlojamiento.setName("pReporteAlojamiento"); // NOI18N
         MnAlojamiento.add(smReporteAlojamiento);
 
         jMenuBar1.add(MnAlojamiento);

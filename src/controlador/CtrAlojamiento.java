@@ -402,6 +402,25 @@ public class CtrAlojamiento {
     public void Reporte_Alojamiento() {
 
         
+        FrmReporteAlojamiento.txtFecInicAloReport.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+            
+            @Override
+            public void propertyChange(PropertyChangeEvent pce) {
+                
+                 for (int i = 0; i < FrmReporteAlojamiento.TB_Reporte_Alojamiento.getRowCount(); i++) {
+                 modelo_detalle_alojamiento.removeRow(i);
+                  i -= 1;
+                }
+
+                if (FrmReporteAlojamiento.txtFecInicAloReport.getDate() != null && FrmReporteAlojamiento.txtFecFinAloReport.getDate() != null) {
+
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(FrmReporteAlojamiento.txtFecInicAloReport.getCalendar().getTime());
+                    Calendar r = Calendar.getInstance();
+                    r.setTime(FrmReporteAlojamiento.txtFecFinAloReport.getCalendar().getTime());
+
+                    String fechainicio = (String.valueOf(c.get(Calendar.YEAR)) + "-" + (c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DATE));
+                    String fechafin = (String.valueOf(r.get(Calendar.YEAR)) + "-" + (r.get(Calendar.MONTH) + 1) + "-" + r.get(Calendar.DATE));
 
                     ArrayList<Map<String, String>> resultreporte = BasicDao.select("alojamiento t1 inner join \n"
                             + "reserva t2 \n"
@@ -409,8 +428,8 @@ public class CtrAlojamiento {
                             + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
                             + "inner join persona t4 on\n"
                             + " t3.Persona_idPersona = t4.idPersona ",
-                            new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + FrmReporteAlojamiento.txtFecInicAloReport.getDateFormatString()
-                            + "'" + FrmReporteAlojamiento.txtFecFinAloReport.getDateFormatString() + "'");
+                            new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + fechainicio
+                            + "' and '" + fechafin + "'");
 
                     for (int i = 0; i < resultreporte.size(); i++) {
 
@@ -419,11 +438,68 @@ public class CtrAlojamiento {
 
                         modelo_detalle_alojamiento.setValueAt(row.get("idAlojamiento"), i, 0);
                         modelo_detalle_alojamiento.setValueAt(row.get("FechaInicioAlo"), i, 1);
-                        modelo_detalle_alojamiento.setValueAt(row.get("FechaFinAlo"), i, 2);
+                        modelo_detalle_alojamiento.setValueAt(row.get("FechaFinalAlo"), i, 2);
 
                     }
+                    
+                  
+
+                }
+                  
+            }
+             
+        });
+         
+        
+        FrmReporteAlojamiento.txtFecFinAloReport.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+            
+            @Override
+            public void propertyChange(PropertyChangeEvent pce) {
+                
+                 for (int i = 0; i < FrmReporteAlojamiento.TB_Reporte_Alojamiento.getRowCount(); i++) {
+                 modelo_detalle_alojamiento.removeRow(i);
+                  i -= 1;
                 }
 
+                if (FrmReporteAlojamiento.txtFecInicAloReport.getDate() != null && FrmReporteAlojamiento.txtFecFinAloReport.getDate() != null) {
+
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(FrmReporteAlojamiento.txtFecInicAloReport.getCalendar().getTime());
+                    Calendar r = Calendar.getInstance();
+                    r.setTime(FrmReporteAlojamiento.txtFecFinAloReport.getCalendar().getTime());
+
+                    String fechainicio = (String.valueOf(c.get(Calendar.YEAR)) + "-" + (c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DATE));
+                    String fechafin = (String.valueOf(r.get(Calendar.YEAR)) + "-" + (r.get(Calendar.MONTH) + 1) + "-" + r.get(Calendar.DATE));
+
+                    ArrayList<Map<String, String>> resultreporte = BasicDao.select("alojamiento t1 inner join \n"
+                            + "reserva t2 \n"
+                            + "on t1.Reserva_idReserva = t2.idReserva inner join cliente t3 on \n"
+                            + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
+                            + "inner join persona t4 on\n"
+                            + " t3.Persona_idPersona = t4.idPersona ",
+                            new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + fechainicio
+                            + "' and '" + fechafin + "'");
+
+                    for (int i = 0; i < resultreporte.size(); i++) {
+
+                        Map<String, String> row = resultreporte.get(i);
+                        modelo_detalle_alojamiento.insertRow(i, new Object[]{});
+
+                        modelo_detalle_alojamiento.setValueAt(row.get("idAlojamiento"), i, 0);
+                        modelo_detalle_alojamiento.setValueAt(row.get("FechaInicioAlo"), i, 1);
+                        modelo_detalle_alojamiento.setValueAt(row.get("FechaFinalAlo"), i, 2);
+
+                    }
+                    
+                  
+
+                }
+                  
+            }
+             
+        });
+        
+    }
 
     public final void interfaz_detalle_alojamiento() {
 
@@ -440,16 +516,15 @@ public class CtrAlojamiento {
         FrmReporteAlojamiento.TB_Reporte_Alojamiento.getColumnModel().getColumn(1).setPreferredWidth(200);
         FrmReporteAlojamiento.TB_Reporte_Alojamiento.getColumnModel().getColumn(2).setPreferredWidth(50);
 
-
     }
 
-    public void Limpiar_Tabla_alojamiento() {
+    /*public void Limpiar_Tabla_alojamiento() {
 
         for (int i = 0; i < FrmReporteAlojamiento.TB_Reporte_Alojamiento.getRowCount(); i++) {
             modelo_detalle_alojamiento.removeRow(i);
             i -= 1;
         }
 
-    }
+    }*/
 
 }

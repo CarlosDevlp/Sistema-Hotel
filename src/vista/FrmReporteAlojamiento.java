@@ -26,6 +26,7 @@ public class FrmReporteAlojamiento extends javax.swing.JFrame {
         initComponents();
         Alojamientov2.interfaz_detalle_alojamiento();
         Alojamientov2.tamaño_tabla_alojamiento();
+        Alojamientov2.Reporte_Alojamiento();
     }
 
     /**
