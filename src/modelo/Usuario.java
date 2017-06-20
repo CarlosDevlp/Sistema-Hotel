@@ -65,6 +65,15 @@ public class Usuario {
     }
     
     //setters and getters
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }        
+    
     public String getPassword() {
         return passUser;
     }
@@ -128,9 +137,29 @@ public class Usuario {
     
     /**
      * obtener toda la lista de usuarios existentes
+     * en la base de datos con condición
+     * 
+     * @param where condición
+     * @return retorna una arraylist de usuarios
+     */
+    public static ArrayList<Usuario> getUsuarioList(String where){
+        
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO, new String[]{"*"}, where);
+        ArrayList<Usuario> userList=new ArrayList();
+        for(Map<String,String> row:result){ 
+            userList.add(new Usuario(row));
+            userList.get(userList.size()-1).setRolUser(Rol.getRol(row.get("Roles_idRoles")));
+        }
+        return userList;
+    }
+    
+    
+    
+    /**
+     * obtener toda la lista de usuarios existentes
      * en la base de datos.
      * 
-     * @return retorna una arraylist de roles
+     * @return retorna una arraylist de usuarios
      */
     public static ArrayList<Usuario> getUsuarioList(){
         ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO, new String[]{"*"}, null);

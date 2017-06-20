@@ -115,6 +115,7 @@ public class FrmMain extends StandardForm {
         MnAdministrador.add(SmnMantenerUsuario);
 
         smMantenerRoles.setText("Mantener Roles");
+        smMantenerRoles.setName("pmantenerroles"); // NOI18N
         MnAdministrador.add(smMantenerRoles);
 
         SmnReporteSesiones.setText("Reporte Sesiones");
@@ -163,6 +164,7 @@ public class FrmMain extends StandardForm {
 
         MnAlojamiento.setText("Alojamiento");
         MnAlojamiento.setEnabled(false);
+        MnAlojamiento.setName("pAlojamiento"); // NOI18N
 
         smRegistrarAlojamiento.setText("Registrar Alojamiento");
         smRegistrarAlojamiento.setName("pRegistrarAlojamiento"); // NOI18N
@@ -184,6 +186,8 @@ public class FrmMain extends StandardForm {
         jMenuBar1.add(MnServicio);
 
         MnMantenimiento.setText("Mantenimiento");
+        MnMantenimiento.setEnabled(false);
+        MnMantenimiento.setName("pMantenimiento"); // NOI18N
         jMenuBar1.add(MnMantenimiento);
 
         setJMenuBar(jMenuBar1);

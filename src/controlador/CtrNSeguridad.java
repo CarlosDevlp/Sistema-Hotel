@@ -17,14 +17,15 @@ public class CtrNSeguridad {
     private CtrLogin mCtrLogin;
     private CtrMantenerUsuario mCtrMantenerUsuario;
     private CtrVerPerfil mCtrVerPerfil;
-    
-    
+    private CtrMantenerRol mCtrMantenerRol;
+    private Callback mInvokeCallback;
     //constructor    
     public CtrNSeguridad() {
         //creación implicita de controladores
         mCtrLogin=new CtrLogin();
         mCtrMantenerUsuario=new CtrMantenerUsuario();
         mCtrVerPerfil=new CtrVerPerfil();
+        mCtrMantenerRol=new CtrMantenerRol();
     }
     
     public CtrNSeguridad(CtrLogin ctrLogin) {
@@ -85,11 +86,18 @@ public class CtrNSeguridad {
     }
     
     /**
-     * mostrar el fomrulario mantener usuario
+     * mostrar el formulario mantener usuario
      */            
     public void showFrmVerPerfil(){
        mCtrVerPerfil.showFrmVerPerfil();
        mCtrVerPerfil.loadData();
+    }
+    
+    /**
+     * mostrar el formulario mantener rol
+     */
+    public void showFrmMantenerRol(){
+      mCtrMantenerRol.showFrmMantenerRol();
     }
     
     /**
@@ -98,4 +106,18 @@ public class CtrNSeguridad {
     public void loadData(){
         mCtrMantenerUsuario.loadData();        
     }
+
+    /**
+     * pasar el callback para invocar casos
+     * de uso incluidos
+     * 
+     * @param invokeCallback objeto callback
+     */
+    public void setInvokeCallback(Callback invokeCallback) {
+        this.mInvokeCallback = invokeCallback;
+        
+    }
+    
+    
+    
 }

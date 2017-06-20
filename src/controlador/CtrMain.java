@@ -26,8 +26,9 @@ public class CtrMain implements ActionListener{
     private CtrNReserva mCtrNReserva;    
     private CtrNServicio mCtrNServicio;
     private CtrNAlojamiento mCtrNAlojamiento;
+    private CtrIncluido mCtrIncluido;
+    private Callback mInvokeCallback;
     
-   
     private final String LOG_TAG="CtrMain",LOG_TAG_ERROR="CtrMain-error";
     
     //constructores
@@ -43,6 +44,15 @@ public class CtrMain implements ActionListener{
         mFrmMain.smServicioExtra.addActionListener(this);
         mFrmMain.smServicioHabitacion.addActionListener(this);
         mFrmMain.smRegistrarAlojamiento.addActionListener(this);
+        
+        mCtrIncluido=CtrIncluido.getInstance();
+        
+        mInvokeCallback=new Callback<String>(){
+            @Override
+            public void execute(String[] args) {
+                mCtrIncluido.showForm(args[0]);
+            }        
+        };
     }
     
     /**
@@ -59,29 +69,40 @@ public class CtrMain implements ActionListener{
         JComponent obj=(JComponent) e.getSource();
         System.out.println(obj.getName());
         switch(obj.getName()){
+            //SEGURIDAD
             case "pmantenerusuario":    
                 this.mCtrNSeguridad.showFrmMantenerUsuario();
                 break;
             case "pperfil":
                 this.mCtrNSeguridad.showFrmVerPerfil();
                 break;
+            case "pmantenerroles":
+                this.mCtrNSeguridad.showFrmMantenerRol();
+                break;
+            //RESERVA
             case "pGenerarReserva":
                 this.mCtrNReserva.showGenerarReserva();                
                 break;
+            //SERVICIO
             case "pServicioHabitacion":
                 this.mCtrNServicio.showFrmServicioHabitacion();
                 break;
             case "pServicioExtra":
                 this.mCtrNServicio.showFrmServicioExtra();
                 break;
+            //ALOJAMIENTO
             case "pRegistrarAlojamiento":
                 this.mCtrNAlojamiento.showFrmAlojamiento();
                 break;
+            //MANTENIMIENTO
+            case "pMantenimiento":
+                break;
+            //OTROS
             case "exit":
                 System.exit(0);                
                 break;
         }
-        
+                
     }
     
     //método importante
@@ -100,11 +121,11 @@ public class CtrMain implements ActionListener{
         disableFrmMain();
         //mostrar el login (seguridad)
         mCtrNSeguridad.showFrmLogin();                
-        
+                
         
         mCtrNSeguridad.loadData();
         //cuando el usuario se logea, esto debe pasar
-        mCtrNSeguridad.setOnUserLogged(new Callback(){
+        mCtrNSeguridad.setOnUserLogged(new Callback<String>(){
             @Override
             public void execute(String[] args) {                
                 //habilitar el formulario principal
@@ -112,6 +133,11 @@ public class CtrMain implements ActionListener{
                 enableMenus();                
             }
         });
+        
+        //pasar el callback invocador (interfaz) a todas
+        //las controladoras de negocio
+        
+        
     }
 
     //setters and getters
@@ -161,20 +187,36 @@ public class CtrMain implements ActionListener{
         for(String pestana :pestanaList) {
             System.out.println(pestana);
             switch(pestana){
+                //FACTURACIÓN
                 case "pfacturacion":
                     mFrmMain.MnFacturacion.setEnabled(true);
                     break;
+                    
+                //RESERVA
                 case "preserva":
                     mFrmMain.MnReserva.setEnabled(true);
                     break;
+                //SERVICIO
+                case "pServicio":
+                    mFrmMain.MnServicio.setEnabled(true);
+                    break;
+                //ALOJAMIENTO
+                case "pAlojamiento":
+                     mFrmMain.MnAlojamiento.setEnabled(true);
+                     break;
+                //MANTENIMIENTO
+                case "pMantenimiento":
+                    mFrmMain.MnMantenimiento.setEnabled(true);
+                    break;
+                    
+                //TODOS
                 case "all":
                     mFrmMain.MnAdministrador.setEnabled(true);
-                    mFrmMain.MnFacturacion.setEnabled(true);                    
+                    mFrmMain.MnFacturacion.setEnabled(true);
                     mFrmMain.MnReserva.setEnabled(true);
                     mFrmMain.MnAlojamiento.setEnabled(true);
                     mFrmMain.MnServicio.setEnabled(true);
-                    
-                    
+                    mFrmMain.MnMantenimiento.setEnabled(true);
             }
         }
             
@@ -217,7 +259,7 @@ public class CtrMain implements ActionListener{
      *      
     */ 
     private void enableFrmMain(){
-        mFrmMain.setEnabled(true);        
+        mFrmMain.setEnabled(true);
     }
 
     

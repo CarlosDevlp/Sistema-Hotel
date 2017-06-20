@@ -89,7 +89,6 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
     @Override
     public void keyPressed(KeyEvent e) {
         JComponent obj=(JComponent) e.getSource();
-        //System.out.println(obj.getName());        
     }
 
     @Override
@@ -192,7 +191,9 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
         
     }
     
-    //vaciar la tabla
+    /**
+     * vaciar la tabla
+     **/
     private void clearTable(){        
         mUserTableModel = new DefaultTableModel(null,USER_TABLE_COLUMN_NAMES);
         this.mFrmMantenerUsuario.tbUser.setModel(mUserTableModel);

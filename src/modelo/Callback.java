@@ -8,7 +8,9 @@ package modelo;
 /**
  *Interfaz Callback
  * @author Carlos Chavez Laguna
+ * 
+ * @param <T> tipo de dato de la plantilla 
  */
-public interface Callback {
-    void execute(String []args);
+public interface Callback<T> {
+    void execute(T []args);
 }

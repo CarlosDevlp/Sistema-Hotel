@@ -58,11 +58,6 @@ public class FrmLogin extends StandardForm {
 
         TxtUsername.setBackground(new java.awt.Color(255, 255, 255));
         TxtUsername.setName("txtUsername"); // NOI18N
-        TxtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtUsernameKeyPressed(evt);
-            }
-        });
 
         BtnEnter.setText("Entrar");
         BtnEnter.setName("btnEntrar"); // NOI18N
@@ -151,10 +146,6 @@ public class FrmLogin extends StandardForm {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void TxtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtUsernameKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtUsernameKeyPressed
 
     /**
      * @param args the command line arguments
