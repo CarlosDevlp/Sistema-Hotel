@@ -27,6 +27,7 @@ public class CtrBuscarUsuario implements ActionListener{
     private ArrayList<Usuario> mFoundUserList;
     private DefaultTableModel mUserTableModel;
     private Callback mOnCompletedSearch;
+    
     private final String []USER_TABLE_COLUMN_NAMES={"Id","Nombre de usuario","Rol"};
     //constructor    
     public CtrBuscarUsuario() {
@@ -61,9 +62,14 @@ public class CtrBuscarUsuario implements ActionListener{
         }
     } 
     
-    //setters and getters
-    
-    
+    //setters and getters    
+    public Callback getOnCompletedSearch() {
+        return mOnCompletedSearch;
+    }
+
+    public void setOnCompletedSearch(Callback onCompletedSearch) {
+        this.mOnCompletedSearch = onCompletedSearch;
+    }    
     
     
     //otros métodos

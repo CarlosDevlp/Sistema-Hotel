@@ -38,13 +38,18 @@ public class CtrMain implements ActionListener{
     public CtrMain(FrmMain frmMain) {        
         mFrmMain=frmMain;
         mFrmMain.SmnMantenerUsuario.addActionListener(this);
+        mFrmMain.smMantenerRoles.addActionListener(this);
         mFrmMain.MnVerPerfil.addActionListener(this);
+        mFrmMain.SmnReporteSesiones.addActionListener(this);
         mFrmMain.MnGenerarReserva.addActionListener(this);        
         mFrmMain.MnSalir.addActionListener(this);                
         mFrmMain.smServicioExtra.addActionListener(this);
         mFrmMain.smServicioHabitacion.addActionListener(this);
         mFrmMain.smRegistrarAlojamiento.addActionListener(this);
+        mFrmMain.smReporteAlojamiento.addActionListener(this);
         
+        
+        //arreglando conflictos merge--------------------
         mCtrIncluido=CtrIncluido.getInstance();
         
         mInvokeCallback=new Callback<String>(){
@@ -53,6 +58,7 @@ public class CtrMain implements ActionListener{
                 mCtrIncluido.showForm(args[0]);
             }        
         };
+
     }
     
     /**
@@ -79,6 +85,9 @@ public class CtrMain implements ActionListener{
             case "pmantenerroles":
                 this.mCtrNSeguridad.showFrmMantenerRol();
                 break;
+            case "preportesesiones":
+                this.mCtrNSeguridad.showFrmReportarSesiones();
+                break;
             //RESERVA
             case "pGenerarReserva":
                 this.mCtrNReserva.showGenerarReserva();                
@@ -93,6 +102,9 @@ public class CtrMain implements ActionListener{
             //ALOJAMIENTO
             case "pRegistrarAlojamiento":
                 this.mCtrNAlojamiento.showFrmAlojamiento();
+                break;
+            case "pReporteAlojamiento":
+                this.mCtrNAlojamiento.showFrmReporteAlojamiento();
                 break;
             //MANTENIMIENTO
             case "pMantenimiento":
@@ -217,6 +229,7 @@ public class CtrMain implements ActionListener{
                     mFrmMain.MnAlojamiento.setEnabled(true);
                     mFrmMain.MnServicio.setEnabled(true);
                     mFrmMain.MnMantenimiento.setEnabled(true);
+
             }
         }
             

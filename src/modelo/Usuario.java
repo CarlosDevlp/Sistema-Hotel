@@ -60,8 +60,8 @@ public class Usuario {
     public Usuario(Map<String,String> args) {
         this();
         this.idUser = args.get("idUser");
-        this.usuarioUser = args.get("UsuarioUser");
-        this.passUser = args.get("PassUser");
+        this.usuarioUser = args.get("UsuarioUse");
+        this.passUser = args.get("PassUse");
     }
     
     //setters and getters
@@ -112,7 +112,7 @@ public class Usuario {
      * del usuario en la base de datos
      */
     public static boolean userExists(String username,String password){        
-        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO,new String[]{"*"},"UsuarioUser='"+username+"' AND PassUser='"+password+"'");
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO,new String[]{"*"},"UsuarioUse='"+username+"' AND PassUse='"+password+"'");
         boolean exists= result.size()>0;
         //si existe el usuario, de forma implícita, crear al usuario   
         if(exists){
@@ -130,9 +130,9 @@ public class Usuario {
     public void save(){
         //si el usuario existe
         if(BasicDao.rowExists(Constant.DB_TABLE_USUARIO, "idUser="+idUser)) //actualizar sus datos
-            BasicDao.update(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUser","PassUser"}, new String []{this.usuarioUser,this.passUser}, "idUser="+this.idUser);
+            BasicDao.update(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUse","PassUse","Roles_idRoles"}, new String []{this.usuarioUser,this.passUser,this.rolUser.getIdRoles()}, "idUser="+this.idUser);
         else //crear al usuario con los datos actuales
-            BasicDao.insert(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUser","PassUser","Roles_idRoles"}, new String []{this.usuarioUser,this.passUser,this.rolUser.getIdRoles()});
+            BasicDao.insert(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUse","PassUse","Roles_idRoles"}, new String []{this.usuarioUser,this.passUser,this.rolUser.getIdRoles()});
     }        
     
     /**
@@ -144,11 +144,16 @@ public class Usuario {
      */
     public static ArrayList<Usuario> getUsuarioList(String where){
         
-        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO, new String[]{"*"}, where);
+        //ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO, new String[]{"*"}, where);
+        //inner join
+        ArrayList<Map<String,String>> result = BasicDao.select(new String[] {Constant.DB_TABLE_USUARIO,Constant.DB_TABLE_ROLES},
+                                                               new String[] {"*"},new String[] {"Roles_idRoles","idRoles"}, where);
+        
         ArrayList<Usuario> userList=new ArrayList();
+        
         for(Map<String,String> row:result){ 
             userList.add(new Usuario(row));
-            userList.get(userList.size()-1).setRolUser(Rol.getRol(row.get("Roles_idRoles")));
+            userList.get(userList.size()-1).setRolUser(new Rol(row));
         }
         return userList;
     }
@@ -169,6 +174,15 @@ public class Usuario {
             userList.get(userList.size()-1).setRolUser(Rol.getRol(row.get("Roles_idRoles")));
         }
         return userList;
+    }
+    
+    
+    /**
+     * 
+     * remover usuario de la base de datos
+     */
+    public void remove(){
+        BasicDao.delete(Constant.DB_TABLE_USUARIO, "idUser="+this.idUser);
     }
    
 }

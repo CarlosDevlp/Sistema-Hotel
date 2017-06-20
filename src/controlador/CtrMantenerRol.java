@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Callback;
 import modelo.Pestana;
 import modelo.Rol;
+import modelo.Usuario;
 import vista.FrmMantenerRol;
 
 /**
@@ -271,6 +272,7 @@ public class CtrMantenerRol implements ActionListener{
         
         mRol.save();
         this.mFrmMantenerRol.messageBox(Constant.APP_NAME,(isUpdate)? "se ha actualizado el rol":"Se ha registrado el rol ");
+        clear();
     }
     
     
@@ -279,7 +281,16 @@ public class CtrMantenerRol implements ActionListener{
      * eliminar el rol
      */
     private void deleteRol(){
-        mRol.remove();
+        ArrayList<Usuario> result=Usuario.getUsuarioList("Roles_idRoles="+mRol.getIdRoles());
+        //si existe usuarios
+        if(!result.isEmpty()){
+            this.mFrmMantenerRol.messageBoxError(Constant.APP_NAME,"<html>"
+                                                                    + "No se ha podido eliminar el rol. <br/>"
+                                                                    + "Existen usuarios asignados a este rol, elimínelos o cambie sus roles."
+                                                                    + "</html>");  
+         return;       
+        }
+        mRol.remove();                
         this.mFrmMantenerRol.messageBox(Constant.APP_NAME,"el rol ha sido eliminado satisfactoriamente");
         clear();
     }

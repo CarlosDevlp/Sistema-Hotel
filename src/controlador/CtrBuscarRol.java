@@ -6,7 +6,6 @@
 package controlador;
 
 import assets.values.Constant;
-import dao.BasicDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class CtrBuscarRol implements ActionListener{
     public CtrBuscarRol(FrmBuscarRol mFrmBuscarRol) {
         this.mFrmBuscarRol = mFrmBuscarRol;
         this.mFrmBuscarRol.btnSearch.addActionListener(this);
-        this.mFrmBuscarRol.btnAccept.addActionListener(this);                
+        this.mFrmBuscarRol.btnAccept.addActionListener(this);
     }
    
    
@@ -72,6 +71,9 @@ public class CtrBuscarRol implements ActionListener{
     public void setOnCompletedSearch(Callback callback) {
         this.mOnCompletedSearch = callback;
     }
+    //--------------------------------------------------------------------
+    
+    
     
     /**
      * Pre-cargar data en el formulario.
@@ -107,7 +109,7 @@ public class CtrBuscarRol implements ActionListener{
      * Buscar roles por los parámetros de búsqueda
      */    
     public void searchRoles(){
-        BasicDao.DEBUG=true;
+        //BasicDao.DEBUG=true;
         
         String value=this.mFrmBuscarRol.txtValue.getText();
         int index=this.mFrmBuscarRol.cmbSeachParameters.getSelectedIndex();
@@ -144,7 +146,7 @@ public class CtrBuscarRol implements ActionListener{
     public void chooseRolAndGoBack(){
         int index=this.mFrmBuscarRol.tbPestana.getSelectedRow();
         
-        if(index!=-1){                
+        if(index!=-1){
             if(this.mOnCompletedSearch!=null){
                 this.mOnCompletedSearch.execute(new Object[]{this.mFoundRolList.get(index)});
                 hideFrmBuscarRol();

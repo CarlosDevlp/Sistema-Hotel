@@ -20,13 +20,16 @@ import modelo.Callback;
 public class CtrIncluido {
     //paquete de seguridad
     private CtrBuscarRol mCtrBuscarRol;
+    private CtrBuscarUsuario mCtrBuscarUsuario;
     private static CtrIncluido mCtrIncluido;
     
     
     //constructor
     private CtrIncluido() {
-        mCtrBuscarRol=new CtrBuscarRol();        
+        mCtrBuscarRol=new CtrBuscarRol();
+        mCtrBuscarUsuario=new CtrBuscarUsuario();
         mCtrBuscarRol.loadData();
+        mCtrBuscarUsuario.loadData();
     }      
     
     public static CtrIncluido getInstance(){
@@ -42,7 +45,10 @@ public class CtrIncluido {
     public void showForm(String nombreFormulario){
         switch(nombreFormulario){
             case Constant.FORM_BUSCAR_ROL:
-                mCtrBuscarRol.showFrmBuscarRol();
+                mCtrBuscarRol.showFrmBuscarRol();                
+            break;
+            case Constant.FORM_BUSCAR_USUARIO:
+                mCtrBuscarUsuario.showFrmBuscarRol();
             break;
         }
     }
@@ -58,11 +64,13 @@ public class CtrIncluido {
                 mCtrBuscarRol.showFrmBuscarRol();
                 mCtrBuscarRol.setOnCompletedSearch(callback);
             break;
-            
+            case Constant.FORM_BUSCAR_USUARIO:
+                mCtrBuscarUsuario.showFrmBuscarRol();
+                mCtrBuscarUsuario.setOnCompletedSearch(callback);
+                
+            break;
         }
     }
     
-    
-    
-    
+       
 }

@@ -33,11 +33,18 @@
                     <Property name="text" type="java.lang.String" value="Mantener Roles"/>
                     <Property name="name" type="java.lang.String" value="pmantenerroles" noResource="true"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="SmnReporteSesiones">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Reporte Sesiones"/>
+                    <Property name="name" type="java.lang.String" value="preportesesiones" noResource="true"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -129,6 +136,15 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar Alojamiento"/>
                 <Property name="name" type="java.lang.String" value="pRegistrarAlojamiento" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="smReporteAlojamiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reporte Alojamiento"/>
+                <Property name="name" type="java.lang.String" value="pReporteAlojamiento" noResource="true"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
