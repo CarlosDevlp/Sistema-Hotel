@@ -43,13 +43,16 @@ public class CtrAlojamiento {
         SimpleDateFormat Date_Format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate());
         // Date_Format.format(frmAlojamiento.txtfechaSalida.getDate());
-
-        BasicDao.insert("alojamiento", new String[]{"idAlojamiento,FechaInicioAlo,FechaFinalAlo,"
+        /*
+       BasicDao.call("InsertarAlojamiento", new String[]{frmAlojamiento.txtidAlojamiento.getText(),Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate()),
+       Date_Format.format(frmAlojamiento.txtfechaSalida.getDate()),frmAlojamiento.txtidReserva.getText(),"1"});
+       */
+       BasicDao.insert("Alojamiento", new String[]{"idAlojamiento,FechaInicioAlo,FechaFinalAlo,"
             + "Reserva_idReserva,Empleado_Persona_idPersona"},
                 new String[]{frmAlojamiento.txtidAlojamiento.getText(), Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate()),
-                    Date_Format.format(frmAlojamiento.txtfechaSalida.getDate()), frmAlojamiento.txtidReserva.getText(), "3"});
-
-        BasicDao.update("reserva", new String[]{"EstadoRes"}, new String[]{"Alojado"}, "idreserva=" + frmAlojamiento.txtidReserva.getText());
+                    Date_Format.format(frmAlojamiento.txtfechaSalida.getDate()), frmAlojamiento.txtidReserva.getText(),"1"});
+      
+        BasicDao.update("Reserva", new String[]{"EstadoRes"}, new String[]{"Alojado"}, "idreserva=" + frmAlojamiento.txtidReserva.getText());
 
         //JOptionPane.showMessageDialog(null, "El registro se realizo satisfactoriamente"+frmAlojamiento.txtidAlojamiento.getText());
         JOptionPane.showMessageDialog(null, "El registro se realizo satisfactoriamente");
@@ -58,8 +61,8 @@ public class CtrAlojamiento {
 
     public void Conusltar_Reserva() throws ParseException {
 
-        ArrayList<Map<String, String>> RConreserva = BasicDao.select("cliente t1 inner join reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join persona t3 \n"
-                + "on t2.Cliente_Persona_idPersona = t3.idPersona inner join razonsocial t4 on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
+        ArrayList<Map<String, String>> RConreserva = BasicDao.select("Cliente t1 inner join Reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join Persona t3 \n"
+                + "on t2.Cliente_Persona_idPersona = t3.idPersona inner join RazonSocial t4 on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
                 new String[]{"*"}, "t2.idReserva =" + frmAlojamiento.txtidReserva.getText());
 
         Map<String, String> row = RConreserva.get(0);
@@ -83,8 +86,8 @@ public class CtrAlojamiento {
 
         frmAlojamiento.txtCantDias.setText(String.valueOf(dias));
 
-        ArrayList<Map<String, String>> resultado = BasicDao.select("huesped t1 inner join detallereserva t2 on t1.idHSP = t2.Huesped_idHSP inner join\n"
-                + "reserva t3 on t2.Reserva_idReserva = t3.idReserva ",
+        ArrayList<Map<String, String>> resultado = BasicDao.select("Huesped t1 inner join DetalleReserva t2 on t1.idHSP = t2.Huesped_idHSP inner join\n"
+                + "Reserva t3 on t2.Reserva_idReserva = t3.idReserva ",
                 new String[]{"*"}, "t3.idReserva =" + frmAlojamiento.txtidReserva.getText());
 
         for (int s = 0; s < resultado.size(); s++) {
@@ -149,8 +152,8 @@ public class CtrAlojamiento {
     public void Llenar_detalle_huesped_alojamiento() {
 
         String IdAReserva = String.valueOf(modelo_detalle_reserva.getValueAt(frmBuscarReserva.TB_Buscar_Reserva.getSelectedRow(), 0));
-        ArrayList<Map<String, String>> resultado = BasicDao.select("huesped t1 inner join detallereserva t2 on t1.idHSP = t2.Huesped_idHSP inner join\n"
-                + "reserva t3 on t2.Reserva_idReserva = t3.idReserva ",
+        ArrayList<Map<String, String>> resultado = BasicDao.select("Huesped t1 inner join DetalleReserva t2 on t1.idHSP = t2.Huesped_idHSP inner join\n"
+                + "Reserva t3 on t2.Reserva_idReserva = t3.idReserva ",
                 new String[]{"*"}, "t3.idReserva =" + IdAReserva);
 
         for (int e = 0; e < resultado.size(); e++) {
@@ -168,9 +171,9 @@ public class CtrAlojamiento {
 
     public void Buscar_Reserva_id() {
 
-        ArrayList<Map<String, String>> result = BasicDao.select("cliente t1 inner join reserva t2 on\n"
-                + " t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join persona t3 \n"
-                + "on t2.Cliente_Persona_idPersona = t3.idPersona inner join razonsocial t4\n"
+        ArrayList<Map<String, String>> result = BasicDao.select("Cliente t1 inner join Reserva t2 on\n"
+                + " t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join Persona t3 \n"
+                + "on t2.Cliente_Persona_idPersona = t3.idPersona inner join RazonSocial t4\n"
                 + " on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
                 new String[]{"*"}, "t2.idReserva =" + frmBuscarReserva.txtDatosReserva.getText());
 
@@ -193,8 +196,8 @@ public class CtrAlojamiento {
 
     public void Buscar_Reserva_Nombre_Cliente() {
 
-        ArrayList<Map<String, String>> result = BasicDao.select("cliente t1 inner join reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join persona t3 \n"
-                + " on t2.Cliente_Persona_idPersona = t3.idPersona inner join razonsocial t4 on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
+        ArrayList<Map<String, String>> result = BasicDao.select("Cliente t1 inner join Reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join Persona t3 \n"
+                + " on t2.Cliente_Persona_idPersona = t3.idPersona inner join RazonSocial t4 on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
                 new String[]{"*"}, "t3.FullNamePer ='" + frmBuscarReserva.txtDatosReserva.getText() + "'");
 
         Map<String, String> row = result.get(0);
@@ -264,7 +267,7 @@ public class CtrAlojamiento {
      */
     public void VCTextoIdR(String idReserva) {
 
-        ArrayList<Map<String, String>> result = BasicDao.select("reserva r", new String[]{"*"}, "r.idReserva='" + idReserva + "'");
+        ArrayList<Map<String, String>> result = BasicDao.select("Reserva r", new String[]{"*"}, "r.idReserva='" + idReserva + "'");
         boolean exists = result.size() > 0;
 
         if (frmAlojamiento.txtidReserva.getText().length() == 00) {
@@ -423,10 +426,10 @@ public class CtrAlojamiento {
                     String fechafin = (String.valueOf(r.get(Calendar.YEAR)) + "-" + (r.get(Calendar.MONTH) + 1) + "-" + r.get(Calendar.DATE));
 
                     ArrayList<Map<String, String>> resultreporte = BasicDao.select("Alojamiento t1 inner join \n"
-                            + "reserva t2 \n"
-                            + "on t1.Reserva_idReserva = t2.idReserva inner join cliente t3 on \n"
+                            + "Reserva t2 \n"
+                            + "on t1.Reserva_idReserva = t2.idReserva inner join Cliente t3 on \n"
                             + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
-                            + "inner join persona t4 on\n"
+                            + "inner join Persona t4 on\n"
                             + " t3.Persona_idPersona = t4.idPersona ",
                             new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + fechainicio
                             + "' and '" + fechafin + "'");
@@ -472,10 +475,10 @@ public class CtrAlojamiento {
                     String fechafin = (String.valueOf(r.get(Calendar.YEAR)) + "-" + (r.get(Calendar.MONTH) + 1) + "-" + r.get(Calendar.DATE));
 
                     ArrayList<Map<String, String>> resultreporte = BasicDao.select("Alojamiento t1 inner join \n"
-                            + "reserva t2 \n"
-                            + "on t1.Reserva_idReserva = t2.idReserva inner join cliente t3 on \n"
+                            + "Reserva t2 \n"
+                            + "on t1.Reserva_idReserva = t2.idReserva inner join Cliente t3 on \n"
                             + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
-                            + "inner join persona t4 on\n"
+                            + "inner join Persona t4 on\n"
                             + " t3.Persona_idPersona = t4.idPersona ",
                             new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + fechainicio
                             + "' and '" + fechafin + "'");
