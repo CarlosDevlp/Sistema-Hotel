@@ -104,7 +104,7 @@ public class CtrAlojamiento {
 
     private void id_Alojamiento() {
 
-        if (BasicDao.isTableEmpty("alojamiento")) {
+        if (BasicDao.isTableEmpty("Alojamiento")) {
 
             frmAlojamiento.txtidAlojamiento.setText("1");
         } else {
@@ -422,7 +422,7 @@ public class CtrAlojamiento {
                     String fechainicio = (String.valueOf(c.get(Calendar.YEAR)) + "-" + (c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DATE));
                     String fechafin = (String.valueOf(r.get(Calendar.YEAR)) + "-" + (r.get(Calendar.MONTH) + 1) + "-" + r.get(Calendar.DATE));
 
-                    ArrayList<Map<String, String>> resultreporte = BasicDao.select("alojamiento t1 inner join \n"
+                    ArrayList<Map<String, String>> resultreporte = BasicDao.select("Alojamiento t1 inner join \n"
                             + "reserva t2 \n"
                             + "on t1.Reserva_idReserva = t2.idReserva inner join cliente t3 on \n"
                             + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
@@ -471,7 +471,7 @@ public class CtrAlojamiento {
                     String fechainicio = (String.valueOf(c.get(Calendar.YEAR)) + "-" + (c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DATE));
                     String fechafin = (String.valueOf(r.get(Calendar.YEAR)) + "-" + (r.get(Calendar.MONTH) + 1) + "-" + r.get(Calendar.DATE));
 
-                    ArrayList<Map<String, String>> resultreporte = BasicDao.select("alojamiento t1 inner join \n"
+                    ArrayList<Map<String, String>> resultreporte = BasicDao.select("Alojamiento t1 inner join \n"
                             + "reserva t2 \n"
                             + "on t1.Reserva_idReserva = t2.idReserva inner join cliente t3 on \n"
                             + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
