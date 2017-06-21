@@ -27,7 +27,6 @@ public class CtrBuscarUsuario implements ActionListener{
     private ArrayList<Usuario> mFoundUserList;
     private DefaultTableModel mUserTableModel;
     private Callback mOnCompletedSearch;
-    
     private final String []USER_TABLE_COLUMN_NAMES={"Id","Nombre de usuario","Rol"};
     //constructor    
     public CtrBuscarUsuario() {

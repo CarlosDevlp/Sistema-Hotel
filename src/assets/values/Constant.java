@@ -28,12 +28,20 @@ public abstract class Constant {
     public final static String DB_USER_NAME="admin";
     public final static String DB_USER_PASSWORD="LTKIKOECRZFJOEUM";
     
-    /*local
+    /*local carlos chavez
     public final static String DB_SERVER="localhost";
     public final static String DB_NAME="calidadt3";
     public final static String DB_USER_NAME="root";
     public final static String DB_USER_PASSWORD="admin";
         */
+
+    /*local luis fernando*/
+    /*
+    public final static String DB_SERVER="localhost";
+    public final static String DB_NAME="calidadt3";
+    public final static String DB_USER_NAME="root";
+    public final static String DB_USER_PASSWORD="masterhg12";
+    */
     //nombre de las tablas
     public final static String DB_TABLE_ROLES="Roles";
     public final static String DB_TABLE_USUARIO="User";

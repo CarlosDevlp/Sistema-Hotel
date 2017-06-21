@@ -154,7 +154,7 @@ public class CtrVerPerfil implements ActionListener{
         
         //si el usuario no son espacios vacíos 
         if(!username.trim().equals("")) {
-            boolean exists=BasicDao.rowExists(Constant.DB_TABLE_USUARIO, "UsuarioUser='"+username+"'");
+            boolean exists=BasicDao.rowExists(Constant.DB_TABLE_USUARIO, "UsuarioUse='"+username+"'");
             if(!exists) {//si el nombre de usuario no existe, actualizar y guardar los datos
                 mUsuario.setUsuario(username);
                 mUsuario.save(); 
