@@ -174,6 +174,7 @@ public class frmAlojamiento extends javax.swing.JFrame {
         Alojamientov1.VCTextoIdR(txtidReserva.getText());
         try {
             // TODO add your handling code here:
+            Alojamientov1.Limpiar_Tabla_huesped_alojamiento();
             Alojamientov1.Conusltar_Reserva();
         } catch (ParseException ex) {
             Logger.getLogger(frmAlojamiento.class.getName()).log(Level.SEVERE, null, ex);

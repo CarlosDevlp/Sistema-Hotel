@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import vista.FrmReporteAlojamiento;
 import vista.frmAlojamiento;
 
 /**
@@ -15,10 +16,15 @@ import vista.frmAlojamiento;
  */
 public class CtrNAlojamiento {
     private frmAlojamiento mFrmAlojamiento;
+    private FrmReporteAlojamiento mFrmReporteAlojamiento;
 
     public CtrNAlojamiento() {
         mFrmAlojamiento=new frmAlojamiento();
+        mFrmReporteAlojamiento = new FrmReporteAlojamiento();
+        
     }
+    
+    
     
     /**
      * showFrmAlojamiento <br>
@@ -27,5 +33,8 @@ public class CtrNAlojamiento {
      */
     public void showFrmAlojamiento(){
         mFrmAlojamiento.setVisible(true);
+    }
+    public void showFrmReporteAlojamiento(){
+        mFrmReporteAlojamiento.setVisible(true);
     }
 }

@@ -15,16 +15,20 @@ public class CtrNSeguridad {
 
     
     private CtrLogin mCtrLogin;
-    private CtrMantenerUsuario mCtrMantenerUsuario;
     private CtrVerPerfil mCtrVerPerfil;
+    private CtrMantenerUsuario mCtrMantenerUsuario;    
+    private CtrMantenerRol mCtrMantenerRol;
+    private CtrReportarSesiones mCtrReportarSesiones;
     
-    
+    private Callback mInvokeCallback;
     //constructor    
     public CtrNSeguridad() {
         //creación implicita de controladores
         mCtrLogin=new CtrLogin();
-        mCtrMantenerUsuario=new CtrMantenerUsuario();
         mCtrVerPerfil=new CtrVerPerfil();
+        mCtrMantenerUsuario=new CtrMantenerUsuario();        
+        mCtrMantenerRol=new CtrMantenerRol();
+        mCtrReportarSesiones=new CtrReportarSesiones();
     }
     
     public CtrNSeguridad(CtrLogin ctrLogin) {
@@ -55,6 +59,16 @@ public class CtrNSeguridad {
     public void setmCtrVerPerfil(CtrVerPerfil mCtrVerPerfil) {
         this.mCtrVerPerfil = mCtrVerPerfil;
     }
+
+    public CtrReportarSesiones getCtrReportarSesiones() {
+        return mCtrReportarSesiones;
+    }
+
+    public void setCtrReportarSesiones(CtrReportarSesiones ctrReportarSesiones) {
+        this.mCtrReportarSesiones = ctrReportarSesiones;
+    }
+    
+    
     
     /**
      * Agrega un callback(listener) para cuando
@@ -85,7 +99,7 @@ public class CtrNSeguridad {
     }
     
     /**
-     * mostrar el fomrulario mantener usuario
+     * mostrar el formulario mantener usuario
      */            
     public void showFrmVerPerfil(){
        mCtrVerPerfil.showFrmVerPerfil();
@@ -93,9 +107,38 @@ public class CtrNSeguridad {
     }
     
     /**
+     * mostrar el formulario mantener rol
+     */
+    public void showFrmMantenerRol(){
+      mCtrMantenerRol.showFrmMantenerRol();
+    }
+    
+    /**
+     * mostrar el formulario mantener rol
+     */
+    public void showFrmReportarSesiones(){
+      mCtrReportarSesiones.showFrmReporteSesiones();
+    }
+    
+    
+    /**
      * cargar los datos de los formularios
      */
     public void loadData(){
-        mCtrMantenerUsuario.loadData();        
+        mCtrMantenerUsuario.loadData();
+        mCtrMantenerRol.loadData();
     }
+
+    /**
+     * pasar el callback para invocar casos
+     * de uso incluidos
+     * 
+     * @param invokeCallback objeto callback
+     */
+    public void setInvokeCallback(Callback invokeCallback) {
+        this.mInvokeCallback = invokeCallback;        
+    }
+    
+    
+    
 }

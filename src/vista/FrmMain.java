@@ -78,6 +78,7 @@ public class FrmMain extends StandardForm {
         MnGenerarReserva = new javax.swing.JMenuItem();
         MnAlojamiento = new javax.swing.JMenu();
         smRegistrarAlojamiento = new javax.swing.JMenuItem();
+        smReporteAlojamiento = new javax.swing.JMenuItem();
         MnServicio = new javax.swing.JMenu();
         smServicioHabitacion = new javax.swing.JMenuItem();
         smServicioExtra = new javax.swing.JMenuItem();
@@ -116,9 +117,11 @@ public class FrmMain extends StandardForm {
         MnAdministrador.add(SmnMantenerUsuario);
 
         smMantenerRoles.setText("Mantener Roles");
+        smMantenerRoles.setName("pmantenerroles"); // NOI18N
         MnAdministrador.add(smMantenerRoles);
 
         SmnReporteSesiones.setText("Reporte Sesiones");
+        SmnReporteSesiones.setName("preportesesiones"); // NOI18N
         MnAdministrador.add(SmnReporteSesiones);
 
         jMenu1.add(MnAdministrador);
@@ -164,10 +167,15 @@ public class FrmMain extends StandardForm {
 
         MnAlojamiento.setText("Alojamiento");
         MnAlojamiento.setEnabled(false);
+        MnAlojamiento.setName("pAlojamiento"); // NOI18N
 
         smRegistrarAlojamiento.setText("Registrar Alojamiento");
         smRegistrarAlojamiento.setName("pRegistrarAlojamiento"); // NOI18N
         MnAlojamiento.add(smRegistrarAlojamiento);
+
+        smReporteAlojamiento.setText("Reporte Alojamiento");
+        smReporteAlojamiento.setName("pReporteAlojamiento"); // NOI18N
+        MnAlojamiento.add(smReporteAlojamiento);
 
         jMenuBar1.add(MnAlojamiento);
 
@@ -185,6 +193,8 @@ public class FrmMain extends StandardForm {
         jMenuBar1.add(MnServicio);
 
         MnMantenimiento.setText("Mantenimiento");
+        MnMantenimiento.setEnabled(false);
+        MnMantenimiento.setName("pMantenimiento"); // NOI18N
         jMenuBar1.add(MnMantenimiento);
 
         setJMenuBar(jMenuBar1);
@@ -257,15 +267,16 @@ public class FrmMain extends StandardForm {
     public javax.swing.JMenu MnServicio;
     public javax.swing.JMenuItem MnVerPerfil;
     public javax.swing.JMenuItem SmnMantenerUsuario;
-    private javax.swing.JMenuItem SmnReporteSesiones;
+    public javax.swing.JMenuItem SmnReporteSesiones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JMenuItem smBuscarCliente;
-    private javax.swing.JMenuItem smMantenerRoles;
+    public javax.swing.JMenuItem smMantenerRoles;
     public javax.swing.JMenuItem smRegistrarAlojamiento;
     public javax.swing.JMenuItem smRegistrarCobro;
+    public javax.swing.JMenuItem smReporteAlojamiento;
     public javax.swing.JMenuItem smServicioExtra;
     public javax.swing.JMenuItem smServicioHabitacion;
     // End of variables declaration//GEN-END:variables

@@ -7,10 +7,11 @@ package vista;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Callback;
 
 /**
  * Standard Form, clase de formulario genérico que permite
- * el uso de diferen
+ * el uso de diferentes funcionalidades extra.
  * @author Carlos Chavez Laguna
  */
 abstract public class StandardForm extends javax.swing.JFrame{
@@ -20,6 +21,11 @@ abstract public class StandardForm extends javax.swing.JFrame{
         JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
     }    
     
+    public void messageBox(String title,String message,Callback<Boolean> onAnswer){        
+        int answer=(JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION));
+        onAnswer.execute(new Boolean []{ 0==answer});
+    }
+    
     public void messageBoxAlert(String title,String message){
         JOptionPane.showMessageDialog(this, message, title, JOptionPane.WARNING_MESSAGE);
     }    
@@ -27,6 +33,7 @@ abstract public class StandardForm extends javax.swing.JFrame{
     public void messageBoxError(String title,String message){
         JOptionPane.showMessageDialog(this, message, title, JOptionPane.ERROR_MESSAGE);
     }
+    
     
     /**
      * maximize <br>
