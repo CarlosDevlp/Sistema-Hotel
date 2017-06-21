@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import assets.values.Constant;
@@ -103,7 +98,7 @@ public class Usuario {
      * del usuario en la base de datos
      */
     public static boolean userExists(String username,String password){        
-        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO,new String[]{"*"},"UsuarioUser='"+username+"' AND PassUser='"+password+"'");
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO,new String[]{"*"},"UsuarioUse='"+username+"' AND PassUse='"+password+"'");
         boolean exists= result.size()>0;
         //si existe el usuario, de forma implícita, crear al usuario   
         if(exists){
@@ -121,9 +116,9 @@ public class Usuario {
     public void save(){
         //si el usuario existe
         if(BasicDao.rowExists(Constant.DB_TABLE_USUARIO, "idUser="+idUser)) //actualizar sus datos
-            BasicDao.update(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUser","PassUser"}, new String []{this.usuarioUser,this.passUser}, "idUser="+this.idUser);
+            BasicDao.update(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUse","PassUse"}, new String []{this.usuarioUser,this.passUser}, "idUser="+this.idUser);
         else //crear al usuario con los datos actuales
-            BasicDao.insert(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUser","PassUser","Roles_idRoles"}, new String []{this.usuarioUser,this.passUser,this.rolUser.getIdRoles()});
+            BasicDao.insert(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUse","PassUse","Roles_idRoles"}, new String []{this.usuarioUser,this.passUser,this.rolUser.getIdRoles()});
     }        
     
     /**

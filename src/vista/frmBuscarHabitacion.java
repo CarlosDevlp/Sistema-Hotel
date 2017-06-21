@@ -5,19 +5,23 @@
  */
 package vista;
 
+import controlador.CtrBuscarHabitacion;
+import dao.BasicDao;
 import java.awt.event.ActionListener;
 
 /**
  *
  * @author Propietario
  */
-public class frmBuscarHabitacion extends javax.swing.JFrame {
+public class frmBuscarHabitacion extends StandardForm {
 
     /**
      * Creates new form frmBuscarHabitacion
      */
+    CtrBuscarHabitacion mCtrBuscarHabitacion;
     public frmBuscarHabitacion() {
         initComponents();
+        //Habitacion.interfazInicialHabitacion();
     }
 
     /**
@@ -42,6 +46,8 @@ public class frmBuscarHabitacion extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Buscar Habitacion");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         tblHabitacion = new javax.swing.JTable(){
@@ -63,8 +69,10 @@ public class frmBuscarHabitacion extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblHabitacion);
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
+        btnAceptar.setName("btnAceptar"); // NOI18N
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
+        btnCancelar.setName("btnCancelar"); // NOI18N
 
         jLabel2.setText("Fecha Llegada");
 
@@ -80,10 +88,11 @@ public class frmBuscarHabitacion extends javax.swing.JFrame {
 
         jLabel1.setText("Tipo:");
 
-        cmbTipoHabitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Basica", "Estandar", "V.I.P" }));
+        cmbTipoHabitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Individual", "Matrimonial", "Familiar", "VIP" }));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setName("btnBuscar"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,15 +182,26 @@ public class frmBuscarHabitacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmBuscarHabitacion().setVisible(true);
+                final frmBuscarHabitacion  mFrmBuscarHabitacion= new frmBuscarHabitacion();
+                mFrmBuscarHabitacion.setVisible(true);
+                mFrmBuscarHabitacion.createController();
+                
+                Thread thread=new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        BasicDao.init();                        
+                        mFrmBuscarHabitacion.loadControllerData();
+                    }
+                });
+                thread.start();
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnAceptar;
+    public javax.swing.JButton btnBuscar;
+    public javax.swing.JButton btnCancelar;
     public javax.swing.JComboBox<String> cmbTipoHabitacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -192,16 +212,18 @@ public class frmBuscarHabitacion extends javax.swing.JFrame {
     public static javax.swing.JTextField txtFechaSalida;
     // End of variables declaration//GEN-END:variables
     
-    public void addALbtnCancelar(ActionListener actionListener) {
-        btnCancelar.addActionListener(actionListener);
+    public void loadControllerData(){        
+        mCtrBuscarHabitacion.loadData();  
     }
-
-    public void addLbtnAceptar(ActionListener actionListener) {
-        btnAceptar.addActionListener(actionListener);
+    
+    @Override
+    public void createController() {
+        mCtrBuscarHabitacion=new CtrBuscarHabitacion(this);
     }
-
-    public void addALbtnBuscar(ActionListener actionListener) {
-        btnBuscar.addActionListener(actionListener);
+    
+    @Override
+    public Object getViewController() {
+        return mCtrBuscarHabitacion;
     }
 
 

@@ -134,9 +134,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="TxtUsername">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="admin"/>
             <Property name="name" type="java.lang.String" value="txtUsername" noResource="true"/>
           </Properties>
           <Events>
@@ -157,9 +155,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="TxtPassword">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="admin"/>
             <Property name="name" type="java.lang.String" value="txtPassword" noResource="true"/>
           </Properties>
           <AuxValues>

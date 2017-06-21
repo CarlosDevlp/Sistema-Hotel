@@ -18,11 +18,10 @@ public abstract class Constant {
     //constantes de datos de la app
     public final static String APP_NAME="Hotel Bica";
     
-    
     //constantes de la base de datos    
     /*cloud*/
     public final static String DB_SERVER="sl-us-south-1-portal.2.dblayer.com:16643";
-    public final static String DB_NAME="CalidadT3";
+    public final static String DB_NAME="CalidadT3Oficial";
     public final static String DB_USER_NAME="admin";
     public final static String DB_USER_PASSWORD="LTKIKOECRZFJOEUM";
     /*local

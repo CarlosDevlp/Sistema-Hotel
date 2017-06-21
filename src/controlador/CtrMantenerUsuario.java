@@ -158,8 +158,7 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
         
         //ocultar el preloader
         this.mFrmMantenerUsuario.pbFormPreloader.setVisible(false);                        
-        
-                
+                 
     }
     
     /**

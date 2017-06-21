@@ -66,7 +66,7 @@ public class CtrMain implements ActionListener{
                 this.mCtrNSeguridad.showFrmVerPerfil();
                 break;
             case "pGenerarReserva":
-                this.mCtrNReserva.showGenerarReserva();                
+                this.mCtrNReserva.showFrmGenerarReserva();                
                 break;
             case "pServicioHabitacion":
                 this.mCtrNServicio.showFrmServicioHabitacion();
@@ -219,9 +219,5 @@ public class CtrMain implements ActionListener{
     private void enableFrmMain(){
         mFrmMain.setEnabled(true);        
     }
-
-    
-            
-    
 }
 
