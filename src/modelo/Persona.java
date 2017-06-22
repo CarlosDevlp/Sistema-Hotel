@@ -5,11 +5,17 @@
  */
 package modelo;
 
+import dao.BasicDao;
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * Entidad Persona
  * @author carlos
  */
-public abstract class Persona{    
+public abstract class Persona{  
+    
+    private String idPersona;
     private String RucDNI;
     private String fullNamePer;
     private String mApellidos;
@@ -33,8 +39,25 @@ public abstract class Persona{
         direccionPer = direccion;
         emailPer= correo;
     }
+     public Persona(Map<String, String> args) {
+        idPersona=args.get("idPersona");
+        RucDNI = args.get("RucDNIRSo");
+        fullNamePer = args.get("FullNamePer"); 
+        edadPer= Integer.parseInt(args.get("EdadPer"));
+        telefonoPer = args.get("TelefonoPer");
+        direccionPer = args.get("DireccionPer");
+        emailPer= args.get("EmailPer");
+    }
+   //setters and getters 
+     
+    public String getIdPersona() {
+        return idPersona;
+    }
 
-   //setters and getters    
+    public void setIdPersona(String idPersona) {
+        this.idPersona = idPersona;
+    }
+    
     public String getNombre() {
         return fullNamePer;
     }
@@ -104,5 +127,35 @@ public abstract class Persona{
         
         return new String[]{RucDNI ,fullNamePer ,mApellidos ,mGenero,edadPer+"",telefonoPer ,direccionPer ,emailPer};
         
+    }
+    
+    public static ArrayList<Persona> getClienteList(){
+        ArrayList<Map<String,String>> result = BasicDao.call("Listar_Cliente", null);
+        ArrayList<Persona> clienteList=new ArrayList();
+        for(Map<String,String> row:result) 
+            clienteList.add(new Persona(row){});
+        return clienteList;
+        
+    }
+    
+    
+    public static ArrayList<Persona> getClienteDni(String dni){
+        ArrayList<Map<String,String>> result = BasicDao.call("Listar_Cliente_DNI", new String[]{dni});
+        ArrayList<Persona> clienteList=new ArrayList();
+        for(Map<String,String> row:result) 
+            clienteList.add(new Persona(row){});
+        return clienteList;
+        
+    }
+    
+    public void nuevoPersona(){
+        
+            BasicDao.insert("RazonSocial",  new String []{"RucDNIRSo"},new String []{this.RucDNI} );
+            Map<String,String> result;
+            result= BasicDao.selectLastRow("RazonSocial",new String []{"idRazonSocial"},"idRazonSocial");
+            BasicDao.insert("Persona", new String []{"FullNamePer","RazonSocial_idRazonSocial","TelefonoPer","EdadPer","DireccionPer","EmailPer"}, new String []{this.fullNamePer,result.get("idRazonSocial"),this.telefonoPer,String.valueOf(this.edadPer),this.direccionPer,this.emailPer});
+            Map<String,String> lastIdPer;
+            lastIdPer=BasicDao.selectLastRow("Persona", new String[]{"idPersona"}, "idPersona");
+            BasicDao.insert("Cliente",  new String []{"Persona_idPersona"},new String []{lastIdPer.get("idPersona")} );  
     }
 }

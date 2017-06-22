@@ -106,7 +106,6 @@ public class CtrAlojamiento {
 
             int dato = Integer.parseInt(lastRowIdReserva.get("idAlojamiento"));
             frmAlojamiento.txtidAlojamiento.setText(String.valueOf(dato + 1));
-
         }
     }
 

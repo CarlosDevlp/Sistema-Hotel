@@ -19,7 +19,6 @@ public abstract class Constant {
     //constantes de datos de la app
     public final static String APP_NAME="Hotel Bica";
     
-    
     //constantes de la base de datos    
 
     /*cloud*/

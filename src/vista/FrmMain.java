@@ -11,7 +11,7 @@ import controlador.CtrNAlojamiento;
 import controlador.CtrNReserva;
 import controlador.CtrNSeguridad;
 import controlador.CtrNServicio;
-import controlador.ctrGenerarReserva;
+import controlador.CtrNReserva;
 /**
  * 
  * @author Carlos Chavez Laguna
@@ -33,13 +33,14 @@ public class FrmMain extends StandardForm {
         //controladora de negocio facturación
             //.....
        //controladora de negocio reserva
+       /*
         CtrNReserva mCtrNReserva= new CtrNReserva();
                 ctrGenerarReserva ctrGenerarReservax=new ctrGenerarReserva(this);                
                 ctrGenerarReservax.setVistaGenerarReserva(new frmGenerarReserva());
                 mCtrNReserva.setCtrGenerarReserva(ctrGenerarReservax);             
          mCtrMain.setCtrNReserva(mCtrNReserva);
-                 
-         
+        */
+        mCtrMain.setCtrNReserva(new CtrNReserva());
         //controladora de negocio de servicio
          mCtrMain.setCtrNServicio(new CtrNServicio());
         
