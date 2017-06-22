@@ -408,16 +408,7 @@ public class CtrAlojamiento {
 
                     
                     ArrayList<Map<String, String>> CallReporte = BasicDao.call("ListarPorFecha", new String[]{"'"+fechainicio+"'","'"+fechafin+"'"});
-                    
-                  /* ArrayList<Map<String, String>> resultreporte = BasicDao.select("Alojamiento t1 inner join \n"
-                            + "Reserva t2 \n"
-                            + "on t1.Reserva_idReserva = t2.idReserva inner join Cliente t3 on \n"
-                            + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
-                            + "inner join Persona t4 on\n"
-                            + " t3.Persona_idPersona = t4.idPersona ",
-                            new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + fechainicio
-                            + "' and '" + fechafin + "'");
-*/
+ 
                     for (int i = 0; i < CallReporte.size(); i++) {
 
                         Map<String, String> row = CallReporte.get(i);
@@ -458,15 +449,7 @@ public class CtrAlojamiento {
                     
                     ArrayList<Map<String, String>> CallReporte = BasicDao.call("ListarPorFecha", new String[]{"'"+fechainicio+"'","'"+fechafin+"'"});
                     
-                    /*ArrayList<Map<String, String>> resultreporte = BasicDao.select("Alojamiento t1 inner join \n"
-                            + "Reserva t2 \n"
-                            + "on t1.Reserva_idReserva = t2.idReserva inner join Cliente t3 on \n"
-                            + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
-                            + "inner join Persona t4 on\n"
-                            + " t3.Persona_idPersona = t4.idPersona ",
-                            new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + fechainicio
-                            + "' and '" + fechafin + "'");
-                      */
+                    
                     for (int i = 0; i < CallReporte.size(); i++) {
 
                         Map<String, String> row = CallReporte.get(i);
