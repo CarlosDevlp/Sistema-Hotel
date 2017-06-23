@@ -90,7 +90,7 @@ public class CtrMain implements ActionListener{
                 break;
             //RESERVA
             case "pGenerarReserva":
-                this.mCtrNReserva.showGenerarReserva();                
+                this.mCtrNReserva.showFrmGenerarReserva();                
                 break;
             //SERVICIO
             case "pServicioHabitacion":
@@ -274,9 +274,5 @@ public class CtrMain implements ActionListener{
     private void enableFrmMain(){
         mFrmMain.setEnabled(true);
     }
-
-    
-            
-    
 }
 

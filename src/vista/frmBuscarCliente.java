@@ -5,17 +5,21 @@
  */
 package vista;
 
+import controlador.CtrBuscarCliente;
+import controlador.CtrBuscarHuesped;
+import dao.BasicDao;
 import java.awt.event.ActionListener;
 
 /**
  *
  * @author Propietario
  */
-public class frmBuscarCliente extends javax.swing.JFrame {
+public class frmBuscarCliente extends StandardForm  {
 
     /**
      * Creates new form frmBuscarCliente
      */
+    CtrBuscarCliente mCtrBuscarCliente;
     public frmBuscarCliente() {
         initComponents();
     }
@@ -39,6 +43,7 @@ public class frmBuscarCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buscar Cliente");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         txtDocumento.addActionListener(new java.awt.event.ActionListener() {
@@ -49,6 +54,7 @@ public class frmBuscarCliente extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setName("btnBuscar"); // NOI18N
 
         jLabel1.setText("DNI o RUC");
 
@@ -71,6 +77,7 @@ public class frmBuscarCliente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblCliente);
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
+        btnAceptar.setName("btnAceptar"); // NOI18N
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -78,6 +85,7 @@ public class frmBuscarCliente extends javax.swing.JFrame {
         });
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
+        btnCancelar.setName("btnCancelar"); // NOI18N
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -170,30 +178,45 @@ public class frmBuscarCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmBuscarCliente().setVisible(true);
+                final frmBuscarCliente  mFrmBuscarCliente= new frmBuscarCliente();
+                mFrmBuscarCliente.setVisible(true);
+                mFrmBuscarCliente.createController();
+                
+                Thread thread=new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        BasicDao.init();                        
+                        mFrmBuscarCliente.loadControllerData();
+                    }
+                });
+                thread.start();
+                System.out.println("FrmBuscarHuesped");
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCancelar;
+    public static javax.swing.JButton btnAceptar;
+    public static javax.swing.JButton btnBuscar;
+    public static javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tblCliente;
     public javax.swing.JTextField txtDocumento;
     // End of variables declaration//GEN-END:variables
 
-    public void addALbtnCancelar(ActionListener actionListener) {
-        btnCancelar.addActionListener(actionListener);
-    }
-
-    public void addALbtnBuscar(ActionListener actionListener) {
-        btnBuscar.addActionListener(actionListener);
+    
+    public void loadControllerData(){        
+        mCtrBuscarCliente.loadData();  
     }
     
-    public void addLbtnAceptar(ActionListener actionListener){
-        btnAceptar.addActionListener(actionListener);
+    @Override
+    public void createController() {
+        mCtrBuscarCliente=new CtrBuscarCliente(this);
+    }
+    
+    @Override
+    public Object getViewController() {
+        return mCtrBuscarCliente;
     }
 }

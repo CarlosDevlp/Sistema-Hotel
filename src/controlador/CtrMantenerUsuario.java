@@ -245,7 +245,6 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
         
         this.mFrmMantenerUsuario.cmbRol.setModel(new DefaultComboBoxModel(mUserNameList.toArray()));
         
-                               
     }
     
     /**

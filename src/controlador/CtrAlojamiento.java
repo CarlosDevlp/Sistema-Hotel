@@ -41,42 +41,35 @@ public class CtrAlojamiento {
     public void Registrar_alojamiento() {
 
         SimpleDateFormat Date_Format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate());
-        // Date_Format.format(frmAlojamiento.txtfechaSalida.getDate());
-        /*
-       BasicDao.call("InsertarAlojamiento", new String[]{frmAlojamiento.txtidAlojamiento.getText(),Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate()),
-       Date_Format.format(frmAlojamiento.txtfechaSalida.getDate()),frmAlojamiento.txtidReserva.getText(),"1"});
-       */
-       BasicDao.insert("Alojamiento", new String[]{"idAlojamiento,FechaInicioAlo,FechaFinalAlo,"
-            + "Reserva_idReserva,Empleado_Persona_idPersona"},
-                new String[]{frmAlojamiento.txtidAlojamiento.getText(), Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate()),
-                    Date_Format.format(frmAlojamiento.txtfechaSalida.getDate()), frmAlojamiento.txtidReserva.getText(),"1"});
-      
-        BasicDao.update("Reserva", new String[]{"EstadoRes"}, new String[]{"Alojado"}, "idreserva=" + frmAlojamiento.txtidReserva.getText());
+       
+        BasicDao.call("InsertarAlojamiento", new String[]{frmAlojamiento.txtidAlojamiento.getText(), "'"+Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate())+"'",
+                    "'"+Date_Format.format(frmAlojamiento.txtfechaSalida.getDate())+"'", frmAlojamiento.txtidReserva.getText(), "1"});
+        
+         BasicDao.call("ActualizarHabitacion", new String[]{frmAlojamiento.txtidReserva.getText()});
+        
+        //BasicDao.update("Reserva", new String[]{"EstadoRes"}, new String[]{"Alojado"}, "idreserva=" + frmAlojamiento.txtidReserva.getText());
+        
 
-        //JOptionPane.showMessageDialog(null, "El registro se realizo satisfactoriamente"+frmAlojamiento.txtidAlojamiento.getText());
         JOptionPane.showMessageDialog(null, "El registro se realizo satisfactoriamente");
 
     }
 
     public void Conusltar_Reserva() throws ParseException {
 
-        ArrayList<Map<String, String>> RConreserva = BasicDao.select("Cliente t1 inner join Reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join Persona t3 \n"
-                + "on t2.Cliente_Persona_idPersona = t3.idPersona inner join RazonSocial t4 on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
-                new String[]{"*"}, "t2.idReserva =" + frmAlojamiento.txtidReserva.getText());
+        ArrayList<Map<String, String>> CallReserva = BasicDao.call("ConsultarReserva", new String[]{frmAlojamiento.txtidReserva.getText()});
 
-        Map<String, String> row = RConreserva.get(0);
+        Map<String, String> row1 = CallReserva.get(0);
 
-        frmAlojamiento.txtTitular.setText(row.get("FullNamePer"));
+        frmAlojamiento.txtTitular.setText(row1.get("FullNamePer"));
         id_Alojamiento();
 
         Calendar FInicio = Calendar.getInstance();
         SimpleDateFormat sdfv1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        FInicio.setTime(sdfv1.parse(row.get("FechaInicioRes")));
+        FInicio.setTime(sdfv1.parse(row1.get("FechaInicioRes")));
 
         Calendar FSalidaA = Calendar.getInstance();
         SimpleDateFormat sdfv2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        FSalidaA.setTime(sdfv2.parse(row.get("FechaFinalRes")));
+        FSalidaA.setTime(sdfv2.parse(row1.get("FechaFinalRes")));
 
         frmAlojamiento.txtFechaLLegada.setCalendar(FInicio);
         frmAlojamiento.txtfechaSalida.setCalendar(FSalidaA);
@@ -86,18 +79,15 @@ public class CtrAlojamiento {
 
         frmAlojamiento.txtCantDias.setText(String.valueOf(dias));
 
-        ArrayList<Map<String, String>> resultado = BasicDao.select("Huesped t1 inner join DetalleReserva t2 on t1.idHSP = t2.Huesped_idHSP inner join\n"
-                + "Reserva t3 on t2.Reserva_idReserva = t3.idReserva ",
-                new String[]{"*"}, "t3.idReserva =" + frmAlojamiento.txtidReserva.getText());
+        ArrayList<Map<String, String>> CallHuesped = BasicDao.call("ConsultarHuesped", new String[]{frmAlojamiento.txtidReserva.getText()});
 
-        for (int s = 0; s < resultado.size(); s++) {
+        for (int s = 0; s < CallHuesped.size(); s++) {
 
-            Map<String, String> rowe = resultado.get(s);
+            Map<String, String> row2 = CallHuesped.get(s);
             modelo_detalle_huesped.insertRow(s, new Object[]{});
-
-            modelo_detalle_huesped.setValueAt(rowe.get("idHSP"), s, 0);
-            modelo_detalle_huesped.setValueAt(rowe.get("NombreHue"), s, 1);
-            modelo_detalle_huesped.setValueAt(rowe.get("DNIHue"), s, 2);
+            modelo_detalle_huesped.setValueAt(row2.get("idHSP"), s, 0);
+            modelo_detalle_huesped.setValueAt(row2.get("NombreHue"), s, 1);
+            modelo_detalle_huesped.setValueAt(row2.get("DNIHue"), s, 2);
 
         }
 
@@ -116,7 +106,6 @@ public class CtrAlojamiento {
 
             int dato = Integer.parseInt(lastRowIdReserva.get("idAlojamiento"));
             frmAlojamiento.txtidAlojamiento.setText(String.valueOf(dato + 1));
-
         }
     }
 
@@ -152,18 +141,17 @@ public class CtrAlojamiento {
     public void Llenar_detalle_huesped_alojamiento() {
 
         String IdAReserva = String.valueOf(modelo_detalle_reserva.getValueAt(frmBuscarReserva.TB_Buscar_Reserva.getSelectedRow(), 0));
-        ArrayList<Map<String, String>> resultado = BasicDao.select("Huesped t1 inner join DetalleReserva t2 on t1.idHSP = t2.Huesped_idHSP inner join\n"
-                + "Reserva t3 on t2.Reserva_idReserva = t3.idReserva ",
-                new String[]{"*"}, "t3.idReserva =" + IdAReserva);
+        
+        ArrayList<Map<String, String>> CallHuesped = BasicDao.call("ConsultarHuesped", new String[]{IdAReserva});
+  
+        for (int e = 0; e < CallHuesped.size(); e++) {
 
-        for (int e = 0; e < resultado.size(); e++) {
-
-            Map<String, String> row = resultado.get(e);
+            Map<String, String> row3 = CallHuesped.get(e);
             modelo_detalle_huesped.insertRow(e, new Object[]{});
 
-            modelo_detalle_huesped.setValueAt(row.get("idHSP"), e, 0);
-            modelo_detalle_huesped.setValueAt(row.get("NombreHue"), e, 1);
-            modelo_detalle_huesped.setValueAt(row.get("DNIHue"), e, 2);
+            modelo_detalle_huesped.setValueAt(row3.get("idHSP"), e, 0);
+            modelo_detalle_huesped.setValueAt(row3.get("NombreHue"), e, 1);
+            modelo_detalle_huesped.setValueAt(row3.get("DNIHue"), e, 2);
 
         }
 
@@ -171,36 +159,30 @@ public class CtrAlojamiento {
 
     public void Buscar_Reserva_id() {
 
-        ArrayList<Map<String, String>> result = BasicDao.select("Cliente t1 inner join Reserva t2 on\n"
-                + " t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join Persona t3 \n"
-                + "on t2.Cliente_Persona_idPersona = t3.idPersona inner join RazonSocial t4\n"
-                + " on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
-                new String[]{"*"}, "t2.idReserva =" + frmBuscarReserva.txtDatosReserva.getText());
+        ArrayList<Map<String, String>> CallReservaId = BasicDao.call("ConsultarReservaId", new String[]{frmBuscarReserva.txtDatosReserva.getText()});
 
-        for (int i = 0; i < result.size(); i++) {
+        for (int i = 0; i < CallReservaId.size(); i++) {
 
-            Map<String, String> row = result.get(i);
+            Map<String, String> row4 = CallReservaId.get(i);
             modelo_detalle_reserva.insertRow(i, new Object[]{});
 
-            modelo_detalle_reserva.setValueAt(row.get("idReserva"), i, 0);
-            modelo_detalle_reserva.setValueAt(row.get("FullNamePer"), i, 1);
-            modelo_detalle_reserva.setValueAt(row.get("RucDNIRSo"), i, 2);
-            modelo_detalle_reserva.setValueAt(row.get("TelefonoPer"), i, 3);
-            modelo_detalle_reserva.setValueAt(row.get("EstadoRes"), i, 4);
-            modelo_detalle_reserva.setValueAt(row.get("FechaInicioRes"), i, 5);
-            modelo_detalle_reserva.setValueAt(row.get("FechaFinalRes"), i, 6);
+            modelo_detalle_reserva.setValueAt(row4.get("idReserva"), i, 0);
+            modelo_detalle_reserva.setValueAt(row4.get("FullNamePer"), i, 1);
+            modelo_detalle_reserva.setValueAt(row4.get("RucDNIRSo"), i, 2);
+            modelo_detalle_reserva.setValueAt(row4.get("TelefonoPer"), i, 3);
+            modelo_detalle_reserva.setValueAt(row4.get("EstadoRes"), i, 4);
+            modelo_detalle_reserva.setValueAt(row4.get("FechaInicioRes"), i, 5);
+            modelo_detalle_reserva.setValueAt(row4.get("FechaFinalRes"), i, 6);
 
         }
 
     }
 
     public void Buscar_Reserva_Nombre_Cliente() {
+        
+        ArrayList<Map<String, String>> CallReservaNombre = BasicDao.call("ConsultarReservaNombre", new String[]{"'"+frmBuscarReserva.txtDatosReserva.getText().toString()+"'"});
 
-        ArrayList<Map<String, String>> result = BasicDao.select("Cliente t1 inner join Reserva t2 on t1.Persona_idPersona = t2.Cliente_Persona_idPersona inner join Persona t3 \n"
-                + " on t2.Cliente_Persona_idPersona = t3.idPersona inner join RazonSocial t4 on t3.RazonSocial_idRazonSocial = t4.idRazonSocial",
-                new String[]{"*"}, "t3.FullNamePer ='" + frmBuscarReserva.txtDatosReserva.getText() + "'");
-
-        Map<String, String> row = result.get(0);
+        Map<String, String> row = CallReservaNombre.get(0);
 
         for (int i = 0; i < 1; i++) {
 
@@ -404,15 +386,14 @@ public class CtrAlojamiento {
     /*------------REPORTE------------*/
     public void Reporte_Alojamiento() {
 
-        
         FrmReporteAlojamiento.txtFecInicAloReport.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
-            
+
             @Override
             public void propertyChange(PropertyChangeEvent pce) {
-                
-                 for (int i = 0; i < FrmReporteAlojamiento.TB_Reporte_Alojamiento.getRowCount(); i++) {
-                 modelo_detalle_alojamiento.removeRow(i);
-                  i -= 1;
+
+                for (int i = 0; i < FrmReporteAlojamiento.TB_Reporte_Alojamiento.getRowCount(); i++) {
+                    modelo_detalle_alojamiento.removeRow(i);
+                    i -= 1;
                 }
 
                 if (FrmReporteAlojamiento.txtFecInicAloReport.getDate() != null && FrmReporteAlojamiento.txtFecFinAloReport.getDate() != null) {
@@ -425,18 +406,12 @@ public class CtrAlojamiento {
                     String fechainicio = (String.valueOf(c.get(Calendar.YEAR)) + "-" + (c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DATE));
                     String fechafin = (String.valueOf(r.get(Calendar.YEAR)) + "-" + (r.get(Calendar.MONTH) + 1) + "-" + r.get(Calendar.DATE));
 
-                    ArrayList<Map<String, String>> resultreporte = BasicDao.select("Alojamiento t1 inner join \n"
-                            + "Reserva t2 \n"
-                            + "on t1.Reserva_idReserva = t2.idReserva inner join Cliente t3 on \n"
-                            + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
-                            + "inner join Persona t4 on\n"
-                            + " t3.Persona_idPersona = t4.idPersona ",
-                            new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + fechainicio
-                            + "' and '" + fechafin + "'");
+                    
+                    ArrayList<Map<String, String>> CallReporte = BasicDao.call("ListarPorFecha", new String[]{"'"+fechainicio+"'","'"+fechafin+"'"});
+ 
+                    for (int i = 0; i < CallReporte.size(); i++) {
 
-                    for (int i = 0; i < resultreporte.size(); i++) {
-
-                        Map<String, String> row = resultreporte.get(i);
+                        Map<String, String> row = CallReporte.get(i);
                         modelo_detalle_alojamiento.insertRow(i, new Object[]{});
 
                         modelo_detalle_alojamiento.setValueAt(row.get("idAlojamiento"), i, 0);
@@ -444,24 +419,21 @@ public class CtrAlojamiento {
                         modelo_detalle_alojamiento.setValueAt(row.get("FechaFinalAlo"), i, 2);
 
                     }
-                    
-                  
 
                 }
-                  
+
             }
-             
+
         });
-         
-        
+
         FrmReporteAlojamiento.txtFecFinAloReport.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
-            
+
             @Override
             public void propertyChange(PropertyChangeEvent pce) {
-                
-                 for (int i = 0; i < FrmReporteAlojamiento.TB_Reporte_Alojamiento.getRowCount(); i++) {
-                 modelo_detalle_alojamiento.removeRow(i);
-                  i -= 1;
+
+                for (int i = 0; i < FrmReporteAlojamiento.TB_Reporte_Alojamiento.getRowCount(); i++) {
+                    modelo_detalle_alojamiento.removeRow(i);
+                    i -= 1;
                 }
 
                 if (FrmReporteAlojamiento.txtFecInicAloReport.getDate() != null && FrmReporteAlojamiento.txtFecFinAloReport.getDate() != null) {
@@ -474,18 +446,13 @@ public class CtrAlojamiento {
                     String fechainicio = (String.valueOf(c.get(Calendar.YEAR)) + "-" + (c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DATE));
                     String fechafin = (String.valueOf(r.get(Calendar.YEAR)) + "-" + (r.get(Calendar.MONTH) + 1) + "-" + r.get(Calendar.DATE));
 
-                    ArrayList<Map<String, String>> resultreporte = BasicDao.select("Alojamiento t1 inner join \n"
-                            + "Reserva t2 \n"
-                            + "on t1.Reserva_idReserva = t2.idReserva inner join Cliente t3 on \n"
-                            + "t2.Cliente_Persona_idPersona = t3.Persona_idPersona\n"
-                            + "inner join Persona t4 on\n"
-                            + " t3.Persona_idPersona = t4.idPersona ",
-                            new String[]{"*"}, "t1.FechaInicioAlo BETWEEN '" + fechainicio
-                            + "' and '" + fechafin + "'");
+                    
+                    ArrayList<Map<String, String>> CallReporte = BasicDao.call("ListarPorFecha", new String[]{"'"+fechainicio+"'","'"+fechafin+"'"});
+                    
+                    
+                    for (int i = 0; i < CallReporte.size(); i++) {
 
-                    for (int i = 0; i < resultreporte.size(); i++) {
-
-                        Map<String, String> row = resultreporte.get(i);
+                        Map<String, String> row = CallReporte.get(i);
                         modelo_detalle_alojamiento.insertRow(i, new Object[]{});
 
                         modelo_detalle_alojamiento.setValueAt(row.get("idAlojamiento"), i, 0);
@@ -493,15 +460,13 @@ public class CtrAlojamiento {
                         modelo_detalle_alojamiento.setValueAt(row.get("FechaFinalAlo"), i, 2);
 
                     }
-                    
-                  
 
                 }
-                  
+
             }
-             
+
         });
-        
+
     }
 
     public final void interfaz_detalle_alojamiento() {
@@ -521,13 +486,5 @@ public class CtrAlojamiento {
 
     }
 
-    /*public void Limpiar_Tabla_alojamiento() {
-
-        for (int i = 0; i < FrmReporteAlojamiento.TB_Reporte_Alojamiento.getRowCount(); i++) {
-            modelo_detalle_alojamiento.removeRow(i);
-            i -= 1;
-        }
-
-    }*/
 
 }
