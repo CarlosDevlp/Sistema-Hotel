@@ -13,27 +13,31 @@ import java.util.Map;
  * Entidad Persona
  * @author carlos
  */
-public abstract class Persona{  
-    
+public abstract class Persona{    
     private String idPersona;
     private String RucDNI;
     private String fullNamePer;
-    private String mApellidos;
-    private String mGenero;
     private int edadPer;
     private String telefonoPer;
     private String direccionPer;
     private String emailPer;
     
+    public static final String TABLE_PERSONA_COLUMN_ID_PERSONA="idPersona",
+                               TABLE_PERSONA_COLUMN_FULL_NAME="FullNamePer",
+                               TABLE_PERSONA_COLUMN_TELEFONO="TelefonoPer",
+                               TABLE_PERSONA_COLUMN_EMAIL="EmailPer",
+                               TABLE_PERSONA_COLUMN_DIRECCION="DireccionPer",
+                               TABLE_PERSONA_COLUMN_EDAD="EdadPer";
+    
     //Cconstructors
     public Persona(){
         //función por defecto para su uso en factories
+        idPersona="0";
     }
-    public Persona( String dni, String nombres, String apellidos,String genero,int edad,String telefono,String direccion,String correo) {
+    public Persona( String dni, String nombresCompleto, int edad,String telefono,String direccion,String correo) {
+        idPersona="0";
         RucDNI = dni;
-        fullNamePer = nombres;
-        mApellidos = apellidos;                        
-        mGenero= genero;
+        fullNamePer = nombresCompleto;        
         edadPer= edad;
         telefonoPer = telefono;
         direccionPer = direccion;
@@ -54,26 +58,32 @@ public abstract class Persona{
         return idPersona;
     }
 
+
     public void setIdPersona(String idPersona) {
         this.idPersona = idPersona;
     }
     
     public String getNombre() {
         return fullNamePer;
+
+    }
+    
+    public String getFullNamePer() {
+        return fullNamePer;
     }
 
-    public void setNombre(String _nombre) {
-        this.fullNamePer = _nombre;
-    }
+    public void setFullNamePer(String fullNamePer) {
+        this.fullNamePer = fullNamePer;
+    }    
 
-    public String getDni() {
+    public String getRucDNI() {
         return RucDNI;
     }
 
-    public void setDni(String _dni) {
-        this.RucDNI = _dni;
+    public void setRucDNI(String RucDNI) {
+        this.RucDNI = RucDNI;
     }
-
+    
     public String getDireccion() {
         return direccionPer;
     }
@@ -88,22 +98,6 @@ public abstract class Persona{
 
     public void setTelefono(String telefono) {
         this.telefonoPer = telefono;
-    }
-
-    public String getApellidos() {
-        return mApellidos;
-    }
-
-    public void setApellidos(String mApellidos) {
-        this.mApellidos = mApellidos;
-    }
-
-    public String getGenero() {
-        return mGenero;
-    }
-
-    public void setGenero(String mGenero) {
-        this.mGenero = mGenero;
     }
 
     public int getEdad() {
@@ -123,10 +117,8 @@ public abstract class Persona{
     }
     
     
-    public String []toArray(){
-        
-        return new String[]{RucDNI ,fullNamePer ,mApellidos ,mGenero,edadPer+"",telefonoPer ,direccionPer ,emailPer};
-        
+    public String []toArray(){        
+        return new String[]{RucDNI ,fullNamePer ,edadPer+"",telefonoPer ,direccionPer ,emailPer};        
     }
     
     public static ArrayList<Persona> getClienteList(){

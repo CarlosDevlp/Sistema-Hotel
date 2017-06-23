@@ -21,6 +21,7 @@ public class CtrIncluido {
     //paquete de seguridad
     private CtrBuscarRol mCtrBuscarRol;
     private CtrBuscarUsuario mCtrBuscarUsuario;
+    private CtrBuscarEmpleado mCtrBuscarEmpleado;
     private static CtrIncluido mCtrIncluido;
     
     
@@ -28,8 +29,10 @@ public class CtrIncluido {
     private CtrIncluido() {
         mCtrBuscarRol=new CtrBuscarRol();
         mCtrBuscarUsuario=new CtrBuscarUsuario();
+        mCtrBuscarEmpleado=new CtrBuscarEmpleado();
         mCtrBuscarRol.loadData();
         mCtrBuscarUsuario.loadData();
+        mCtrBuscarEmpleado.loadData();
     }      
     
     public static CtrIncluido getInstance(){
@@ -50,6 +53,9 @@ public class CtrIncluido {
             case Constant.FORM_BUSCAR_USUARIO:
                 mCtrBuscarUsuario.showFrmBuscarRol();
             break;
+            case Constant.FORM_BUSCAR_EMPLEADO:
+                mCtrBuscarEmpleado.showFrmBuscarEmpleado();
+            break;
         }
     }
 
@@ -67,7 +73,10 @@ public class CtrIncluido {
             case Constant.FORM_BUSCAR_USUARIO:
                 mCtrBuscarUsuario.showFrmBuscarRol();
                 mCtrBuscarUsuario.setOnCompletedSearch(callback);
-                
+            break;
+            case Constant.FORM_BUSCAR_EMPLEADO:
+                mCtrBuscarEmpleado.showFrmBuscarEmpleado();
+                mCtrBuscarEmpleado.setOnCompletedSearch(callback);
             break;
         }
     }

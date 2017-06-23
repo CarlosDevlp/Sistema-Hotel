@@ -56,8 +56,8 @@ public class CtrRegistrarCliente implements ActionListener{
         if(nom.length()>0 && (doc.length()==11 || doc.length()==8) && doc.matches("[0-9]*") && edad.length()>0 && edad.matches("[0-9]*")&& dir.length()>0 && tel.length()>0 && tel.matches("[0-9]*") && email.length()>0){
             
             Persona persona=new Persona() {};
-            persona.setNombre(nom);
-            persona.setDni(doc);
+            persona.setFullNamePer(nom);
+            persona.setRucDNI(doc);
             persona.setEdad(Integer.parseInt(edad));
             persona.setDireccion(dir);
             persona.setTelefono(tel);
@@ -67,7 +67,7 @@ public class CtrRegistrarCliente implements ActionListener{
             repetido=false;
             mClienteList= Persona.getClienteDni((String)vistaRegistrarCliente.txtDocumento.getText());
             for(Persona cliente:mClienteList){        
-                if(cliente.getDni().equals(doc)){
+                if(cliente.getRucDNI().equals(doc)){
                     repetido=true;
                 }  
             }

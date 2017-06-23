@@ -95,7 +95,7 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
             case "btnClean":
                 clear();
                 break;
-        }                
+        }
     }
     
     @Override

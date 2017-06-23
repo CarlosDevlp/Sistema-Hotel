@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Callback;
 import modelo.Persona;
 import vista.frmBuscarCliente;
 import vista.frmGenerarReserva;
@@ -13,6 +14,7 @@ import vista.frmGenerarReserva;
 public class ctrBuscarCliente implements ActionListener{
     private frmBuscarCliente vistaBuscarCliente;
     private frmGenerarReserva vistaGenerarReserva;
+    private Callback onCompletedSearch;
     
     private ArrayList<Persona> mClienteList;
     private DefaultTableModel mClienteTableModel;
@@ -29,6 +31,7 @@ public class ctrBuscarCliente implements ActionListener{
         this.vistaBuscarCliente.btnCancelar.addActionListener(this);
     }
     
+    @Override
     public void actionPerformed(ActionEvent e) {
         JComponent obj=(JComponent) e.getSource();
         
@@ -46,7 +49,23 @@ public class ctrBuscarCliente implements ActionListener{
         }                
     }
     
+    
+    public Callback getOnCompletedSearch() {
+        return onCompletedSearch;
+    }
+
+    /**
+     * pasar método que se ejecutará cuando se complete la búsqueda
+     * @params onCompletedSearch callback
+     */
+    public void setOnCompletedSearch(Callback onCompletedSearch) {
+        this.onCompletedSearch = onCompletedSearch;
+    }
+    
+    
+    
     public void buscarClienteDni(){
+<<<<<<< HEAD
         String doc=vistaBuscarCliente.txtDocumento.getText();
         if(doc.length()>0){
             clearTable();
@@ -58,6 +77,14 @@ public class ctrBuscarCliente implements ActionListener{
         }else{
             JOptionPane.showMessageDialog(vistaBuscarCliente, "Error: Ingrese DNI");
         }
+=======
+        clearTable();
+        mClienteList= Persona.getClienteDni((String)vistaBuscarCliente.txtDocumento.getText());
+        
+        for(Persona cliente:mClienteList)        
+            mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getRucDNI(),cliente.getDireccion(),cliente.getTelefono()});        
+        this.vistaBuscarCliente.tblCliente.setModel(mClienteTableModel); 
+>>>>>>> d2bd2d5a1d99799b5bd8c7f3f8fe44251fc27779
     }
     
     public void transferirDatos(){
@@ -70,10 +97,14 @@ public class ctrBuscarCliente implements ActionListener{
             String dir=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 3);
             String tel=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 4);
 
+            if(vistaGenerarReserva!=null){
             vistaGenerarReserva.txtCodCliente.setText(cod);
             vistaGenerarReserva.txtNomCliente.setText(nom);
             vistaGenerarReserva.txtDocCliente.setText(doc);
-
+            }
+            
+            onCompletedSearch.execute(new String[]{cod,nom,doc,dir,tel});
+            
             hideFrmBuscarCliente();
             
         }else{
@@ -86,7 +117,7 @@ public class ctrBuscarCliente implements ActionListener{
         mClienteList= Persona.getClienteList();
         
         for(Persona cliente:mClienteList)        
-            mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getDni(),cliente.getDireccion(),cliente.getTelefono()});        
+            mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getRucDNI(),cliente.getDireccion(),cliente.getTelefono()});        
         this.vistaBuscarCliente.tblCliente.setModel(mClienteTableModel); 
     }
    
@@ -97,6 +128,7 @@ public class ctrBuscarCliente implements ActionListener{
     
     public void showFrmBuscarCliente(){
         this.vistaBuscarCliente.setVisible(true);
+        this.vistaBuscarCliente.setAlwaysOnTop(true);
     }
     
     public void hideFrmBuscarCliente(){
@@ -105,5 +137,4 @@ public class ctrBuscarCliente implements ActionListener{
         
     }
 
-    
 }

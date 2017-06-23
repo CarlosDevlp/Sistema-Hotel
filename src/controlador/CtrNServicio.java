@@ -7,21 +7,24 @@ package controlador;
 
 import vista.frmServicioExtra;
 import vista.frmServicioHabitacion;
+import vista.FrmMain;
 
 /**
  *
  * Grupo Servicio
- * @author Cristian
+ * @author Daniel
  */
 public class CtrNServicio {
-    frmServicioHabitacion mfrmServicioHabitacion;
-    frmServicioExtra mfrmServicioExtra;
+    private frmServicioHabitacion mfrmServicioHabitacion;
+    private frmServicioExtra mfrmServicioExtra;
+    //private FrmMain mFrmMain;
     
     //constructor
 
     public CtrNServicio() {
         mfrmServicioHabitacion=new frmServicioHabitacion();
         mfrmServicioExtra=new frmServicioExtra();
+        //mFrmMain=new FrmMain();
     }
     
     /**     
@@ -29,6 +32,7 @@ public class CtrNServicio {
      */
     public void showFrmServicioHabitacion(){
         mfrmServicioHabitacion.setVisible(true);
+        //mFrmMain.setVisible(false);
     }
     
     
@@ -38,6 +42,7 @@ public class CtrNServicio {
     */
     public void showFrmServicioExtra(){
         mfrmServicioExtra.setVisible(true);
+        //mFrmMain.setVisible(false);
     }
     
 }

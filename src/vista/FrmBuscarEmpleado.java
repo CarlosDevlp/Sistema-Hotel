@@ -5,19 +5,20 @@
  */
 package vista;
 
-import controlador.CtrBuscarUsuario;
+import controlador.CtrBuscarEmpleado;
 import dao.BasicDao;
 
 /**
  *
  * @author Carlos Chavez Laguna
  */
-public class FrmBuscarUsuario extends StandardForm {
-    CtrBuscarUsuario mCtrBuscarUsuario;
+public class FrmBuscarEmpleado extends StandardForm {
+    private CtrBuscarEmpleado mCtrBuscarEmpleado;
+    
     /**
-     * Creates new form FrmBuscarUsuario
+     * Creates new form FrmBuscarEmpleado
      */
-    public FrmBuscarUsuario() {
+    public FrmBuscarEmpleado() {
         initComponents();
     }
 
@@ -31,20 +32,23 @@ public class FrmBuscarUsuario extends StandardForm {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         txtValue = new javax.swing.JTextField();
         cmbSearchParameters = new javax.swing.JComboBox<>();
         btnSearch = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblEmptyTable = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbUser = new javax.swing.JTable();
+        tbEmployee = new javax.swing.JTable();
         btnAccept = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
-        setTitle("Buscar Usuario");
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(java.awt.Color.white);
+
+        jLabel1.setFont(new java.awt.Font("Georgia", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Buscar Empleado");
 
         btnSearch.setText("Buscar");
         btnSearch.setName("btnSearch"); // NOI18N
@@ -55,19 +59,19 @@ public class FrmBuscarUsuario extends StandardForm {
         lblEmptyTable.setText("No hay datos para mostrar");
         jPanel2.add(lblEmptyTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, -1, -1));
 
-        tbUser.setModel(new javax.swing.table.DefaultTableModel(
+        tbEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nombre de usuario", "Rol"
+                "Id", "Nombre completo", "DNI / RUC", "Telefono", "Correo", "Edad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -78,17 +82,13 @@ public class FrmBuscarUsuario extends StandardForm {
                 return canEdit [columnIndex];
             }
         });
-        tbUser.setName("tbUser"); // NOI18N
-        jScrollPane2.setViewportView(tbUser);
+        tbEmployee.setName("tbEmployee"); // NOI18N
+        jScrollPane2.setViewportView(tbEmployee);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 250));
 
         btnAccept.setText("Aceptar");
         btnAccept.setName("btnAccept"); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Georgia", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Buscar Usuario");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -97,46 +97,45 @@ public class FrmBuscarUsuario extends StandardForm {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmbSearchParameters, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSearch))
                     .addComponent(jLabel1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(cmbSearchParameters, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnSearch))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAccept, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAccept)
-                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSearch)
-                    .addComponent(cmbSearchParameters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtValue))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch))
+                    .addComponent(cmbSearchParameters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAccept, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btnAccept)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -159,24 +158,23 @@ public class FrmBuscarUsuario extends StandardForm {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmBuscarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmBuscarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmBuscarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmBuscarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmBuscarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmBuscarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmBuscarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmBuscarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                BasicDao.init();
-                BasicDao.DEBUG=true;
-                FrmBuscarUsuario frmBuscarUsuario=new FrmBuscarUsuario();
-                frmBuscarUsuario.createController();
-                frmBuscarUsuario.setVisible(true);
+                BasicDao.init();                
+                FrmBuscarEmpleado frmBuscarEmpleado=new FrmBuscarEmpleado();
+                frmBuscarEmpleado.setVisible(true);
+                frmBuscarEmpleado.createController();
                 
             }
         });
@@ -191,18 +189,17 @@ public class FrmBuscarUsuario extends StandardForm {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JLabel lblEmptyTable;
-    public javax.swing.JTable tbUser;
+    public javax.swing.JTable tbEmployee;
     public javax.swing.JTextField txtValue;
     // End of variables declaration//GEN-END:variables
-
     @Override
     public void createController(){
-        mCtrBuscarUsuario=new CtrBuscarUsuario(this);
-        mCtrBuscarUsuario.loadData();
+        mCtrBuscarEmpleado=new CtrBuscarEmpleado(this);
+        mCtrBuscarEmpleado.loadData();
     }
     
     @Override
     public Object getViewController() {
-        return mCtrBuscarUsuario;
+        return mCtrBuscarEmpleado;
     }
 }
