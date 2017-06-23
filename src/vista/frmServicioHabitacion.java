@@ -24,17 +24,17 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
     }
     
     void bloquear(){
-        txtnombresyapellidos1.setEditable(false);
-        txthabitacion1.setEditable(false);
-        txtdescripcion1.setEnabled(false);
+        txtnombresyapellidosPedido.setEditable(false);
+        txtHabitacionPedido.setEditable(false);
+        txaDetallePedido.setEnabled(false);
         txtprecio1.setEditable(false);
         btnguardar1.setEnabled(false);
 }
     void desbloquear(){
-        txtdni1.setEditable(true);
-        txtnombresyapellidos1.setEditable(true);
-        txthabitacion1.setEditable(true);
-        txtdescripcion1.setEnabled(true);
+        txtdniPedido.setEditable(true);
+        txtnombresyapellidosPedido.setEditable(true);
+        txtHabitacionPedido.setEditable(true);
+        txaDetallePedido.setEnabled(true);
         txtprecio1.setEditable(true);
         btnguardar1.setEnabled(true);
 }
@@ -46,13 +46,13 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        btnbuscar1 = new javax.swing.JButton();
+        btnConsultarDNI = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         btnguardar1 = new javax.swing.JButton();
         btnsalir1 = new javax.swing.JButton();
-        txtdni1 = new javax.swing.JTextField();
-        txtnombresyapellidos1 = new javax.swing.JTextField();
-        txthabitacion1 = new javax.swing.JTextField();
+        txtdniPedido = new javax.swing.JTextField();
+        txtnombresyapellidosPedido = new javax.swing.JTextField();
+        txtHabitacionPedido = new javax.swing.JTextField();
         txtprecio1 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
@@ -61,9 +61,9 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
         fecha1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtdescripcion1 = new javax.swing.JTable();
+        txaDetallePedido = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,10 +75,10 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
 
         jLabel7.setText("Detalle del Pedido");
 
-        btnbuscar1.setText("Consultar");
-        btnbuscar1.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultarDNI.setText("Consultar");
+        btnConsultarDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscar1ActionPerformed(evt);
+                btnConsultarDNIActionPerformed(evt);
             }
         });
 
@@ -98,9 +98,9 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
             }
         });
 
-        txthabitacion1.addActionListener(new java.awt.event.ActionListener() {
+        txtHabitacionPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txthabitacion1ActionPerformed(evt);
+                txtHabitacionPedidoActionPerformed(evt);
             }
         });
 
@@ -111,7 +111,7 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
 
         fecha1.setText("dd/MM/YYYY");
 
-        txtdescripcion1.setModel(new javax.swing.table.DefaultTableModel(
+        txaDetallePedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -119,14 +119,14 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
                 "DNI", "Nombres y Apellidos", "N° Habitación", "Fecha", "Producto", "Precio", "Cantidad", "Total"
             }
         ));
-        jScrollPane2.setViewportView(txtdescripcion1);
+        jScrollPane2.setViewportView(txaDetallePedido);
 
-        jLabel13.setText("Producto");
+        jLabel13.setText("Agregar Producto");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -139,14 +139,10 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))))
+                        .addGap(136, 136, 136)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,9 +150,9 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
                                 .addGap(65, 65, 65)
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtdni1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtdniPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36)
-                                .addComponent(btnbuscar1))
+                                .addComponent(btnConsultarDNI))
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)))
                     .addGroup(layout.createSequentialGroup()
@@ -165,9 +161,6 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(jLabel8)
@@ -178,9 +171,9 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(118, 118, 118)
+                                .addGap(127, 127, 127)
                                 .addComponent(btnguardar1)
-                                .addGap(48, 48, 48)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnsalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -190,11 +183,16 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtnombresyapellidos1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtnombresyapellidosPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(70, 70, 70)
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txthabitacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(txtHabitacionPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -211,23 +209,23 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtdni1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnbuscar1)
+                            .addComponent(txtdniPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConsultarDNI)
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtnombresyapellidos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtnombresyapellidosPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
-                            .addComponent(txthabitacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHabitacionPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jButton1))
+                            .addComponent(btnBuscar))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -247,16 +245,16 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnbuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscar1ActionPerformed
+    private void btnConsultarDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarDNIActionPerformed
        //Consultar Huesped
-       ArrayList<Map<String,String>> resultaHuespedes=BasicDao.select("Huesped", new String[]{"*"}, "DNIHue="+this.txtdni1.getText());
+       ArrayList<Map<String,String>> resultaHuespedes=BasicDao.select("Huesped", new String[]{"*"}, "DNIHue="+this.txtdniPedido.getText());
         Map<String,String> huespedes=resultaHuespedes.get(0);//objeto huesped
         
-        this.txtnombresyapellidos1.setText(huespedes.get("NombreHue")); 
+        this.txtnombresyapellidosPedido.setText(huespedes.get("NombreHue")); 
         ArrayList<Map<String,String>> resultaHabitaciones=BasicDao.select(new String[]{"Habitacion","DetalleReserva"}, new String[]{"*"}, new String[]{"Habitacion_idHab","idHab"},"Huesped_idHSP="+huespedes.get("idHSP"));
         Map<String,String> habitaciones=resultaHabitaciones.get(0);
-        this.txthabitacion1.setText(habitaciones.get("NumeroHab"));
-    }//GEN-LAST:event_btnbuscar1ActionPerformed
+        this.txtHabitacionPedido.setText(habitaciones.get("NumeroHab"));
+    }//GEN-LAST:event_btnConsultarDNIActionPerformed
 
     private void btnguardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardar1ActionPerformed
      
@@ -269,14 +267,14 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
        this.setVisible(false);
     }//GEN-LAST:event_btnsalir1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         frmBuscarProducto  buscar = new frmBuscarProducto();
         buscar.show();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void txthabitacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txthabitacion1ActionPerformed
+    private void txtHabitacionPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHabitacionPedidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txthabitacion1ActionPerformed
+    }//GEN-LAST:event_txtHabitacionPedidoActionPerformed
    public static String FechaActual(){
         Date fecha=new Date();
         SimpleDateFormat formatoFecha=new SimpleDateFormat("dd/MM/YYYY hh:mm:ss a");
@@ -292,11 +290,11 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnbuscar1;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnConsultarDNI;
     private javax.swing.JButton btnguardar1;
     private javax.swing.JButton btnsalir1;
     private javax.swing.JLabel fecha1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
@@ -309,10 +307,10 @@ public class frmServicioHabitacion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable txtdescripcion1;
-    private javax.swing.JTextField txtdni1;
-    private javax.swing.JTextField txthabitacion1;
-    private javax.swing.JTextField txtnombresyapellidos1;
+    private javax.swing.JTable txaDetallePedido;
+    private javax.swing.JTextField txtHabitacionPedido;
+    private javax.swing.JTextField txtdniPedido;
+    private javax.swing.JTextField txtnombresyapellidosPedido;
     private javax.swing.JTextField txtprecio1;
     // End of variables declaration//GEN-END:variables
 }
