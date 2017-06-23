@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Mantener Empleado"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" pref="348" max="-2" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -50,7 +50,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="btnClean" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" pref="32" max="32767" attributes="0"/>
                                   <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
@@ -58,42 +58,45 @@
                                   <Component id="btnSave" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel12" max="32767" attributes="0"/>
-                                              <Component id="cmbEmployeeType" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
                                                   <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
-                                              <Component id="spnPayment" alignment="1" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="cmbEmployeeType" alignment="0" max="32767" attributes="0"/>
                                               <Group type="102" attributes="0">
-                                                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="spnPayment" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="txtEstate" min="-2" pref="96" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPane1" min="-2" pref="115" max="-2" attributes="0"/>
+                                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -180,28 +183,29 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cmbEmployeeType" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="spnPayment" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="spnPayment" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txtEstate" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="74" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <EmptySpace pref="50" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnClean" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -505,16 +509,13 @@
             <Property name="text" type="java.lang.String" value="Estado"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JTextField" name="txtEstate">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="33" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Contratado"/>
+            <Property name="name" type="java.lang.String" value="txtEstate" noResource="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

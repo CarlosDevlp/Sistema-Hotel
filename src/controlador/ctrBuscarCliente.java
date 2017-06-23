@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Callback;
 import modelo.Persona;
 import vista.frmBuscarCliente;
 import vista.frmGenerarReserva;
@@ -13,6 +14,7 @@ import vista.frmGenerarReserva;
 public class ctrBuscarCliente implements ActionListener{
     private frmBuscarCliente vistaBuscarCliente;
     private frmGenerarReserva vistaGenerarReserva;
+    private Callback onCompletedSearch;
     
     private ArrayList<Persona> mClienteList;
     private DefaultTableModel mClienteTableModel;
@@ -47,6 +49,21 @@ public class ctrBuscarCliente implements ActionListener{
         }                
     }
     
+    
+    public Callback getOnCompletedSearch() {
+        return onCompletedSearch;
+    }
+
+    /**
+     * pasar método que se ejecutará cuando se complete la búsqueda
+     * @params onCompletedSearch callback
+     */
+    public void setOnCompletedSearch(Callback onCompletedSearch) {
+        this.onCompletedSearch = onCompletedSearch;
+    }
+    
+    
+    
     public void buscarClienteDni(){
         clearTable();
         mClienteList= Persona.getClienteDni((String)vistaBuscarCliente.txtDocumento.getText());
@@ -70,6 +87,9 @@ public class ctrBuscarCliente implements ActionListener{
             vistaGenerarReserva.txtNomCliente.setText(nom);
             vistaGenerarReserva.txtDocCliente.setText(doc);
 
+            
+            onCompletedSearch.execute(new String[]{cod,nom,doc,dir,tel});
+            
             hideFrmBuscarCliente();
             
         }else{

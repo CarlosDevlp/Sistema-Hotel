@@ -63,7 +63,7 @@ public class TipoEmpleado {
      */
     
     public static TipoEmpleado getTipoEmpleado(String tipoempladoId){
-        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_TIPO_EMPLEADO, new String[]{"*"}, "idTem="+tipoempladoId);
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_TIPO_EMPLEADO, new String[]{"*"}, "idTEm="+tipoempladoId);
         return new TipoEmpleado(result.get(0));
     }
     

@@ -8,9 +8,12 @@ package controlador;
 import assets.values.Constant;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import modelo.Callback;
 import modelo.Empleado;
+import modelo.TipoEmpleado;
 import vista.FrmMantenerEmpleado;
 
 /**
@@ -21,6 +24,7 @@ import vista.FrmMantenerEmpleado;
 public class CtrMantenerEmpleado implements ActionListener{
    private FrmMantenerEmpleado mFrmMantenerEmpleado;
    private Empleado mEmpleado;
+   private ArrayList<TipoEmpleado> mTipoEmpleadoList;
    
    //constructor
     public CtrMantenerEmpleado() {
@@ -101,21 +105,31 @@ public class CtrMantenerEmpleado implements ActionListener{
                                mFrmMantenerEmpleado.txtAddress.setText(mEmpleado.getDireccion());
                                //empleado
                                mFrmMantenerEmpleado.spnPayment.setValue(mEmpleado.getSueldo());
-                               mFrmMantenerEmpleado.txtHorarioLaboral.setText(mEmpleado.getHorarioLaboralEmp());
+                               mFrmMantenerEmpleado.txtHorarioLaboral.setText(mEmpleado.getHorarioLaboralEmp());                               
+                               mFrmMantenerEmpleado.txtEstate.setText(mEmpleado.getEstadoEmp());
                                
-                               //setear en el combo el rol escogido
-                               /*Rol userRol=mEmpleado.getRolUser();
-                               for(int i=0;i<mRolList.size();i++)
-                                   if(mRolList.get(i).getIdRoles().equals(userRol.getIdRoles())){
-                                        mFrmMantenerEmpleado.cmbRol.setSelectedIndex(i);
+                               //setear en el combo el tipo de empleado escogido
+                               TipoEmpleado tipoEmpleado=mEmpleado.getTipoEmpleado();
+                               
+                               for(int i=0;i<mTipoEmpleadoList.size();i++)
+                                   if(mTipoEmpleadoList.get(i).getIdTem().equals(tipoEmpleado.getIdTem())){
+                                        mFrmMantenerEmpleado.cmbEmployeeType.setSelectedIndex(i);
                                         break;
                                    }
-                                 */       
+                                 
                           }
                        }
            };
     }
     
+    
+    /**
+     * Validar si los campos no tienen algo inválido o
+     * vacío
+     */
+    private void validarCampos(){
+        
+    }
     /**
      * Agregar empleado a la base de datos y a la tabla.
      */
@@ -176,8 +190,11 @@ public class CtrMantenerEmpleado implements ActionListener{
      * Pre-cargar data en el formulario.
      */
     public void loadData(){
-        
-        
+        mTipoEmpleadoList=TipoEmpleado.getTipoEmpleadoList();
+        ArrayList<String> tipoEmpleadoName=new ArrayList();
+        for(TipoEmpleado tipoEmpleado: mTipoEmpleadoList)
+            tipoEmpleadoName.add(tipoEmpleado.getDescripcion());        
+        mFrmMantenerEmpleado.cmbEmployeeType.setModel(new DefaultComboBoxModel(tipoEmpleadoName.toArray()));
                                
     }
     

@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class Empleado  extends Persona{
     private float sueldoEmp;
-    private int estadoEmp;
+    private String estadoEmp;
     private Empleado usuario;    
     private TipoEmpleado  tipoEmpleado;
     private String horarioLaboralEmp;
@@ -45,19 +45,14 @@ public class Empleado  extends Persona{
      */    
     public Empleado(Map<String,String> args){
         //super.setRucDNI(args.get("idRazonSocial"));
-        super.setIdPersona(args.get("idPersona"));
-        super.setFullNamePer(args.get("FullNamePer"));
-        super.setTelefono(args.get("TelefonoPer"));
-        super.setCorreo(args.get("EmailPer"));
-        super.setDireccion(args.get("DireccionPer"));
-        super.setEdad(Integer.parseInt(args.get("EdadPer")));
+        super(args);
         this.sueldoEmp=Float.parseFloat(args.get("SueldoEmp"));
         this.horarioLaboralEmp=args.get("HorarioLaboralEmp");
-        //this.estadoEmp= preguntar a la gente...
+        this.estadoEmp= args.get("EstadoEmp");
     }
     
     
-    //setters and getters
+    //setters and   getters
 
     public float getSueldo() {
         return sueldoEmp;
@@ -90,6 +85,14 @@ public class Empleado  extends Persona{
     public void setHorarioLaboralEmp(String horarioLaboralEmp) {
         this.horarioLaboralEmp = horarioLaboralEmp;
     }
+
+    public String getEstadoEmp() {
+        return estadoEmp;
+    }
+
+    public void setEstadoEmp(String estadoEmp) {
+        this.estadoEmp = estadoEmp;
+    }
     
  
     
@@ -109,7 +112,7 @@ public class Empleado  extends Persona{
                                                         super.getEdad()+"",//persona
                                                         this.sueldoEmp+"",//empleado
                                                         "'"+this.horarioLaboralEmp+"'",//empleado
-                                                    });        
+                                                    });
     }        
     
     /**
@@ -122,14 +125,15 @@ public class Empleado  extends Persona{
     public static ArrayList<Empleado> getEmpleadoList(String where){
                 
         //inner join
-        ArrayList<Map<String,String>> result = BasicDao.select(new String[] {Constant.DB_TABLE_EMPLEADO,Constant.DB_TABLE_PERSONA},
-                                                               new String[] {"*"},new String[] {"Persona_idPersona","idPersona"}, where);
+        ArrayList<Map<String,String>> result = BasicDao.select(Constant.DB_TABLE_EMPLEADO+" INNER JOIN "+Constant.DB_TABLE_PERSONA+" ON Persona_idPersona=idPersona "+
+                                                                                          " INNER JOIN "+Constant.DB_TABLE_RAZON_SOCIAL+" ON RazonSocial_idRazonSocial=idRazonSocial"  ,
+                                                               new String[] {"*"}, where);
         
         ArrayList<Empleado> empleadoList=new ArrayList();
-        
+       
         for(Map<String,String> row:result){ 
-            empleadoList.add(new Empleado(row));            
-            //empleadoList.get(empleadoList.size()-1).setTipoEmpleado(new TipoEmpleado(row));
+            empleadoList.add(new Empleado(row));                        
+            empleadoList.get(empleadoList.size()-1).setTipoEmpleado(TipoEmpleado.getTipoEmpleado( row.get("idTEm") ));
         }
         return empleadoList;
     }
@@ -143,13 +147,16 @@ public class Empleado  extends Persona{
      */
     public static ArrayList<Empleado> getEmpleadoList(){
         //inner join
-        ArrayList<Map<String,String>> result = BasicDao.select(new String[] {Constant.DB_TABLE_EMPLEADO,Constant.DB_TABLE_PERSONA},
-                                                               new String[] {"*"},new String[] {"Persona_idPersona","idPersona"}, null);
+        ArrayList<Map<String,String>> result = BasicDao.select(Constant.DB_TABLE_EMPLEADO+" INNER JOIN "+Constant.DB_TABLE_PERSONA+" ON Persona_idPersona=idPersona "+
+                                                                                          " INNER JOIN "+Constant.DB_TABLE_RAZON_SOCIAL+" ON RazonSocial_idRazonSocial=idRazonSocial"  ,
+                                                               new String[] {"*"}, null);
+        
         
         ArrayList<Empleado> empleadoList=new ArrayList();
+        //Empleado currentEmpleado;currentEmpleado=empleadoList.get(empleadoList.size()-1);
         for(Map<String,String> row:result){ 
             empleadoList.add(new Empleado(row));
-            //empleadoList.get(empleadoList.size()-1).setTipoEmpleado(Rol.getRol(row.get("Roles_idRoles")));
+            empleadoList.get(empleadoList.size()-1).setTipoEmpleado(TipoEmpleado.getTipoEmpleado( row.get("idTEm") ));
         }
         return empleadoList;
     }

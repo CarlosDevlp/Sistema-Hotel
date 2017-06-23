@@ -118,15 +118,27 @@ public class CtrBuscarEmpleado implements ActionListener{
         //obtener la lista de usuarios dependiendo de los  parámetros de búsqueda
         if(!"".equals(value.trim())){
             
-            mFoundEmployeeList=Empleado.getEmpleadoList(
-                        Constant.ARRAY_EMPLOYEE_COLUMNS_AND_ALIAS[0][index]+"="+((index!=1)?"'"+value+"'":value)
-                        );
+            String cond;
+            switch(index){
+                case 0://FullName
+                    cond=" LIKE '%"+value+"%'";
+                    break;
+                case 1://Dni/Ruc
+                    cond=" = "+value;
+                    break;
+                default://email
+                    cond=" = '"+value+"'";
+            }
+            mFoundEmployeeList=Empleado.getEmpleadoList(Constant.ARRAY_EMPLOYEE_COLUMNS_AND_ALIAS[0][index]+cond);
             
         }else mFoundEmployeeList=Empleado.getEmpleadoList();
+        
         //ocultar o mostrar el label de tabla vacía
         this.mFrmBuscarEmpleado.lblEmptyTable.setVisible(mFoundEmployeeList.isEmpty());  
-        //mostrar un mensaje que no se encontró lo que se buscaba
+        
+        //mostrar un mensaje que NO se encontró lo que se buscaba
         if(mFoundEmployeeList.isEmpty()) this.mFrmBuscarEmpleado.messageBox(Constant.APP_NAME, "No se encontraron valores con "+value);
+        
         
         //mostrar los valores en la tabla
         for(Empleado empleado:mFoundEmployeeList)
