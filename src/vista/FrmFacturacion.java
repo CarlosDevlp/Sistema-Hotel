@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.CtrFacturacion;
+import dao.BasicDao;
 
 /**
  *
@@ -349,6 +350,7 @@ public class FrmFacturacion extends StandardForm {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                BasicDao.init();
                 FrmFacturacion frmFacturacion=new FrmFacturacion();
                 frmFacturacion.createController();                
                 frmFacturacion.setVisible(true);
@@ -391,10 +393,10 @@ public class FrmFacturacion extends StandardForm {
     private javax.swing.JTable tbLSE;
     private javax.swing.JTable tbLSH;
     private javax.swing.JTextField txtApellidoD;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtDNIRUC;
+    public javax.swing.JTextField txtCodigo;
+    public javax.swing.JTextField txtDNIRUC;
     private javax.swing.JTextField txtIGV;
-    private javax.swing.JTextField txtNombreRS;
+    public javax.swing.JTextField txtNombreRS;
     private javax.swing.JTextField txtNombreRS1;
     private javax.swing.JTextField txtSubtotal;
     private javax.swing.JTextField txtTotal;
