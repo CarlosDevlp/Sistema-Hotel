@@ -65,26 +65,17 @@ public class ctrBuscarCliente implements ActionListener{
     
     
     public void buscarClienteDni(){
-<<<<<<< HEAD
         String doc=vistaBuscarCliente.txtDocumento.getText();
         if(doc.length()>0){
             clearTable();
             mClienteList= Persona.getClienteDni((String)vistaBuscarCliente.txtDocumento.getText());
 
             for(Persona cliente:mClienteList)        
-                mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getDni(),cliente.getDireccion(),cliente.getTelefono()});        
+                mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getRucDNI(),cliente.getDireccion(),cliente.getTelefono()});        
             this.vistaBuscarCliente.tblCliente.setModel(mClienteTableModel); 
         }else{
             JOptionPane.showMessageDialog(vistaBuscarCliente, "Error: Ingrese DNI");
         }
-=======
-        clearTable();
-        mClienteList= Persona.getClienteDni((String)vistaBuscarCliente.txtDocumento.getText());
-        
-        for(Persona cliente:mClienteList)        
-            mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getRucDNI(),cliente.getDireccion(),cliente.getTelefono()});        
-        this.vistaBuscarCliente.tblCliente.setModel(mClienteTableModel); 
->>>>>>> d2bd2d5a1d99799b5bd8c7f3f8fe44251fc27779
     }
     
     public void transferirDatos(){
@@ -97,14 +88,10 @@ public class ctrBuscarCliente implements ActionListener{
             String dir=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 3);
             String tel=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 4);
 
-            if(vistaGenerarReserva!=null){
             vistaGenerarReserva.txtCodCliente.setText(cod);
             vistaGenerarReserva.txtNomCliente.setText(nom);
             vistaGenerarReserva.txtDocCliente.setText(doc);
-            }
-            
-            onCompletedSearch.execute(new String[]{cod,nom,doc,dir,tel});
-            
+           
             hideFrmBuscarCliente();
             
         }else{
