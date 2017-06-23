@@ -5,7 +5,7 @@
  */
 package vista;
 
-import controlador.CtrBuscarHabitacion;
+import controlador.ctrBuscarHabitacion;
 import dao.BasicDao;
 import java.awt.event.ActionListener;
 
@@ -18,7 +18,7 @@ public class frmBuscarHabitacion extends StandardForm {
     /**
      * Creates new form frmBuscarHabitacion
      */
-    CtrBuscarHabitacion mCtrBuscarHabitacion;
+    ctrBuscarHabitacion mCtrBuscarHabitacion;
     public frmBuscarHabitacion() {
         initComponents();
         //Habitacion.interfazInicialHabitacion();
@@ -218,7 +218,7 @@ public class frmBuscarHabitacion extends StandardForm {
     
     @Override
     public void createController() {
-        mCtrBuscarHabitacion=new CtrBuscarHabitacion(this);
+        mCtrBuscarHabitacion=new ctrBuscarHabitacion(this);
     }
     
     @Override

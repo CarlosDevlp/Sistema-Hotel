@@ -133,11 +133,14 @@ public class CtrBuscarRol implements ActionListener{
         this.mFrmBuscarRol.lblEmptyTable.setVisible(mFoundRolList.isEmpty());  
         //mostrar un mensaje que no se encontró lo que se buscaba
         if(mFoundRolList.isEmpty()) this.mFrmBuscarRol.messageBox(Constant.APP_NAME, "No se encontraron valores con "+value);
-        /*
+        
         //mostrar los valores en la tabla
+        
+                
         for(Rol rol:mFoundRolList)
-            mRolTableModel.addRow(new String[]{rol.getIdRoles(),rol.getNombreRol(),String.join(",", rol.getPestanasHabilitadas())});
-        */
+            mRolTableModel.addRow(new String[]{rol.getIdRoles(),rol.getNombreRol(),""});
+            //mRolTableModel.addRow(new String[]{rol.getIdRoles(),rol.getNombreRol(),String.join(",", rol.getPestanasHabilitadas())});
+        
     }
 
     /**

@@ -10,7 +10,7 @@ import modelo.Persona;
 import vista.frmBuscarCliente;
 import vista.frmGenerarReserva;
 
-public class CtrBuscarCliente implements ActionListener{
+public class ctrBuscarCliente implements ActionListener{
     private frmBuscarCliente vistaBuscarCliente;
     private frmGenerarReserva vistaGenerarReserva;
     
@@ -18,11 +18,11 @@ public class CtrBuscarCliente implements ActionListener{
     private DefaultTableModel mClienteTableModel;
     private final String []USER_TABLE_COLUMN_NAMES={"Codigo","Nombre","Documento","Direccion","Telefono"};
     
-    public CtrBuscarCliente(){
+    public ctrBuscarCliente(){
         this(new frmBuscarCliente());
     }
     
-    public CtrBuscarCliente(frmBuscarCliente mfrmBuscarCliente) {
+    public ctrBuscarCliente(frmBuscarCliente mfrmBuscarCliente) {
         this.vistaBuscarCliente = mfrmBuscarCliente;
         this.vistaBuscarCliente.btnAceptar.addActionListener(this);
         this.vistaBuscarCliente.btnBuscar.addActionListener(this);
@@ -96,7 +96,7 @@ public class CtrBuscarCliente implements ActionListener{
     
     public void hideFrmBuscarCliente(){
         this.vistaBuscarCliente.setVisible(false);
-        CtrGenerarReserva.activo=false;
+        ctrGenerarReserva.activo=false;
         
     }
 

@@ -96,7 +96,7 @@ public class CtrRegistrarCliente implements ActionListener{
     
     public void hideFrmRegistrarCliente(){
         this.vistaRegistrarCliente.setVisible(false);
-        CtrGenerarReserva.activo=false;
+        ctrGenerarReserva.activo=false;
     }
 
     public void loadData() {
