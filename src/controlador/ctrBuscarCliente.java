@@ -47,12 +47,17 @@ public class ctrBuscarCliente implements ActionListener{
     }
     
     public void buscarClienteDni(){
-        clearTable();
-        mClienteList= Persona.getClienteDni((String)vistaBuscarCliente.txtDocumento.getText());
-        
-        for(Persona cliente:mClienteList)        
-            mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getDni(),cliente.getDireccion(),cliente.getTelefono()});        
-        this.vistaBuscarCliente.tblCliente.setModel(mClienteTableModel); 
+        String doc=vistaBuscarCliente.txtDocumento.getText();
+        if(doc.length()>0){
+            clearTable();
+            mClienteList= Persona.getClienteDni((String)vistaBuscarCliente.txtDocumento.getText());
+
+            for(Persona cliente:mClienteList)        
+                mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getDni(),cliente.getDireccion(),cliente.getTelefono()});        
+            this.vistaBuscarCliente.tblCliente.setModel(mClienteTableModel); 
+        }else{
+            JOptionPane.showMessageDialog(vistaBuscarCliente, "Error: Ingrese DNI");
+        }
     }
     
     public void transferirDatos(){
