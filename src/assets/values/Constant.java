@@ -22,18 +22,18 @@ public abstract class Constant {
     
     //constantes de la base de datos    
 
-    /*cloud*/
+    /*cloud
     public final static String DB_SERVER="sl-us-south-1-portal.2.dblayer.com:16643";
     public final static String DB_NAME="CalidadT3Oficial";
     public final static String DB_USER_NAME="admin";
     public final static String DB_USER_PASSWORD="LTKIKOECRZFJOEUM";
-    
-    /*local carlos chavez
+    */
+    /*local carlos chavez*/
     public final static String DB_SERVER="localhost";
     public final static String DB_NAME="calidadt3";
     public final static String DB_USER_NAME="root";
     public final static String DB_USER_PASSWORD="admin";
-        */
+        
 
     /*local luis fernando*/
     /*
@@ -45,10 +45,15 @@ public abstract class Constant {
     //nombre de las tablas
     public final static String DB_TABLE_ROLES="Roles";
     public final static String DB_TABLE_USUARIO="User";
+    public final static String DB_TABLE_EMPLEADO="Empleado";
+    public final static String DB_TABLE_TIPO_EMPLEADO="TipoEmpleado";
+    public final static String DB_TABLE_PERSONA="Persona";
+    public final static String DB_TABLE_RAZON_SOCIAL="RazonSocial";
     
     //nombre de los formularios a nivel de diseño
     public final static String FORM_BUSCAR_ROL="frm_Buscar rol";
     public final static String FORM_BUSCAR_USUARIO="frm_Buscar usuario";
+    public final static String FORM_BUSCAR_EMPLEADO="frm_Buscar empleado";
   
     
     //COLORS 
@@ -80,6 +85,12 @@ public abstract class Constant {
     public final static String [][]ARRAY_USER_COLUMNS_AND_ALIAS={
                                     {"idUser","UsuarioUse","NombreRol"}, //column names
                                     {"ID","Nombre de usuario","Nombre de rol"} //alias
+                                };
+    //empleados
+    public final static String [][]ARRAY_EMPLOYEE_COLUMNS_AND_ALIAS={
+                                    {"FullNamePer","RucDNIRSo","EmailPer"}, //column names
+                                    {"Nombre y/o apellido","Dni/Ruc","Correo electrónico"} //alias
+                                    
                                 };
     
 }

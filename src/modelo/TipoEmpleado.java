@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import assets.values.Constant;
 import dao.BasicDao;
 import java.util.ArrayList;
 import java.util.Map;
@@ -29,8 +30,8 @@ public class TipoEmpleado {
     }
        
     public TipoEmpleado(Map<String, String> args) {
-        this.idTem = args.get("idTem");
-        this.descripcion = args.get("Descripcion");
+        this.idTem = args.get("idTEm");
+        this.descripcion = args.get("DescripcionTEm");
     }
     
     //setters and getters
@@ -56,25 +57,25 @@ public class TipoEmpleado {
      * 
      * obtiene un tipo empleado
      * 
-     * @param tipoempladoId id del empelado a buscar
+     * @param tipoempladoId id del tipo empleado a buscar
      * 
      * @return el objeto buscado     
      */
     
     public static TipoEmpleado getTipoEmpleado(String tipoempladoId){
-        ArrayList<Map<String,String>> result=BasicDao.select("TipoEmpleado", new String[]{"*"}, "idTem="+tipoempladoId);
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_TIPO_EMPLEADO, new String[]{"*"}, "idTem="+tipoempladoId);
         return new TipoEmpleado(result.get(0));
     }
     
     
     /**
-     * obtener toda la lista de roles existentes
+     * obtener toda la lista de tipos de empleado existentes
      * en la base de datos.
      * 
      * @return retorna una arraylist de empleados
      */
     public static ArrayList<TipoEmpleado> getTipoEmpleadoList(){
-        ArrayList<Map<String,String>> result=BasicDao.select("roles", new String[]{"*"}, null);
+        ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_TIPO_EMPLEADO, new String[]{"*"}, null);
         ArrayList<TipoEmpleado> tipoEmpleadoList=new ArrayList();
         for(Map<String,String> row:result) tipoEmpleadoList.add(new TipoEmpleado(row));
         return tipoEmpleadoList;
