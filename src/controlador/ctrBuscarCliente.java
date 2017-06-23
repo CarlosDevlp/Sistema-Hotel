@@ -93,6 +93,7 @@ public class ctrBuscarCliente implements ActionListener{
     
     public void showFrmBuscarCliente(){
         this.vistaBuscarCliente.setVisible(true);
+        this.vistaBuscarCliente.setAlwaysOnTop(true);
     }
     
     public void hideFrmBuscarCliente(){
@@ -101,5 +102,4 @@ public class ctrBuscarCliente implements ActionListener{
         
     }
 
-    
 }
