@@ -20,17 +20,17 @@ import vista.frmGenerarReserva;
  *
  * @author Propietario
  */
-public class CtrBuscarHabitacion implements ActionListener{
+public class ctrBuscarHabitacion implements ActionListener{
     private frmBuscarHabitacion vistaBuscarHabitacion;
     private frmGenerarReserva vistaGenerarReserva;
     private ArrayList<Habitacion> mHabitacionList;
     private DefaultTableModel mHabitacionTableModel;
     private final String []USER_TABLE_COLUMN_NAMES={"Codigo","Numero","Tipo","Costo","Estado"};
     
-    public CtrBuscarHabitacion(){
+    public ctrBuscarHabitacion(){
         this(new frmBuscarHabitacion());
     }
-    public CtrBuscarHabitacion(frmBuscarHabitacion mfrmBuscarHabitacion) {
+    public ctrBuscarHabitacion(frmBuscarHabitacion mfrmBuscarHabitacion) {
         this.vistaBuscarHabitacion = mfrmBuscarHabitacion;
         this.vistaBuscarHabitacion.btnAceptar.addActionListener(this);
         this.vistaBuscarHabitacion.btnBuscar.addActionListener(this);
@@ -104,6 +104,6 @@ public class CtrBuscarHabitacion implements ActionListener{
     
     public void hideFrmBuscarHabitacion(){
         this.vistaBuscarHabitacion.setVisible(false);
-        CtrGenerarReserva.activo=false;
+        ctrGenerarReserva.activo=false;
     }
 }

@@ -5,7 +5,7 @@
  */
 package vista;
 
-import controlador.CtrGenerarReserva;
+import controlador.ctrGenerarReserva;
 import dao.BasicDao;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
@@ -16,7 +16,7 @@ import java.beans.PropertyChangeListener;
  */
 public class frmGenerarReserva extends StandardForm {
 
-    private CtrGenerarReserva mCtrGenerarReserva;
+    private ctrGenerarReserva mCtrGenerarReserva;
     
     public frmGenerarReserva() {
         initComponents();
@@ -789,7 +789,7 @@ public class frmGenerarReserva extends StandardForm {
     
     @Override
     public void createController() {
-        mCtrGenerarReserva=new CtrGenerarReserva(this);
+        mCtrGenerarReserva=new ctrGenerarReserva(this);
     }
     
     @Override

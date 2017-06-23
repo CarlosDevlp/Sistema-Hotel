@@ -5,8 +5,8 @@
  */
 package vista;
 
-import controlador.CtrBuscarHuesped;
-import controlador.CtrGenerarReserva;
+import controlador.ctrBuscarHuesped;
+import controlador.ctrGenerarReserva;
 import dao.BasicDao;
 
 /**
@@ -18,7 +18,7 @@ public class frmBuscarHuesped extends StandardForm {
     /**
      * Creates new form frmBuscarHuesped
      */
-    private CtrBuscarHuesped mCtrBuscarHuesped;
+    private ctrBuscarHuesped mCtrBuscarHuesped;
     public frmBuscarHuesped() {
         initComponents();
     }
@@ -201,7 +201,7 @@ public class frmBuscarHuesped extends StandardForm {
     
     @Override
     public void createController() {
-        mCtrBuscarHuesped=new CtrBuscarHuesped(this);
+        mCtrBuscarHuesped=new ctrBuscarHuesped(this);
     }
     
     @Override

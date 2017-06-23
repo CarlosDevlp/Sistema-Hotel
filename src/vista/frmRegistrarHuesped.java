@@ -5,7 +5,7 @@
  */
 package vista;
 
-import controlador.CtrRegistrarHuesped;
+import controlador.ctrRegistrarHuesped;
 import dao.BasicDao;
 import java.awt.event.ActionListener;
 
@@ -18,7 +18,7 @@ public class frmRegistrarHuesped extends StandardForm {
     /**
      * Creates new form frmRegistrarHuesped
      */
-    CtrRegistrarHuesped mCtrRegistrarHuesped;
+    ctrRegistrarHuesped mCtrRegistrarHuesped;
     public frmRegistrarHuesped() {
         initComponents();
     }
@@ -169,7 +169,7 @@ public class frmRegistrarHuesped extends StandardForm {
     
     @Override
     public void createController() {
-        mCtrRegistrarHuesped=new CtrRegistrarHuesped(this);
+        mCtrRegistrarHuesped=new ctrRegistrarHuesped(this);
     }
     
     @Override

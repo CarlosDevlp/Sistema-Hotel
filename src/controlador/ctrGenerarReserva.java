@@ -33,18 +33,18 @@ import vista.*;
  *
  * @author Propietario
  */
-public class CtrGenerarReserva implements ActionListener{
+public class ctrGenerarReserva implements ActionListener{
     
     private frmGenerarReserva vistaGenerarReserva;
     private frmBuscarHuesped vistaBuscarHuesped;
     private frmBuscarHabitacion vistaBuscarHabitacion;
     
     
-    private CtrBuscarHuesped mCtrBuscarHuesped;
-    private CtrBuscarHabitacion mCtrBuscarHabitacion;
-    private CtrBuscarCliente mCtrBuscarCliente;
+    private ctrBuscarHuesped mCtrBuscarHuesped;
+    private ctrBuscarHabitacion mCtrBuscarHabitacion;
+    private ctrBuscarCliente mCtrBuscarCliente;
     private CtrRegistrarCliente mCtrRegistrarCliente;
-    private CtrRegistrarHuesped mCtrRegistrarHuesped;
+    private ctrRegistrarHuesped mCtrRegistrarHuesped;
     
     DefaultTableModel modelo; 
     public static boolean activo=false;
@@ -54,10 +54,10 @@ public class CtrGenerarReserva implements ActionListener{
     String sal="";
     String cd="";
     
-    public CtrGenerarReserva() {
+    public ctrGenerarReserva() {
         this(new frmGenerarReserva());
     }
-    public CtrGenerarReserva(frmGenerarReserva mfrmGenerarReserva) {
+    public ctrGenerarReserva(frmGenerarReserva mfrmGenerarReserva) {
         this.vistaGenerarReserva = mfrmGenerarReserva;
         this.vistaGenerarReserva.btnGrabarReserva.addActionListener(this);
         this.vistaGenerarReserva.btnBuscarHuesped.addActionListener(this);
@@ -289,7 +289,7 @@ public class CtrGenerarReserva implements ActionListener{
             
             case "btnBuscarCliente":
                 if(activo==false){
-                    mCtrBuscarCliente = new CtrBuscarCliente();
+                    mCtrBuscarCliente = new ctrBuscarCliente();
                     mCtrBuscarCliente.showFrmBuscarCliente();
                     mCtrBuscarCliente.loadData();
                     activo=true;
@@ -301,7 +301,7 @@ public class CtrGenerarReserva implements ActionListener{
             case "btnBuscarHabitacion":
                 
                 if(activo==false){
-                    mCtrBuscarHabitacion = new CtrBuscarHabitacion();
+                    mCtrBuscarHabitacion = new ctrBuscarHabitacion();
                     mCtrBuscarHabitacion.showFrmBuscarHabitacion();
                     vistaBuscarHabitacion.txtFechaLlegada.setText("  "+fechaActual2(vistaGenerarReserva.jdcLlegada.getDate()));
                     vistaBuscarHabitacion.txtFechaSalida.setText("  "+fechaActual2(vistaGenerarReserva.jdcSalida.getDate()));
@@ -314,7 +314,7 @@ public class CtrGenerarReserva implements ActionListener{
             case "btnBuscarHuesped":
                 
                 if(activo==false){
-                    mCtrBuscarHuesped = new CtrBuscarHuesped();
+                    mCtrBuscarHuesped = new ctrBuscarHuesped();
                     mCtrBuscarHuesped.showFrmBuscarHuesped();
                     mCtrBuscarHuesped.loadData();
                     activo=true;
@@ -335,7 +335,7 @@ public class CtrGenerarReserva implements ActionListener{
             case "btnNuevoHuesped":
                 
                 if(activo==false){
-                    mCtrRegistrarHuesped = new CtrRegistrarHuesped();
+                    mCtrRegistrarHuesped = new ctrRegistrarHuesped();
                     mCtrRegistrarHuesped.showFrmRegistrarHuesped();
                     activo=true;
                 }else{
@@ -465,7 +465,7 @@ public class CtrGenerarReserva implements ActionListener{
         try {
             date = formatter.parse(dateInString);
         } catch (ParseException ex) {
-            Logger.getLogger(CtrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ctrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
             
             return date;
@@ -485,7 +485,7 @@ public class CtrGenerarReserva implements ActionListener{
         try {
             date = formatter.parse(dateInString);
         } catch (ParseException ex) {
-            Logger.getLogger(CtrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ctrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
             
             return date;
@@ -505,7 +505,7 @@ public class CtrGenerarReserva implements ActionListener{
         try {
             date = formatter.parse(dateInString);
         } catch (ParseException ex) {
-            Logger.getLogger(CtrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ctrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
             
             return date;

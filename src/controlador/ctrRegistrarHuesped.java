@@ -11,7 +11,7 @@ import modelo.Huesped;
 import vista.frmRegistrarHuesped;
 
 
-public class CtrRegistrarHuesped implements ActionListener{
+public class ctrRegistrarHuesped implements ActionListener{
     private frmRegistrarHuesped vistaRegistrarHuesped;
     
     private ArrayList<Huesped> mHuespedList;
@@ -19,11 +19,11 @@ public class CtrRegistrarHuesped implements ActionListener{
     private boolean repetido=false;
     
     
-    public CtrRegistrarHuesped(){
+    public ctrRegistrarHuesped(){
         this(new frmRegistrarHuesped());
     }
     
-    public CtrRegistrarHuesped(frmRegistrarHuesped mfrmRegistrarHuesped) {
+    public ctrRegistrarHuesped(frmRegistrarHuesped mfrmRegistrarHuesped) {
         this.vistaRegistrarHuesped = mfrmRegistrarHuesped;
         this.vistaRegistrarHuesped.btnAceptar.addActionListener(this);
         this.vistaRegistrarHuesped.btnCancelar.addActionListener(this);
@@ -72,7 +72,7 @@ public class CtrRegistrarHuesped implements ActionListener{
     
     public void hideFrmRegistrarHuesped(){
         this.vistaRegistrarHuesped.setVisible(false);
-        CtrGenerarReserva.activo=false;
+        ctrGenerarReserva.activo=false;
     }
 
     public void loadData() {

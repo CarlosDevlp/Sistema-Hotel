@@ -13,7 +13,7 @@ package controlador;
  * @author Cristian
  */
 public class CtrNReserva {
-    private CtrGenerarReserva mCtrGenerarReserva;
+    private ctrGenerarReserva mCtrGenerarReserva;
 //    private CtrBuscarCliente mCtrGenerarReserva;
 //    private CtrBuscarCliente mCtrBuscarCliente;
 //    private CtrBuscarHabitacion mCtrBuscarHabitacion;
@@ -24,7 +24,7 @@ public class CtrNReserva {
     //constructor
 
     public CtrNReserva() {
-        mCtrGenerarReserva=new CtrGenerarReserva();
+        mCtrGenerarReserva=new ctrGenerarReserva();
 //        mCtrBuscarCliente=new CtrGenerarReserva();
 //        mCtrBuscarHabitacion=new CtrBuscarHabitacion();
 //        mCtrBuscarHuesped=new CtrBuscarHuesped();
@@ -49,11 +49,11 @@ public class CtrNReserva {
 //        this.mCtrBuscarHuesped = mCtrBuscarHuesped;
 //    }
 
-    public CtrGenerarReserva getmCtrGenerarReserva() {
+    public ctrGenerarReserva getmCtrGenerarReserva() {
         return mCtrGenerarReserva;
     }
 
-    public void setmCtrGenerarReserva(CtrGenerarReserva mCtrGenerarReserva) {
+    public void setmCtrGenerarReserva(ctrGenerarReserva mCtrGenerarReserva) {
         this.mCtrGenerarReserva = mCtrGenerarReserva;
     }
     
@@ -61,7 +61,7 @@ public class CtrNReserva {
     
     
     public void showFrmGenerarReserva(){
-        mCtrGenerarReserva=new CtrGenerarReserva();
+        mCtrGenerarReserva=new ctrGenerarReserva();
         mCtrGenerarReserva.showFrmGenerarReserva();
         mCtrGenerarReserva.loadData();
     }

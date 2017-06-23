@@ -5,8 +5,8 @@
  */
 package vista;
 
-import controlador.CtrBuscarCliente;
-import controlador.CtrBuscarHuesped;
+import controlador.ctrBuscarCliente;
+import controlador.ctrBuscarHuesped;
 import dao.BasicDao;
 import java.awt.event.ActionListener;
 
@@ -19,7 +19,7 @@ public class frmBuscarCliente extends StandardForm  {
     /**
      * Creates new form frmBuscarCliente
      */
-    CtrBuscarCliente mCtrBuscarCliente;
+    ctrBuscarCliente mCtrBuscarCliente;
     public frmBuscarCliente() {
         initComponents();
     }
@@ -212,7 +212,7 @@ public class frmBuscarCliente extends StandardForm  {
     
     @Override
     public void createController() {
-        mCtrBuscarCliente=new CtrBuscarCliente(this);
+        mCtrBuscarCliente=new ctrBuscarCliente(this);
     }
     
     @Override

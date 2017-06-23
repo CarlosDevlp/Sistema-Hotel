@@ -12,7 +12,7 @@ import vista.frmBuscarHuesped;
 import vista.frmGenerarReserva;
 
 
-public class CtrBuscarHuesped implements ActionListener{
+public class ctrBuscarHuesped implements ActionListener{
     
     private frmBuscarHuesped vistaBuscarHuesped;
     private frmGenerarReserva vistaGenerarReserva;
@@ -21,11 +21,11 @@ public class CtrBuscarHuesped implements ActionListener{
     private DefaultTableModel mHuespedTableModel;
     private final String []USER_TABLE_COLUMN_NAMES={"Codigo","Nombres","DNI"};
     
-    public CtrBuscarHuesped(){
+    public ctrBuscarHuesped(){
         this(new frmBuscarHuesped());
     }
     
-    public CtrBuscarHuesped(frmBuscarHuesped mfrmBuscarHuesped) {
+    public ctrBuscarHuesped(frmBuscarHuesped mfrmBuscarHuesped) {
         this.vistaBuscarHuesped = mfrmBuscarHuesped;
         this.vistaBuscarHuesped.btnAceptar.addActionListener(this);
         this.vistaBuscarHuesped.btnBuscar.addActionListener(this);
@@ -96,7 +96,7 @@ public class CtrBuscarHuesped implements ActionListener{
     
     public void hideFrmBuscarHuesped(){
         this.vistaBuscarHuesped.setVisible(false);
-        CtrGenerarReserva.activo=false;
+        ctrGenerarReserva.activo=false;
     }
     
 }
