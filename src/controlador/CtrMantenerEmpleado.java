@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
+
 import modelo.Callback;
 import modelo.Empleado;
 import modelo.TipoEmpleado;
@@ -67,7 +68,7 @@ public class CtrMantenerEmpleado implements ActionListener{
                 break;
             //botón eliminar al empleado
             case "btnDelete":
-                removeUser();
+                removeEmpleado();
                 break;
             //botón limpiar los campos
             case "btnClean":
@@ -126,38 +127,55 @@ public class CtrMantenerEmpleado implements ActionListener{
     /**
      * Validar si los campos no tienen algo inválido o
      * vacío
+     * @return retorna si los campos son o no válidos
      */
-    private void validarCampos(){
+    private boolean camposValidos(){
+        //boolean valid=true;
         
+        //si uno de estos campos están vacíos
+        return !
+                (
+                "".equals(mFrmMantenerEmpleado.txtName.getText()) ||
+                "".equals(mFrmMantenerEmpleado.txtDniRuc.getText()) ||
+                "".equals(mFrmMantenerEmpleado.txtPhone.getText()) ||
+                "".equals(mFrmMantenerEmpleado.txtEmail.getText()) ||
+                "".equals(mFrmMantenerEmpleado.txtEstate.getText()) ||
+                "".equals(mFrmMantenerEmpleado.txtHorarioLaboral.getText()) 
+                );
     }
+    
+    
     /**
      * Agregar empleado a la base de datos y a la tabla.
      */
     public void saveEmpleado(){
-                
-        
+                    
+        //validor los campos antes de generar algún cambio
+        if(!camposValidos()) {
+            mFrmMantenerEmpleado.messageBoxAlert(Constant.APP_NAME, "los campos no deben estar vacíos");
+            return;
+        }
         
         //empleado nuevo
         boolean isUpdate=true;
-        if(mEmpleado==null){
-            //impedir que se cree el empleado
-            /*if(BasicDao.rowExists(Constant.DB_TABLE_USUARIO, "UsuarioUse='"+username+"'")){
-                this.mFrmMantenerEmpleado.messageBoxAlert(Constant.APP_NAME, "El nombre de empleado ya está en uso");
-                return;
-            }*/
-            
+        if(mEmpleado==null){                        
             isUpdate=false;            
-            mEmpleado= new Empleado();
-            
+            mEmpleado= new Empleado();            
         }
-        mEmpleado.setRucDNI(mFrmMantenerEmpleado.txtDniRuc.getText());
-        mEmpleado.setFullNamePer(mFrmMantenerEmpleado.txtName.getText());
-        mEmpleado.setEdad((int)mFrmMantenerEmpleado.spnEdad.getValue());
-        mEmpleado.setTelefono(mFrmMantenerEmpleado.txtPhone.getText());
-        mEmpleado.setCorreo(mFrmMantenerEmpleado.txtEmail.getText());
-        mEmpleado.setDireccion(mFrmMantenerEmpleado.txtAddress.getText());
-        mEmpleado.setSueldo((float)mFrmMantenerEmpleado.spnPayment.getValue());
-        mEmpleado.setHorarioLaboralEmp(mFrmMantenerEmpleado.txtHorarioLaboral.getText());
+        
+        
+        mEmpleado.setFullNamePer(mFrmMantenerEmpleado.txtName.getText());//persona
+        mEmpleado.setRucDNI(mFrmMantenerEmpleado.txtDniRuc.getText());//persona        
+        mEmpleado.setEdad((int)mFrmMantenerEmpleado.spnEdad.getValue());//persona
+        mEmpleado.setTelefono(mFrmMantenerEmpleado.txtPhone.getText());//persona
+        mEmpleado.setCorreo(mFrmMantenerEmpleado.txtEmail.getText());//persona
+        mEmpleado.setDireccion(mFrmMantenerEmpleado.txtAddress.getText());//persona
+        mEmpleado.setTipoEmpleado(mTipoEmpleadoList.get(mFrmMantenerEmpleado.cmbEmployeeType.getSelectedIndex()));//empleado
+        mEmpleado.setSueldo((float)mFrmMantenerEmpleado.spnPayment.getValue());//empleado
+        mEmpleado.setHorarioLaboralEmp(mFrmMantenerEmpleado.txtHorarioLaboral.getText());//empleado
+        mEmpleado.setEstadoEmp(mFrmMantenerEmpleado.txtEstate.getText());//empleado
+        
+        
         
         //guardar o actualizar
         mEmpleado.save();
@@ -166,11 +184,14 @@ public class CtrMantenerEmpleado implements ActionListener{
         clear();
     }
     
-    public void removeUser(){
+    /**
+     * remover empleado de la base de datos
+     */
+    public void removeEmpleado(){
         //preguntar al empleado si realmente eliminar o no al objeto empleado
         this.mFrmMantenerEmpleado.messageBox(Constant.APP_NAME, "<html>"
                                                              + "¿Deseas remover el empleado del sistema?<br> "
-                                                             + "<b>OJO: EL USUARIO SERÁ ELIMINADO PERMANENTEMENTE.</b> "
+                                                             + "<b>OJO: EL EMPLEADO SERÁ ELIMINADO PERMANENTEMENTE.</b> "
                                                              + "</html>",
                                               new Callback<Boolean>(){
                                                     @Override
@@ -195,7 +216,8 @@ public class CtrMantenerEmpleado implements ActionListener{
         for(TipoEmpleado tipoEmpleado: mTipoEmpleadoList)
             tipoEmpleadoName.add(tipoEmpleado.getDescripcion());        
         mFrmMantenerEmpleado.cmbEmployeeType.setModel(new DefaultComboBoxModel(tipoEmpleadoName.toArray()));
-                               
+                
+        
     }
     
     
@@ -212,26 +234,28 @@ public class CtrMantenerEmpleado implements ActionListener{
         mFrmMantenerEmpleado.txtName.setText("");
         mFrmMantenerEmpleado.txtDniRuc.setText("");
         mFrmMantenerEmpleado.txtPhone.setText("");
-        mFrmMantenerEmpleado.spnEdad.setValue("");
+        mFrmMantenerEmpleado.spnEdad.setValue(0);
         mFrmMantenerEmpleado.txtEmail.setText("");
         mFrmMantenerEmpleado.txtAddress.setText("");
         //empleado
-        mFrmMantenerEmpleado.spnPayment.setValue("");
+        mFrmMantenerEmpleado.cmbEmployeeType.setSelectedIndex(0);
+        mFrmMantenerEmpleado.spnPayment.setValue(0.0f);
         mFrmMantenerEmpleado.txtHorarioLaboral.setText("");
+        mFrmMantenerEmpleado.txtEstate.setText("");
                                
     }
     
     /**
      * Mostrar el formulario mantener empleado
      */
-    public void showFrmMantenerUsuario(){
+    public void showFrmMantenerEmpleado(){
         this.mFrmMantenerEmpleado.setVisible(true);
     }
     
     /**
      * Esconder el formulario mantener empleado
      */
-    public void hideFrmMantenerUsuario(){
+    public void hideFrmMantenerEmpleado(){
         this.mFrmMantenerEmpleado.setVisible(false);
     }    
     

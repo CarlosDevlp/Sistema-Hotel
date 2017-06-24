@@ -8,8 +8,12 @@ package controlador;
 import assets.values.Constant;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
+import javax.swing.table.DefaultTableModel;
 import modelo.Callback;
+import modelo.Sesion;
 import modelo.Usuario;
 import vista.FrmReporteSesiones;
 
@@ -20,7 +24,10 @@ import vista.FrmReporteSesiones;
  */
 public class CtrReportarSesiones implements ActionListener{
     private Usuario mUser;
+    private ArrayList<Sesion> mSesionList;
     private FrmReporteSesiones mFrmReporteSesiones;
+    private DefaultTableModel mSesionTableModel;
+    private final String []SESION_TABLE_COLUMN_NAMES={"Id","Nombre de usuario","Fecha de ingreso","Fecha de salida","Actividad"};
     
     //constructor
 
@@ -31,6 +38,7 @@ public class CtrReportarSesiones implements ActionListener{
     public CtrReportarSesiones(FrmReporteSesiones mFrmReporteSesiones) {
         this.mFrmReporteSesiones = mFrmReporteSesiones;
         this.mFrmReporteSesiones.btnSearchUser.addActionListener(this);
+        this.mFrmReporteSesiones.btnFilter.addActionListener(this);
     }
     
     
@@ -54,6 +62,10 @@ public class CtrReportarSesiones implements ActionListener{
             case "btnSearchUser":
                 CtrIncluido.getInstance().showForm(Constant.FORM_BUSCAR_USUARIO, OnCompleteSearch());
                 break;
+            //botón para buscar los logs y sesiones del usuarios
+            case "btnFilter":
+                searchLogs();
+                break;
             //botón guardar al usuario y
             //botón actualizar al usuario
             case "btnSave":
@@ -72,7 +84,7 @@ public class CtrReportarSesiones implements ActionListener{
     }
     //____________________________________________________________________________________________    
     
-        //otros métodos
+   //otros métodos
     /**
      * 
      * cuando se complete la búsqueda
@@ -86,6 +98,15 @@ public class CtrReportarSesiones implements ActionListener{
                             mFrmReporteSesiones.txtName.setText(mUser.getUsuario());
                        }
            };
+    }
+    
+    /**
+     * Pre-cargar data en el formulario.
+     */
+    public void loadData(){        
+        
+        this.mFrmReporteSesiones.cmbActivity.setModel(new DefaultComboBoxModel(Constant.ARRAY_ACTIVITY_TYPE));
+        clearTable();
     }
     
     /**
@@ -111,6 +132,37 @@ public class CtrReportarSesiones implements ActionListener{
     public void hideFrmReporteSesiones(){
         this.mFrmReporteSesiones.setVisible(false);
     }    
-    
+
+    /**
+     * vaciar la tabla
+     **/
+    private void clearTable(){
+        mSesionTableModel = new DefaultTableModel(null,SESION_TABLE_COLUMN_NAMES);
+        this.mFrmReporteSesiones.tbLog.setModel(mSesionTableModel);
+    }    
+    /**
+     * buscar logs de un usuario filtrando por 
+     * fecha y tipo de actividad realizado (insertar, eliminar, actualizar, etc)
+     */
+    private void searchLogs(){
+        
+        int condCounter=0;
+        String cond="";
+        if(mUser!=null) {
+            cond+=" User_idUser="+mUser.getIdUser();
+            condCounter++;
+        }
+        //cond+="  ";
+
+        mSesionList=Sesion.getSesionList((condCounter==0? null:cond));
+        
+        //setear la vista
+        this.mFrmReporteSesiones.lblEmptyTable.setVisible(mSesionList.isEmpty());
+        if(mSesionTableModel.getRowCount()>0) clearTable();        
+        for(Sesion sesion:mSesionList){
+            mSesionTableModel.addRow(new Object[]{sesion.getIdSesion(),sesion.getIdUser(),sesion.getTimeInitSes(),sesion.getTimesFinishSes(),"inicio de sesión"});
+        }
+        
+    }
     
 }

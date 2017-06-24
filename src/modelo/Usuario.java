@@ -18,10 +18,21 @@ public class Usuario {
     private String usuarioUser;
     private String passUser;
     private Rol rolUser;
+    
+    /**
+     * sesión actual del usuario sobre el sistema
+     */
+    private Sesion mCurrentSesion;
+    
+    /**
+     * solo si el usuario que se ingresado está relacionado con algún 
+     * empleado
+     */        
+    private Empleado mEmpleado;
+    
     /**
      * Singleton que mantiene sesión por un solo usuario a nivel global.
-     */
-    
+     */    
     private static Usuario mCurrentUser;
     
     /**
@@ -92,7 +103,26 @@ public class Usuario {
     public void setRolUser(Rol rolUser) {
         this.rolUser = rolUser;
     }
+
+    public Sesion getCurrentSesion() {
+        return mCurrentSesion;
+    }
+
+    public void setCurrentSesion(Sesion mCurrentSesion) {
+        this.mCurrentSesion = mCurrentSesion;
+        this.mCurrentSesion.setIdUser(idUser);
+        this.mCurrentSesion.setDescripcionSes(usuarioUser+" accesando para trabajo ");
+    }
+
+    public Empleado getEmpleado() {
+        return mEmpleado;
+    }
+
+    public void setEmpleado(Empleado mEmpleado) {
+        this.mEmpleado = mEmpleado;
+    }
    
+    
     
     
     /**
@@ -128,7 +158,7 @@ public class Usuario {
             BasicDao.update(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUse","PassUse","Roles_idRoles"}, new String []{this.usuarioUser,this.passUser,this.rolUser.getIdRoles()}, "idUser="+this.idUser);
         else //crear al usuario con los datos actuales
             BasicDao.insert(Constant.DB_TABLE_USUARIO, new String []{"UsuarioUse","PassUse","Roles_idRoles"}, new String []{this.usuarioUser,this.passUser,this.rolUser.getIdRoles()});
-    }        
+    }
     
     /**
      * obtener toda la lista de usuarios existentes

@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Callback;
 import modelo.DetalleReserva;
 import modelo.Habitacion;
 import vista.frmGenerarReserva;
@@ -292,6 +293,16 @@ public class ctrGenerarReserva implements ActionListener{
                     mCtrBuscarCliente = new ctrBuscarCliente();
                     mCtrBuscarCliente.showFrmBuscarCliente();
                     mCtrBuscarCliente.loadData();
+                    mCtrBuscarCliente.setOnCompletedSearch(new Callback<String>(){
+                        @Override
+                        public void execute(String[] cliente) {
+                            vistaGenerarReserva.txtCodCliente.setText(cliente[0]);
+                            vistaGenerarReserva.txtNomCliente.setText(cliente[1]);
+                            vistaGenerarReserva.txtDocCliente.setText(cliente[2]);
+                        }
+                        
+                    });
+                    
                     activo=true;
                 }else{
                     System.out.println("btnBuscarCliente");

@@ -42,7 +42,8 @@ public class FrmBuscarEmpleado extends StandardForm {
         tbEmployee = new javax.swing.JTable();
         btnAccept = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Buscar Empleado");
+        setResizable(false);
 
         jPanel1.setBackground(java.awt.Color.white);
 

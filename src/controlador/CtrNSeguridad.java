@@ -19,6 +19,7 @@ public class CtrNSeguridad {
     private CtrMantenerUsuario mCtrMantenerUsuario;    
     private CtrMantenerRol mCtrMantenerRol;
     private CtrReportarSesiones mCtrReportarSesiones;
+    private CtrMantenerEmpleado mCtrMantenerEmpleado;//verificar
     
     private Callback mInvokeCallback;
     //constructor    
@@ -29,6 +30,8 @@ public class CtrNSeguridad {
         mCtrMantenerUsuario=new CtrMantenerUsuario();        
         mCtrMantenerRol=new CtrMantenerRol();
         mCtrReportarSesiones=new CtrReportarSesiones();
+        mCtrMantenerEmpleado=new CtrMantenerEmpleado();
+        mCtrMantenerEmpleado=new CtrMantenerEmpleado();
     }
     
     public CtrNSeguridad(CtrLogin ctrLogin) {
@@ -119,6 +122,13 @@ public class CtrNSeguridad {
     public void showFrmReportarSesiones(){
       mCtrReportarSesiones.showFrmReporteSesiones();
     }
+
+    /**
+     * mostrar el fomrulario mantener empleado
+     */            
+    public void showFrmMantenerEmpleado(){
+        mCtrMantenerEmpleado.showFrmMantenerEmpleado();
+    }
     
     
     /**
@@ -127,6 +137,8 @@ public class CtrNSeguridad {
     public void loadData(){
         mCtrMantenerUsuario.loadData();
         mCtrMantenerRol.loadData();
+        mCtrReportarSesiones.loadData();
+        mCtrMantenerEmpleado.loadData();
     }
 
     /**

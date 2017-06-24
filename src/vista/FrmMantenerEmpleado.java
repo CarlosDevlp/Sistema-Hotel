@@ -63,6 +63,7 @@ public class FrmMantenerEmpleado extends StandardForm{
         txtEstate = new javax.swing.JTextField();
 
         setTitle("Mantener Empleado");
+        setResizable(false);
 
         jPanel1.setBackground(java.awt.Color.white);
 
@@ -86,7 +87,7 @@ public class FrmMantenerEmpleado extends StandardForm{
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Correo electrónico");
 
-        txtPhone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        txtPhone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtPhone.setName("txtPhone"); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
@@ -188,14 +189,12 @@ public class FrmMantenerEmpleado extends StandardForm{
                                                 .addComponent(jLabel10)
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                         .addGap(34, 34, 34))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(cmbEmployeeType, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(spnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtEstate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cmbEmployeeType, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(spnPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtEstate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,6 +342,7 @@ public class FrmMantenerEmpleado extends StandardForm{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 BasicDao.init();
+                BasicDao.DEBUG=true;
                 FrmMantenerEmpleado frmMantenerEmpleado=new FrmMantenerEmpleado();
                 frmMantenerEmpleado.createController();
                 frmMantenerEmpleado.setVisible(true);

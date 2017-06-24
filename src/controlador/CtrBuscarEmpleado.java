@@ -106,8 +106,7 @@ public class CtrBuscarEmpleado implements ActionListener{
     /**
      * Buscar usuarios por los parámetros de búsqueda
      */    
-    public void searchEmployee(){
-        BasicDao.DEBUG=true;
+    public void searchEmployee(){        
         
         String value=this.mFrmBuscarEmpleado.txtValue.getText();
         int index=this.mFrmBuscarEmpleado.cmbSearchParameters.getSelectedIndex();

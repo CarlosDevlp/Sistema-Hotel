@@ -5,13 +5,16 @@
  */
 package vista;
 
+import controlador.CtrReportarSesiones;
+import dao.BasicDao;
+
 /**
  *
- * @author JUAN
+ * @author Carlos Chavez Laguna
  */
-public class FrmReporteSesiones extends javax.swing.JFrame {
-
-    /**
+public class FrmReporteSesiones extends StandardForm {
+    CtrReportarSesiones mCtrReportarSesiones;
+    /** 
      * Creates new form FrmReporteSesiones
      */
     public FrmReporteSesiones() {
@@ -45,6 +48,14 @@ public class FrmReporteSesiones extends javax.swing.JFrame {
 
         setTitle("Reporte de sesiones");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(java.awt.Color.white);
 
@@ -91,6 +102,7 @@ public class FrmReporteSesiones extends javax.swing.JFrame {
             }
         });
 
+        txtName.setEnabled(false);
         txtName.setName("txtName"); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
@@ -102,7 +114,7 @@ public class FrmReporteSesiones extends javax.swing.JFrame {
         jLabel1.setText("Reporte de sesiones");
 
         btnFilter.setText("Filtrar");
-        btnFilter.setName("btnSearchUser"); // NOI18N
+        btnFilter.setName("btnFilter"); // NOI18N
         btnFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFilterActionPerformed(evt);
@@ -220,6 +232,14 @@ public class FrmReporteSesiones extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbActivityActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        System.out.println("cerrando");
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        System.out.println("cerrado!");
+    }//GEN-LAST:event_formWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -250,7 +270,11 @@ public class FrmReporteSesiones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmReporteSesiones().setVisible(true);
+                BasicDao.init();
+                FrmReporteSesiones frmReporteSesiones=new FrmReporteSesiones();
+                frmReporteSesiones.createController();
+                frmReporteSesiones.setVisible(true);
+                
             }
         });
     }
@@ -272,4 +296,15 @@ public class FrmReporteSesiones extends javax.swing.JFrame {
     public javax.swing.JTable tbLog;
     public javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
+    
+    @Override
+    public void createController(){
+        mCtrReportarSesiones=new CtrReportarSesiones(this);
+        mCtrReportarSesiones.loadData();    
+    }
+    
+    @Override
+    public Object getViewController() {
+        return mCtrReportarSesiones;
+    }
 }

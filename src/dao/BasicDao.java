@@ -409,7 +409,7 @@ abstract public class BasicDao {
                 paramsSeq+=")";
             }
             
-            //System.out.println("CALL "+name+paramsSeq);
+            if(DEBUG) System.out.println("CALL "+name+paramsSeq);
             
             //ejecución  del código sql
             r=BasicDao.DB.query("CALL "+name+paramsSeq,"PROCEDURE");

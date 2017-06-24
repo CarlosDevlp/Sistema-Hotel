@@ -46,6 +46,15 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="smMantenerEmpleado">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Mantener Empleado"/>
+                    <Property name="name" type="java.lang.String" value="pMantenerEmpleado" noResource="true"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
+                </MenuItem>
               </SubComponents>
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="MnVerPerfil">

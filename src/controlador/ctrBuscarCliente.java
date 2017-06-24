@@ -82,12 +82,6 @@ public class ctrBuscarCliente implements ActionListener{
             String doc=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 2);
             String dir=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 3);
             String tel=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 4);
-
-            if(vistaGenerarReserva!=null){
-            vistaGenerarReserva.txtCodCliente.setText(cod);
-            vistaGenerarReserva.txtNomCliente.setText(nom);
-            vistaGenerarReserva.txtDocCliente.setText(doc);
-            }
             
             onCompletedSearch.execute(new String[]{cod,nom,doc,dir,tel});
             

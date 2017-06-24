@@ -48,7 +48,7 @@ public abstract class Constant {
     public final static String DB_TABLE_TIPO_EMPLEADO="TipoEmpleado";
     public final static String DB_TABLE_PERSONA="Persona";
     public final static String DB_TABLE_RAZON_SOCIAL="RazonSocial";
-    
+    public final static String DB_TABLE_SESION="Sesiones";
     //nombre de los formularios a nivel de diseño
     public final static String FORM_BUSCAR_ROL="frm_Buscar rol";
     public final static String FORM_BUSCAR_USUARIO="frm_Buscar usuario";
@@ -85,11 +85,13 @@ public abstract class Constant {
                                     {"idUser","UsuarioUse","NombreRol"}, //column names
                                     {"ID","Nombre de usuario","Nombre de rol"} //alias
                                 };
+    public final static String []ARRAY_ACTIVITY_TYPE={"Todos","Insertar","Actualizar","Eliminar"};
     //empleados
     public final static String [][]ARRAY_EMPLOYEE_COLUMNS_AND_ALIAS={
                                     {"FullNamePer","RucDNIRSo","EmailPer"}, //column names
                                     {"Nombre y/o apellido","Dni/Ruc","Correo electrónico"} //alias
                                     
                                 };
+    
     
 }

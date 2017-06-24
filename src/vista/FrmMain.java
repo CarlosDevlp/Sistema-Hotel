@@ -69,6 +69,7 @@ public class FrmMain extends StandardForm {
         SmnMantenerUsuario = new javax.swing.JMenuItem();
         smMantenerRoles = new javax.swing.JMenuItem();
         SmnReporteSesiones = new javax.swing.JMenuItem();
+        smMantenerEmpleado = new javax.swing.JMenuItem();
         MnVerPerfil = new javax.swing.JMenuItem();
         MnSalir = new javax.swing.JMenuItem();
         MnFacturacion = new javax.swing.JMenu();
@@ -123,6 +124,10 @@ public class FrmMain extends StandardForm {
         SmnReporteSesiones.setText("Reporte Sesiones");
         SmnReporteSesiones.setName("preportesesiones"); // NOI18N
         MnAdministrador.add(SmnReporteSesiones);
+
+        smMantenerEmpleado.setText("Mantener Empleado");
+        smMantenerEmpleado.setName("pMantenerEmpleado"); // NOI18N
+        MnAdministrador.add(smMantenerEmpleado);
 
         jMenu1.add(MnAdministrador);
 
@@ -273,6 +278,7 @@ public class FrmMain extends StandardForm {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JMenuItem smBuscarCliente;
+    public javax.swing.JMenuItem smMantenerEmpleado;
     public javax.swing.JMenuItem smMantenerRoles;
     public javax.swing.JMenuItem smRegistrarAlojamiento;
     public javax.swing.JMenuItem smRegistrarCobro;

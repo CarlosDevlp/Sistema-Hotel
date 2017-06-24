@@ -8,9 +8,12 @@ package controlador;
 import dao.BasicDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JComponent;
 import modelo.Callback;
 import modelo.Rol;
+import modelo.Sesion;
 import modelo.Usuario;
 import vista.FrmMain;
 
@@ -18,7 +21,7 @@ import vista.FrmMain;
  * Controlador principal para el formulario principal
  * @author Carlos chavez laguna
  */
-public class CtrMain implements ActionListener{
+public class CtrMain implements ActionListener, WindowListener{
 
     private FrmMain mFrmMain;
     private Usuario mUsuario;      
@@ -41,6 +44,7 @@ public class CtrMain implements ActionListener{
         mFrmMain.smMantenerRoles.addActionListener(this);
         mFrmMain.MnVerPerfil.addActionListener(this);
         mFrmMain.SmnReporteSesiones.addActionListener(this);
+        mFrmMain.smMantenerEmpleado.addActionListener(this);
         mFrmMain.MnGenerarReserva.addActionListener(this);        
         mFrmMain.MnSalir.addActionListener(this);                
         mFrmMain.smServicioExtra.addActionListener(this);
@@ -59,6 +63,9 @@ public class CtrMain implements ActionListener{
             }        
         };
 
+        //eventos de ventana
+        mFrmMain.addWindowListener(this);
+        
     }
     
     /**
@@ -88,6 +95,9 @@ public class CtrMain implements ActionListener{
             case "preportesesiones":
                 this.mCtrNSeguridad.showFrmReportarSesiones();
                 break;
+            case "pMantenerEmpleado":
+                this.mCtrNSeguridad.showFrmMantenerEmpleado();
+                break;
             //RESERVA
             case "pGenerarReserva":
                 this.mCtrNReserva.showFrmGenerarReserva();                
@@ -111,10 +121,58 @@ public class CtrMain implements ActionListener{
                 break;
             //OTROS
             case "exit":
+                Usuario.getInstance()
+                        .getCurrentSesion()
+                        .finishSesion();
+                System.out.println(LOG_TAG+": ---------------cerrando sesión---------------");
                 System.exit(0);                
                 break;
         }
                 
+    }
+    
+    @Override
+    public void windowOpened(WindowEvent e) {
+             
+    }
+
+    /**
+     * Evento que se ejecuta cuando la ventana
+     * se está cerrando.
+     * 
+     * @param e objeto evento
+     */
+    @Override
+    public void windowClosing(WindowEvent e) {
+        Usuario.getInstance()
+                        .getCurrentSesion()
+                        .finishSesion();
+        System.out.println(LOG_TAG+": ---------------cerrando sesión---------------");
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        
     }
     
     //método importante
@@ -136,13 +194,25 @@ public class CtrMain implements ActionListener{
                 
         
         mCtrNSeguridad.loadData();
-        //cuando el usuario se logea, esto debe pasar
+        //cuando el usuario se logea, se crea una nueva sesión
+        //del usuario en el sistema
         mCtrNSeguridad.setOnUserLogged(new Callback<String>(){
             @Override
             public void execute(String[] args) {                
-                //habilitar el formulario principal
+                //habilitar el formulario principal                
+                
+                
+                //crear nueva sesión y asignarle al usuario correspondiente
+                Usuario currentUser =Usuario.getInstance();
+                Sesion currentSesion=new Sesion();
+                currentUser.setCurrentSesion(currentSesion);
+                currentSesion.startSesion();
+                currentSesion.setIdSesion(Sesion.getLastSesionOfUser(currentUser.getIdUser()).getIdSesion());
+                System.out.println(LOG_TAG+": ---------------iniciando sesión---------------");
+                
+                
                 enableFrmMain();
-                enableMenus();                
+                enableMenus();
             }
         });
         
@@ -274,5 +344,7 @@ public class CtrMain implements ActionListener{
     private void enableFrmMain(){
         mFrmMain.setEnabled(true);
     }
+
+
 }
 
