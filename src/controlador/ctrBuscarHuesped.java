@@ -20,6 +20,7 @@ public class ctrBuscarHuesped implements ActionListener{
     private ArrayList<Huesped> mHuespedList;
     private DefaultTableModel mHuespedTableModel;
     private final String []USER_TABLE_COLUMN_NAMES={"Codigo","Nombres","DNI"};
+    private final int []anchos={100, 150, 135};
     
     public ctrBuscarHuesped(){
         this(new frmBuscarHuesped());
@@ -49,12 +50,17 @@ public class ctrBuscarHuesped implements ActionListener{
     }
     
     public void buscarHuespedDni(){
-        clearTable();
-        mHuespedList= Huesped.getHuespedDni((String) vistaBuscarHuesped.txtDni.getText());
-        
-        for(Huesped huesped:mHuespedList)        
-            mHuespedTableModel.addRow(new String[]{huesped.getIdHuesped(),huesped.getNombre(),huesped.getDni()});        
-        this.vistaBuscarHuesped.tblHuesped.setModel(mHuespedTableModel);
+        String dni=vistaBuscarHuesped.txtDni.getText();
+        if(dni.length()>0){
+            clearTable();
+            mHuespedList= Huesped.getHuespedDni((String) vistaBuscarHuesped.txtDni.getText());
+
+            for(Huesped huesped:mHuespedList)        
+                mHuespedTableModel.addRow(new String[]{huesped.getIdHuesped(),huesped.getNombre(),huesped.getDni()});        
+            this.vistaBuscarHuesped.tblHuesped.setModel(mHuespedTableModel);
+        }else{
+            JOptionPane.showMessageDialog(vistaBuscarHuesped, "Error: Ingrese DNI");
+        }
     }
     
     public void transferirDatos(){

@@ -65,12 +65,17 @@ public class ctrBuscarCliente implements ActionListener{
     
     
     public void buscarClienteDni(){
-        clearTable();
-        mClienteList= Persona.getClienteDni((String)vistaBuscarCliente.txtDocumento.getText());
-        
-        for(Persona cliente:mClienteList)        
-            mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getRucDNI(),cliente.getDireccion(),cliente.getTelefono()});        
-        this.vistaBuscarCliente.tblCliente.setModel(mClienteTableModel); 
+        String doc=vistaBuscarCliente.txtDocumento.getText();
+        if(doc.length()>0){
+            clearTable();
+            mClienteList= Persona.getClienteDni((String)vistaBuscarCliente.txtDocumento.getText());
+
+            for(Persona cliente:mClienteList)        
+                mClienteTableModel.addRow(new String[]{cliente.getIdPersona(),cliente.getNombre(),cliente.getRucDNI(),cliente.getDireccion(),cliente.getTelefono()});        
+            this.vistaBuscarCliente.tblCliente.setModel(mClienteTableModel); 
+        }else{
+            JOptionPane.showMessageDialog(vistaBuscarCliente, "Error: Ingrese DNI");
+        }
     }
     
     public void transferirDatos(){
@@ -82,9 +87,12 @@ public class ctrBuscarCliente implements ActionListener{
             String doc=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 2);
             String dir=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 3);
             String tel=(String)vistaBuscarCliente.tblCliente.getValueAt(fila, 4);
-            
+
+            //llamo la interfaz que ejecutará el código del formulario que llamo a este
+            //caso de uso
             onCompletedSearch.execute(new String[]{cod,nom,doc,dir,tel});
             
+
             hideFrmBuscarCliente();
             
         }else{
