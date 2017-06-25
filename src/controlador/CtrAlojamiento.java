@@ -29,6 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import modelo.Empleado;
 import modelo.Usuario;
 import vista.FrmReporteAlojamiento;
 
@@ -40,15 +41,20 @@ public class CtrAlojamiento {
 
     public void Registrar_alojamiento() {
 
+        Empleado empleadoActual=Usuario.getInstance().getEmpleado();
+     
+        String idEmpleado= empleadoActual.getIdPersona();
+ 
+        String CodEmpleado = Usuario.getInstance().getCurrentSesion().getIdSesion();
+     
         SimpleDateFormat Date_Format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
        
-        BasicDao.call("InsertarAlojamiento", new String[]{frmAlojamiento.txtidAlojamiento.getText(), "'"+Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate())+"'",
-                    "'"+Date_Format.format(frmAlojamiento.txtfechaSalida.getDate())+"'", frmAlojamiento.txtidReserva.getText(), "1"});
+        BasicDao.call("InsertarAlojamientoLog", new String[]{frmAlojamiento.txtidAlojamiento.getText(), "'"+Date_Format.format(frmAlojamiento.txtFechaLLegada.getDate())+"'",
+                    "'"+Date_Format.format(frmAlojamiento.txtfechaSalida.getDate())+"'", frmAlojamiento.txtidReserva.getText(),idEmpleado,"'insert'","'Alojamiento'",CodEmpleado});
         
-         BasicDao.call("ActualizarHabitacion", new String[]{frmAlojamiento.txtidReserva.getText()});
-        
-        //BasicDao.update("Reserva", new String[]{"EstadoRes"}, new String[]{"Alojado"}, "idreserva=" + frmAlojamiento.txtidReserva.getText());
-        
+         BasicDao.call("ActualizarHabitacion", new String[]{frmAlojamiento.txtidReserva.getText(),"'insert'","'Alojamiento'",CodEmpleado});
+         
+       
 
         JOptionPane.showMessageDialog(null, "El registro se realizo satisfactoriamente");
 
