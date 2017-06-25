@@ -138,7 +138,7 @@ public class CtrBuscarRol implements ActionListener{
         
                 
         for(Rol rol:mFoundRolList)
-            mRolTableModel.addRow(new String[]{rol.getIdRoles(),rol.getNombreRol(),""});
+            mRolTableModel.addRow(new String[]{rol.getIdRoles(),rol.getNombreRol(),rol.getPestanasHabilitadasString()});
             //mRolTableModel.addRow(new String[]{rol.getIdRoles(),rol.getNombreRol(),String.join(",", rol.getPestanasHabilitadas())});
         
     }

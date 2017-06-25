@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JToggleButton;
+import modelo.Empleado;
 import modelo.Usuario;
 import vista.FrmVerPerfil;
 
@@ -22,6 +23,7 @@ import vista.FrmVerPerfil;
 public class CtrVerPerfil implements ActionListener{
     private FrmVerPerfil mFrmVerPerfil;
     private Usuario mUsuario;
+    private Empleado mEmpleado;
     //constructores    
     public CtrVerPerfil() {
         //creación de vista implícita
@@ -120,19 +122,42 @@ public class CtrVerPerfil implements ActionListener{
     public void loadData(){
         setIfEnableAll(false);
         clearForm();                     
-        //datos de usuario        
+        //datos de usuario actual
         mUsuario=Usuario.getInstance();
         
-            //nombre de usuario        
-            this.mFrmVerPerfil.txtUsername.setText(mUsuario.getUsuario());
-            //rol de usuario
-            this.mFrmVerPerfil.lblRolUsuario.setText(mUsuario.getRolUser().getNombreRol());
+        //USUARIO
+        //nombre de usuario        
+        this.mFrmVerPerfil.txtUsername.setText(mUsuario.getUsuario());
+        //rol de usuario
+        this.mFrmVerPerfil.lblRolUsuario.setText(mUsuario.getRolUser().getNombreRol());
+        
+        //EMPLEADO
+        mEmpleado=mUsuario.getEmpleado();
+        if(mEmpleado!=null){
+            //persona
+            this.mFrmVerPerfil.txtName.setText(mEmpleado.getNombre());
+            this.mFrmVerPerfil.txtDniRuc.setText(mEmpleado.getRucDNI());
+            this.mFrmVerPerfil.txtPhone.setText(mEmpleado.getTelefono());
+            this.mFrmVerPerfil.spnEdad.setValue(mEmpleado.getEdad());
+            this.mFrmVerPerfil.txtEmail.setText(mEmpleado.getCorreo());
+            this.mFrmVerPerfil.txtAddress.setText(mEmpleado.getDireccion());
+            //empleado
+            this.mFrmVerPerfil.lblTipoEmpleado.setText(mEmpleado.getTipoEmpleado().getDescripcion());
+            this.mFrmVerPerfil.txtHorarioLaboral.setText(mEmpleado.getHorarioLaboralEmp());
+            this.mFrmVerPerfil.lblSueldo.setText("S/."+mEmpleado.getSueldo());
+        }
+        
     }
     
     /**
      * eliminar todos los datos de la caja de texto
      */
     private void clearForm(){        
+        //....
+        this.mFrmVerPerfil.tbtnEdit.setEnabled(false);
+        this.mFrmVerPerfil.btnCancel.setEnabled(false);
+        this.mFrmVerPerfil.btnSave.setEnabled(false);
+        
         //datos personales        
         this.mFrmVerPerfil.txtName.setText("");
         this.mFrmVerPerfil.txtDniRuc.setText("");

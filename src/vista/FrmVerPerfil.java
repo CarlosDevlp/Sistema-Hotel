@@ -51,7 +51,7 @@ public class FrmVerPerfil extends StandardForm {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        lblCajero = new javax.swing.JLabel();
+        lblTipoEmpleado = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtHorarioLaboral = new javax.swing.JTextArea();
@@ -60,6 +60,8 @@ public class FrmVerPerfil extends StandardForm {
         btnCancel = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         lblRolUsuario = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lblSueldo = new javax.swing.JLabel();
 
         setTitle("Ver Perfil");
         setResizable(false);
@@ -132,9 +134,9 @@ public class FrmVerPerfil extends StandardForm {
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
         jLabel12.setText("Tipo de empleado");
 
-        lblCajero.setFont(new java.awt.Font("Georgia", 2, 12)); // NOI18N
-        lblCajero.setForeground(new java.awt.Color(51, 51, 51));
-        lblCajero.setText("Cajero");
+        lblTipoEmpleado.setFont(new java.awt.Font("Georgia", 2, 12)); // NOI18N
+        lblTipoEmpleado.setForeground(new java.awt.Color(51, 51, 51));
+        lblTipoEmpleado.setText("Externo");
 
         jLabel14.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(51, 51, 51));
@@ -165,6 +167,14 @@ public class FrmVerPerfil extends StandardForm {
         lblRolUsuario.setForeground(new java.awt.Color(51, 51, 51));
         lblRolUsuario.setText("Admin");
 
+        jLabel13.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel13.setText("Sueldo");
+
+        lblSueldo.setFont(new java.awt.Font("Georgia", 2, 12)); // NOI18N
+        lblSueldo.setForeground(new java.awt.Color(51, 51, 51));
+        lblSueldo.setText("S/. 00.0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,7 +190,9 @@ public class FrmVerPerfil extends StandardForm {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
-                                    .addComponent(lblCajero))
+                                    .addComponent(lblTipoEmpleado)
+                                    .addComponent(jLabel13)
+                                    .addComponent(lblSueldo))
                                 .addGap(45, 45, 45)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
@@ -279,10 +291,6 @@ public class FrmVerPerfil extends StandardForm {
                     .addComponent(lblRolUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCajero))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -291,8 +299,16 @@ public class FrmVerPerfil extends StandardForm {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel14)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(43, 43, 43))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTipoEmpleado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSueldo)))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -357,6 +373,7 @@ public class FrmVerPerfil extends StandardForm {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
@@ -369,8 +386,9 @@ public class FrmVerPerfil extends StandardForm {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JLabel lblCajero;
     public javax.swing.JLabel lblRolUsuario;
+    public javax.swing.JLabel lblSueldo;
+    public javax.swing.JLabel lblTipoEmpleado;
     public javax.swing.JSpinner spnEdad;
     public javax.swing.JToggleButton tbtnEdit;
     public javax.swing.JTextField txtAddress;

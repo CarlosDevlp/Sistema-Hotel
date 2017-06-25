@@ -20,6 +20,7 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.xml.bind.DatatypeConverter;
 import modelo.Callback;
+import modelo.Empleado;
 import modelo.Rol;
 import modelo.Usuario;
 import vista.FrmMantenerUsuario;
@@ -34,6 +35,7 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
     private ArrayList<Rol> mRolList;
     private ArrayList<String> mUserNameList;        
     private Usuario mUser;
+    private Empleado mEmpleado;//empleado a asignar el usuario (opcional)
     
     
     //ICONS
@@ -50,6 +52,7 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
         this.mFrmMantenerUsuario = frmMantenerUsuario;
         this.mFrmMantenerUsuario.btnSearchUser.addActionListener(this);
         this.mFrmMantenerUsuario.btnSave.addActionListener(this);
+        this.mFrmMantenerUsuario.btnSearchEmployee.addActionListener(this);
         this.mFrmMantenerUsuario.btnUpdate.addActionListener(this);
         this.mFrmMantenerUsuario.btnDelete.addActionListener(this);
         this.mFrmMantenerUsuario.btnClean.addActionListener(this);
@@ -77,9 +80,14 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
         //System.out.println(obj.getName());
         
         switch(obj.getName()){
+            
+            //botón buscar al empleado
+            case "btnSearchEmployee":
+                CtrIncluido.getInstance().showForm(Constant.FORM_BUSCAR_EMPLEADO, OnCompleteSearchEmployee());
+                break;
             //botón buscar al usuario
             case "btnSearchUser":
-                CtrIncluido.getInstance().showForm(Constant.FORM_BUSCAR_USUARIO, OnCompleteSearch());
+                CtrIncluido.getInstance().showForm(Constant.FORM_BUSCAR_USUARIO, OnCompleteSearchUser());
                 break;
             //botón guardar al usuario y
             //botón actualizar al usuario
@@ -133,11 +141,31 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
     //____________________________________________________________________________________________    
             
     //otros métodos
+    
     /**
      * 
-     * cuando se complete la búsqueda
+     * cuando se complete la búsqueda de un empleado
+     * en el caso de uso buscar empleado
      */
-    private Callback OnCompleteSearch(){
+    private Callback OnCompleteSearchEmployee(){
+        return new Callback(){
+            @Override
+            public void execute(Object[] args) {
+                if(args!=null) {
+                   mEmpleado=(Empleado) args[0];
+                   mFrmMantenerUsuario.txtName.setText(mEmpleado.getFullNamePer());
+                   
+                }
+            }
+            
+        };
+    }
+    /**
+     * 
+     * cuando se complete la búsqueda de un usuario
+     * en el caso de uso buscar usuario
+     */
+    private Callback OnCompleteSearchUser(){
         return //callback que se ejecutará cuando se logre completar la búsqueda
             new Callback(){
                        @Override
@@ -151,6 +179,7 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
                                mFrmMantenerUsuario.txtUsername.setText(mUser.getUsuario());                                                              
                                mFrmMantenerUsuario.txtPassword.setText("");
                                mFrmMantenerUsuario.txtPasswordRepeat.setText("");
+                               mFrmMantenerUsuario.txtName.setText("");
                                
                                //setear en el combo el rol escogido
                                Rol userRol=mUser.getRolUser();
@@ -159,7 +188,12 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
                                         mFrmMantenerUsuario.cmbRol.setSelectedIndex(i);
                                         break;
                                    }
-                                        
+                               
+                               //obtener el empleado que se le asigno este usuario (si existe)
+                               ArrayList<Empleado> empleadoList=Empleado.getEmpleadoList("User_idUser="+mUser.getIdUser());
+                               if(!empleadoList.isEmpty()){
+                                   mFrmMantenerUsuario.txtName.setText(empleadoList.get(0).getFullNamePer());                                   
+                               }
                           }
                        }
            };
@@ -207,10 +241,20 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
         mUser.setRolUser(mRolList.get(this.mFrmMantenerUsuario.cmbRol.getSelectedIndex()));
         mUser.save();
         
+        //si tengo un empleado, eso quiere decir que quiero asignarle el usuario que estoy
+        //editando
+        if(mEmpleado!=null){
+            mUser.updateId();
+            mEmpleado.setUserId(mUser.getIdUser());
+            mEmpleado.assignUser();
+        }
+        
         this.mFrmMantenerUsuario.messageBox(Constant.APP_NAME, (isUpdate?"Se ha actualizado el usuario":"Se ha agregado un nuevo usuario al sistema") );
         clear();
     }
-    
+    /**
+     * remover usuario de la lista mantener usuario
+     */
     public void removeUser(){
         //preguntar al usuario si realmente eliminar o no al objeto usuario
         this.mFrmMantenerUsuario.messageBox(Constant.APP_NAME, "<html>"
@@ -281,13 +325,15 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
      */
     private void clear(){
         mUser=null;
+        mEmpleado=null;
         mFrmMantenerUsuario.btnSave.setEnabled(true);
         mFrmMantenerUsuario.btnUpdate.setEnabled(false);
         mFrmMantenerUsuario.btnDelete.setEnabled(false);
+        mFrmMantenerUsuario.txtName.setText("");
         mFrmMantenerUsuario.txtUsername.setText("");
         mFrmMantenerUsuario.txtPassword.setText("");
         mFrmMantenerUsuario.txtPasswordRepeat.setText("");
-        mFrmMantenerUsuario.cmbRol.setSelectedIndex(0);                
+        mFrmMantenerUsuario.cmbRol.setSelectedIndex(0);
     }
     
     /**

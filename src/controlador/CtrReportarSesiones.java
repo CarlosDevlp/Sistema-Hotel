@@ -8,7 +8,10 @@ package controlador;
 import assets.values.Constant;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.table.DefaultTableModel;
@@ -105,7 +108,7 @@ public class CtrReportarSesiones implements ActionListener{
      */
     public void loadData(){        
         
-        this.mFrmReporteSesiones.cmbActivity.setModel(new DefaultComboBoxModel(Constant.ARRAY_ACTIVITY_TYPE));
+        this.mFrmReporteSesiones.cmbActivity.setModel(new DefaultComboBoxModel(Constant.ARRAY_ACTIVITY_TYPE_AND_ALIAS[1]));
         clearTable();
     }
     
@@ -147,22 +150,76 @@ public class CtrReportarSesiones implements ActionListener{
     private void searchLogs(){
         
         int condCounter=0;
-        String cond="";
+        String condSesion="";
+        
         if(mUser!=null) {
-            cond+=" User_idUser="+mUser.getIdUser();
+            condSesion+=" User_idUser="+mUser.getIdUser();
             condCounter++;
         }
-        //cond+="  ";
-
-        mSesionList=Sesion.getSesionList((condCounter==0? null:cond));
-        
-        //setear la vista
-        this.mFrmReporteSesiones.lblEmptyTable.setVisible(mSesionList.isEmpty());
-        if(mSesionTableModel.getRowCount()>0) clearTable();        
-        for(Sesion sesion:mSesionList){
-            mSesionTableModel.addRow(new Object[]{sesion.getIdSesion(),sesion.getIdUser(),sesion.getTimeInitSes(),sesion.getTimesFinishSes(),"inicio de sesión"});
+                
+        Date fromDate=this.mFrmReporteSesiones.dtpSessionDateFrom.getDate();
+        if(fromDate!=null){                       
+            fromDate.setHours(0);
+            fromDate.setMinutes(0);
+            fromDate.setSeconds(1);
+            condSesion+=(condCounter>0?" AND ":" ")+" TimeInitSes > '"+formatDate(fromDate)+"'";
+            condCounter++;
         }
         
+        
+        Date toDate=this.mFrmReporteSesiones.dtpSessionDateTo.getDate();
+        if(toDate!=null){
+            toDate.setHours(23);
+            toDate.setMinutes(59);
+            toDate.setSeconds(59);
+            condSesion+=(condCounter>0?" AND ":" ")+" TimeInitSes < '"+formatDate(toDate)+"'";
+            condCounter++;
+        }
+        
+                        
+
+        String condLog;
+        condLog=Constant.ARRAY_ACTIVITY_TYPE_AND_ALIAS[0][this.mFrmReporteSesiones.cmbActivity.getSelectedIndex()];
+        
+        mSesionList=Sesion.getSesionList((condCounter==0? null:condSesion),(condLog.equals("all")? "":" AND DescripcionTHU='"+condLog+"'") );
+        
+        //--------------------------------------------
+        
+        //setear la vista
+        
+        if(mSesionTableModel.getRowCount()>0) clearTable();
+        
+        ArrayList<Sesion.Log> logList;
+        for(Sesion sesion:mSesionList){
+            
+            //mostrar solo inicio de sesión 
+            if(condLog.equals("all"))
+                mSesionTableModel.addRow(new Object[]{sesion.getIdSesion(),sesion.getUserName(),sesion.getTimeInitSes(),sesion.getTimesFinishSes(),"inicio de sesión"});
+            
+            //mostrar los logs de la sesión
+            logList=sesion.getLogList();
+            if(logList!=null)            
+                for(Sesion.Log log:logList)
+                    mSesionTableModel.addRow(new Object[]{sesion.getIdSesion(),sesion.getUserName(),sesion.getTimeInitSes(),sesion.getTimesFinishSes(),log.getTipoActividad()+" - "+log.getTablaLUs()});
+        }
+        
+        
+        this.mFrmReporteSesiones.lblEmptyTable.setVisible(mSesionList.isEmpty());
+        
     }
+    
+    /**
+     * 
+     * convertir el la fecha a un formato reconocido por el 
+     * mysql
+     * 
+     * @param date fecha de clase date
+     * 
+     * @return string formateado listo para ser enviado a la bd.
+     */
+    private String formatDate(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(date);
+    } 
     
 }

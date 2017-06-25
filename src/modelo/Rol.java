@@ -82,6 +82,16 @@ public class Rol {
         return pestanasHabilitadas;
     }
 
+    public String getPestanasHabilitadasString() {
+        String pestanasString="";        
+        
+        for(int i=0;i<this.pestanasHabilitadas.length;i++){
+            if(i>0)pestanasString+=",";
+            pestanasString+=this.pestanasHabilitadas[i];
+        }
+        return pestanasString;
+    }
+    
     public void setPestanasHabilitadas(String[] pestanasHabilitadas) {
         this.pestanasHabilitadas = pestanasHabilitadas;
     }
@@ -89,6 +99,7 @@ public class Rol {
     public void setPestanasHabilitadas(String strPestanasHabilitadas) {
         this.pestanasHabilitadas = strPestanasHabilitadas.split(DELIMETER);
     }
+    
     
 
     //otros métodos    
@@ -135,19 +146,25 @@ public class Rol {
             pestanasString+=this.pestanasHabilitadas[i];
         }
         
+        Sesion currentSesion= Usuario.getInstance().getCurrentSesion();
+        BasicDao.call("guardarRol", new String[]{currentSesion.getIdSesion(),idRoles,"'"+nombreRol+"'","'"+pestanasString+"'"});
+        /*
         //si el rol existe
         if(BasicDao.rowExists(Constant.DB_TABLE_ROLES, "idRoles="+idRoles)) //actualizar sus datos
             BasicDao.update(Constant.DB_TABLE_ROLES, new String []{"NombreRol","PestanasRol"}, new String []{this.nombreRol,pestanasString}, "idRoles="+this.idRoles);
         else //crear al rol con los datos actuales
             BasicDao.insert(Constant.DB_TABLE_ROLES, new String []{"NombreRol","PestanasRol"}, new String []{this.nombreRol,pestanasString});
+        */
     }
     
     /**
      * 
      * remover rol de la base de datos
      */
-    public void remove(){
-        BasicDao.delete(Constant.DB_TABLE_ROLES, "idRoles="+idRoles);
+    public void remove(){       
+        Sesion currentSesion= Usuario.getInstance().getCurrentSesion();
+        BasicDao.call("removerRol", new String[]{currentSesion.getIdSesion(),idRoles});
+        /*BasicDao.delete(Constant.DB_TABLE_ROLES, "idRoles="+idRoles);*/
     }
     
 }

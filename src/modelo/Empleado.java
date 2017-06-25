@@ -21,7 +21,9 @@ public class Empleado  extends Persona{
     private Empleado usuario;    
     private TipoEmpleado  tipoEmpleado;
     private String horarioLaboralEmp;
-
+    private String userId;
+    
+            
     private static final String TABLE_EMPLEADO_SUELDO="SueldoEmp",
                                 TABLE_EMPLEADO_ESTADO="EstadoEmp",
                                 TABLE_EMPLEADO_HORARIO="HorarioLaboralEmp";
@@ -93,7 +95,14 @@ public class Empleado  extends Persona{
     public void setEstadoEmp(String estadoEmp) {
         this.estadoEmp = estadoEmp;
     }
-    
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }    
  
     
     
@@ -104,7 +113,12 @@ public class Empleado  extends Persona{
     public void save(){                
         //call guardarEmpleado (0,76935184,'Carlos Chavez Laguna',965124295,'carloscl94r@gmail.com','jr pataz 1344, Los olivos',22,2500,'lun-vie, 9-16hrs');
         //call guardarEmpleado (0,12345678,'hackerman',87654321,'hackerman@someone.com','mountain view, california',22,8,2500,'lun-vie, 9-16hrs','vacaciones');
-        BasicDao.call("guardarEmpleado", new String []{ super.getIdPersona(), //id 
+        
+        Sesion currentSesion= Usuario.getInstance().getCurrentSesion();
+        
+        BasicDao.call("guardarEmpleado", new String []{ 
+                                                        currentSesion.getIdSesion(),
+                                                        super.getIdPersona(), //id 
                                                         super.getRucDNI(),//persona
                                                         "'"+super.getFullNamePer()+"'",//persona
                                                         super.getTelefono(),//persona
@@ -117,8 +131,14 @@ public class Empleado  extends Persona{
                                                         "'"+this.horarioLaboralEmp+"'",//empleado
                                                         "'"+this.estadoEmp+"'",//empleado
                                                     });
-    }        
+    }
     
+    /**
+     * asignar un usuario al empleado
+     */
+    public void assignUser(){
+        BasicDao.update(Constant.DB_TABLE_EMPLEADO, new String[]{"User_idUser"}, new String[]{this.userId}, "Persona_idPersona="+super.getIdPersona());
+    }
     /**
      * obtener toda la lista de empleados existentes
      * en la base de datos con condición
@@ -171,9 +191,12 @@ public class Empleado  extends Persona{
      * remover usuario de la base de datos
      */
     public void remove(){
-        BasicDao.delete(Constant.DB_TABLE_EMPLEADO, "Persona_idPersona="+super.getIdPersona());        
+        Sesion currentSesion= Usuario.getInstance().getCurrentSesion();
+        
+        BasicDao.call("removerEmpleado",new String[]{currentSesion.getIdSesion(),super.getIdPersona(),super.getRucDNI()});
+        /*BasicDao.delete(Constant.DB_TABLE_EMPLEADO, "Persona_idPersona="+super.getIdPersona());        
         BasicDao.delete(Constant.DB_TABLE_PERSONA, "idPersona="+super.getIdPersona());
-        BasicDao.delete(Constant.DB_TABLE_RAZON_SOCIAL, "RucDNIRSo="+super.getRucDNI());
+        BasicDao.delete(Constant.DB_TABLE_RAZON_SOCIAL, "RucDNIRSo="+super.getRucDNI());*/
     }
 
     

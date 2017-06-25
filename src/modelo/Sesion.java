@@ -23,7 +23,8 @@ public class Sesion {
     private String timeInitSes;
     private String timesFinishSes;
     private String idUser;
-    
+    private String mUserName;
+    private ArrayList<Log> mLogList;
     
     //constructores
     public Sesion() {
@@ -91,6 +92,80 @@ public class Sesion {
     public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
+
+    public ArrayList<Log> getLogList() {
+        return mLogList;
+    }
+
+    public void setLogList(ArrayList<Log> logList) {
+        this.mLogList = logList;
+    }
+
+    public String getUserName() {
+        return mUserName;
+    }
+
+    public void setUserName(String mUserName) {
+        this.mUserName = mUserName;
+    }
+        
+    
+    
+    //clase log
+    public static class Log{        
+        private String timekeepLUs;
+        private String tablaLUs;
+        private String tipoActividad;
+        
+        //constructor
+        public Log() {
+        }
+
+        public Log(String timekeepLUs, String tablaLUs, String tipoActividad) {
+            this.timekeepLUs = timekeepLUs;
+            this.tablaLUs = tablaLUs;
+            this.tipoActividad = tipoActividad;
+        }
+
+        public Log(Map<String,String> args) {
+            this.timekeepLUs = args.get("TimekeepLUs");
+            this.tablaLUs = args.get("TablaLUs");
+            this.tipoActividad = args.get("DescripcionTHU");            
+        }
+        
+        
+        //setters and getters
+        public String getTimekeepLUs() {
+            return timekeepLUs;
+        }
+
+        public void setTimekeepLUs(String timekeepLUs) {
+            this.timekeepLUs = timekeepLUs;
+        }
+
+        public String getTablaLUs() {
+            return tablaLUs;
+        }
+
+        public void setTablaLUs(String tablaLUs) {
+            this.tablaLUs = tablaLUs;
+        }
+
+        public String getTipoActividad() {
+            return tipoActividad;
+        }
+
+        public void setTipoActividad(String tipoActividad) {
+            this.tipoActividad = tipoActividad;
+        }
+        
+        //métodos mágicos
+        @Override
+        public String toString(){
+            return this.timekeepLUs+" - "+this.tipoActividad+" a la tabla "+this.tablaLUs;
+        }
+        
+    }
     
     //otros métodos    
     public void startSesion(){     
@@ -104,7 +179,7 @@ public class Sesion {
     }
     
     public String generateCurrentTimeString(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(new Date());
     }
     
@@ -134,10 +209,7 @@ public class Sesion {
      * @param where condición
      * @return retorna una arraylist de usuarios
      */
-    public static ArrayList<Sesion> getSesionList(String where){
-        
-        //ArrayList<Map<String,String>> result=BasicDao.select(Constant.DB_TABLE_USUARIO, new String[]{"*"}, where);
-        //inner join
+    public static ArrayList<Sesion> getSesionList(String where){        
         ArrayList<Map<String,String>> result = BasicDao.select(Constant.DB_TABLE_SESION,new String[] {"*"},where);
         
         ArrayList<Sesion> sesionList=new ArrayList();
@@ -148,6 +220,48 @@ public class Sesion {
         return sesionList;
     }
     
+    
+    /**
+     * obtener toda la lista de usuarios existentes
+     * en la base de datos con condición
+     * 
+     * @param sesionWhere condición para obtener filas de sesiones
+     * @param logWhere condición para obtener filas de logs con respecto a lo anterior
+     * @return retorna una arraylist de usuarios
+     */
+    public static ArrayList<Sesion> getSesionList(String sesionWhere,String logWhere){        
+        ArrayList<Map<String,String>> result = BasicDao.select(new String[]{Constant.DB_TABLE_SESION,Constant.DB_TABLE_USUARIO},new String[] {"*"},new String[]{"User_idUser","idUser"},sesionWhere);
+        
+        ArrayList<Sesion> sesionList=new ArrayList();
+        ArrayList<Log> logList;
+        
+        ArrayList<Map<String,String>> resultLog;
+        Sesion sesion;
+        for(Map<String,String> row:result){             
+            sesion=new Sesion(row);
+            sesion.setUserName(row.get("UsuarioUse"));
+            sesionList.add(sesion);
+            
+            
+            //obtener log y setear a la sesion
+            resultLog=BasicDao.select(new String[]{Constant.DB_TABLE_LOG,Constant.DB_TABLE_TIPO_HISTORIAL},
+                                new String[]{"*"},
+                                new String[]{"TipoHistorialUser_idTipoHistorialUser","idTipoHistorialUser"},
+                                "Sesiones_idSes="+sesion.getIdSesion()+" "+logWhere);
+            
+            //System.out.println("obteniendo logs.... , size:"+resultLog.size());
+            if(!resultLog.isEmpty()){                
+                logList=new ArrayList();
+                for(Map<String,String> rowLog:resultLog)
+                        logList.add(new Log(rowLog));
+                
+                sesion.setLogList(logList);               
+            }
+            
+            
+        }
+        return sesionList;
+    }
     
     
     /**
