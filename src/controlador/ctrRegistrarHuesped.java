@@ -5,7 +5,7 @@
  */
 package controlador;
 
-import static controlador.ctrBuscarHabitacion.activo;
+//import static controlador.ctrBuscarHabitacion.activo;
 import modelo.mdlRegistrarHuesped;
 import vista.frmRegistrarHuesped;
 import vista.FrmMain;

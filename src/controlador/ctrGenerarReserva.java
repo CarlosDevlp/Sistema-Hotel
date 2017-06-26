@@ -47,7 +47,7 @@ public class ctrGenerarReserva {
     //controladores
     private ctrBuscarCliente unctrBuscarCliente;
     private ctrRegistarCliente unctrRegistrarCliente;
-    private ctrBuscarHabitacion unctrBuscarHabitacion;
+//    private ctrBuscarHabitacion unctrBuscarHabitacion;
     private ctrBuscarHuesped unctrBuscarHuesped;
     private ctrRegistrarHuesped unctrRegistarHuesped;
 
@@ -122,7 +122,7 @@ public class ctrGenerarReserva {
             }
         });
         // boton buscar Habitacion
-        vistaGenerarReserva.addBuscarHabitacion(new ActionListener() {
+       /* vistaGenerarReserva.addBuscarHabitacion(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (unctrBuscarHabitacion == null) {
@@ -134,7 +134,7 @@ public class ctrGenerarReserva {
                 vistaBuscarHabitacion.txtFechaLlegada.setText("  " + vistaGenerarReserva.fechaActual2(vistaGenerarReserva.jdcLlegada.getDate()));
                 vistaBuscarHabitacion.txtFechaSalida.setText("  " + vistaGenerarReserva.fechaActual2(vistaGenerarReserva.jdcSalida.getDate()));
             }
-        });
+        });*/
         //boton buscar Huesped
         vistaGenerarReserva.addBuscarHuesped(new ActionListener() {
             @Override

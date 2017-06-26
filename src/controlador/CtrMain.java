@@ -26,6 +26,8 @@ public class CtrMain implements ActionListener{
     private CtrNReserva mCtrNReserva;    
     private CtrNServicio mCtrNServicio;
     private CtrNAlojamiento mCtrNAlojamiento;
+    private CtrlMantenerRDLH mCtrMantenimiento;
+    private CtrGenerarLHPISO mCtrGenerarLHPISO;
     
    
     private final String LOG_TAG="CtrMain",LOG_TAG_ERROR="CtrMain-error";
@@ -44,6 +46,8 @@ public class CtrMain implements ActionListener{
         mFrmMain.smServicioHabitacion.addActionListener(this);
         mFrmMain.smRegistrarAlojamiento.addActionListener(this);
         mFrmMain.smReporteAlojamiento.addActionListener(this);
+        mFrmMain.MantenerRLH.addActionListener(this);
+        mFrmMain.GenerarLLHP.addActionListener(this);
     }
     
     /**
@@ -81,6 +85,13 @@ public class CtrMain implements ActionListener{
             case "pReporteAlojamiento":
                 this.mCtrNAlojamiento.showFrmReporteAlojamiento();
                 break;
+            case "pmantener":
+                this.mCtrMantenimiento.showFrmMantenerRegistro();
+                break;
+                 case "pGenerarL":
+                 this.mCtrGenerarLHPISO.showFrmGenerarlistaLHP();
+                break;
+                
             case "exit":
                 System.exit(0);                
                 break;
@@ -147,6 +158,23 @@ public class CtrMain implements ActionListener{
         return mCtrNAlojamiento;
     }
 
+    public CtrlMantenerRDLH getCtrMatenerRLH() {
+        return mCtrMantenimiento;
+    }
+    
+    public void setCtrlMantenimiento(CtrlMantenerRDLH ctrMantener)
+    {
+        this.mCtrMantenimiento=ctrMantener;
+    }
+     public CtrGenerarLHPISO getCtrGenerarLHPISO() {
+        return mCtrGenerarLHPISO;
+    }
+    
+    public void setCtlGenerarLHPISO(CtrGenerarLHPISO ctrGenerarLHPISO)
+    {
+        this.mCtrGenerarLHPISO=ctrGenerarLHPISO;
+    }
+    
     public void setCtrNAlojamiento(CtrNAlojamiento ctrNAlojamiento) {
         this.mCtrNAlojamiento = ctrNAlojamiento;
     }    
