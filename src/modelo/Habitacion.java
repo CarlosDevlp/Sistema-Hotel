@@ -96,6 +96,6 @@ public class Habitacion {
     }
     
     public static void updateEstadoHabitacion(String codHab,String estado){
-        BasicDao.call("Actualizar_Estado_Habitacion", new String[]{codHab,"'"+estado+"'"});
+        BasicDao.call("Actualizar_Estado_Habitacion", new String[]{codHab,"'"+estado+"'","'Update'","'Habitacion'","(select idSesiones from Sesiones ORDER BY idSesiones DESC LIMIT 1)"});
     }
 }
