@@ -5,17 +5,20 @@
  */
 package vista;
 
-import java.awt.event.ActionListener;
+import controlador.ctrBuscarHuesped;
+import controlador.ctrGenerarReserva;
+import dao.BasicDao;
 
 /**
  *
  * @author Propietario
  */
-public class frmBuscarHuesped extends javax.swing.JFrame {
+public class frmBuscarHuesped extends StandardForm {
 
     /**
      * Creates new form frmBuscarHuesped
      */
+    private ctrBuscarHuesped mCtrBuscarHuesped;
     public frmBuscarHuesped() {
         initComponents();
     }
@@ -39,10 +42,12 @@ public class frmBuscarHuesped extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buscar Huesped");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setName("btnBuscar"); // NOI18N
 
         tblHuesped = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -51,7 +56,6 @@ public class frmBuscarHuesped extends javax.swing.JFrame {
         };
         tblHuesped.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
@@ -68,11 +72,19 @@ public class frmBuscarHuesped extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tblHuesped.setName("tblHuesped"); // NOI18N
         jScrollPane1.setViewportView(tblHuesped);
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
+        btnAceptar.setName("btnAceptar"); // NOI18N
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
+        btnCancelar.setName("btnCancelar"); // NOI18N
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("DNI");
 
@@ -92,8 +104,8 @@ public class frmBuscarHuesped extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
                         .addComponent(btnBuscar)))
                 .addGap(20, 20, 20))
         );
@@ -101,16 +113,13 @@ public class frmBuscarHuesped extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addComponent(btnBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscar)
+                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
@@ -119,6 +128,10 @@ public class frmBuscarHuesped extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,29 +164,44 @@ public class frmBuscarHuesped extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmBuscarHuesped().setVisible(true);
+                final frmBuscarHuesped  mFrmBuscarHuesped= new frmBuscarHuesped();
+                mFrmBuscarHuesped.setVisible(true);
+                mFrmBuscarHuesped.createController();
+                
+                Thread thread=new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        BasicDao.init();                        
+                        mFrmBuscarHuesped.loadControllerData();
+                    }
+                });
+                thread.start();
+                System.out.println("FrmBuscarHuesped");
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCancelar;
+    public static javax.swing.JButton btnAceptar;
+    public static javax.swing.JButton btnBuscar;
+    public static javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable tblHuesped;
+    public static javax.swing.JTable tblHuesped;
     public javax.swing.JTextField txtDni;
     // End of variables declaration//GEN-END:variables
-
-    public void addALbtnCancelar(ActionListener actionListener) {
-        btnCancelar.addActionListener(actionListener);
+    
+    public void loadControllerData(){        
+        mCtrBuscarHuesped.loadData();  
     }
-
-    public void addALbtnBuscar(ActionListener actionListener) {
-        btnBuscar.addActionListener(actionListener);
+    
+    @Override
+    public void createController() {
+        mCtrBuscarHuesped=new ctrBuscarHuesped(this);
     }
-    public void addALbtnAceptar(ActionListener actionListener) {
-        btnAceptar.addActionListener(actionListener);
+    
+    @Override
+    public Object getViewController() {
+        return mCtrBuscarHuesped;
     }
 }

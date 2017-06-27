@@ -56,18 +56,13 @@ public class FrmLogin extends StandardForm {
         jLabel2.setFont(new java.awt.Font("Georgia", 0, 18)); // NOI18N
         jLabel2.setText("Login");
 
-        TxtUsername.setBackground(new java.awt.Color(255, 255, 255));
+        TxtUsername.setText("admin");
         TxtUsername.setName("txtUsername"); // NOI18N
-        TxtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtUsernameKeyPressed(evt);
-            }
-        });
 
         BtnEnter.setText("Entrar");
         BtnEnter.setName("btnEntrar"); // NOI18N
 
-        TxtPassword.setBackground(new java.awt.Color(255, 255, 255));
+        TxtPassword.setText("admin");
         TxtPassword.setName("txtPassword"); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
@@ -151,10 +146,6 @@ public class FrmLogin extends StandardForm {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void TxtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtUsernameKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtUsernameKeyPressed
 
     /**
      * @param args the command line arguments

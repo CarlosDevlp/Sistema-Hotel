@@ -5,26 +5,19 @@
  */
 package vista;
 
+import controlador.ctrGenerarReserva;
+import dao.BasicDao;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Propietario
  */
-public class frmGenerarReserva extends javax.swing.JFrame {
+public class frmGenerarReserva extends StandardForm {
 
-    /**
-     * Creates new form frmGenerarReserva
-     */
+    private ctrGenerarReserva mCtrGenerarReserva;
+    
     public frmGenerarReserva() {
         initComponents();
     }
@@ -71,8 +64,8 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         btnBuscarHuesped = new javax.swing.JButton();
         txtCodHuesped = new javax.swing.JTextField();
         btnNuevoHuesped = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txtApeHuesped = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jspCantHuesped = new javax.swing.JSpinner();
         btnCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -126,9 +119,21 @@ public class frmGenerarReserva extends javax.swing.JFrame {
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregar.png"))); // NOI18N
         btnAgregar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnAgregar.setName("btnAgregar"); // NOI18N
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnQuitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         btnQuitar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnQuitar.setName("btnQuitar"); // NOI18N
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -184,6 +189,7 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         });
 
         btnBuscarHabitacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        btnBuscarHabitacion.setName("btnBuscarHabitacion"); // NOI18N
         btnBuscarHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarHabitacionActionPerformed(evt);
@@ -252,8 +258,20 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         txtCantDias.setBackground(new java.awt.Color(255, 255, 255));
 
         jdcSalida.setBackground(new java.awt.Color(255, 255, 153));
+        jdcSalida.setToolTipText("jdcSalida");
+        jdcSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcSalidaPropertyChange(evt);
+            }
+        });
 
         jdcLlegada.setBackground(new java.awt.Color(204, 255, 204));
+        jdcLlegada.setToolTipText("jdcLlegada");
+        jdcLlegada.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcLlegadaPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -314,6 +332,12 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         jLabel14.setText("Codigo");
 
         btnBuscarHuesped.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        btnBuscarHuesped.setName("btnBuscarHuesped"); // NOI18N
+        btnBuscarHuesped.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarHuespedActionPerformed(evt);
+            }
+        });
 
         txtCodHuesped.setEditable(false);
         txtCodHuesped.setBackground(new java.awt.Color(255, 255, 255));
@@ -324,11 +348,16 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         });
 
         btnNuevoHuesped.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        btnNuevoHuesped.setName("btnNuevoHuesped"); // NOI18N
+        btnNuevoHuesped.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoHuespedActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("Apellidos");
+        jLabel18.setText("Cantidad");
 
-        txtApeHuesped.setEditable(false);
-        txtApeHuesped.setEnabled(false);
+        jspCantHuesped.setModel(new javax.swing.SpinnerNumberModel(1, 1, 2, 1));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -336,25 +365,22 @@ public class frmGenerarReserva extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel18))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtNomHuesped))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(42, 42, 42)
-                        .addComponent(txtCodHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscarHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtCodHuesped, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                    .addComponent(jspCantHuesped))
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscarHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel12)
                         .addGap(18, 18, 18)
-                        .addComponent(txtApeHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(txtNomHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
                         .addComponent(txtDniHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -383,12 +409,18 @@ public class frmGenerarReserva extends javax.swing.JFrame {
                     .addComponent(txtNomHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDniHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel2)
-                    .addComponent(txtApeHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel18)
+                    .addComponent(jspCantHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
+        btnCancelar.setName("btnCancelar"); // NOI18N
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Fecha Reserva");
 
@@ -403,6 +435,7 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         txtFechaReserva.setForeground(new java.awt.Color(255, 255, 255));
 
         btnGrabarReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
+        btnGrabarReserva.setName("btnGrabarReserva"); // NOI18N
         btnGrabarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGrabarReservaActionPerformed(evt);
@@ -417,6 +450,7 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         txtCodCliente.setBackground(new java.awt.Color(255, 255, 255));
 
         btnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        btnBuscarCliente.setName("btnBuscarCliente"); // NOI18N
         btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarClienteActionPerformed(evt);
@@ -424,6 +458,12 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         });
 
         btnNuevoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        btnNuevoCliente.setName("btnNuevoCliente"); // NOI18N
+        btnNuevoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoClienteActionPerformed(evt);
+            }
+        });
 
         txtNomCliente.setEditable(false);
         txtNomCliente.setBackground(new java.awt.Color(255, 255, 255));
@@ -568,86 +608,7 @@ public class frmGenerarReserva extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public static String fechaActual1(Date date){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String fec="";
-        fec=dateFormat.format(date);
-        return fec;
-    }
-    public static String fechaActual2(Date date){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String fec="";
-        fec=dateFormat.format(date);
-        return fec;
-    }
-    public static String fechaActual3(Date date){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        String fec="";
-        fec=dateFormat.format(date);
-        return fec;
-    }
-    public  Date setMaxDate(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar maximo = new GregorianCalendar();
-        maximo.setTime(jdcLlegada.getDate());
-        int año = maximo.get(Calendar.YEAR);
-        String dateInString = "31/12/"+año;
-        Date date= null;
-            try {
-                date = formatter.parse(dateInString);
-            } catch (ParseException ex) {
-                Logger.getLogger(frmGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return date;
-    }
-    public  Date setMinSal(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar minimo = new GregorianCalendar();
-        minimo.setTime(jdcLlegada.getDate());
-        
-        int año = minimo.get(Calendar.YEAR);
-        int mes = minimo.get(Calendar.MONTH)+1;
-        int dia = minimo.get(Calendar.DAY_OF_MONTH)+1;
-        
-        String dateInString = (dia)+"/"+mes+"/"+año;
-        Date date= null;
-            try {
-                date = formatter.parse(dateInString);
-            } catch (ParseException ex) {
-                Logger.getLogger(frmGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return date;
-    }
-    public  Date setMaxLleg(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar maximo = new GregorianCalendar();
-        maximo.setTime(jdcSalida.getDate());
-        
-        int año = maximo.get(Calendar.YEAR);
-        int mes = maximo.get(Calendar.MONTH)+1;
-        int dia = maximo.get(Calendar.DAY_OF_MONTH)-1;
-        
-        String dateInString = (dia)+"/"+mes+"/"+año;
-        Date date= null;
-            try {
-                date = formatter.parse(dateInString);
-            } catch (ParseException ex) {
-                Logger.getLogger(frmGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return date;
-    }
-    public void contarDias(){
-        Calendar llegada = new GregorianCalendar();
-        llegada.setTime(jdcLlegada.getDate());
-
-        Calendar salida = new GregorianCalendar();
-        salida.setTime(jdcSalida.getDate());
-                
-        int llegada_dias = llegada.get(Calendar.DAY_OF_YEAR);
-        int salida_dias  = salida.get(Calendar.DAY_OF_YEAR);
-                
-        txtCantDias.setText(String.valueOf(salida_dias-llegada_dias));
-    }
+   
     private void txtCodHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodHabActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodHabActionPerformed
@@ -688,6 +649,38 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDocClienteActionPerformed
 
+    private void btnBuscarHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarHuespedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarHuespedActionPerformed
+
+    private void btnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoClienteActionPerformed
+
+    private void btnNuevoHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoHuespedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoHuespedActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jdcLlegadaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcLlegadaPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jdcLlegadaPropertyChange
+
+    private void jdcSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcSalidaPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jdcSalidaPropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -719,21 +712,34 @@ public class frmGenerarReserva extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmGenerarReserva().setVisible(true);
+                
+                final frmGenerarReserva  mFrmGenerarReserva= new frmGenerarReserva();
+                mFrmGenerarReserva.setVisible(true);
+                mFrmGenerarReserva.createController();
+                
+                Thread thread=new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        BasicDao.init();                        
+                        mFrmGenerarReserva.loadControllerData();
+                    }
+                });
+                thread.start();
+                System.out.println("FrmGenerarReserva");
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
-    public javax.swing.JButton btnBuscarCliente;
-    private javax.swing.JButton btnBuscarHabitacion;
-    private javax.swing.JButton btnBuscarHuesped;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnGrabarReserva;
-    public javax.swing.JButton btnNuevoCliente;
-    private javax.swing.JButton btnNuevoHuesped;
-    private javax.swing.JButton btnQuitar;
+    public static javax.swing.JButton btnAgregar;
+    public static javax.swing.JButton btnBuscarCliente;
+    public static javax.swing.JButton btnBuscarHabitacion;
+    public static javax.swing.JButton btnBuscarHuesped;
+    public javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnGrabarReserva;
+    public static javax.swing.JButton btnNuevoCliente;
+    public static javax.swing.JButton btnNuevoHuesped;
+    public static javax.swing.JButton btnQuitar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -743,7 +749,7 @@ public class frmGenerarReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -759,16 +765,16 @@ public class frmGenerarReserva extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public com.toedter.calendar.JDateChooser jdcLlegada;
     public com.toedter.calendar.JDateChooser jdcSalida;
+    public javax.swing.JSpinner jspCantHuesped;
     public javax.swing.JTable tblDetalleReserva;
-    public static javax.swing.JTextField txtApeHuesped;
     public static javax.swing.JTextField txtCantDias;
-    public javax.swing.JTextField txtCantHabit;
+    public static javax.swing.JTextField txtCantHabit;
     public static javax.swing.JTextField txtCodCliente;
     public static javax.swing.JTextField txtCodEmpleado;
     public static javax.swing.JTextField txtCodHab;
     public static javax.swing.JTextField txtCodHuesped;
     public static javax.swing.JTextField txtCostoHab;
-    public javax.swing.JTextField txtCotizacion;
+    public static javax.swing.JTextField txtCotizacion;
     public static javax.swing.JTextField txtDniHuesped;
     public static javax.swing.JTextField txtDocCliente;
     public static javax.swing.JTextField txtFechaReserva;
@@ -777,21 +783,20 @@ public class frmGenerarReserva extends javax.swing.JFrame {
     public static javax.swing.JTextField txtTipoHab;
     // End of variables declaration//GEN-END:variables
 
-    public void addBuscarCliente(ActionListener actionListener){
-        btnBuscarCliente.addActionListener(actionListener);
+    public void loadControllerData(){        
+        mCtrGenerarReserva.loadData();  
     }
-    public void addNuevoCliente(ActionListener actionListener){
-        btnNuevoCliente.addActionListener(actionListener);
+    
+    @Override
+    public void createController() {
+        mCtrGenerarReserva=new ctrGenerarReserva(this);
     }
-    public void addBuscarHabitacion(ActionListener actionListener){
-        btnBuscarHabitacion.addActionListener(actionListener);
+    
+    @Override
+    public Object getViewController() {
+        return mCtrGenerarReserva;
     }
-    public void addBuscarHuesped(ActionListener actionListener){
-        btnBuscarHuesped.addActionListener(actionListener);
-    }
-    public void addRegistrarHuesped(ActionListener actionListener){
-        btnNuevoHuesped.addActionListener(actionListener);
-    }
+
     public void addPropertyChangeLlegada(PropertyChangeListener event ){
         jdcLlegada.addPropertyChangeListener(event);
     }
@@ -804,13 +809,4 @@ public class frmGenerarReserva extends javax.swing.JFrame {
     public void addALbtnQuitar(ActionListener actionListener) {
         btnQuitar.addActionListener(actionListener);
     }
-
-    public void addALbtnCancelar(ActionListener actionListener) {
-        btnCancelar.addActionListener(actionListener);
-    }
-
-    public void addALbtnGrabarReserva(ActionListener actionListener) {
-        btnGrabarReserva.addActionListener(actionListener);
-    }
-
 }

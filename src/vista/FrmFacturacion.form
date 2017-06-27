@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="MDP">
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnNuevo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="51" max="32767" attributes="0"/>
+                              <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="btnImprimir" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                              <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblTC" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="cmbTC" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="lblTotal" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="txtTotal" min="-2" pref="92" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="lblSubtotal" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="txtSubtotal" min="-2" pref="110" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="lblIGV" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="txtIGV" min="-2" pref="139" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="Scroll" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="Scroll1" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="Scroll2" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblLSE" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblDatosC" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="324" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="lblApellidoD" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lblNombreRS" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblDNIRUC" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtDNIRUC" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblCodigo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtCodigo" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lblDNIRUC1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblNombreRS1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnBuscarCliente" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtNombreRS1" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="rdbtnTarjeta" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rdbtnEfectivo" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Component id="txtApellidoD" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
+                              <Component id="txtNombreRS" alignment="0" min="-2" pref="203" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblLAO" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblLSH" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnBuscarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDatosC" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblCodigo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="txtCodigo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblDNIRUC" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtDNIRUC" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblDNIRUC1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="rdbtnEfectivo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="rdbtnTarjeta" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNombreRS" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblNombreRS1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtNombreRS1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNombreRS" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblApellidoD" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtApellidoD" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="lblLSE" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="Scroll" min="-2" pref="96" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblLSH" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Scroll1" min="-2" pref="92" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblLAO" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="Scroll2" min="-2" pref="95" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtSubtotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSubtotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTC" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtIGV" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbTC" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblIGV" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="lblTotal" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="txtTotal" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnImprimir" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="btnBuscarCliente">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagenes/buscar.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Buscar Cliente"/>
+        <Property name="name" type="java.lang.String" value="btnBuscarCliente" noResource="true"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDatosC">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Datos del Cliente:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCodigo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Codigo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtCodigo">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDNIRUC">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DNI/RUC:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDNIRUC">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNombreRS">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nombres/Razon Social:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNombreRS">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblApellidoD">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Apellidos/Direccion:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtApellidoD">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="Scroll">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tbLSE">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="0" rowCount="0"/>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblTC">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo de Comprobante:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbTC">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Boleta"/>
+            <StringItem index="1" value="Factura"/>
+          </StringArray>
+        </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSubtotal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Subtotal S/."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtSubtotal">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIGV">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="IGV"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtIGV">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTotal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total S/."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtTotal">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnNuevo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nuevo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRegistrar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Registrar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCancelar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="Scroll1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tbLSH">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="0" rowCount="0"/>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="Scroll2">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tbLHO">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="0" rowCount="0"/>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblLSE">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Lista de Servicios Extra:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLSH">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Lista de Servicios a la Habitacion:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLAO">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Lista de Habitaciones Ocupadas:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnImprimir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Imprimir"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDNIRUC1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Modo de Pago:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="rdbtnEfectivo">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="MDP"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Efectivo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="rdbtnTarjeta">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="MDP"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Tarjeta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNombreRS1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Codigo de Alojamiento:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNombreRS1">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

@@ -8,9 +8,12 @@ package controlador;
 import dao.BasicDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JComponent;
 import modelo.Callback;
 import modelo.Rol;
+import modelo.Sesion;
 import modelo.Usuario;
 import vista.FrmMain;
 
@@ -18,7 +21,7 @@ import vista.FrmMain;
  * Controlador principal para el formulario principal
  * @author Carlos chavez laguna
  */
-public class CtrMain implements ActionListener{
+public class CtrMain implements ActionListener, WindowListener{
 
     private FrmMain mFrmMain;
     private Usuario mUsuario;      
@@ -28,8 +31,10 @@ public class CtrMain implements ActionListener{
     private CtrNAlojamiento mCtrNAlojamiento;
     private CtrlMantenerRDLH mCtrMantenimiento;
     private CtrGenerarLHPISO mCtrGenerarLHPISO;
+    private CtrIncluido mCtrIncluido;
+    private Callback mInvokeCallback;
+
     
-   
     private final String LOG_TAG="CtrMain",LOG_TAG_ERROR="CtrMain-error";
     
     //constructores
@@ -39,7 +44,10 @@ public class CtrMain implements ActionListener{
     public CtrMain(FrmMain frmMain) {        
         mFrmMain=frmMain;
         mFrmMain.SmnMantenerUsuario.addActionListener(this);
+        mFrmMain.smMantenerRoles.addActionListener(this);
         mFrmMain.MnVerPerfil.addActionListener(this);
+        mFrmMain.SmnReporteSesiones.addActionListener(this);
+        mFrmMain.smMantenerEmpleado.addActionListener(this);
         mFrmMain.MnGenerarReserva.addActionListener(this);        
         mFrmMain.MnSalir.addActionListener(this);                
         mFrmMain.smServicioExtra.addActionListener(this);
@@ -48,6 +56,21 @@ public class CtrMain implements ActionListener{
         mFrmMain.smReporteAlojamiento.addActionListener(this);
         mFrmMain.MantenerRLH.addActionListener(this);
         mFrmMain.GenerarLLHP.addActionListener(this);
+        
+        
+        //arreglando conflictos merge--------------------
+        mCtrIncluido=CtrIncluido.getInstance();
+        
+        mInvokeCallback=new Callback<String>(){
+            @Override
+            public void execute(String[] args) {
+                mCtrIncluido.showForm(args[0]);
+            }        
+        };
+
+        //eventos de ventana
+        mFrmMain.addWindowListener(this);
+        
     }
     
     /**
@@ -64,21 +87,34 @@ public class CtrMain implements ActionListener{
         JComponent obj=(JComponent) e.getSource();
         System.out.println(obj.getName());
         switch(obj.getName()){
+            //SEGURIDAD
             case "pmantenerusuario":    
                 this.mCtrNSeguridad.showFrmMantenerUsuario();
                 break;
             case "pperfil":
                 this.mCtrNSeguridad.showFrmVerPerfil();
                 break;
-            case "pGenerarReserva":
-                this.mCtrNReserva.showGenerarReserva();                
+            case "pmantenerroles":
+                this.mCtrNSeguridad.showFrmMantenerRol();
                 break;
+            case "preportesesiones":
+                this.mCtrNSeguridad.showFrmReportarSesiones();
+                break;
+            case "pMantenerEmpleado":
+                this.mCtrNSeguridad.showFrmMantenerEmpleado();
+                break;
+            //RESERVA
+            case "pGenerarReserva":
+                this.mCtrNReserva.showFrmGenerarReserva();                
+                break;
+            //SERVICIO
             case "pServicioHabitacion":
                 this.mCtrNServicio.showFrmServicioHabitacion();
                 break;
             case "pServicioExtra":
                 this.mCtrNServicio.showFrmServicioExtra();
                 break;
+            //ALOJAMIENTO
             case "pRegistrarAlojamiento":
                 this.mCtrNAlojamiento.showFrmAlojamiento();
                 break;
@@ -91,11 +127,63 @@ public class CtrMain implements ActionListener{
                  case "pGenerarL":
                  this.mCtrGenerarLHPISO.showFrmGenerarlistaLHP();
                 break;
-                
+               
+            //MANTENIMIENTO
+            case "pMantenimiento":
+                break;
+            //OTROS
             case "exit":
+                Usuario.getInstance()
+                        .getCurrentSesion()
+                        .finishSesion();
+                System.out.println(LOG_TAG+": ---------------cerrando sesión---------------");
                 System.exit(0);                
                 break;
         }
+                
+    }
+    
+    @Override
+    public void windowOpened(WindowEvent e) {
+             
+    }
+
+    /**
+     * Evento que se ejecuta cuando la ventana
+     * se está cerrando.
+     * 
+     * @param e objeto evento
+     */
+    @Override
+    public void windowClosing(WindowEvent e) {
+        Usuario.getInstance()
+                        .getCurrentSesion()
+                        .finishSesion();
+        System.out.println(LOG_TAG+": ---------------cerrando sesión---------------");
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
         
     }
     
@@ -115,18 +203,35 @@ public class CtrMain implements ActionListener{
         disableFrmMain();
         //mostrar el login (seguridad)
         mCtrNSeguridad.showFrmLogin();                
-        
+                
         
         mCtrNSeguridad.loadData();
-        //cuando el usuario se logea, esto debe pasar
-        mCtrNSeguridad.setOnUserLogged(new Callback(){
+        //cuando el usuario se logea, se crea una nueva sesión
+        //del usuario en el sistema
+        mCtrNSeguridad.setOnUserLogged(new Callback<String>(){
             @Override
             public void execute(String[] args) {                
-                //habilitar el formulario principal
+                //habilitar el formulario principal                
+                
+                
+                //crear nueva sesión y asignarle al usuario correspondiente
+                Usuario currentUser =Usuario.getInstance();
+                Sesion currentSesion=new Sesion();
+                currentUser.setCurrentSesion(currentSesion);
+                currentSesion.startSesion();
+                currentSesion.setIdSesion(Sesion.getLastSesionOfUser(currentUser.getIdUser()).getIdSesion());
+                System.out.println(LOG_TAG+": ---------------iniciando sesión---------------");
+                
+                
                 enableFrmMain();
-                enableMenus();                
+                enableMenus();
             }
         });
+        
+        //pasar el callback invocador (interfaz) a todas
+        //las controladoras de negocio
+        
+        
     }
 
     //setters and getters
@@ -193,20 +298,37 @@ public class CtrMain implements ActionListener{
         for(String pestana :pestanaList) {
             System.out.println(pestana);
             switch(pestana){
+                //FACTURACIÓN
                 case "pfacturacion":
                     mFrmMain.MnFacturacion.setEnabled(true);
                     break;
+                    
+                //RESERVA
                 case "preserva":
                     mFrmMain.MnReserva.setEnabled(true);
                     break;
+                //SERVICIO
+                case "pServicio":
+                    mFrmMain.MnServicio.setEnabled(true);
+                    break;
+                //ALOJAMIENTO
+                case "pAlojamiento":
+                     mFrmMain.MnAlojamiento.setEnabled(true);
+                     break;
+                //MANTENIMIENTO
+                case "pMantenimiento":
+                    mFrmMain.MnMantenimiento.setEnabled(true);
+                    break;
+                    
+                //TODOS
                 case "all":
                     mFrmMain.MnAdministrador.setEnabled(true);
-                    mFrmMain.MnFacturacion.setEnabled(true);                    
+                    mFrmMain.MnFacturacion.setEnabled(true);
                     mFrmMain.MnReserva.setEnabled(true);
                     mFrmMain.MnAlojamiento.setEnabled(true);
                     mFrmMain.MnServicio.setEnabled(true);
-                 
-                    
+                    mFrmMain.MnMantenimiento.setEnabled(true);
+
             }
         }
             
@@ -249,11 +371,9 @@ public class CtrMain implements ActionListener{
      *      
     */ 
     private void enableFrmMain(){
-        mFrmMain.setEnabled(true);        
+        mFrmMain.setEnabled(true);
     }
 
-    
-            
-    
+
 }
 

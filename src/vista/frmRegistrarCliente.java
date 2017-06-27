@@ -5,17 +5,20 @@
  */
 package vista;
 
+import controlador.CtrRegistrarCliente;
+import dao.BasicDao;
 import java.awt.event.ActionListener;
 
 /**
  *
  * @author Propietario
  */
-public class frmRegistrarCliente extends javax.swing.JFrame {
+public class frmRegistrarCliente extends StandardForm {
 
     /**
      * Creates new form frmRegistrarCliente
      */
+    CtrRegistrarCliente mCtrRegistrarCliente;
     public frmRegistrarCliente() {
         initComponents();
     }
@@ -40,13 +43,14 @@ public class frmRegistrarCliente extends javax.swing.JFrame {
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        btnRegistrar = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        cmbSexo = new javax.swing.JComboBox<>();
         btnCancelar = new javax.swing.JButton();
+        txtEdad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Cliente");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         jLabel1.setText("CLIENTE:");
@@ -73,18 +77,24 @@ public class frmRegistrarCliente extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
+                txtTelefonoActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("Sexo:");
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
+        btnAceptar.setName("btnAceptar"); // NOI18N
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
-        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINO", "FEMENINO" }));
+        jLabel10.setText("Edad:");
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
+        btnCancelar.setName("btnCancelar"); // NOI18N
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -103,29 +113,28 @@ public class frmRegistrarCliente extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                                .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                                .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
-                                        .addGap(49, 49, 49)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(txtNombre)))
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel10))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                            .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                            .addComponent(txtEdad))
+                                        .addGap(49, 49, 49)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtNombre))))
                         .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
@@ -146,7 +155,7 @@ public class frmRegistrarCliente extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -164,7 +173,7 @@ public class frmRegistrarCliente extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCancelar))))
-                    .addComponent(btnRegistrar))
+                    .addComponent(btnAceptar))
                 .addGap(20, 20, 20))
         );
 
@@ -179,13 +188,17 @@ public class frmRegistrarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionActionPerformed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,15 +231,25 @@ public class frmRegistrarCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmRegistrarCliente().setVisible(true);
+                final frmRegistrarCliente  mfrmRegistrarCliente= new frmRegistrarCliente();
+                mfrmRegistrarCliente.setVisible(true);
+                mfrmRegistrarCliente.createController();
+                
+                Thread thread=new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        BasicDao.init();                        
+                        mfrmRegistrarCliente.loadControllerData();
+                    }
+                });
+                thread.start();
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnRegistrar;
-    public javax.swing.JComboBox<String> cmbSexo;
+    public javax.swing.JButton btnAceptar;
+    public javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -237,16 +260,23 @@ public class frmRegistrarCliente extends javax.swing.JFrame {
     public javax.swing.JTextField txtCorreo;
     public javax.swing.JTextField txtDireccion;
     public javax.swing.JTextField txtDocumento;
+    public javax.swing.JTextField txtEdad;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
     
-    public void addALbtnCancelar(ActionListener actionListener) {
-        btnCancelar.addActionListener(actionListener);
+    public void loadControllerData(){        
+        mCtrRegistrarCliente.loadData();  
     }
-
-    public void addALbtnRegistrar(ActionListener actionListener) {
-        btnRegistrar.addActionListener(actionListener);
+    
+    @Override
+    public void createController() {
+        mCtrRegistrarCliente=new CtrRegistrarCliente(this);
+    }
+    
+    @Override
+    public Object getViewController() {
+        return mCtrRegistrarCliente;
     }
 
 }

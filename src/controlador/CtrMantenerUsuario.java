@@ -6,6 +6,7 @@
 package controlador;
 
 import assets.values.Constant;
+import dao.BasicDao;
 import helpers.Hashing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,8 +18,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.DatatypeConverter;
+import modelo.Callback;
+import modelo.Empleado;
 import modelo.Rol;
 import modelo.Usuario;
 import vista.FrmMantenerUsuario;
@@ -29,15 +31,12 @@ import vista.FrmMantenerUsuario;
  */
 public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretListener{
     private FrmMantenerUsuario mFrmMantenerUsuario;
-    
-    //ROL
+    private boolean mValidPassword;
     private ArrayList<Rol> mRolList;
-    private ArrayList<String> mRolNameList;
+    private ArrayList<String> mUserNameList;        
+    private Usuario mUser;
+    private Empleado mEmpleado;//empleado a asignar el usuario (opcional)
     
-    //USER TABLE
-    private ArrayList<Usuario> mUserList;
-    private DefaultTableModel mUserTableModel;
-    private final String []USER_TABLE_COLUMN_NAMES={"Nombres y apellidos","Nombre de usuario","Rol"};
     
     //ICONS
     private final ImageIcon ICON_GOOD=new javax.swing.ImageIcon(getClass().getResource("/assets/images/good.png"));
@@ -51,10 +50,16 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
     
     public CtrMantenerUsuario(FrmMantenerUsuario frmMantenerUsuario) {
         this.mFrmMantenerUsuario = frmMantenerUsuario;
-        this.mFrmMantenerUsuario.btnGuardar.addActionListener(this);
+        this.mFrmMantenerUsuario.btnSearchUser.addActionListener(this);
+        this.mFrmMantenerUsuario.btnSave.addActionListener(this);
+        this.mFrmMantenerUsuario.btnSearchEmployee.addActionListener(this);
+        this.mFrmMantenerUsuario.btnUpdate.addActionListener(this);
+        this.mFrmMantenerUsuario.btnDelete.addActionListener(this);
+        this.mFrmMantenerUsuario.btnClean.addActionListener(this);
         this.mFrmMantenerUsuario.txtPassword.addCaretListener(this);
-        this.mFrmMantenerUsuario.txtPasswordRepeat.addCaretListener(this);
+        this.mFrmMantenerUsuario.txtPasswordRepeat.addCaretListener(this);        
         this.mFrmMantenerUsuario.lblPasswordValidation.setVisible(false);
+        mValidPassword=false;
     }
 
     
@@ -75,10 +80,30 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
         //System.out.println(obj.getName());
         
         switch(obj.getName()){
-            case "btnGuardar":
-                addUser();
-               break;            
-        }                
+            
+            //botón buscar al empleado
+            case "btnSearchEmployee":
+                CtrIncluido.getInstance().showForm(Constant.FORM_BUSCAR_EMPLEADO, OnCompleteSearchEmployee());
+                break;
+            //botón buscar al usuario
+            case "btnSearchUser":
+                CtrIncluido.getInstance().showForm(Constant.FORM_BUSCAR_USUARIO, OnCompleteSearchUser());
+                break;
+            //botón guardar al usuario y
+            //botón actualizar al usuario
+            case "btnSave":
+            case "btnUpdate":
+                saveUser();
+                break;
+            //botón eliminar al usuario
+            case "btnDelete":
+                removeUser();
+                break;
+            //botón limpiar los campos
+            case "btnClean":
+                clear();
+                break;
+        }
     }
     
     @Override
@@ -89,14 +114,13 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
     @Override
     public void keyPressed(KeyEvent e) {
         JComponent obj=(JComponent) e.getSource();
-        //System.out.println(obj.getName());        
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         
     }
-    
+            
     
     @Override
     public void caretUpdate(CaretEvent e) {
@@ -106,76 +130,184 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
             case "txtPassword":
             case "txtPasswordRepeat":
                 this.checkPasswords();
-                break;
+                break;            
+            
         }
         
     }
+    
+    
+    
     //____________________________________________________________________________________________    
+            
     //otros métodos
+    
+    /**
+     * 
+     * cuando se complete la búsqueda de un empleado
+     * en el caso de uso buscar empleado
+     */
+    private Callback OnCompleteSearchEmployee(){
+        return new Callback(){
+            @Override
+            public void execute(Object[] args) {
+                if(args!=null) {
+                   mEmpleado=(Empleado) args[0];
+                   mFrmMantenerUsuario.txtName.setText(mEmpleado.getFullNamePer());
+                   
+                }
+            }
+            
+        };
+    }
+    /**
+     * 
+     * cuando se complete la búsqueda de un usuario
+     * en el caso de uso buscar usuario
+     */
+    private Callback OnCompleteSearchUser(){
+        return //callback que se ejecutará cuando se logre completar la búsqueda
+            new Callback(){
+                       @Override
+                       public void execute(Object[] args) {
+                           if(args!=null) {
+                               mUser=(Usuario)args[0];
+                               
+                               mFrmMantenerUsuario.btnSave.setEnabled(false);
+                               mFrmMantenerUsuario.btnUpdate.setEnabled(true);
+                               mFrmMantenerUsuario.btnDelete.setEnabled(true);
+                               mFrmMantenerUsuario.txtUsername.setText(mUser.getUsuario());                                                              
+                               mFrmMantenerUsuario.txtPassword.setText("");
+                               mFrmMantenerUsuario.txtPasswordRepeat.setText("");
+                               mFrmMantenerUsuario.txtName.setText("");
+                               
+                               //setear en el combo el rol escogido
+                               Rol userRol=mUser.getRolUser();
+                               for(int i=0;i<mRolList.size();i++)
+                                   if(mRolList.get(i).getIdRoles().equals(userRol.getIdRoles())){
+                                        mFrmMantenerUsuario.cmbRol.setSelectedIndex(i);
+                                        break;
+                                   }
+                               
+                               //obtener el empleado que se le asigno este usuario (si existe)
+                               ArrayList<Empleado> empleadoList=Empleado.getEmpleadoList("User_idUser="+mUser.getIdUser());
+                               if(!empleadoList.isEmpty()){
+                                   mFrmMantenerUsuario.txtName.setText(empleadoList.get(0).getFullNamePer());                                   
+                               }
+                          }
+                       }
+           };
+    }
     
     /**
      * Agregar usuario a la base de datos y a la tabla.
      */
-    public void addUser(){
+    public void saveUser(){
+        
         String username=this.mFrmMantenerUsuario.txtUsername.getText();        
-        String encryptedPassword=DatatypeConverter.printHexBinary(Hashing.hash(this.mFrmMantenerUsuario.txtPassword.getText(), Hashing.HASH_ALG.SHA256));
+        String password=this.mFrmMantenerUsuario.txtPassword.getText();
+        //si está lleno de campos vacíos
+        if("".equals(password.trim())){
+            this.mFrmMantenerUsuario.messageBoxAlert(Constant.APP_NAME, "la contraseña no debe tener campos vacíos");
+            return;
+        }
+        
+        if("".equals(username.trim())){
+            this.mFrmMantenerUsuario.messageBoxAlert(Constant.APP_NAME, "el nombre de usuario no debe tener campos vacíos");
+            return;
+        }
+            
+        String encryptedPassword=DatatypeConverter.printHexBinary(Hashing.hash(password, Hashing.HASH_ALG.SHA256));
 
-        Usuario newUser= new Usuario(username,encryptedPassword);
-        newUser.setRolUser(mRolList.get(this.mFrmMantenerUsuario.cmbRol.getSelectedIndex()));
         
-        newUser.save();
         
-        mUserTableModel.addRow(new String[]{"",newUser.getUsuario(),newUser.getRolUser().getNombreRol()});        
         
-        this.mFrmMantenerUsuario.messageBox(Constant.APP_NAME, "Se ha agregado un nuevo usuario al sistema");
+        //usuario nuevo
+        boolean isUpdate=false;
+        if(mUser==null){
+            //impedir que se cree el usuario
+            if(BasicDao.rowExists(Constant.DB_TABLE_USUARIO, "UsuarioUse='"+username+"'")){
+                this.mFrmMantenerUsuario.messageBoxAlert(Constant.APP_NAME, "El nombre de usuario ya está en uso");
+                return;
+            }
+            
+            
+            mUser= new Usuario(username,encryptedPassword);
+        }else{ //usuario ya creado, pero actualizando
+            isUpdate=true;
+            mUser.setUsuario(username);
+            mUser.setPassword(encryptedPassword);
+        }
+        mUser.setRolUser(mRolList.get(this.mFrmMantenerUsuario.cmbRol.getSelectedIndex()));
+        mUser.save();
+        
+        //si tengo un empleado, eso quiere decir que quiero asignarle el usuario que estoy
+        //editando
+        if(mEmpleado!=null){
+            mUser.updateId();
+            mEmpleado.setUserId(mUser.getIdUser());
+            mEmpleado.assignUser();
+        }
+        
+        this.mFrmMantenerUsuario.messageBox(Constant.APP_NAME, (isUpdate?"Se ha actualizado el usuario":"Se ha agregado un nuevo usuario al sistema") );
+        clear();
+    }
+    /**
+     * remover usuario de la lista mantener usuario
+     */
+    public void removeUser(){
+        //preguntar al usuario si realmente eliminar o no al objeto usuario
+        this.mFrmMantenerUsuario.messageBox(Constant.APP_NAME, "<html>"
+                                                             + "¿Deseas remover el usuario del sistema?<br> "
+                                                             + "<b>OJO: EL USUARIO SERÁ ELIMINADO PERMANENTEMENTE.</b> "
+                                                             + "</html>",
+                                              new Callback<Boolean>(){
+                                                    @Override
+                                                    public void execute(Boolean[] answer) {
+                                                        //si la respuesta fue YES=true, remover al usuario y limpiar el formulario
+                                                        if(answer[0]){
+                                                            mUser.remove();
+                                                            clear();
+                                                        }
+                                                        //si la respuesta es NO=false, no hacer nada
+                                                    }
+                                              }
+                                            );
         
     }
-    
     /**
      * Pre-cargar data en el formulario.
      */
     public void loadData(){
-
         
         //cargar lista de roles en cmbRol
         mRolList= Rol.getRolList();
-        mRolNameList=new ArrayList();
+        mUserNameList=new ArrayList();
         
         for(Rol rol:mRolList)
-            mRolNameList.add(rol.getNombreRol());
+            mUserNameList.add(rol.getNombreRol());
         
-        this.mFrmMantenerUsuario.cmbRol.setModel(new DefaultComboBoxModel(mRolNameList.toArray()));
-
+        this.mFrmMantenerUsuario.cmbRol.setModel(new DefaultComboBoxModel(mUserNameList.toArray()));
         
-        //cargar usuarios en la tabla tbUser
-        clearTable();
-        mUserList= Usuario.getUsuarioList();
-        
-        this.mFrmMantenerUsuario.lblEmptyTable.setVisible(mUserList.isEmpty());
-        for(Usuario usuario:mUserList)        
-            mUserTableModel.addRow(new String[]{"",usuario.getUsuario(),usuario.getRolUser().getNombreRol()});        
-        this.mFrmMantenerUsuario.tbUser.setModel(mUserTableModel);
-        
-        //ocultar el preloader
-        this.mFrmMantenerUsuario.pbFormPreloader.setVisible(false);                        
-        
-                
     }
     
     /**
      * 
      */
     public void checkPasswords(){
+        
+        
         String password=String.valueOf(this.mFrmMantenerUsuario.txtPassword.getPassword());
         String passwordRepeated=String.valueOf(this.mFrmMantenerUsuario.txtPasswordRepeat.getPassword());
        
         
         this.mFrmMantenerUsuario.lblPasswordValidation.setVisible(!password.isEmpty());
         //contraseña correctamente ingresada
-        if(passwordRepeated.equals(password)){
+        mValidPassword=passwordRepeated.equals(password);
+        if(mValidPassword){
             this.mFrmMantenerUsuario.lblPasswordValidation.setIcon(ICON_GOOD);
             this.mFrmMantenerUsuario.lblPasswordValidation.setForeground(Constant.COLOR_GREEN);
-            this.mFrmMantenerUsuario.lblPasswordValidation.setText("Contraseñas iguales");
+            this.mFrmMantenerUsuario.lblPasswordValidation.setText("Contraseñas iguales");                        
         }
         else{
             this.mFrmMantenerUsuario.lblPasswordValidation.setIcon(ICON_BAD);
@@ -183,19 +315,25 @@ public class CtrMantenerUsuario implements ActionListener, KeyListener,CaretList
             this.mFrmMantenerUsuario.lblPasswordValidation.setText("Contraseñas no iguales");
         }
         
-    }
-    
-    /**
-     * 
-     */
-    private void clearData(){
+        (mUser==null?this.mFrmMantenerUsuario.btnSave
+                    :this.mFrmMantenerUsuario.btnUpdate).setEnabled(mValidPassword);
         
     }
     
-    //vaciar la tabla
-    private void clearTable(){        
-        mUserTableModel = new DefaultTableModel(null,USER_TABLE_COLUMN_NAMES);
-        this.mFrmMantenerUsuario.tbUser.setModel(mUserTableModel);
+    /**
+     * limpiar o resetear todos los campos
+     */
+    private void clear(){
+        mUser=null;
+        mEmpleado=null;
+        mFrmMantenerUsuario.btnSave.setEnabled(true);
+        mFrmMantenerUsuario.btnUpdate.setEnabled(false);
+        mFrmMantenerUsuario.btnDelete.setEnabled(false);
+        mFrmMantenerUsuario.txtName.setText("");
+        mFrmMantenerUsuario.txtUsername.setText("");
+        mFrmMantenerUsuario.txtPassword.setText("");
+        mFrmMantenerUsuario.txtPasswordRepeat.setText("");
+        mFrmMantenerUsuario.cmbRol.setSelectedIndex(0);
     }
     
     /**

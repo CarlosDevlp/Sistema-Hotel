@@ -213,7 +213,8 @@ abstract public class BasicDao {
             for(int i=1;i<table.length;i++)
                 join+=" INNER JOIN "+table[i]+" ON "+match[i-1]+"="+match[i]; 
             
-            //System.out.print("SELECT "+colSeq+" FROM "+table[0]+join+((where==null)?"":" WHERE "+where));
+            if(DEBUG) System.out.print("SELECT "+colSeq+" FROM "+table[0]+join+((where==null)?"":" WHERE "+where));
+            
             r=BasicDao.DB.query("SELECT "+colSeq+" FROM "+table[0]+join+((where==null)?"":" WHERE "+where),"SELECT");            
             //proceso de conversión de datos a array
             BasicDao.mapResult(cols,r,col);
@@ -252,6 +253,8 @@ abstract public class BasicDao {
                       vls+=",";
             }
             
+          if(DEBUG) System.out.println("INSERT INTO "+table+" ("+colSeq+") VALUES ("+vls+")");
+            
           BasicDao.DB.query("INSERT INTO "+table+" ("+colSeq+") VALUES ("+vls+")","INSERT");                 
         }catch(Exception err){
           System.err.println(LOG_TAG_ERROR+" On insert: "+err);
@@ -271,7 +274,9 @@ abstract public class BasicDao {
     */    
     public static void delete(String table,String where){
         try{
-            BasicDao.DB.query("DELETE FROM "+table+" WHERE "+where,"DELETE");        
+            if(DEBUG) System.out.println("DELETE FROM "+table+" WHERE "+where);
+            
+            BasicDao.DB.query("DELETE FROM "+table+" WHERE "+where,"DELETE");
         }catch(Exception err){
             System.err.println(LOG_TAG_ERROR+" On delete: "+err);            
         }
@@ -308,7 +313,9 @@ abstract public class BasicDao {
             }            
             
             String q="UPDATE  "+table+" SET "+vls+" WHERE "+where;
-            //System.out.println(q);
+            
+            if(DEBUG) System.out.println(q);
+            
             BasicDao.DB.query(q,"UPDATE");         
         }catch(Exception err){
             //LOG_TAG_ERROR            
@@ -409,7 +416,7 @@ abstract public class BasicDao {
                 paramsSeq+=")";
             }
             
-            //System.out.println("CALL "+name+paramsSeq);
+            if(DEBUG) System.out.println("CALL "+name+paramsSeq);
             
             //ejecución  del código sql
             r=BasicDao.DB.query("CALL "+name+paramsSeq,"PROCEDURE");

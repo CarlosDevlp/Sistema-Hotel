@@ -31,12 +31,29 @@
                 <MenuItem class="javax.swing.JMenuItem" name="smMantenerRoles">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Mantener Roles"/>
+                    <Property name="name" type="java.lang.String" value="pmantenerroles" noResource="true"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="SmnReporteSesiones">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Reporte Sesiones"/>
+                    <Property name="name" type="java.lang.String" value="preportesesiones" noResource="true"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="smMantenerEmpleado">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Mantener Empleado"/>
+                    <Property name="name" type="java.lang.String" value="pMantenerEmpleado" noResource="true"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -118,6 +135,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Alojamiento"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="name" type="java.lang.String" value="pAlojamiento" noResource="true"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -175,6 +193,8 @@
         <Menu class="javax.swing.JMenu" name="MnMantenimiento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Mantenimiento"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="name" type="java.lang.String" value="pMantenimiento" noResource="true"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

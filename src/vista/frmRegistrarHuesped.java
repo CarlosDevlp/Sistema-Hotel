@@ -5,17 +5,20 @@
  */
 package vista;
 
+import controlador.ctrRegistrarHuesped;
+import dao.BasicDao;
 import java.awt.event.ActionListener;
 
 /**
  *
  * @author Propietario
  */
-public class frmRegistrarHuesped extends javax.swing.JFrame {
+public class frmRegistrarHuesped extends StandardForm {
 
     /**
      * Creates new form frmRegistrarHuesped
      */
+    ctrRegistrarHuesped mCtrRegistrarHuesped;
     public frmRegistrarHuesped() {
         initComponents();
     }
@@ -34,13 +37,15 @@ public class frmRegistrarHuesped extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtDni = new javax.swing.JTextField();
-        btnRegistrar = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Huesped");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
+        btnCancelar.setName("btnCancelar"); // NOI18N
 
         jLabel1.setText("Nombres y Apellidos");
 
@@ -52,7 +57,8 @@ public class frmRegistrarHuesped extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
+        btnAceptar.setName("btnAceptar"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,7 +76,7 @@ public class frmRegistrarHuesped extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtDni)))
                 .addGap(18, 18, 18)
-                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -88,7 +94,7 @@ public class frmRegistrarHuesped extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
@@ -131,24 +137,43 @@ public class frmRegistrarHuesped extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmRegistrarHuesped().setVisible(true);
+                final frmRegistrarHuesped  mfrmRegistrarHuesped= new frmRegistrarHuesped();
+                mfrmRegistrarHuesped.setVisible(true);
+                mfrmRegistrarHuesped.createController();
+                
+                Thread thread=new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        BasicDao.init();                        
+                        mfrmRegistrarHuesped.loadControllerData();
+                    }
+                });
+                thread.start();
+                System.out.println("FrmBuscarHuesped");
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnRegistrar;
+    public javax.swing.JButton btnAceptar;
+    public javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JTextField txtDni;
     public javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    public void addALbtnCancelar(ActionListener actionListener) {
-        btnCancelar.addActionListener(actionListener);
+    public void loadControllerData(){        
+        mCtrRegistrarHuesped.loadData();  
     }
-    public void addALbtnRegistrar(ActionListener actionListener) {
-        btnRegistrar.addActionListener(actionListener);
+    
+    @Override
+    public void createController() {
+        mCtrRegistrarHuesped=new ctrRegistrarHuesped(this);
+    }
+    
+    @Override
+    public Object getViewController() {
+        return mCtrRegistrarHuesped;
     }
 }

@@ -5,17 +5,21 @@
  */
 package vista;
 
+import controlador.ctrBuscarCliente;
+import controlador.ctrBuscarHuesped;
+import dao.BasicDao;
 import java.awt.event.ActionListener;
 
 /**
  *
  * @author Propietario
  */
-public class frmBuscarCliente extends javax.swing.JFrame {
+public class frmBuscarCliente extends StandardForm  {
 
     /**
      * Creates new form frmBuscarCliente
      */
+    ctrBuscarCliente mCtrBuscarCliente;
     public frmBuscarCliente() {
         initComponents();
     }
@@ -39,6 +43,7 @@ public class frmBuscarCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buscar Cliente");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         txtDocumento.addActionListener(new java.awt.event.ActionListener() {
@@ -49,6 +54,7 @@ public class frmBuscarCliente extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setName("btnBuscar"); // NOI18N
 
         jLabel1.setText("DNI o RUC");
 
@@ -71,6 +77,7 @@ public class frmBuscarCliente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblCliente);
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
+        btnAceptar.setName("btnAceptar"); // NOI18N
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -78,6 +85,7 @@ public class frmBuscarCliente extends javax.swing.JFrame {
         });
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
+        btnCancelar.setName("btnCancelar"); // NOI18N
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -91,20 +99,20 @@ public class frmBuscarCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
+                        .addGap(180, 180, 180)
                         .addComponent(btnAceptar)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(36, 36, 36)
-                                .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnBuscar))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnBuscar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -115,9 +123,9 @@ public class frmBuscarCliente extends javax.swing.JFrame {
                     .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -170,30 +178,45 @@ public class frmBuscarCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmBuscarCliente().setVisible(true);
+                final frmBuscarCliente  mFrmBuscarCliente= new frmBuscarCliente();
+                mFrmBuscarCliente.setVisible(true);
+                mFrmBuscarCliente.createController();
+                
+                Thread thread=new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        BasicDao.init();                        
+                        mFrmBuscarCliente.loadControllerData();
+                    }
+                });
+                thread.start();
+                System.out.println("FrmBuscarHuesped");
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCancelar;
+    public static javax.swing.JButton btnAceptar;
+    public static javax.swing.JButton btnBuscar;
+    public static javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tblCliente;
     public javax.swing.JTextField txtDocumento;
     // End of variables declaration//GEN-END:variables
 
-    public void addALbtnCancelar(ActionListener actionListener) {
-        btnCancelar.addActionListener(actionListener);
-    }
-
-    public void addALbtnBuscar(ActionListener actionListener) {
-        btnBuscar.addActionListener(actionListener);
+    
+    public void loadControllerData(){        
+        mCtrBuscarCliente.loadData();  
     }
     
-    public void addLbtnAceptar(ActionListener actionListener){
-        btnAceptar.addActionListener(actionListener);
+    @Override
+    public void createController() {
+        mCtrBuscarCliente=new ctrBuscarCliente(this);
+    }
+    
+    @Override
+    public Object getViewController() {
+        return mCtrBuscarCliente;
     }
 }

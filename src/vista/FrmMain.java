@@ -14,6 +14,7 @@ import controlador.CtrNSeguridad;
 import controlador.CtrNServicio;
 import controlador.CtrlMantenerRDLH;
 import controlador.ctrGenerarReserva;
+import controlador.CtrNReserva;
 /**
  * 
  * @author Carlos Chavez Laguna
@@ -35,13 +36,14 @@ public class FrmMain extends StandardForm {
         //controladora de negocio facturación
             //.....
        //controladora de negocio reserva
+       /*
         CtrNReserva mCtrNReserva= new CtrNReserva();
                 ctrGenerarReserva ctrGenerarReservax=new ctrGenerarReserva(this);                
                 ctrGenerarReservax.setVistaGenerarReserva(new frmGenerarReserva());
                 mCtrNReserva.setCtrGenerarReserva(ctrGenerarReservax);             
          mCtrMain.setCtrNReserva(mCtrNReserva);
-                 
-         
+        */
+        mCtrMain.setCtrNReserva(new CtrNReserva());
         //controladora de negocio de servicio
          mCtrMain.setCtrNServicio(new CtrNServicio());
         
@@ -73,6 +75,7 @@ public class FrmMain extends StandardForm {
         SmnMantenerUsuario = new javax.swing.JMenuItem();
         smMantenerRoles = new javax.swing.JMenuItem();
         SmnReporteSesiones = new javax.swing.JMenuItem();
+        smMantenerEmpleado = new javax.swing.JMenuItem();
         MnVerPerfil = new javax.swing.JMenuItem();
         MnSalir = new javax.swing.JMenuItem();
         MnFacturacion = new javax.swing.JMenu();
@@ -123,10 +126,16 @@ public class FrmMain extends StandardForm {
         MnAdministrador.add(SmnMantenerUsuario);
 
         smMantenerRoles.setText("Mantener Roles");
+        smMantenerRoles.setName("pmantenerroles"); // NOI18N
         MnAdministrador.add(smMantenerRoles);
 
         SmnReporteSesiones.setText("Reporte Sesiones");
+        SmnReporteSesiones.setName("preportesesiones"); // NOI18N
         MnAdministrador.add(SmnReporteSesiones);
+
+        smMantenerEmpleado.setText("Mantener Empleado");
+        smMantenerEmpleado.setName("pMantenerEmpleado"); // NOI18N
+        MnAdministrador.add(smMantenerEmpleado);
 
         jMenu1.add(MnAdministrador);
 
@@ -171,6 +180,7 @@ public class FrmMain extends StandardForm {
 
         MnAlojamiento.setText("Alojamiento");
         MnAlojamiento.setEnabled(false);
+        MnAlojamiento.setName("pAlojamiento"); // NOI18N
 
         smRegistrarAlojamiento.setText("Registrar Alojamiento");
         smRegistrarAlojamiento.setName("pRegistrarAlojamiento"); // NOI18N
@@ -210,6 +220,8 @@ public class FrmMain extends StandardForm {
         });
         MnMantenimiento.add(GenerarLLHP);
 
+        MnMantenimiento.setEnabled(false);
+        MnMantenimiento.setName("pMantenimiento"); // NOI18N
         jMenuBar1.add(MnMantenimiento);
 
         setJMenuBar(jMenuBar1);
@@ -288,13 +300,14 @@ public class FrmMain extends StandardForm {
     public javax.swing.JMenu MnServicio;
     public javax.swing.JMenuItem MnVerPerfil;
     public javax.swing.JMenuItem SmnMantenerUsuario;
-    private javax.swing.JMenuItem SmnReporteSesiones;
+    public javax.swing.JMenuItem SmnReporteSesiones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JMenuItem smBuscarCliente;
-    private javax.swing.JMenuItem smMantenerRoles;
+    public javax.swing.JMenuItem smMantenerEmpleado;
+    public javax.swing.JMenuItem smMantenerRoles;
     public javax.swing.JMenuItem smRegistrarAlojamiento;
     public javax.swing.JMenuItem smRegistrarCobro;
     public javax.swing.JMenuItem smReporteAlojamiento;
