@@ -34,18 +34,17 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
         jScrollPane1 = new javax.swing.JScrollPane();
         TablalistaLH = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        cbmPiso = new javax.swing.JComboBox();
+        cboPiso = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         txtcodSupe = new javax.swing.JTextField();
-        txtTelefSuper = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtNombreSuper = new javax.swing.JTextField();
         btnCancelarLH = new javax.swing.JButton();
         btnGuardarlh = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -60,21 +59,20 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Generar Lista de Limpieza de Habitaciones por piso");
+        setBackground(new java.awt.Color(255, 102, 51));
 
         TablalistaLH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "N° HABITACIÓN", "TIPO", "ESTADO", "Title 4"
+                "N° HABITACIÓN", "TIPO", "ESTADO"
             }
         ));
         jScrollPane1.setViewportView(TablalistaLH);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("N° PISO:");
-
-        cbmPiso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "1", "2", "3", "4", "5", "6", "7" }));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("LISTA DE HABITACIONES POR LIMPIAR ");
@@ -83,8 +81,6 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
         jLabel3.setText("DATOS SUPERVISOR DE PISO");
 
         jLabel4.setText("Codigo:");
-
-        jLabel5.setText("Telefono:");
 
         jLabel6.setText("Nombre y Apellidos:");
 
@@ -97,31 +93,33 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("LISTA DE LIMPIEZA DE HABITACIONES POR PISO ");
 
+        jButton1.setText("Consultar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtcodSupe, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNombreSuper, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCancelarLH)
-                        .addGap(53, 53, 53)
-                        .addComponent(btnGuardarlh, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtcodSupe, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(42, 42, 42)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtTelefSuper, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtNombreSuper))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardarlh, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -131,7 +129,7 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbmPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cboPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,7 +140,7 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +149,7 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbmPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
@@ -162,18 +160,17 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5)
                     .addComponent(txtcodSupe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefSuper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtNombreSuper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelarLH)
-                    .addComponent(btnGuardarlh))
-                .addContainerGap())
+                    .addComponent(btnGuardarlh)
+                    .addComponent(btnCancelarLH))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -218,18 +215,17 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
     public javax.swing.JTable TablalistaLH;
     public javax.swing.JButton btnCancelarLH;
     public javax.swing.JButton btnGuardarlh;
-    public javax.swing.JComboBox cbmPiso;
+    public javax.swing.JComboBox cboPiso;
+    public javax.swing.JButton jButton1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextField txtNombreSuper;
-    public javax.swing.JTextField txtTelefSuper;
     public javax.swing.JTextField txtcodSupe;
     // End of variables declaration//GEN-END:variables
 
@@ -241,20 +237,13 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
         this.txtNombreSuper = NombreSuper;
     }
 
-    public JTextField getTelefSuper() {
-        return txtTelefSuper;
-    }
-
-    public void setTelefSuper(JTextField TelefSuper) {
-        this.txtTelefSuper = TelefSuper;
-    }
-
+ 
     public JComboBox getCbmPiso() {
-        return cbmPiso;
+        return cboPiso;
     }
 
     public void setCbmPiso(JComboBox cbmPiso) {
-        this.cbmPiso = cbmPiso;
+        this.cboPiso = cbmPiso;
     }
 
     public JTextField getCodSupe() {

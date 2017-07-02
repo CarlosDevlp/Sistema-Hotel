@@ -1,9 +1,5 @@
 package controlador;
 
-//import static controlador.ctrBuscarHabitacion.activo;
-
-import vista.frmBuscarCliente;
-import vista.frmGenerarReserva;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,13 +9,10 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Callback;
 import modelo.Persona;
 import vista.frmBuscarCliente;
-import vista.frmGenerarReserva;
 
 public class ctrBuscarCliente implements ActionListener{
     private frmBuscarCliente vistaBuscarCliente;
-    private frmGenerarReserva vistaGenerarReserva;
     private Callback onCompletedSearch;
-    
     private ArrayList<Persona> mClienteList;
     private DefaultTableModel mClienteTableModel;
     private final String []USER_TABLE_COLUMN_NAMES={"Codigo","Nombre","Documento","Direccion","Telefono"};
@@ -29,10 +22,10 @@ public class ctrBuscarCliente implements ActionListener{
     }
     
     public ctrBuscarCliente(frmBuscarCliente mfrmBuscarCliente) {
-        this.vistaBuscarCliente = mfrmBuscarCliente;
-        this.vistaBuscarCliente.btnAceptar.addActionListener(this);
-        this.vistaBuscarCliente.btnBuscar.addActionListener(this);
-        this.vistaBuscarCliente.btnCancelar.addActionListener(this);
+        vistaBuscarCliente = mfrmBuscarCliente;
+        vistaBuscarCliente.btnAceptar.addActionListener(this);
+        vistaBuscarCliente.btnBuscar.addActionListener(this);
+        vistaBuscarCliente.btnCancelar.addActionListener(this);
     }
     
     @Override
@@ -49,6 +42,7 @@ public class ctrBuscarCliente implements ActionListener{
             case "btnCancelar":
                 hideFrmBuscarCliente();
                 System.out.println("btnCancelar");
+                onCompletedSearch.execute(null);
                break;
         }                
     }
@@ -60,7 +54,7 @@ public class ctrBuscarCliente implements ActionListener{
 
     /**
      * pasar método que se ejecutará cuando se complete la búsqueda
-     * @params onCompletedSearch callback
+     * @param onCompletedSearch callback
      */
     public void setOnCompletedSearch(Callback onCompletedSearch) {
         this.onCompletedSearch = onCompletedSearch;
@@ -94,9 +88,9 @@ public class ctrBuscarCliente implements ActionListener{
 
             //llamo la interfaz que ejecutará el código del formulario que llamo a este
             //caso de uso
+            
             onCompletedSearch.execute(new String[]{cod,nom,doc,dir,tel});
             
-
             hideFrmBuscarCliente();
             
         }else{
@@ -126,7 +120,6 @@ public class ctrBuscarCliente implements ActionListener{
     public void hideFrmBuscarCliente(){
         this.vistaBuscarCliente.setVisible(false);
         ctrGenerarReserva.activo=false;
-        
     }
 
 }

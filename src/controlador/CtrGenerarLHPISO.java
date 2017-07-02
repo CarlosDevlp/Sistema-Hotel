@@ -36,7 +36,7 @@ public class CtrGenerarLHPISO implements ActionListener,MouseListener,ItemListen
     GenerarLLHP= new FrmGenerarListaLimpiezaHabitaciónPorPiso();
     habitacionPendiente=new DAOHabitacion();
     daoPersonal=new DAOEmpleado();
-    GenerarLLHP.cbmPiso.addItemListener(this);
+    GenerarLLHP.cboPiso.addItemListener(this);
     GenerarLLHP.btnGuardarlh.addActionListener(this);
     GenerarLLHP.btnCancelarLH.addActionListener(this);
     
@@ -93,7 +93,7 @@ public class CtrGenerarLHPISO implements ActionListener,MouseListener,ItemListen
             case "seleccionar":
                 // cargar el piso 
         // GenerarLLHP.getCbmPiso().removeAllItems();
-         GenerarLLHP.cbmPiso.getSelectedItem().equals(codigo);
+         GenerarLLHP.cboPiso.getSelectedItem().equals(codigo);
          GenerarLLHP.getCbmPiso().addItem("Seleccione un Piso");
        // this.codigo.addItemListener(new ItemChangeListener);
         //this.nombre.addItemListener(new ItemChangeListener);
@@ -106,7 +106,6 @@ public class CtrGenerarLHPISO implements ActionListener,MouseListener,ItemListen
          
         // DAOEmpleado lista1= daoPersonal.obtenerEmpleado();
         GenerarLLHP.txtcodSupe.setText(null);
-        GenerarLLHP.txtTelefSuper.setText(null);
         GenerarLLHP.txtNombreSuper.setText(null);
                 
                 break;
