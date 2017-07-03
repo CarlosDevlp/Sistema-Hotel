@@ -48,7 +48,7 @@ public class frmRegistrarCliente extends StandardForm {
         btnCancelar = new javax.swing.JButton();
         txtEdad = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Registrar Cliente");
         setAlwaysOnTop(true);
         setResizable(false);

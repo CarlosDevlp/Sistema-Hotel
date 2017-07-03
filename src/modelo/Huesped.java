@@ -52,7 +52,7 @@ public class Huesped {
     }
     
     public static ArrayList<Huesped> getHuespedList(){
-        ArrayList<Map<String,String>> result=BasicDao.select("Huesped", new String[]{"*"}, null);
+        ArrayList<Map<String,String>> result=BasicDao.select("Huesped", new String[]{"*"}, "idHSP not in (select Huesped_idHSP from DetalleReserva)");
         ArrayList<Huesped> huespedList=new ArrayList();
         for(Map<String,String> row:result) 
             huespedList.add(new Huesped(row));
@@ -60,7 +60,7 @@ public class Huesped {
     }
     
     public static ArrayList<Huesped> getHuespedDni(String dni){
-        ArrayList<Map<String,String>> result=BasicDao.select("Huesped", new String[]{"*"}, "DNIHue LIKE '%"+dni+"%'");
+        ArrayList<Map<String,String>> result=BasicDao.select("Huesped", new String[]{"*"}, "idHSP not in (select Huesped_idHSP from DetalleReserva) and DNIHue LIKE '%"+dni+"%'");
         ArrayList<Huesped> huespedList=new ArrayList();
         for(Map<String,String> row:result) 
             huespedList.add(new Huesped(row));

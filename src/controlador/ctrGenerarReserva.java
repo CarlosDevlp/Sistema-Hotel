@@ -6,7 +6,6 @@
 package controlador;
 
 import com.toedter.calendar.JTextFieldDateEditor;
-import dao.BasicDao;
 import modelo.Reserva;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,11 +14,9 @@ import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -37,9 +34,7 @@ import vista.*;
 public class ctrGenerarReserva implements ActionListener{
     
     private frmGenerarReserva vistaGenerarReserva;
-    private frmBuscarHuesped vistaBuscarHuesped;
     private frmBuscarHabitacion vistaBuscarHabitacion;
-    
     
     private ctrBuscarHuesped mCtrBuscarHuesped;
     private ctrBuscarHabitacion mCtrBuscarHabitacion;
@@ -47,9 +42,12 @@ public class ctrGenerarReserva implements ActionListener{
     private CtrRegistrarCliente mCtrRegistrarCliente;
     private ctrRegistrarHuesped mCtrRegistrarHuesped;
     
-    DefaultTableModel modelo; 
+    public DefaultTableModel modelo; 
     public static boolean activo=false;
+    String idHues[]= new String[10];
+    int row=0;
     int cont=0;
+    int conthue=0;
     double coti=0.00;
     String lleg="";
     String sal="";
@@ -70,6 +68,7 @@ public class ctrGenerarReserva implements ActionListener{
     }
      public void loadData() {
         
+        Reserva reserva=new Reserva(); 
         this.vistaGenerarReserva.txtCantHabit.setText("0");
         this.vistaGenerarReserva.txtCotizacion.setText("0");
         this.vistaGenerarReserva.jdcLlegada.setDate(new Date());
@@ -80,12 +79,15 @@ public class ctrGenerarReserva implements ActionListener{
         this.vistaGenerarReserva.jdcSalida.setMaxSelectableDate(setMaxDate());
         this.vistaGenerarReserva.txtCantDias.setText(contarDias());
         this.vistaGenerarReserva.txtFechaReserva.setText("  " +fechaActual2(new Date()));
-        this.vistaGenerarReserva.txtCodEmpleado.setText("1");
+        this.vistaGenerarReserva.txtCodEmpleado.setText(reserva.getIdPersonaEmpleado());
 
         final JTextFieldDateEditor llegada = (JTextFieldDateEditor) this.vistaGenerarReserva.jdcLlegada.getDateEditor();
         final JTextFieldDateEditor salida  = (JTextFieldDateEditor) this.vistaGenerarReserva.jdcSalida.getDateEditor();
         llegada.setEditable(false);
         salida.setEditable(false);
+        
+        modelo = (DefaultTableModel) vistaGenerarReserva.tblDetalleReserva.getModel();
+        
         vistaGenerarReserva.addPropertyChangeLlegada(new PropertyChangeListener(){
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -93,7 +95,6 @@ public class ctrGenerarReserva implements ActionListener{
                 vistaGenerarReserva.jdcSalida.setMinSelectableDate(setMinSal());
                 vistaGenerarReserva.txtCantDias.setText(contarDias());
             }
-            
         });
         vistaGenerarReserva.addPropertyChangeSalida(new PropertyChangeListener(){
             @Override
@@ -101,91 +102,13 @@ public class ctrGenerarReserva implements ActionListener{
                 vistaGenerarReserva.txtCantDias.setText(contarDias());
             }
         });
-        vistaGenerarReserva.addALbtnQuitar(new ActionListener(){
+        
+        vistaGenerarReserva.addALbtnAgregar(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                modelo = (DefaultTableModel) vistaGenerarReserva.tblDetalleReserva.getModel(); 
-
-                //Sección 2
-                int a = vistaGenerarReserva.tblDetalleReserva.getSelectedRow(); 
-
-                //Sección 3
-                if (a<0){ 
-
-                      JOptionPane.showMessageDialog(vistaGenerarReserva, 
-                      "Debe seleccionar una fila de la tabla" ); 
-
-                }else {
-                    //Sección 4
-                    int confirmar=JOptionPane.showConfirmDialog(vistaGenerarReserva, 
-                    "Esta seguro que desea Eliminar el registro? "); 
-
-                    //Sección 5 
-                    if(JOptionPane.OK_OPTION==confirmar){
-                        
-                        Habitacion habitacion=new Habitacion();
-                        habitacion.updateEstadoHabitacion(String.valueOf(modelo.getValueAt(a,1)),"DISPONIBLE");
-                        
-                        int row = modelo.getRowCount();
-                        double multi = 0.00;
-                        for(int i=0;i<row;i++){
-                            if(a==i){
-
-                                multi=Double.parseDouble(String.valueOf(modelo.getValueAt(a,3)))*Double.parseDouble(String.valueOf(modelo.getValueAt(a,4)));break;
-                            }
-                            else continue;
-                        }
-
-                        JOptionPane.showMessageDialog(vistaGenerarReserva,"Registro Eliminado" );
-
-                        modelo.removeRow(a);  
-
-                        int row2 = modelo.getRowCount();
-                        if(row2==0){
-                            vistaGenerarReserva.btnBuscarCliente.setEnabled(true);
-                            vistaGenerarReserva.btnNuevoCliente.setEnabled(true);
-                            vistaGenerarReserva.txtCodCliente.setEnabled(true);
-                            vistaGenerarReserva.txtNomCliente.setEnabled(true);
-                            vistaGenerarReserva.txtDocCliente.setEnabled(true);
-                            vistaGenerarReserva.txtCantDias.setEnabled(true);
-                            vistaGenerarReserva.btnNuevoCliente.setEnabled(true);
-                            vistaGenerarReserva.jdcLlegada.setEnabled(true);
-                            vistaGenerarReserva.jdcSalida.setEnabled(true);
-                            vistaGenerarReserva.txtCodHab.setEnabled(true);
-                            vistaGenerarReserva.txtTipoHab.setEnabled(true);
-                            vistaGenerarReserva.txtCostoHab.setEnabled(true);
-                            vistaGenerarReserva.jspCantHuesped.setEnabled(true);
-                            vistaGenerarReserva.btnBuscarHabitacion.setEnabled(true);
-                            
-                            vistaGenerarReserva.txtCodHab.setText("");
-                            vistaGenerarReserva.txtTipoHab.setText("");
-                            vistaGenerarReserva.txtCostoHab.setText("");
-                            vistaGenerarReserva.txtCodHuesped.setText("");
-                            vistaGenerarReserva.txtNomHuesped.setText("");
-                            vistaGenerarReserva.txtDniHuesped.setText("");
-                            vistaGenerarReserva.jspCantHuesped.setValue((Integer)1);
-                            
-                            cont=0;
-                            salida.setText(sal);
-                            vistaGenerarReserva.txtCantDias.setText(cd);
-                        }
-                        coti-=multi;
-
-
-                        vistaGenerarReserva.txtCantHabit.setText(String.valueOf(row2));
-                        String cotis=String.valueOf(coti);
-                        vistaGenerarReserva.txtCotizacion.setText(cotis);
-                    }
-                }
-            }    
-        });
-         vistaGenerarReserva.addALbtnAgregar(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            modelo=(DefaultTableModel) vistaGenerarReserva.tblDetalleReserva.getModel();     
-            //Sección 2
+            
             Object [] fila=new Object[7]; 
-            //Sección 3
+            
             String nomcli = vistaGenerarReserva.txtNomCliente.getText();
             String codhab = vistaGenerarReserva.txtCodHab.getText();
             String codhue = vistaGenerarReserva.txtCodHuesped.getText(); 
@@ -201,25 +124,21 @@ public class ctrGenerarReserva implements ActionListener{
             fila[4]=cantdi;
             fila[5]=fllega;
             fila[6]=fsalid;
-
+   
             if(!nomcli.equals("") && !codhab.equals("") && !codhue.equals("") && !coshab.equals("") && !coshab.equals("") && !cantdi.equals("") && !fllega.equals("") && !fsalid.equals("")){
-                //Sección 4
+                
                 modelo.addRow(fila); 
-                int row = modelo.getRowCount();
+                row = modelo.getRowCount();
                 double multi = 0.00;
                 for(int i=0;i<row;i++){
                     multi=Double.parseDouble(String.valueOf(modelo.getValueAt(i,3)))*Double.parseDouble(String.valueOf(modelo.getValueAt(i,4)));
-
                 }
+                
                 coti+=multi;
-                //Sección 5
                 vistaGenerarReserva.tblDetalleReserva.setModel(modelo); 
                 Habitacion habitacion=new Habitacion();
                 habitacion.updateEstadoHabitacion(codhab,"EN LISTA");
              
-                //Sección 6
-                
-                
                 if((Integer)vistaGenerarReserva.jspCantHuesped.getValue()==1){
                     
                     vistaGenerarReserva.txtCodHab.setText(""); 
@@ -227,17 +146,14 @@ public class ctrGenerarReserva implements ActionListener{
                     vistaGenerarReserva.txtCostoHab.setText("");
                 }
                 else{
-                    
                     vistaGenerarReserva.txtCodHab.setEnabled(false);
                     vistaGenerarReserva.btnBuscarHabitacion.setEnabled(false);
                     vistaGenerarReserva.txtTipoHab.setEnabled(false);
                     vistaGenerarReserva.txtCostoHab.setEnabled(false);
                     vistaGenerarReserva.jspCantHuesped.setEnabled(false);
                     cont++;
-                    
                 }
                 if(cont%2==0){
-                    
                     vistaGenerarReserva.txtCodHab.setEnabled(true);
                     vistaGenerarReserva.btnBuscarHabitacion.setEnabled(true);
                     vistaGenerarReserva.txtTipoHab.setEnabled(true);
@@ -267,7 +183,6 @@ public class ctrGenerarReserva implements ActionListener{
                 vistaGenerarReserva.txtCantHabit.setText(String.valueOf(row));
                 vistaGenerarReserva.txtCotizacion.setText(String.valueOf(coti));
                 
-
                 cd=String.valueOf(modelo.getValueAt(0,4));
                 sal=String.valueOf(modelo.getValueAt(0,6));
                 lleg=String.valueOf(modelo.getValueAt(0,5));
@@ -275,11 +190,89 @@ public class ctrGenerarReserva implements ActionListener{
                 llegada.setText(lleg);
                 salida.setText(sal);
                 vistaGenerarReserva.txtCantDias.setText(cd);
+                
+                ctrBuscarHuesped.rowhues = modelo.getRowCount();
+                for(int i=0;i<ctrBuscarHuesped.rowhues;i++){
+                    ctrBuscarHuesped.idhues[i]=String.valueOf(modelo.getValueAt(i,2));
+                }
+                
                 }else{
                     JOptionPane.showMessageDialog(vistaGenerarReserva,"Debe llenar todos los campos");
                 }
             }
         });
+        
+        vistaGenerarReserva.addALbtnQuitar(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 
+                int a = vistaGenerarReserva.tblDetalleReserva.getSelectedRow(); 
+
+                if (a<0){ 
+                    
+                    JOptionPane.showMessageDialog(vistaGenerarReserva,"Debe seleccionar una fila de la tabla" ); 
+                    
+                }else {
+                    
+                    int confirmar=JOptionPane.showConfirmDialog(vistaGenerarReserva,"Esta seguro que desea Eliminar el registro? "); 
+
+                    if(JOptionPane.OK_OPTION==confirmar){
+                        
+                        Habitacion habitacion=new Habitacion();
+                        habitacion.updateEstadoHabitacion(String.valueOf(modelo.getValueAt(a,1)),"DISPONIBLE");
+                        
+                        row = modelo.getRowCount();
+                        double multi = 0.00;
+                        for(int i=0;i<row;i++){
+                            if(a==i){
+                                multi=Double.parseDouble(String.valueOf(modelo.getValueAt(a,3)))*Double.parseDouble(String.valueOf(modelo.getValueAt(a,4)));break;
+                            }
+                            else continue;
+                        }
+
+                        JOptionPane.showMessageDialog(vistaGenerarReserva,"Registro Eliminado" );
+
+                        modelo.removeRow(a);
+                        row = modelo.getRowCount();
+                        
+                        if(row==0){
+                            vistaGenerarReserva.btnBuscarCliente.setEnabled(true);
+                            vistaGenerarReserva.btnNuevoCliente.setEnabled(true);
+                            vistaGenerarReserva.txtCodCliente.setEnabled(true);
+                            vistaGenerarReserva.txtNomCliente.setEnabled(true);
+                            vistaGenerarReserva.txtDocCliente.setEnabled(true);
+                            vistaGenerarReserva.txtCantDias.setEnabled(true);
+                            vistaGenerarReserva.btnNuevoCliente.setEnabled(true);
+                            vistaGenerarReserva.jdcLlegada.setEnabled(true);
+                            vistaGenerarReserva.jdcSalida.setEnabled(true);
+                            vistaGenerarReserva.txtCodHab.setEnabled(true);
+                            vistaGenerarReserva.txtTipoHab.setEnabled(true);
+                            vistaGenerarReserva.txtCostoHab.setEnabled(true);
+                            vistaGenerarReserva.jspCantHuesped.setEnabled(true);
+                            vistaGenerarReserva.btnBuscarHabitacion.setEnabled(true);
+                            
+                            vistaGenerarReserva.txtCodHab.setText("");
+                            vistaGenerarReserva.txtTipoHab.setText("");
+                            vistaGenerarReserva.txtCostoHab.setText("");
+                            vistaGenerarReserva.txtCodHuesped.setText("");
+                            vistaGenerarReserva.txtNomHuesped.setText("");
+                            vistaGenerarReserva.txtDniHuesped.setText("");
+                            vistaGenerarReserva.jspCantHuesped.setValue((Integer)1);
+                            
+                            cont=0;
+                            salida.setText(sal);
+                            vistaGenerarReserva.txtCantDias.setText(cd);
+                        }
+                        coti-=multi;
+
+                        vistaGenerarReserva.txtCantHabit.setText(String.valueOf(row));
+                        String cotis=String.valueOf(coti);
+                        vistaGenerarReserva.txtCotizacion.setText(cotis);
+                    }
+                }
+            }    
+        });
+        
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -308,15 +301,14 @@ public class ctrGenerarReserva implements ActionListener{
                             vistaGenerarReserva.txtNomCliente.setText(cliente[1]);
                             vistaGenerarReserva.txtDocCliente.setText(cliente[2]);
                         }
-                        
                     });
                     
                     activo=true;
                 }else{
                     System.out.println("btnBuscarCliente");
                 }
-                
-               break;
+            break;
+            
             case "btnBuscarHabitacion":
                 
                 if(activo==false){
@@ -329,7 +321,8 @@ public class ctrGenerarReserva implements ActionListener{
                 }else{
                     System.out.println("btnBuscarHabitacion...");
                 }
-               break;
+            break;
+            
             case "btnBuscarHuesped":
                 
                 if(activo==false){
@@ -340,7 +333,8 @@ public class ctrGenerarReserva implements ActionListener{
                 }else{
                     System.out.println("btnBuscarHuesped...");
                 }
-               break;
+            break;
+            
             case "btnNuevoCliente":
                 
                 if(activo==false){
@@ -350,7 +344,8 @@ public class ctrGenerarReserva implements ActionListener{
                 }else{
                     System.out.println("btnNuevoCliente...");
                 }
-               break;
+            break;
+               
             case "btnNuevoHuesped":
                 
                 if(activo==false){
@@ -360,11 +355,12 @@ public class ctrGenerarReserva implements ActionListener{
                 }else{
                     System.out.println("btnNuevoHuesped...");
                 }
-               break;
+            break;
+            
             case "btnGrabarReserva":
                 
                 modelo = (DefaultTableModel) vistaGenerarReserva.tblDetalleReserva.getModel(); 
-                int row = modelo.getRowCount();
+                row = modelo.getRowCount();
                 
                 if(row>0){
                     if(JOptionPane.OK_OPTION==JOptionPane.showConfirmDialog(vistaGenerarReserva,"Esta seguro que desea grabar la RESERVA? ")){
@@ -403,7 +399,6 @@ public class ctrGenerarReserva implements ActionListener{
 
                         }
 
-
                         vistaGenerarReserva.btnBuscarCliente.setEnabled(true);
                         vistaGenerarReserva.btnNuevoCliente.setEnabled(true);
                         vistaGenerarReserva.txtCodCliente.setEnabled(true);
@@ -425,7 +420,6 @@ public class ctrGenerarReserva implements ActionListener{
                         vistaGenerarReserva.txtCotizacion.setText("0");
                         vistaGenerarReserva.txtCantHabit.setText("0");
 
-
                         for(int i=0;i<row;i++){
                             modelo.removeRow(0);
                         }
@@ -436,7 +430,8 @@ public class ctrGenerarReserva implements ActionListener{
                 }else{
                     JOptionPane.showMessageDialog(vistaGenerarReserva,"Error: Campos vacios");          
                 }
-               break;
+            break;
+            
             case "btnCancelar":
                 
                 int confirmar=JOptionPane.showConfirmDialog(vistaGenerarReserva,"Esta seguro que desea salir del registro? "); 
@@ -444,16 +439,15 @@ public class ctrGenerarReserva implements ActionListener{
                 if(JOptionPane.OK_OPTION==confirmar) {
                     
                     modelo=(DefaultTableModel) vistaGenerarReserva.tblDetalleReserva.getModel();
-                    int row1=modelo.getRowCount();
-                    for(int i=0;i<row1;i++){
+                    row=modelo.getRowCount();
+                    for(int i=0;i<row;i++){
                         Habitacion habitacion=new Habitacion();
                         habitacion.updateEstadoHabitacion(String.valueOf(modelo.getValueAt(i,1)),"DISPONIBLE");
                     }
                     hideFrmGenerarReserva();
                 }
-                break;
+            break;
         }
-        
     }
    
     public static String fechaActual1(Date date){
@@ -526,8 +520,7 @@ public class ctrGenerarReserva implements ActionListener{
         } catch (ParseException ex) {
             Logger.getLogger(ctrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-            return date;
+        return date;
     }
     public String contarDias(){
         int cant=0;
@@ -543,12 +536,13 @@ public class ctrGenerarReserva implements ActionListener{
         return String.valueOf(cant);
     }
     
-     public void showFrmGenerarReserva(){
-            this.vistaGenerarReserva.setVisible(true);
+    public void showFrmGenerarReserva(){
+        this.vistaGenerarReserva.setVisible(true);
     }
-    
+     
     public void hideFrmGenerarReserva(){
         this.vistaGenerarReserva.setVisible(false);
+        CtrNReserva.activo=false;
     }
  
 }

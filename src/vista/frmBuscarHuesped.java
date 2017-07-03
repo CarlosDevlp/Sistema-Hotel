@@ -40,7 +40,7 @@ public class frmBuscarHuesped extends StandardForm {
         jLabel1 = new javax.swing.JLabel();
         txtDni = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Buscar Huesped");
         setAlwaysOnTop(true);
         setResizable(false);

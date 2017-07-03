@@ -6,18 +6,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import modelo.Huesped;
 import vista.frmRegistrarHuesped;
 
 
 public class ctrRegistrarHuesped implements ActionListener{
     private frmRegistrarHuesped vistaRegistrarHuesped;
-    
     private ArrayList<Huesped> mHuespedList;
-    private DefaultTableModel mHuespedTableModel;
     private boolean repetido=false;
-    
     
     public ctrRegistrarHuesped(){
         this(new frmRegistrarHuesped());
@@ -45,7 +41,7 @@ public class ctrRegistrarHuesped implements ActionListener{
     public void registrarHuesped(){
         String nom=this.vistaRegistrarHuesped.txtNombre.getText();
         String dni=this.vistaRegistrarHuesped.txtDni.getText();
-        if(nom.length()>0 && dni.length()==8 &&dni.matches("[0-9]*")){
+        if(nom.length()>0 && nom.matches("[a-zA-Z- ]*") && dni.length()==8 && dni.matches("[0-9]*")){
             repetido=false;
             mHuespedList= Huesped.getHuespedList();
         
@@ -63,9 +59,11 @@ public class ctrRegistrarHuesped implements ActionListener{
                 this.vistaRegistrarHuesped.txtDni.setText("");
             }else
                 JOptionPane.showMessageDialog(vistaRegistrarHuesped,"Error: DNI ingresado ya existe.");
+            System.out.println("Exito Ingresado");
         }else
             JOptionPane.showMessageDialog(vistaRegistrarHuesped,"Error: Los datos son incorrectos.");
     }
+    
     public void showFrmRegistrarHuesped(){
         this.vistaRegistrarHuesped.setVisible(true);
     }

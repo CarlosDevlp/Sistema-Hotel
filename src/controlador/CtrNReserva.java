@@ -14,40 +14,12 @@ package controlador;
  */
 public class CtrNReserva {
     private ctrGenerarReserva mCtrGenerarReserva;
-//    private CtrBuscarCliente mCtrGenerarReserva;
-//    private CtrBuscarCliente mCtrBuscarCliente;
-//    private CtrBuscarHabitacion mCtrBuscarHabitacion;
-//    private CtrBuscarHuesped mCtrBuscarHuesped;
-//    private CtrRegistrarCliente mCtrRegistrarCliente;
-//    private CtrRegistrarHuesped mCtrRegistrarHuesped;
+    public static boolean activo=false;
     
     //constructor
-
     public CtrNReserva() {
         mCtrGenerarReserva=new ctrGenerarReserva();
-//        mCtrBuscarCliente=new CtrGenerarReserva();
-//        mCtrBuscarHabitacion=new CtrBuscarHabitacion();
-//        mCtrBuscarHuesped=new CtrBuscarHuesped();
-//        mCtrRegistrarCliente=new CtrGenerarReserva();
-//        mCtrRegistrarHuesped=new CtrGenerarReserva();
-       
     }
-
-//    public CtrBuscarHabitacion getmCtrBuscarHabitacion() {
-//        return mCtrBuscarHabitacion;
-//    }
-//
-//    public void setmCtrBuscarHabitacion(CtrBuscarHabitacion mCtrBuscarHabitacion) {
-//        this.mCtrBuscarHabitacion = mCtrBuscarHabitacion;
-//    }
-//
-//    public CtrBuscarHuesped getmCtrBuscarHuesped() {
-//        return mCtrBuscarHuesped;
-//    }
-//
-//    public void setmCtrBuscarHuesped(CtrBuscarHuesped mCtrBuscarHuesped) {
-//        this.mCtrBuscarHuesped = mCtrBuscarHuesped;
-//    }
 
     public ctrGenerarReserva getmCtrGenerarReserva() {
         return mCtrGenerarReserva;
@@ -57,22 +29,17 @@ public class CtrNReserva {
         this.mCtrGenerarReserva = mCtrGenerarReserva;
     }
     
-    
-    
-    
     public void showFrmGenerarReserva(){
-        mCtrGenerarReserva=new ctrGenerarReserva();
-        mCtrGenerarReserva.showFrmGenerarReserva();
-        mCtrGenerarReserva.loadData();
+        if(activo==false){
+            mCtrGenerarReserva=new ctrGenerarReserva();
+            mCtrGenerarReserva.showFrmGenerarReserva();
+            mCtrGenerarReserva.loadData();
+            activo=true;
+        }
+        else{
+            mCtrGenerarReserva.showFrmGenerarReserva();
+        }
     }
-//    public void showFrmBuscarHuesped(){
-//        mCtrBuscarHuesped.showFrmBuscarHuesped();
-//        mCtrBuscarHuesped.loadData(); 
-//    }
-//    public void showFrmBuscarHabitacion(){
-//        mCtrBuscarHabitacion.showFrmBuscarHabitacion();
-//        mCtrBuscarHabitacion.loadData(); 
-//    }
     public void loadData(){
         mCtrGenerarReserva.loadData();        
     }

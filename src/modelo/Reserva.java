@@ -6,6 +6,7 @@
 package modelo;
 
 import dao.BasicDao;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -132,5 +133,9 @@ public class Reserva {
             result= BasicDao.selectLastRow("Reserva",new String []{"idReserva"},"idReserva");
             return result.get("idReserva");
     }
-    
+    public String getIdPersonaEmpleado(){
+        ArrayList<Map<String,String>> result = BasicDao.call("Listar_idPersona_Empleado", null);
+           String idPerEmp=result.get(0).get("idPersona"); 
+        return idPerEmp;
+    }
 }

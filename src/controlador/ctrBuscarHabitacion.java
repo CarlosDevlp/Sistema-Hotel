@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Habitacion;
 import vista.frmBuscarHabitacion;
-import vista.frmBuscarHuesped;
 import vista.frmGenerarReserva;
 
 /**
@@ -30,12 +29,14 @@ public class ctrBuscarHabitacion implements ActionListener{
     public ctrBuscarHabitacion(){
         this(new frmBuscarHabitacion());
     }
+    
     public ctrBuscarHabitacion(frmBuscarHabitacion mfrmBuscarHabitacion) {
         this.vistaBuscarHabitacion = mfrmBuscarHabitacion;
         this.vistaBuscarHabitacion.btnAceptar.addActionListener(this);
         this.vistaBuscarHabitacion.btnBuscar.addActionListener(this);
         this.vistaBuscarHabitacion.btnCancelar.addActionListener(this);
     }
+    
      public void actionPerformed(ActionEvent e) {
         JComponent obj=(JComponent) e.getSource();
         
@@ -76,27 +77,26 @@ public class ctrBuscarHabitacion implements ActionListener{
     
     public void transferirDatos(){
         int fila=vistaBuscarHabitacion.tblHabitacion.getSelectedRow();
-                if(fila>-1){
-                
-                String cod=(String)vistaBuscarHabitacion.tblHabitacion.getValueAt(fila, 0);
-                String tip=(String)vistaBuscarHabitacion.tblHabitacion.getValueAt(fila, 2);
-                String cos=(String)vistaBuscarHabitacion.tblHabitacion.getValueAt(fila, 3);
-                
-                vistaGenerarReserva.txtCodHab.setText(cod);
-                vistaGenerarReserva.txtTipoHab.setText(tip);
-                vistaGenerarReserva.txtCostoHab.setText(cos);
-                
-                hideFrmBuscarHabitacion();
-                }else{
-                    JOptionPane.showMessageDialog(vistaBuscarHabitacion, "Seleccione una Habitacion");
-                }
+            if(fila>-1){
+
+            String cod=(String)vistaBuscarHabitacion.tblHabitacion.getValueAt(fila, 0);
+            String tip=(String)vistaBuscarHabitacion.tblHabitacion.getValueAt(fila, 2);
+            String cos=(String)vistaBuscarHabitacion.tblHabitacion.getValueAt(fila, 3);
+
+            vistaGenerarReserva.txtCodHab.setText(cod);
+            vistaGenerarReserva.txtTipoHab.setText(tip);
+            vistaGenerarReserva.txtCostoHab.setText(cos);
+
+            hideFrmBuscarHabitacion();
+            }else{
+                JOptionPane.showMessageDialog(vistaBuscarHabitacion, "Seleccione una Habitacion");
+            }
     }
     
     private void clearTable(){        
         mHabitacionTableModel = new DefaultTableModel(null,USER_TABLE_COLUMN_NAMES);
         this.vistaBuscarHabitacion.tblHabitacion.setModel(mHabitacionTableModel);
     }
-    
     
     public void showFrmBuscarHabitacion(){
         this.vistaBuscarHabitacion.setVisible(true);
@@ -106,4 +106,5 @@ public class ctrBuscarHabitacion implements ActionListener{
         this.vistaBuscarHabitacion.setVisible(false);
         ctrGenerarReserva.activo=false;
     }
+    
 }

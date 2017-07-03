@@ -9,11 +9,10 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Callback;
 import modelo.Persona;
 import vista.frmBuscarCliente;
-import vista.frmGenerarReserva;
 
 public class ctrBuscarCliente implements ActionListener{
+    
     private frmBuscarCliente vistaBuscarCliente;
-    private frmGenerarReserva vistaGenerarReserva;
     private Callback onCompletedSearch;
     
     private ArrayList<Persona> mClienteList;
@@ -49,7 +48,6 @@ public class ctrBuscarCliente implements ActionListener{
         }                
     }
     
-    
     public Callback getOnCompletedSearch() {
         return onCompletedSearch;
     }
@@ -61,8 +59,6 @@ public class ctrBuscarCliente implements ActionListener{
     public void setOnCompletedSearch(Callback onCompletedSearch) {
         this.onCompletedSearch = onCompletedSearch;
     }
-    
-    
     
     public void buscarClienteDni(){
         String doc=vistaBuscarCliente.txtDocumento.getText();
@@ -92,7 +88,6 @@ public class ctrBuscarCliente implements ActionListener{
             //caso de uso
             onCompletedSearch.execute(new String[]{cod,nom,doc,dir,tel});
             
-
             hideFrmBuscarCliente();
             
         }else{
