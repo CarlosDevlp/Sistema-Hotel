@@ -1,5 +1,7 @@
 package controlador;
 
+//import static controlador.ctrBuscarHabitacion.activo;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class ctrBuscarCliente implements ActionListener{
                break;
             case "btnCancelar":
                 hideFrmBuscarCliente();
+                onCompletedSearch.execute(null);
                 System.out.println("btnCancelar");
                break;
         }                

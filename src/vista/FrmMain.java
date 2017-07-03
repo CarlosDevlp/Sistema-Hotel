@@ -6,11 +6,15 @@
 package vista;
 
 import assets.values.Constant;
+import controlador.CtrFacturacion;
+import controlador.CtrGenerarLHPISO;
 import controlador.CtrMain;
 import controlador.CtrNAlojamiento;
 import controlador.CtrNReserva;
 import controlador.CtrNSeguridad;
 import controlador.CtrNServicio;
+import controlador.CtrlMantenerRDLH;
+import controlador.ctrGenerarReserva;
 import controlador.CtrNReserva;
 /**
  * 
@@ -46,7 +50,10 @@ public class FrmMain extends StandardForm {
         
         //controladora de negocio alojamiento
         mCtrMain.setCtrNAlojamiento(new CtrNAlojamiento());
-        
+        //controladora de negocio Mantenimiento
+        mCtrMain.setCtrlMantenimiento(new CtrlMantenerRDLH());
+        mCtrMain.setCtlGenerarLHPISO(new CtrGenerarLHPISO());
+        mCtrMain.setMctrFacturacion(new CtrFacturacion());
         //inicializar sistema y su configuración
          mCtrMain.init();
         
@@ -84,6 +91,8 @@ public class FrmMain extends StandardForm {
         smServicioHabitacion = new javax.swing.JMenuItem();
         smServicioExtra = new javax.swing.JMenuItem();
         MnMantenimiento = new javax.swing.JMenu();
+        MantenerRLH = new javax.swing.JMenuItem();
+        GenerarLLHP = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Constant.APP_NAME);
@@ -151,7 +160,7 @@ public class FrmMain extends StandardForm {
         MnFacturacion.setName("pfacturacion"); // NOI18N
 
         smRegistrarCobro.setText("Registrar Cobro");
-        smRegistrarCobro.setName("smRegistrarCobro"); // NOI18N
+        smRegistrarCobro.setName("pRegistrarCobro"); // NOI18N
         MnFacturacion.add(smRegistrarCobro);
 
         smBuscarCliente.setText("Buscar Cliente");
@@ -200,6 +209,20 @@ public class FrmMain extends StandardForm {
         MnMantenimiento.setText("Mantenimiento");
         MnMantenimiento.setEnabled(false);
         MnMantenimiento.setName("pMantenimiento"); // NOI18N
+
+        MantenerRLH.setText("MantenerRLH");
+        MantenerRLH.setName("pmantener"); // NOI18N
+        MnMantenimiento.add(MantenerRLH);
+
+        GenerarLLHP.setText("GenerarLLHP");
+        GenerarLLHP.setName("pGenerarL"); // NOI18N
+        GenerarLLHP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerarLLHPActionPerformed(evt);
+            }
+        });
+        MnMantenimiento.add(GenerarLLHP);
+
         jMenuBar1.add(MnMantenimiento);
 
         setJMenuBar(jMenuBar1);
@@ -221,6 +244,10 @@ public class FrmMain extends StandardForm {
     private void MnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSalirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MnSalirActionPerformed
+
+    private void GenerarLLHPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarLLHPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GenerarLLHPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +289,8 @@ public class FrmMain extends StandardForm {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JMenuItem GenerarLLHP;
+    public javax.swing.JMenuItem MantenerRLH;
     public javax.swing.JMenu MnAdministrador;
     public javax.swing.JMenu MnAlojamiento;
     public javax.swing.JMenu MnFacturacion;
@@ -286,7 +315,7 @@ public class FrmMain extends StandardForm {
     public javax.swing.JMenuItem smServicioExtra;
     public javax.swing.JMenuItem smServicioHabitacion;
     // End of variables declaration//GEN-END:variables
-
+   
     
 
     @Override

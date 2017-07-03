@@ -29,8 +29,11 @@ public class CtrMain implements ActionListener, WindowListener{
     private CtrNReserva mCtrNReserva;    
     private CtrNServicio mCtrNServicio;
     private CtrNAlojamiento mCtrNAlojamiento;
+    private CtrlMantenerRDLH mCtrMantenimiento;
+    private CtrGenerarLHPISO mCtrGenerarLHPISO;
     private CtrIncluido mCtrIncluido;
     private Callback mInvokeCallback;
+    private CtrFacturacion mctrFacturacion;
     
     private final String LOG_TAG="CtrMain",LOG_TAG_ERROR="CtrMain-error";
     
@@ -51,7 +54,11 @@ public class CtrMain implements ActionListener, WindowListener{
         mFrmMain.smServicioHabitacion.addActionListener(this);
         mFrmMain.smRegistrarAlojamiento.addActionListener(this);
         mFrmMain.smReporteAlojamiento.addActionListener(this);
-        
+        mFrmMain.MantenerRLH.addActionListener(this);
+        mFrmMain.GenerarLLHP.addActionListener(this);
+        //mFrmMain.MnFacturacion.addActionListener(this);
+        mFrmMain.smRegistrarCobro.addActionListener(this);
+       
         
         //arreglando conflictos merge--------------------
         mCtrIncluido=CtrIncluido.getInstance();
@@ -116,6 +123,16 @@ public class CtrMain implements ActionListener, WindowListener{
             case "pReporteAlojamiento":
                 this.mCtrNAlojamiento.showFrmReporteAlojamiento();
                 break;
+            case "pmantener":
+                this.mCtrMantenimiento.showFrmMantenerRegistro();
+                break;
+            case "pGenerarL":
+                this.mCtrGenerarLHPISO.showFrmGenerarlistaLHP();
+                break;
+            //FACTURACION
+            case "pRegistrarCobro":
+                this.mctrFacturacion.showFrmFacturacion();
+                break;   
             //MANTENIMIENTO
             case "pMantenimiento":
                 break;
@@ -221,8 +238,15 @@ public class CtrMain implements ActionListener, WindowListener{
         
         
     }
-
     //setters and getters
+    public CtrFacturacion getMctrFacturacion() {
+        return mctrFacturacion;
+    }
+
+    public void setMctrFacturacion(CtrFacturacion mctrFacturacion) {    
+        this.mctrFacturacion = mctrFacturacion;
+    }
+
     public CtrNSeguridad getCtrNFacturacion() {
         return mCtrNSeguridad;
     }
@@ -251,6 +275,23 @@ public class CtrMain implements ActionListener, WindowListener{
         return mCtrNAlojamiento;
     }
 
+    public CtrlMantenerRDLH getCtrMatenerRLH() {
+        return mCtrMantenimiento;
+    }
+    
+    public void setCtrlMantenimiento(CtrlMantenerRDLH ctrMantener)
+    {
+        this.mCtrMantenimiento=ctrMantener;
+    }
+     public CtrGenerarLHPISO getCtrGenerarLHPISO() {
+        return mCtrGenerarLHPISO;
+    }
+    
+    public void setCtlGenerarLHPISO(CtrGenerarLHPISO ctrGenerarLHPISO)
+    {
+        this.mCtrGenerarLHPISO=ctrGenerarLHPISO;
+    }
+    
     public void setCtrNAlojamiento(CtrNAlojamiento ctrNAlojamiento) {
         this.mCtrNAlojamiento = ctrNAlojamiento;
     }    

@@ -93,7 +93,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="smRegistrarCobro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar Cobro"/>
-                <Property name="name" type="java.lang.String" value="smRegistrarCobro" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="pRegistrarCobro" noResource="true"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -199,6 +199,29 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="MantenerRLH">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="MantenerRLH"/>
+                <Property name="name" type="java.lang.String" value="pmantener" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="GenerarLLHP">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="GenerarLLHP"/>
+                <Property name="name" type="java.lang.String" value="pGenerarL" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GenerarLLHPActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

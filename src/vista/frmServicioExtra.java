@@ -1,4 +1,5 @@
 package vista;
+
 import conexion.Conexion;
 import dao.BasicDao;
 import java.awt.event.ActionListener;
@@ -7,13 +8,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 public class frmServicioExtra extends javax.swing.JFrame {
 
@@ -21,49 +26,54 @@ public class frmServicioExtra extends javax.swing.JFrame {
     //conexion
    /* Conexion cn = new Conexion();
    Connection con = cn.conexion(); */
+    DefaultTableModel tableta;
+    int precioAcumulado = 0;
+    int idAlojamiento = 0;
+    int idHuesped = 0;
     
     public frmServicioExtra() {
         initComponents();
         fecha2.setText(FechaActual());
         tablilla();
         bloquear();
+        txtpago2.setText(""+precioAcumulado);
     }
     
     void bloquear(){
-      txtnombresapellidosServicio.setEnabled(false);
-      txtHabitacionServicio.setEnabled(false);
+      txtnombresapellidos2.setEnabled(false);
+      txthabitacion2.setEnabled(false);
       panelservicio.setEnabled(false);
-      txaDetalleServicio.setEnabled(false);
-      txtpagoServicios.setEnabled(false);
-      btnAgregarServicio.setEnabled(false);
-      btnquitarServicio.setEnabled(false);
-      btnguardarServicios.setEnabled(false);
+      tblServiciosExtras.setEnabled(false);
+      txtpago2.setEnabled(false);
+      btnagregar2.setEnabled(false);
+      btnquitar2.setEnabled(false);
+      btnguardar2.setEnabled(false);
       checkbuffet.setEnabled(false);
       checkpiscina.setEnabled(false);
       checkdiscoteca.setEnabled(false);
     }
     void desbloquear(){
-      txtnombresapellidosServicio.setEnabled(true);
-      txtHabitacionServicio.setEnabled(true);
+      txtnombresapellidos2.setEnabled(true);
+      txthabitacion2.setEnabled(true);
       panelservicio.setEnabled(true);
-      txaDetalleServicio.setEnabled(true);
-      txtpagoServicios.setEnabled(true);
-      btnAgregarServicio.setEnabled(true);
-      btnquitarServicio.setEnabled(true);
-      btnguardarServicios.setEnabled(true);
+      tblServiciosExtras.setEnabled(true);
+      txtpago2.setEnabled(true);
+      btnagregar2.setEnabled(true);
+      btnquitar2.setEnabled(true);
+      btnguardar2.setEnabled(true);
       checkbuffet.setEnabled(true);
       checkpiscina.setEnabled(true);
       checkdiscoteca.setEnabled(true);
     }
     void tablilla(){
-       /* DefaultTableModel tableta =new DefaultTableModel();
+        tableta = new DefaultTableModel();
         tableta.addColumn("DNI");
         tableta.addColumn("Nombres y Apellidos");
         tableta.addColumn("N°Habitación");
         tableta.addColumn("Fecha");
         tableta.addColumn("Tipo Servicio");
         tableta.addColumn("Total");
-        txttabla2.setModel(tableta);
+        tblServiciosExtras.setModel(tableta);/*
         String sql= "SELECT * FROM ";
         String datos[]=new String[6];
         Statement st;
@@ -92,16 +102,16 @@ public class frmServicioExtra extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtnombresapellidosServicio = new javax.swing.JTextField();
-        txtHabitacionServicio = new javax.swing.JTextField();
+        txtnombresapellidos2 = new javax.swing.JTextField();
+        txthabitacion2 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        txaDetalleServicio = new javax.swing.JTable();
-        txtdniServicio = new javax.swing.JTextField();
-        btnconsultarDNIservicio = new javax.swing.JButton();
-        btnAgregarServicio = new javax.swing.JButton();
-        btnquitarServicio = new javax.swing.JButton();
-        btnguardarServicios = new javax.swing.JButton();
-        btnsalirServicios = new javax.swing.JButton();
+        tblServiciosExtras = new javax.swing.JTable();
+        txtdni2 = new javax.swing.JTextField();
+        btnconsultar2 = new javax.swing.JButton();
+        btnagregar2 = new javax.swing.JButton();
+        btnquitar2 = new javax.swing.JButton();
+        btnguardar2 = new javax.swing.JButton();
+        btnsalir2 = new javax.swing.JButton();
         panelservicio = new javax.swing.JPanel();
         checkpiscina = new javax.swing.JCheckBox();
         checkbuffet = new javax.swing.JCheckBox();
@@ -112,9 +122,9 @@ public class frmServicioExtra extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         fecha2 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtpagoServicios = new javax.swing.JTextField();
+        txtpago2 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(java.awt.Color.lightGray);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -124,7 +134,7 @@ public class frmServicioExtra extends javax.swing.JFrame {
 
         jLabel6.setText("N° Habitación");
 
-        txaDetalleServicio.setModel(new javax.swing.table.DefaultTableModel(
+        tblServiciosExtras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -132,30 +142,40 @@ public class frmServicioExtra extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane3.setViewportView(txaDetalleServicio);
+        jScrollPane3.setViewportView(tblServiciosExtras);
 
-        btnconsultarDNIservicio.setText("Consultar");
-        btnconsultarDNIservicio.addActionListener(new java.awt.event.ActionListener() {
+        btnconsultar2.setText("Consultar");
+        btnconsultar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnconsultarDNIservicioActionPerformed(evt);
+                btnconsultar2ActionPerformed(evt);
             }
         });
 
-        btnAgregarServicio.setText("Agregar");
-
-        btnquitarServicio.setText("Quitar");
-
-        btnguardarServicios.setText("Guardar");
-        btnguardarServicios.addActionListener(new java.awt.event.ActionListener() {
+        btnagregar2.setText("Agregar");
+        btnagregar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnguardarServiciosActionPerformed(evt);
+                btnagregar2ActionPerformed(evt);
             }
         });
 
-        btnsalirServicios.setText("Salir");
-        btnsalirServicios.addActionListener(new java.awt.event.ActionListener() {
+        btnquitar2.setText("Quitar");
+        btnquitar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsalirServiciosActionPerformed(evt);
+                btnquitar2ActionPerformed(evt);
+            }
+        });
+
+        btnguardar2.setText("Guardar");
+        btnguardar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnguardar2ActionPerformed(evt);
+            }
+        });
+
+        btnsalir2.setText("Salir");
+        btnsalir2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalir2ActionPerformed(evt);
             }
         });
 
@@ -178,7 +198,7 @@ public class frmServicioExtra extends javax.swing.JFrame {
                     .addComponent(checkpiscina)
                     .addComponent(checkbuffet)
                     .addComponent(checkdiscoteca))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         panelservicioLayout.setVerticalGroup(
             panelservicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,150 +220,262 @@ public class frmServicioExtra extends javax.swing.JFrame {
 
         jLabel2.setText("Neto a Pagar");
 
+        txtpago2.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtdni2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnconsultar2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtnombresapellidos2, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txthabitacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelservicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnagregar2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnquitar2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(205, 205, 205)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtdniServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnconsultarDNIservicio))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtHabitacionServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtnombresapellidosServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnAgregarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(27, 27, 27)
-                                                .addComponent(btnquitarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(33, 33, 33)
-                                        .addComponent(panelservicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnguardarServicios)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtpagoServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnsalirServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(293, 293, 293)
+                        .addComponent(btnguardar2)
+                        .addGap(50, 50, 50)
+                        .addComponent(btnsalir2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtpago2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(fecha2)
-                        .addComponent(jLabel8)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(fecha2)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtdniServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnconsultarDNIservicio))
+                    .addComponent(txtdni2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnconsultar2))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(txtnombresapellidosServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtnombresapellidos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(txtHabitacionServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAgregarServicio)
-                            .addComponent(btnquitarServicio)))
+                            .addComponent(txthabitacion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(btnagregar2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnquitar2))
                     .addComponent(panelservicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtpagoServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel2)
+                    .addComponent(txtpago2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnsalirServicios)
-                    .addComponent(btnguardarServicios)))
+                    .addComponent(btnguardar2)
+                    .addComponent(btnsalir2))
+                .addGap(33, 33, 33))
         );
-
-        getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnconsultarDNIservicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarDNIservicioActionPerformed
+    private void btnconsultar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultar2ActionPerformed
         //CONSULTAR DATOS
-        ArrayList<Map<String,String>> resultHuespedes=BasicDao.select("Huesped", new String[]{"*"}, "DNIHue="+this.txtdniServicio.getText());
-        Map<String,String> huesped=resultHuespedes.get(0);//objeto huesped
-        
-        this.txtnombresapellidosServicio.setText(huesped.get("NombreHue")); 
-        ArrayList<Map<String,String>> resultHabitaciones=BasicDao.select(new String[]{"Habitacion","DetalleReserva"}, new String[]{"*"}, new String[]{"Habitacion_idHab","idHab"},"Huesped_idHSP="+huesped.get("idHSP"));
-        Map<String,String> habitacion=resultHabitaciones.get(0);
-        this.txtHabitacionServicio.setText(habitacion.get("NumeroHab"));
-    }//GEN-LAST:event_btnconsultarDNIservicioActionPerformed
+       Map<String,String> huespedes=null;
+       //Consultar Huesped
+        if(txtdni2.getText().length()>0 && txtdni2.getText().length()==8){
+            try{
+           
+                ArrayList<Map<String,String>> resultaHuespedes=BasicDao.select("Huesped", new String[]{"*"}, "DNIHue="+this.txtdni2.getText());
+                huespedes=resultaHuespedes.get(0);//objeto huesped
+                this.txtnombresapellidos2.setText(huespedes.get("NombreHue"));
+                idHuesped = Integer.parseInt(huespedes.get("idHSP"));
+                
+                desbloquear();
+                } catch(Exception e){
+                   JOptionPane.showMessageDialog(null,"Huesped no se encuentra alojado en estos momentos");
+                   bloquear();
+                   txtnombresapellidos2.setText("");
+                   txthabitacion2.setText("");
+               }
 
-    private void btnsalirServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirServiciosActionPerformed
+
+                ArrayList<Map<String,String>> resultaHabitaciones=BasicDao.select(new String[]{"Habitacion","DetalleReserva"}, new String[]{"*"}, new String[]{"Habitacion_idHab","idHab"},"Huesped_idHSP="+huespedes.get("idHSP"));
+                Map<String,String> habitaciones=resultaHabitaciones.get(0);
+                txthabitacion2.setText(habitaciones.get("NumeroHab"));
+                ArrayList<Map<String,String>> resultAlojamiento = BasicDao.select("Alojamiento", new String[]{"*"},"Reserva_idReserva="+habitaciones.get("Reserva_idReserva").toString());
+                idAlojamiento = Integer.parseInt(resultAlojamiento.get(0).get("idAlojamiento"));
+                
+        }else{
+            JOptionPane.showMessageDialog(null,"Ingrese un DNI correcto");
+                   bloquear();
+                   txtnombresapellidos2.setText("");
+                   txthabitacion2.setText("");
+        }
+    }//GEN-LAST:event_btnconsultar2ActionPerformed
+
+    private void btnsalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalir2ActionPerformed
        JOptionPane.showMessageDialog(null,"Salir de Servicios Extras");
        this.setVisible(false);
          
-    }//GEN-LAST:event_btnsalirServiciosActionPerformed
+    }//GEN-LAST:event_btnsalir2ActionPerformed
 
-    private void btnguardarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarServiciosActionPerformed
-       /* try {
-            //validacion de mi panel
-            panelservicio.add(checkpiscina);
-            panelservicio.add(checkbuffet);
-            panelservicio.add(checkdiscoteca);
-            if(checkpiscina.){
-                
-              
-            }
-            // codigo del boton guardar
-            PreparedStatement pps = cn.prepareStatement("INSERT INTO detalleserviciosextra(dniDSE,FullNombresDSE,NroHabitacionDSE,FechaDSE,TipoServicioDSE,totalDSe,totalnetoDSE) VALUES(?,?,?,?,?,?,?)");
-            pps.setString(1,txtdni2.getText());
-            pps.setString(2,txtnombresapellidos2.getText());
-            pps.setString(3,txthabitacion2.getText());
-            pps.setString(4,fecha2.getText());
-            pps.setString(5,panelservicio.getText());
-            pps.setString(6,txtdni2.getText());
-            pps.setString(7,.getText());
-            pps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(frmServicioExtra.class.getName()).log(Level.SEVERE, null, ex);
-        } */
-    }//GEN-LAST:event_btnguardarServiciosActionPerformed
+    private void btnguardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardar2ActionPerformed
+        try{
+           if(tableta.getRowCount() > 0){
+                for(int i = 0 ; i < tableta.getRowCount(); i++)
+                {
+                     tableta.getValueAt(i, 0);
+                     String []items = new String[5];
+                     String []values = new String[5];
+                     items[0] = "FechaDSe";
+                     items[1] = "CantidadDSe";
+                     items[2] = "Huesped_idHSP";
+                     items[3] = "ServicioExtra_idSEx";
+                     items[4] = "Alojamiento_idAlojamiento";
+                     String fecha = fecha2.getText();
+                     String fechaCambiada = fecha.replace("/","-");
+                     SimpleDateFormat formatFecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                     Date fechaFormateada = formatFecha.parse(fechaCambiada);
+                     SimpleDateFormat formatoFecha2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                     values[0] = ""+formatoFecha2.format(fechaFormateada);
+                     values[1] = "1";
+                     values[2] = ""+idHuesped;
+                     ArrayList<Map<String,String>> resultadoProductos = BasicDao.select("ServiciosExtra", new String[]{"*"}, "NombreSEx = '"+tableta.getValueAt(i, 4).toString()+"'");
+                     //System.out.println(tableta.getValueAt(i, 4).toString());
+                     //System.out.println(resultadoProductos.get(0));
+                     values[3] = ""+resultadoProductos.get(0).get("idSEx");
+                     values[4] = ""+idAlojamiento;
+                     BasicDao.insert("DetalleServicios", items, values);
+                 }
+
+                 checkbuffet.setSelected(false);
+                 checkdiscoteca.setSelected(false);
+                 checkpiscina.setSelected(false);
+                 DefaultTableModel modelo = (DefaultTableModel) tblServiciosExtras.getModel();
+                 while(modelo.getRowCount()>0)modelo.removeRow(0);
+                 precioAcumulado = 0;
+                 txtpago2.setText(""+precioAcumulado);
+                 JOptionPane.showMessageDialog(null,"Registro sastifactorio");
+           }else{
+               JOptionPane.showMessageDialog(null, "No puede guardar si no selecciona algún servicio extra.");
+           }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+    }//GEN-LAST:event_btnguardar2ActionPerformed
+
+    private void btnagregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregar2ActionPerformed
+        
+        if(checkpiscina.isSelected()){
+            String data[] = new String[6];
+            data[0] = txtdni2.getText().toString();
+            data[1] = txtnombresapellidos2.getText().toString();
+            data[2] = txthabitacion2.getText().toString();
+            data[3] = fecha2.getText().toString();
+            data[4] = checkpiscina.getText().toString();
+            ArrayList<Map<String,String>> resultadoProductos = BasicDao.select("ServiciosExtra", new String[]{"*"}, "NombreSEx like '%"+this.checkpiscina.getText().toString()+"%'");
+            data[5] = resultadoProductos.get(0).get("costoSEx");
+            tableta.addRow(data);
+            precioAcumulado += Integer.parseInt(resultadoProductos.get(0).get("costoSEx"));
+            txtpago2.setText(""+precioAcumulado);
+            checkpiscina.setSelected(false);
+        }
+        
+        if(checkbuffet.isSelected()){
+            String data[] = new String[6];
+            data[0] = txtdni2.getText().toString();
+            data[1] = txtnombresapellidos2.getText().toString();
+            data[2] = txthabitacion2.getText().toString();
+            data[3] = fecha2.getText().toString();
+            data[4] = checkbuffet.getText().toString();
+            ArrayList<Map<String,String>> resultadoProductos = BasicDao.select("ServiciosExtra", new String[]{"*"}, "NombreSEx like '%"+this.checkbuffet.getText().toString()+"%'");
+            data[5] = resultadoProductos.get(0).get("costoSEx");
+            tableta.addRow(data);
+            precioAcumulado += Integer.parseInt(resultadoProductos.get(0).get("costoSEx"));
+            txtpago2.setText(""+precioAcumulado);
+            checkbuffet.setSelected(false);
+        }
+        
+        if(checkdiscoteca.isSelected()){
+            String data[] = new String[6];
+            data[0] = txtdni2.getText().toString();
+            data[1] = txtnombresapellidos2.getText().toString();
+            data[2] = txthabitacion2.getText().toString();
+            data[3] = fecha2.getText().toString();
+            data[4] = checkdiscoteca.getText().toString();
+            ArrayList<Map<String,String>> resultadoProductos = BasicDao.select("ServiciosExtra", new String[]{"*"}, "NombreSEx like '%"+this.checkdiscoteca.getText().toString()+"%'");
+            data[5] = resultadoProductos.get(0).get("costoSEx");
+            tableta.addRow(data);
+            precioAcumulado += Integer.parseInt(resultadoProductos.get(0).get("costoSEx"));
+            txtpago2.setText(""+precioAcumulado);
+            checkdiscoteca.setSelected(false);
+        }
+        
+    }//GEN-LAST:event_btnagregar2ActionPerformed
+
+    private void btnquitar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnquitar2ActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tblServiciosExtras.getModel();
+        
+        precioAcumulado -= Integer.parseInt(modelo.getValueAt(tblServiciosExtras.getSelectedRow(), 5).toString());
+        txtpago2.setText(""+precioAcumulado);
+        modelo.removeRow(tblServiciosExtras.getSelectedRow());
+    }//GEN-LAST:event_btnquitar2ActionPerformed
 
     public static String FechaActual(){
         Date fecha=new Date();
@@ -385,11 +517,11 @@ public class frmServicioExtra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarServicio;
-    private javax.swing.JButton btnconsultarDNIservicio;
-    private javax.swing.JButton btnguardarServicios;
-    private javax.swing.JButton btnquitarServicio;
-    private javax.swing.JButton btnsalirServicios;
+    private javax.swing.JButton btnagregar2;
+    private javax.swing.JButton btnconsultar2;
+    private javax.swing.JButton btnguardar2;
+    private javax.swing.JButton btnquitar2;
+    private javax.swing.JButton btnsalir2;
     private javax.swing.JCheckBox checkbuffet;
     private javax.swing.JCheckBox checkdiscoteca;
     private javax.swing.JCheckBox checkpiscina;
@@ -404,17 +536,14 @@ public class frmServicioExtra extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel panelservicio;
-    private javax.swing.JTable txaDetalleServicio;
-    private javax.swing.JTextField txtHabitacionServicio;
-    private javax.swing.JTextField txtdniServicio;
-    private javax.swing.JTextField txtnombresapellidosServicio;
-    private javax.swing.JTextField txtpagoServicios;
+    private javax.swing.JTable tblServiciosExtras;
+    private javax.swing.JTextField txtdni2;
+    private javax.swing.JTextField txthabitacion2;
+    private javax.swing.JTextField txtnombresapellidos2;
+    private javax.swing.JTextField txtpago2;
     // End of variables declaration//GEN-END:variables
 
     public void addALbtnsalir2(ActionListener actionListener){
-        btnsalirServicios.addActionListener(actionListener);
-    }
-    private void fclose() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        btnsalir2.addActionListener(actionListener);
     }
 }

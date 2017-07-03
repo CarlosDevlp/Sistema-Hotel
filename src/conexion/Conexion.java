@@ -25,7 +25,9 @@ public class Conexion {
         try{
             
                 Class.forName("com.mysql.jdbc.Driver");
-                con=DriverManager.getConnection("jdbc:mysql://localhost:3306/calidadt3?zeroDateTimeBehavior=convertToNull","root","");       
+
+                con=DriverManager.getConnection("jdbc:mysql://sl-us-south-1-portal.2.dblayer.com:16643/CalidadT3Oficial?zeroDateTimeBehavior=convertToNull","admin","LTKIKOECRZFJOEUM");       
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
