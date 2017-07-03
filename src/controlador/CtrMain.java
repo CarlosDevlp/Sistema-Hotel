@@ -33,7 +33,7 @@ public class CtrMain implements ActionListener, WindowListener{
     private CtrGenerarLHPISO mCtrGenerarLHPISO;
     private CtrIncluido mCtrIncluido;
     private Callback mInvokeCallback;
-
+    private CtrFacturacion mctrFacturacion;
     
     private final String LOG_TAG="CtrMain",LOG_TAG_ERROR="CtrMain-error";
     
@@ -56,7 +56,9 @@ public class CtrMain implements ActionListener, WindowListener{
         mFrmMain.smReporteAlojamiento.addActionListener(this);
         mFrmMain.MantenerRLH.addActionListener(this);
         mFrmMain.GenerarLLHP.addActionListener(this);
-        
+        //mFrmMain.MnFacturacion.addActionListener(this);
+        mFrmMain.smRegistrarCobro.addActionListener(this);
+       
         
         //arreglando conflictos merge--------------------
         mCtrIncluido=CtrIncluido.getInstance();
@@ -124,10 +126,13 @@ public class CtrMain implements ActionListener, WindowListener{
             case "pmantener":
                 this.mCtrMantenimiento.showFrmMantenerRegistro();
                 break;
-                 case "pGenerarL":
-                 this.mCtrGenerarLHPISO.showFrmGenerarlistaLHP();
+            case "pGenerarL":
+                this.mCtrGenerarLHPISO.showFrmGenerarlistaLHP();
                 break;
-               
+            //FACTURACION
+            case "pRegistrarCobro":
+                this.mctrFacturacion.showFrmFacturacion();
+                break;   
             //MANTENIMIENTO
             case "pMantenimiento":
                 break;
@@ -233,8 +238,15 @@ public class CtrMain implements ActionListener, WindowListener{
         
         
     }
-
     //setters and getters
+    public CtrFacturacion getMctrFacturacion() {
+        return mctrFacturacion;
+    }
+
+    public void setMctrFacturacion(CtrFacturacion mctrFacturacion) {    
+        this.mctrFacturacion = mctrFacturacion;
+    }
+
     public CtrNSeguridad getCtrNFacturacion() {
         return mCtrNSeguridad;
     }

@@ -6,6 +6,7 @@
 package vista;
 
 import assets.values.Constant;
+import controlador.CtrFacturacion;
 import controlador.CtrGenerarLHPISO;
 import controlador.CtrMain;
 import controlador.CtrNAlojamiento;
@@ -52,7 +53,7 @@ public class FrmMain extends StandardForm {
         //controladora de negocio Mantenimiento
         mCtrMain.setCtrlMantenimiento(new CtrlMantenerRDLH());
         mCtrMain.setCtlGenerarLHPISO(new CtrGenerarLHPISO());
-        
+        mCtrMain.setMctrFacturacion(new CtrFacturacion());
         //inicializar sistema y su configuración
          mCtrMain.init();
         
@@ -159,7 +160,7 @@ public class FrmMain extends StandardForm {
         MnFacturacion.setName("pfacturacion"); // NOI18N
 
         smRegistrarCobro.setText("Registrar Cobro");
-        smRegistrarCobro.setName("smRegistrarCobro"); // NOI18N
+        smRegistrarCobro.setName("pRegistrarCobro"); // NOI18N
         MnFacturacion.add(smRegistrarCobro);
 
         smBuscarCliente.setText("Buscar Cliente");
@@ -206,6 +207,8 @@ public class FrmMain extends StandardForm {
         jMenuBar1.add(MnServicio);
 
         MnMantenimiento.setText("Mantenimiento");
+        MnMantenimiento.setEnabled(false);
+        MnMantenimiento.setName("pMantenimiento"); // NOI18N
 
         MantenerRLH.setText("MantenerRLH");
         MantenerRLH.setName("pmantener"); // NOI18N
@@ -220,8 +223,6 @@ public class FrmMain extends StandardForm {
         });
         MnMantenimiento.add(GenerarLLHP);
 
-        MnMantenimiento.setEnabled(false);
-        MnMantenimiento.setName("pMantenimiento"); // NOI18N
         jMenuBar1.add(MnMantenimiento);
 
         setJMenuBar(jMenuBar1);
