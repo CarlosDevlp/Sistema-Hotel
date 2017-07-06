@@ -22,22 +22,22 @@ public abstract class Constant {
     //constantes de la base de datos    
 
     /*cloud
-
+*/
     public final static String DB_SERVER="sl-us-south-1-portal.2.dblayer.com:16643";
     public final static String DB_NAME="CalidadT3Oficial";
     public final static String DB_USER_NAME="admin";
     public final static String DB_USER_PASSWORD="LTKIKOECRZFJOEUM";
 
-    */
+    
     
     
     /*
-    Local carlos*/
+    Local carlos
     public final static String DB_SERVER="localhost";
     public final static String DB_NAME="hotelbica";
     public final static String DB_USER_NAME="mantenimiento";
     public final static String DB_USER_PASSWORD="12345";
-     
+     */
 
     /*local luis fernando*/
     /*

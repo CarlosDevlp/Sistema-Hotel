@@ -154,9 +154,12 @@ public class CtrVerPerfil implements ActionListener{
      */
     private void clearForm(){        
         //....
-        this.mFrmVerPerfil.tbtnEdit.setEnabled(false);
+        this.mFrmVerPerfil.tbtnEdit.setVisible(false);
+        this.mFrmVerPerfil.tbtnEdit.setEnabled(false);        
         this.mFrmVerPerfil.btnCancel.setEnabled(false);
+        this.mFrmVerPerfil.btnCancel.setVisible(false);
         this.mFrmVerPerfil.btnSave.setEnabled(false);
+        this.mFrmVerPerfil.btnSave.setVisible(false);
         
         //datos personales        
         this.mFrmVerPerfil.txtName.setText("");
