@@ -6,6 +6,7 @@
 package controlador;
 
 import dto.dtoHabitacion;
+import dto.dtpEmpleadoDNI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -15,11 +16,15 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 import modelo.DAOEmpleado;
 import modelo.DAOHabitacion;
+import modelo.ListaDatosHabtacionPorPiso;
+import modelo.Piso;
 import vista.FrmGenerarListaLimpiezaHabitaciónPorPiso;
 
 /**
@@ -39,14 +44,52 @@ public class CtrGenerarLHPISO implements ActionListener,MouseListener,ItemListen
     GenerarLLHP.cboPiso.addItemListener(this);
     GenerarLLHP.btnGuardarlh.addActionListener(this);
     GenerarLLHP.btnCancelarLH.addActionListener(this);
-    
+    GenerarLLHP.btnConsultarEmpleado.addActionListener(this);
     }
     
     public void showFrmGenerarlistaLHP(){
        GenerarLLHP.setVisible(true);
-       cargarDatosHabitacionesporLimpiar2();
+       //cargarDatosHabitacionesporLimpiar2();
+       CargarCombo();
         
     }
+    
+    
+    
+ public void CargarCombo(){ 
+       DAOHabitacion daohabc= new DAOHabitacion();
+       System.out.println("ENTRO AL METODO");
+       ArrayList<Piso> lista = daohabc.consultarPiso();
+      lista = daohabc.consultarPiso();
+      
+       for (int i = 0; i < lista.size(); i++) {
+            GenerarLLHP.cboPiso.addItem(lista.get(i));
+            
+       }
+        
+   }
+ 
+ public void consultarEmpleado(){
+        //System.out.println("Ingreso al metodo");
+            DAOHabitacion daohab = new DAOHabitacion();
+            //daohab.obtenerPersona(GenerarLLHP.txtcodSupe);
+            dtpEmpleadoDNI pdt= daohab.consultarPorCodigo(GenerarLLHP.txtcodSupe.getText());
+            
+            
+            String nombre = pdt.toString();
+        
+            //System.out.println("Empleado: "+ nombre);
+            GenerarLLHP.txtNombreSuper.setText(nombre);
+
+            daohab.consultarPorCodigo(GenerarLLHP.txtcodSupe.getText());
+                        
+    }
+ 
+ 
+ 
+ 
+ 
+ 
      public void cargarDatosHabitacionesporLimpiar2()
     {
         
@@ -115,6 +158,12 @@ public class CtrGenerarLHPISO implements ActionListener,MouseListener,ItemListen
                 GenerarLLHP =null;
                 
                 break;
+            case "Consultar":
+                System.out.println("TOCANDO BOTON");
+                consultarEmpleado();
+                break;
+            case "guardar": 
+                JOptionPane.showMessageDialog(null, "Registrado exitosamente");
         }
     }
 
@@ -142,11 +191,32 @@ public class CtrGenerarLHPISO implements ActionListener,MouseListener,ItemListen
     public void mouseExited(MouseEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+   
     @Override
     public void itemStateChanged(ItemEvent e) {
-        JOptionPane.showMessageDialog(null,e.getItem().toString());
-        DefaultTableModel model= (DefaultTableModel)GenerarLLHP.TablalistaLH.getModel();
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            Object item = e.getItem();
+            //JOptionPane.showMessageDialog(null, item);
+            DAOHabitacion habi = new DAOHabitacion();
+            ArrayList<ListaDatosHabtacionPorPiso> list = habi.obtenerTabla(item);
+            DefaultTableModel model = new DefaultTableModel();
+            model.setColumnIdentifiers(new Object[]{"N° Habitación","Tipo Habitación","Estado Habitación"});
+            Object[] row = new Object[3];
+            for (int i = 0; i < list.size(); i++) {
+                row[0] = list.get(i).getNumeroHabitacion();
+                row[1] = list.get(i).getTipoHabitacon();
+                row[2]= list.get(i).getEstadoHabitacion();
+                model.addRow(row);
+            }
+           GenerarLLHP.TablalistaLH.setModel(model);
+            System.out.println("Dato: "+ item);
+        }
+
+   
+       // JOptionPane.showMessageDialog(null,e.getItem().toString());
+       
+        //DefaultTableModel model= (DefaultTableModel)GenerarLLHP.TablalistaLH.getModel();
+        }   
     }
-    
-}
+
+

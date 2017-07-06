@@ -6,6 +6,7 @@
 package vista;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -19,6 +20,7 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
      */
     public FrmGenerarListaLimpiezaHabitaciónPorPiso() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -44,7 +46,7 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
         btnCancelarLH = new javax.swing.JButton();
         btnGuardarlh = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnConsultarEmpleado = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -86,14 +88,25 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
 
         btnCancelarLH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancel.Mantenimiento.png"))); // NOI18N
         btnCancelarLH.setText("CANCELAR");
+        btnCancelarLH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarLHActionPerformed(evt);
+            }
+        });
 
         btnGuardarlh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Guardar.Mantenimiento.png"))); // NOI18N
         btnGuardarlh.setText("GUARDAR");
+        btnGuardarlh.setName("guardar"); // NOI18N
+        btnGuardarlh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarlhActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("LISTA DE LIMPIEZA DE HABITACIONES POR PISO ");
 
-        jButton1.setText("Consultar");
+        btnConsultarEmpleado.setText("Consultar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,7 +122,7 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtcodSupe, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnConsultarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -161,7 +174,7 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtcodSupe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnConsultarEmpleado))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -175,6 +188,16 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarlhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarlhActionPerformed
+        JOptionPane.showMessageDialog(null, "Se registro exitosamente");
+        txtNombreSuper.setText("");
+        txtcodSupe.setText("");
+    }//GEN-LAST:event_btnGuardarlhActionPerformed
+
+    private void btnCancelarLHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarLHActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnCancelarLHActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,9 +237,9 @@ public class FrmGenerarListaLimpiezaHabitaciónPorPiso extends javax.swing.JFram
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TablalistaLH;
     public javax.swing.JButton btnCancelarLH;
+    public javax.swing.JButton btnConsultarEmpleado;
     public javax.swing.JButton btnGuardarlh;
     public javax.swing.JComboBox cboPiso;
-    public javax.swing.JButton jButton1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

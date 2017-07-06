@@ -24,11 +24,11 @@ public class ListaSH {
     }
     
     public ListaSH(Map<String, String> args){
-    this.cod = args.get("Codigo Pro.");
-    this.nombre = args.get("Nombre Pro.");
-    this.fecha = args.get("Fecha");
-    this.cant = args.get("Cantidad");
-    this.PU = args.get("Precio U.");
+    this.cod = args.get("idProducto");
+    this.nombre = args.get("NombrePro");
+    this.fecha = args.get("FechaPHa");
+    this.cant = args.get("CantidadDPe");
+    this.PU = args.get("PrecioPro");
     this.PT = args.get("Precio Total");
     }
 

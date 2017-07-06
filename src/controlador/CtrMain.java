@@ -31,6 +31,7 @@ public class CtrMain implements ActionListener, WindowListener{
     private CtrNAlojamiento mCtrNAlojamiento;
     private CtrlMantenerRDLH mCtrMantenimiento;
     private CtrGenerarLHPISO mCtrGenerarLHPISO;
+    private CtrlActualizarEstadoHabitacionADisponible mCtrlActualizarEHabD;
     private CtrIncluido mCtrIncluido;
     private Callback mInvokeCallback;
 
@@ -56,7 +57,8 @@ public class CtrMain implements ActionListener, WindowListener{
         mFrmMain.smReporteAlojamiento.addActionListener(this);
         mFrmMain.MantenerRLH.addActionListener(this);
         mFrmMain.GenerarLLHP.addActionListener(this);
-        
+        mFrmMain.formulario.addActionListener(this);
+
         
         //arreglando conflictos merge--------------------
         mCtrIncluido=CtrIncluido.getInstance();
@@ -127,6 +129,10 @@ public class CtrMain implements ActionListener, WindowListener{
                  case "pGenerarL":
                  this.mCtrGenerarLHPISO.showFrmGenerarlistaLHP();
                 break;
+                case "pActualizarE":
+                 this.mCtrlActualizarEHabD.showFrmActualizarEstadoHabitacionADisponile();
+                break;
+
                
             //MANTENIMIENTO
             case "pMantenimiento":
@@ -279,7 +285,14 @@ public class CtrMain implements ActionListener, WindowListener{
     {
         this.mCtrGenerarLHPISO=ctrGenerarLHPISO;
     }
+     public CtrlActualizarEstadoHabitacionADisponible getCtrActualizarEstadoHabitacionADisponible() {
+        return mCtrlActualizarEHabD;
+    }
     
+    public void setCtlActualizarEstadoHabitacionADisponible(CtrlActualizarEstadoHabitacionADisponible ctrlActualizarEstadoHabitacionADisponible)
+    {
+        this.mCtrlActualizarEHabD=ctrlActualizarEstadoHabitacionADisponible;
+    }
     public void setCtrNAlojamiento(CtrNAlojamiento ctrNAlojamiento) {
         this.mCtrNAlojamiento = ctrNAlojamiento;
     }    

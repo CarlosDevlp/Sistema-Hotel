@@ -5,6 +5,8 @@
  */
 package vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Tyler
@@ -35,6 +37,7 @@ public class FrmActualizarEstadoDeHabitación extends javax.swing.JFrame {
         cboEstadohab = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         btnCancelar2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -60,20 +63,36 @@ public class FrmActualizarEstadoDeHabitación extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tablaestado);
 
-        jLabel1.setText("REPORTE DE HABITACIONES ");
+        jLabel1.setText("Registro de Habitaciones");
 
         jLabel2.setText("ESTADO:");
 
-        cboEstadohab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar" }));
+        cboEstadohab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Disponible" }));
+        cboEstadohab.setName("combo"); // NOI18N
         cboEstadohab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboEstadohabActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("ACTUALIZAR ESTADO DE HABITACIÓN");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("ESTADO DE HABITACIONES");
 
+        btnCancelar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.Mantenimiento.png"))); // NOI18N
         btnCancelar2.setText("CANCELAR");
+        btnCancelar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelar2ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Consultar Reserva.png"))); // NOI18N
+        jButton1.setText("Actualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,37 +105,40 @@ public class FrmActualizarEstadoDeHabitación extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(cboEstadohab, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cboEstadohab, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
                         .addComponent(btnCancelar2)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboEstadohab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar2)
-                .addGap(22, 22, 22))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -125,6 +147,15 @@ public class FrmActualizarEstadoDeHabitación extends javax.swing.JFrame {
     private void cboEstadohabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEstadohabActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboEstadohabActionPerformed
+
+    private void btnCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelar2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        JOptionPane.showMessageDialog(null,"Habitación actualizada a estado disponible");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,7 +196,8 @@ public class FrmActualizarEstadoDeHabitación extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable Tablaestado;
     private javax.swing.JButton btnCancelar2;
-    private javax.swing.JComboBox cboEstadohab;
+    public javax.swing.JComboBox cboEstadohab;
+    private javax.swing.JButton jButton1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

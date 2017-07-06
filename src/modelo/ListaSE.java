@@ -24,11 +24,11 @@ public class ListaSE {
     }
 
     public ListaSE(Map<String, String> args) {
-         this.cod = args.get("Codigo Serv.");
-        this.nombre = args.get("Nombre");
-        this.fechaserv = args.get("Fecha Serv.");
-        this.cant = args.get("Cantidad");
-        this.PU = args.get("Precio U.");
+         this.cod = args.get("idSEx");
+        this.nombre = args.get("NombreSEx");
+        this.fechaserv = args.get("FechaDSe");
+        this.cant = args.get("CantidadDSe");
+        this.PU = args.get("costoSEx");
         this.PT = args.get("Precio Total");
     }
     

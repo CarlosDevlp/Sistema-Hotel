@@ -40,8 +40,14 @@ public class CtrBuscarPersonaLimpieza implements ActionListener,MouseListener{
         Bpersonal.btnCancelarP.addActionListener(this);
         Bpersonal.setVisible(true);
         Bpersonal.txtdni.requestFocusInWindow();
+       
     }
 
+    public void limpiarCajar(){
+        Bpersonal.txtNombre.setText("");
+        Bpersonal.txtdni.setText("");
+        Bpersonal.txtTurno.setText("");
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
      
@@ -76,6 +82,10 @@ public class CtrBuscarPersonaLimpieza implements ActionListener,MouseListener{
             case "CANCELAR":
                 Bpersonal.setVisible(false);
                 Bpersonal=null;
+                break;
+            case "Limpiar":
+                limpiarCajar();
+             break;
         }
     }
 

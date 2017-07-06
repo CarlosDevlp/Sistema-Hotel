@@ -52,8 +52,6 @@ public class CtrFacturacion implements ActionListener {
         this.VistaFacturacion.rdbtnTarjeta.addActionListener(this);
         this.controlBuscarCliente = new ctrBuscarCliente(); 
     }
-
-     
      
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -152,7 +150,7 @@ public class CtrFacturacion implements ActionListener {
             Map<String,String> alojamiento=alojamientoLista.get(0);
             
             codigoAlojamiento = alojamiento.get("idAlojamiento");
-            System.out.println(codigoAlojamiento);
+            //System.out.println(codigoAlojamiento);
         } catch (Exception e) {
             e.toString();
         }
@@ -196,6 +194,8 @@ public class CtrFacturacion implements ActionListener {
             e.toString();
         }
         
+        //System.out.println(lista.size());
+        
         return  lista;
     }
     
@@ -203,7 +203,7 @@ public class CtrFacturacion implements ActionListener {
         clearTableLSE();
         ArrayList<ListaSE> listaSE = null;
         listaSE = getLSE(codaloj);
-        if(listaSE.isEmpty()){
+        if(!listaSE.isEmpty()){
             for(ListaSE LSE: listaSE){
                 mLSETableModel.addRow(new String[]{LSE.getCod(),LSE.getNombre(),LSE.getFechaserv(),LSE.getCant(),LSE.getPU(),LSE.getPT()});
                 subtotal += Double.parseDouble(LSE.getPT());
@@ -216,7 +216,7 @@ public class CtrFacturacion implements ActionListener {
         clearTableLSH();
         ArrayList<ListaSH> listaSH = null;
         listaSH = getLSH(codaloj);
-        if(listaSH.isEmpty()){
+        if(!listaSH.isEmpty()){
             for(ListaSH LSH: listaSH){
                 mLSHTableModel.addRow(new String[]{LSH.getCod(),LSH.getNombre(),LSH.getFecha(),LSH.getCant(),LSH.getPU(),LSH.getPT()});
                 subtotal += Double.parseDouble(LSH.getPT());
@@ -229,8 +229,9 @@ public class CtrFacturacion implements ActionListener {
         clearTableLHO();
         ArrayList<ListaHO> listaHO = null;
         listaHO = getLHO(codaloj);
-        if(listaHO.isEmpty()){
+        if(!listaHO.isEmpty()){
             for(ListaHO LHO: listaHO){
+                //System.out.println(LHO.toString());
                 mLHOTableModel.addRow(new String[]{LHO.getCod(),LHO.getNumhab(),LHO.getTipohab(),LHO.getFechaing(),LHO.getPxD(),LHO.getDiasaloj(),LHO.getCostoxH()});
                 subtotal += Double.parseDouble(LHO.getCostoxH());
             }

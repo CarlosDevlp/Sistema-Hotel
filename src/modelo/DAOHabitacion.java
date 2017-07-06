@@ -8,13 +8,14 @@ package modelo;
 
 import conexion.Conexion;
 import dto.dtoHabitacion;
+import dto.dtpEmpleadoDNI;
 import java.awt.List;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
@@ -23,7 +24,10 @@ import javax.swing.JOptionPane;
  */
 public class DAOHabitacion extends Conexion {
     
+    Piso piso;
     dtoHabitacion Habitacion;
+    dtpEmpleadoDNI empleadodni;
+    ListaDatosHabtacionPorPiso listahab;
     Connection conn=this.getCon();
     CallableStatement cs;
     PreparedStatement st;
@@ -31,6 +35,48 @@ public class DAOHabitacion extends Conexion {
 
     public DAOHabitacion() {
         
+    }
+    
+    
+    public ArrayList<Piso> consultarPiso(){
+    ArrayList<Piso> lista = new ArrayList<Piso>();
+        try {
+            st= conn.prepareCall("{call CargarPisos()}");
+            rs= st.executeQuery();
+            while (rs.next()) {                
+                piso = new Piso();
+                piso.setUbicacionPis(rs.getString("Piso.UbicacionPis"));
+                lista.add(piso);
+            }
+           
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }catch(Exception e){
+            throw new RuntimeException("Error en el acceso a la tabla cliente");
+        }
+        return lista;
+}
+    
+    
+    
+    
+    
+    public dtpEmpleadoDNI consultarPorCodigo(String codigo){
+       empleadodni= new dtpEmpleadoDNI();
+        try {
+            cs=conn.prepareCall("{call consultarEmpleado(?)}");
+            cs.setString(1, codigo);
+            rs= cs.executeQuery();
+            if (rs.next()) {
+                empleadodni.setNombreEmpleado(rs.getString("Persona.FullNamePer"));
+            }
+            rs.close();
+            cs.close();
+        } catch (SQLException e) {
+            throw  new RuntimeException(e.getMessage());
+        }
+        
+        return empleadodni;
     }
     
     public ArrayList<String> obtenerTiposHabitacion()
@@ -55,6 +101,48 @@ public class DAOHabitacion extends Conexion {
         return tiposHabitacion;
         
     }
+    
+    public ArrayList<ListaDatosHabtacionPorPiso> obtenerTabla(Object piso){
+        ArrayList<ListaDatosHabtacionPorPiso> list = new ArrayList<ListaDatosHabtacionPorPiso>();
+        try {
+            cs=conn.prepareCall("{call ListarHabitacionPorAsignar(?)}");
+            cs.setString(1, piso.toString());
+            rs= cs.executeQuery();
+            while (rs.next()) {                
+                listahab = new ListaDatosHabtacionPorPiso(
+                        rs.getInt("Habitacion.NumeroHab"), 
+                        rs.getString("TipoHabitacion.DescripcionTHA"),
+                        rs.getString("Habitacion.EstadoHab"));
+                list.add(listahab);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Horror"+e);
+        }
+        return list;
+    }
+    
+    public ArrayList<ListaDatosHabtacionPorPiso> obtenerTablaLista(){
+        ArrayList<ListaDatosHabtacionPorPiso> list = new ArrayList<ListaDatosHabtacionPorPiso>();
+        try {
+            cs=conn.prepareCall("{call ListarHabitacionAsignada()}");
+            
+            rs= cs.executeQuery();
+            while (rs.next()) {                
+                listahab = new ListaDatosHabtacionPorPiso(
+                        rs.getInt("Habitacion.NumeroHab"), 
+                        rs.getString("TipoHabitacion.DescripcionTHA"),
+                        rs.getString("Habitacion.EstadoHab"));
+                list.add(listahab);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Horror"+e);
+        }
+        return list;
+    }
+    
+    
+    
+    
     
     public List obtenerPisos()
     {

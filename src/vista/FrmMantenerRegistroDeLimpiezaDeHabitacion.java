@@ -58,7 +58,6 @@ public class FrmMantenerRegistroDeLimpiezaDeHabitacion extends javax.swing.JFram
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtFechaActual = new javax.swing.JTextField();
-        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MANTENER REGISTRO DE LIMPIEZA DE HABITACIÓN");
@@ -181,10 +180,6 @@ public class FrmMantenerRegistroDeLimpiezaDeHabitacion extends javax.swing.JFram
         txtFechaActual.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         getContentPane().add(txtFechaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 110, -1));
 
-        btnActualizar.setText("ACTUALIZAR");
-        btnActualizar.setName(""); // NOI18N
-        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 60, -1, -1));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -225,7 +220,6 @@ public class FrmMantenerRegistroDeLimpiezaDeHabitacion extends javax.swing.JFram
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnActualizar;
     public javax.swing.JButton btnBuscarP;
     public javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnEliminar;

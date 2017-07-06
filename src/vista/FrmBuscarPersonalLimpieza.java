@@ -28,7 +28,7 @@ public class FrmBuscarPersonalLimpieza extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtdni = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPersonal = new javax.swing.JTable();
@@ -38,10 +38,8 @@ public class FrmBuscarPersonalLimpieza extends javax.swing.JFrame {
         BtnBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtdni = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        cmbturno = new javax.swing.JComboBox<String>();
+        txtTurno = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BUSCAR PERSONAL DE LIMPIEZA");
@@ -52,25 +50,25 @@ public class FrmBuscarPersonalLimpieza extends javax.swing.JFrame {
         jLabel1.setText("Buscar Personal de limpieza");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 480, 40));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtdni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtdniActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 110, -1));
+        getContentPane().add(txtdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 110, -1));
 
         jLabel3.setText("CÓDIGO: ");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 20));
 
         tbPersonal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "CÓDIGO", "DNI", "NOMBRE", "TELÉFONO"
+                "CÓDIGO", "NOMBRE", "TELÉFONO"
             }
         ));
         jScrollPane1.setViewportView(tbPersonal);
@@ -91,37 +89,32 @@ public class FrmBuscarPersonalLimpieza extends javax.swing.JFrame {
         getContentPane().add(btnCancelarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 140, 50));
 
         jButton3.setText("LIMPIAR");
+        jButton3.setName("Limpiar"); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 90, 30));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 90, 30));
 
         BtnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.Mantenimiento.png"))); // NOI18N
         BtnBuscar.setText("BUSCAR");
-        getContentPane().add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 120, 40));
+        getContentPane().add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 120, 40));
 
         jLabel2.setText("NOMBRE:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 20));
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 110, -1));
-
-        jLabel4.setText("DNI:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 20));
-        getContentPane().add(txtdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 110, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 20));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 110, -1));
 
         jLabel5.setText("TURNO:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 20));
-
-        cmbturno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MAÑANA", "TARDE", "NOCHE" }));
-        getContentPane().add(cmbturno, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 110, -1));
+        getContentPane().add(txtTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 110, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdniActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtdniActionPerformed
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
@@ -171,17 +164,15 @@ public class FrmBuscarPersonalLimpieza extends javax.swing.JFrame {
     public javax.swing.JButton BtnAceptar;
     public javax.swing.JButton BtnBuscar;
     public javax.swing.JButton btnCancelarP;
-    public javax.swing.JComboBox<String> cmbturno;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     public javax.swing.JTable tbPersonal;
     public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtTurno;
     public javax.swing.JTextField txtdni;
     // End of variables declaration//GEN-END:variables
 }

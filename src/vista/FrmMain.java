@@ -15,6 +15,7 @@ import controlador.CtrNServicio;
 import controlador.CtrlMantenerRDLH;
 import controlador.ctrGenerarReserva;
 import controlador.CtrNReserva;
+import controlador.CtrlActualizarEstadoHabitacionADisponible;
 /**
  * 
  * @author Carlos Chavez Laguna
@@ -52,7 +53,8 @@ public class FrmMain extends StandardForm {
         //controladora de negocio Mantenimiento
         mCtrMain.setCtrlMantenimiento(new CtrlMantenerRDLH());
         mCtrMain.setCtlGenerarLHPISO(new CtrGenerarLHPISO());
-        
+        mCtrMain.setCtlActualizarEstadoHabitacionADisponible(new CtrlActualizarEstadoHabitacionADisponible());
+
         //inicializar sistema y su configuración
          mCtrMain.init();
         
@@ -92,6 +94,7 @@ public class FrmMain extends StandardForm {
         MnMantenimiento = new javax.swing.JMenu();
         MantenerRLH = new javax.swing.JMenuItem();
         GenerarLLHP = new javax.swing.JMenuItem();
+        formulario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Constant.APP_NAME);
@@ -206,6 +209,8 @@ public class FrmMain extends StandardForm {
         jMenuBar1.add(MnServicio);
 
         MnMantenimiento.setText("Mantenimiento");
+        MnMantenimiento.setEnabled(false);
+        MnMantenimiento.setName("pMantenimiento"); // NOI18N
 
         MantenerRLH.setText("MantenerRLH");
         MantenerRLH.setName("pmantener"); // NOI18N
@@ -220,8 +225,10 @@ public class FrmMain extends StandardForm {
         });
         MnMantenimiento.add(GenerarLLHP);
 
-        MnMantenimiento.setEnabled(false);
-        MnMantenimiento.setName("pMantenimiento"); // NOI18N
+        formulario.setText("ActualizarEstado");
+        formulario.setName("pActualizarE"); // NOI18N
+        MnMantenimiento.add(formulario);
+
         jMenuBar1.add(MnMantenimiento);
 
         setJMenuBar(jMenuBar1);
@@ -301,6 +308,7 @@ public class FrmMain extends StandardForm {
     public javax.swing.JMenuItem MnVerPerfil;
     public javax.swing.JMenuItem SmnMantenerUsuario;
     public javax.swing.JMenuItem SmnReporteSesiones;
+    public javax.swing.JMenuItem formulario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

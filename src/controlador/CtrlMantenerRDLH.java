@@ -48,7 +48,7 @@ public class CtrlMantenerRDLH implements ActionListener,MouseListener,ListSelect
         MantenerRDLH.btnRegistrar.addActionListener(this);
         MantenerRDLH.btnModificar.addActionListener(this);
         MantenerRDLH.btnCancelar.addActionListener(this);
-        MantenerRDLH.btnActualizar.addActionListener(this);
+   
         MantenerRDLH.tbporhacer.getSelectionModel().addListSelectionListener(this);
         MantenerRDLH.tablaHab.getSelectionModel().addListSelectionListener(this);
         //asignando fecha actual
@@ -85,7 +85,7 @@ public class CtrlMantenerRDLH implements ActionListener,MouseListener,ListSelect
          LimpiarTabla(MantenerRDLH.tablaHab);
          DefaultTableModel dtm1=(DefaultTableModel)MantenerRDLH.tablaHab.getModel();
         //String id=Integer.toString(hp.get(e).getIdhabitacion());TableModel dtm=MantenerRDLH.tablaHab.getModel();
-        ArrayList<dtoHabitacion> hp=habitacionPendiente.obtenerHabitacionPendientes("POR LIMPIAR");
+        ArrayList<dtoHabitacion> hp=habitacionPendiente.obtenerHabitacionPendientes("PENDIENTE POR ASIGNAR");
            
         for(int e=0;e<hp.size();e++)
         {
@@ -176,7 +176,7 @@ public class CtrlMantenerRDLH implements ActionListener,MouseListener,ListSelect
                 JOptionPane.showMessageDialog(null,codigoRLH);
                 
                 habitacionMantenimiento.EliminarHabitacionesMantenimiento(codigoRLH);
-                habitacionPendiente.ActualizarEstadoHabitacion(numeroHab,"EN LISTA");
+                habitacionPendiente.ActualizarEstadoHabitacion(numeroHab,"PENDIENTE POR ASIGNAR");
                 LoadHabitacionesMantenimiento();
                 cargarDatosHabitacionesporLimpiar();
                 break;

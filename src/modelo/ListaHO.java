@@ -23,13 +23,18 @@ public class ListaHO {
         this.diasaloj = diasaloj;
         this.costoxH = costoxH;
     }
+
+    @Override
+    public String toString() {
+        return "ListaHO{" + "cod=" + cod + ", numhab=" + numhab + ", tipohab=" + tipohab + ", fechaing=" + fechaing + ", PxD=" + PxD + ", diasaloj=" + diasaloj + ", costoxH=" + costoxH + '}';
+    }
     
     public ListaHO(Map<String, String> args){
-        this.cod = args.get("Codigo Hab.");
-        this.numhab = args.get("Numero Hab.");
-        this.tipohab = args.get("Tipo Hab.");
-        this.fechaing = args.get("Fecha Ingreso");
-        this.PxD = args.get("Precio x Dia");
+        this.cod = args.get("idHab");
+        this.numhab = args.get("NumeroHab");
+        this.tipohab = args.get("DescripcionTHA");
+        this.fechaing = args.get("FechaInicioAlo");
+        this.PxD = args.get("CostoHab");
         this.diasaloj = args.get("Dias Alojado");
         this.costoxH = args.get("Costo x Habitacion");
     }
