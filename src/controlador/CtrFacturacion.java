@@ -69,27 +69,33 @@ public class CtrFacturacion implements ActionListener {
                     @Override
                     public void execute(String[] cliente) {
                         if(cliente!= null){
-                            subtotal = 0;
-                            VistaFacturacion.txtCodigo.setText(cliente[0]);
-                            VistaFacturacion.txtNombreRS.setText(cliente[1]);
-                            VistaFacturacion.txtDNIRUC.setText(cliente[2]);
-                            VistaFacturacion.txtApellidoD.setText(cliente[3]);
                             String codAloj = getCodAlojamiento(cliente[0]);
-                            VistaFacturacion.txtCA.setText(codAloj);
-                            //Llenando tablas
-                            loadLSE(codAloj);
-                            loadLSH(codAloj);
-                            loadLHO(codAloj);
-                            //Generando Subtotal, IGV y Total
-                            igv = subtotal * 0.18;
-                            subtotal -= igv;
-                            total = subtotal + igv;
-                            //LLenando Subtotal, IGV y Total
-                            VistaFacturacion.txtSubtotal.setText(""+subtotal);
-                            VistaFacturacion.txtIGV.setText(""+igv);
-                            VistaFacturacion.txtTotal.setText(""+total);
-                            VistaFacturacion.btnImprimir.setEnabled(true);
-                            VistaFacturacion.btnRegistrar.setEnabled(true);
+                            System.out.println(isFacturable(codAloj));
+                            if(isFacturable(codAloj).isEmpty()){
+                                subtotal = 0;
+                                VistaFacturacion.txtCodigo.setText(cliente[0]);
+                                VistaFacturacion.txtNombreRS.setText(cliente[1]);
+                                VistaFacturacion.txtDNIRUC.setText(cliente[2]);
+                                VistaFacturacion.txtApellidoD.setText(cliente[3]);
+
+                                VistaFacturacion.txtCA.setText(codAloj);
+                                //Llenando tablas
+                                loadLSE(codAloj);
+                                loadLSH(codAloj);
+                                loadLHO(codAloj);
+                                //Generando Subtotal, IGV y Total
+                                igv = subtotal * 0.18;
+                                subtotal -= igv;
+                                total = subtotal + igv;
+                                //LLenando Subtotal, IGV y Total
+                                VistaFacturacion.txtSubtotal.setText(""+subtotal);
+                                VistaFacturacion.txtIGV.setText(""+igv);
+                                VistaFacturacion.txtTotal.setText(""+total);
+                                VistaFacturacion.btnImprimir.setEnabled(true);
+                                VistaFacturacion.btnRegistrar.setEnabled(true);
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Factura ya realizada");
+                            }
                         }
                         VistaFacturacion.setEnabled(true);
                     }
@@ -126,6 +132,12 @@ public class CtrFacturacion implements ActionListener {
                        String[] factura = { obs, Total, IdformaPago, IdtipoPago, "'Cancelado'", "'Insert'", "'Facturacion'", idSesion, idAloj};
                        insertFacturacion(factura);
                        
+                       ArrayList<String> listHab = codHabitaciones(idAloj);
+                       
+                       for(String idHab : listHab){
+                           String[] habitacion = {idHab, "'Update'", "'Habitacion'", idSesion};
+                           updateHabitaciones(habitacion);
+                       }
                        
                        limpiarCampos();
                        JOptionPane.showMessageDialog(null, "Pago Realizado.");
@@ -281,6 +293,30 @@ public class CtrFacturacion implements ActionListener {
         
     }
     
+    public ArrayList<String> codHabitaciones(String idAloj){
+        
+        ArrayList<String> listaHab = new ArrayList();
+        try {
+            ArrayList<Map<String,String>> listamap = BasicDao.call("ListarHAbitacionFacturada", new String[]{idAloj});
+            for ( Map<String,String> entry : listamap) {
+                listaHab.add(entry.get("Habitacion_idHab"));
+            }
+        } catch (Exception e) {
+            e.toString();
+        }
+        return listaHab;
+    }
+    
+    public void updateHabitaciones(String[] habitacion){
+        try {
+            BasicDao.call("ActualizarEstadoHabitacion", habitacion);
+        } catch (Exception e) {
+            e.toString();
+        }
+        
+    }
+    
+    
     public void limpiarCampos(){
         VistaFacturacion.txtCodigo.setText("");
         VistaFacturacion.txtNombreRS.setText("");
@@ -296,5 +332,18 @@ public class CtrFacturacion implements ActionListener {
         VistaFacturacion.txtSubtotal.setText("");
         VistaFacturacion.txtIGV.setText("");
         VistaFacturacion.txtTotal.setText("");
+    }
+    
+    public ArrayList<String> isFacturable(String idAloj){
+        ArrayList<String> idfactura = new ArrayList();
+        try {
+             ArrayList<Map<String,String>> Facturas = BasicDao.call("ObtenerFactura", new String[]{idAloj});
+             for(Map<String,String> fact : Facturas){
+                 idfactura.add(fact.get("Facturacion_idFac"));
+             }
+        } catch (Exception e) {
+            e.toString();
+        }
+        return idfactura;
     }
 }

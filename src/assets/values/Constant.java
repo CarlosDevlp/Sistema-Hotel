@@ -30,12 +30,14 @@ public abstract class Constant {
 
     
     
-    /*local carlos chavez
+    
+    /*
+    Local carlos
     public final static String DB_SERVER="localhost";
-    public final static String DB_NAME="calidadt3";
-    public final static String DB_USER_NAME="root";
-    public final static String DB_USER_PASSWORD="admin";
-        */
+    public final static String DB_NAME="hotelbica";
+    public final static String DB_USER_NAME="mantenimiento";
+    public final static String DB_USER_PASSWORD="12345";
+     */   
 
     /*local luis fernando*/
     /*
