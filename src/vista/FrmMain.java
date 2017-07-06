@@ -6,6 +6,7 @@
 package vista;
 
 import assets.values.Constant;
+import controlador.CtrFacturacion;
 import controlador.CtrGenerarLHPISO;
 import controlador.CtrMain;
 import controlador.CtrNAlojamiento;
@@ -54,6 +55,7 @@ public class FrmMain extends StandardForm {
         mCtrMain.setCtrlMantenimiento(new CtrlMantenerRDLH());
         mCtrMain.setCtlGenerarLHPISO(new CtrGenerarLHPISO());
         mCtrMain.setCtlActualizarEstadoHabitacionADisponible(new CtrlActualizarEstadoHabitacionADisponible());
+        mCtrMain.setMctrFacturacion(new CtrFacturacion());
 
         //inicializar sistema y su configuración
          mCtrMain.init();
@@ -162,7 +164,7 @@ public class FrmMain extends StandardForm {
         MnFacturacion.setName("pfacturacion"); // NOI18N
 
         smRegistrarCobro.setText("Registrar Cobro");
-        smRegistrarCobro.setName("smRegistrarCobro"); // NOI18N
+        smRegistrarCobro.setName("pRegistrarCobro"); // NOI18N
         MnFacturacion.add(smRegistrarCobro);
 
         smBuscarCliente.setText("Buscar Cliente");
@@ -225,9 +227,11 @@ public class FrmMain extends StandardForm {
         });
         MnMantenimiento.add(GenerarLLHP);
 
+
         formulario.setText("ActualizarEstado");
         formulario.setName("pActualizarE"); // NOI18N
         MnMantenimiento.add(formulario);
+
 
         jMenuBar1.add(MnMantenimiento);
 

@@ -11,6 +11,7 @@ import modelo.Persona;
 import vista.frmBuscarCliente;
 
 public class ctrBuscarCliente implements ActionListener{
+    
     private frmBuscarCliente vistaBuscarCliente;
     private Callback onCompletedSearch;
     private ArrayList<Persona> mClienteList;
@@ -41,12 +42,12 @@ public class ctrBuscarCliente implements ActionListener{
                break;
             case "btnCancelar":
                 hideFrmBuscarCliente();
+                onCompletedSearch.execute(null);
                 System.out.println("btnCancelar");
                 onCompletedSearch.execute(null);
                break;
         }                
     }
-    
     
     public Callback getOnCompletedSearch() {
         return onCompletedSearch;
@@ -59,8 +60,6 @@ public class ctrBuscarCliente implements ActionListener{
     public void setOnCompletedSearch(Callback onCompletedSearch) {
         this.onCompletedSearch = onCompletedSearch;
     }
-    
-    
     
     public void buscarClienteDni(){
         String doc=vistaBuscarCliente.txtDocumento.getText();

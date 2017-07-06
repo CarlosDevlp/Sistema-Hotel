@@ -27,15 +27,17 @@ public abstract class Constant {
     public final static String DB_NAME="CalidadT3Oficial";
     public final static String DB_USER_NAME="admin";
     public final static String DB_USER_PASSWORD="LTKIKOECRZFJOEUM";
-*/
+
+    */
     
     
-    /*local carlos chavez*/
+    /*
+    Local carlos*/
     public final static String DB_SERVER="localhost";
     public final static String DB_NAME="hotelbica";
     public final static String DB_USER_NAME="mantenimiento";
     public final static String DB_USER_PASSWORD="12345";
-    
+     
 
     /*local luis fernando*/
     /*
@@ -102,4 +104,5 @@ public abstract class Constant {
                                 };
     
     
+
 }

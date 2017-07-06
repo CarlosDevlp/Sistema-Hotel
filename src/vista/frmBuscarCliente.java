@@ -41,7 +41,7 @@ public class frmBuscarCliente extends StandardForm  {
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Buscar Cliente");
         setAlwaysOnTop(true);
         setResizable(false);
