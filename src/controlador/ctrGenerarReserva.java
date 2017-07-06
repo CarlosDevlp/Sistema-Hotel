@@ -44,10 +44,8 @@ public class ctrGenerarReserva implements ActionListener{
     
     public DefaultTableModel modelo; 
     public static boolean activo=false;
-    String idHues[]= new String[10];
     int row=0;
     int cont=0;
-    int conthue=0;
     double coti=0.00;
     String lleg="";
     String sal="";
@@ -268,6 +266,12 @@ public class ctrGenerarReserva implements ActionListener{
                         vistaGenerarReserva.txtCantHabit.setText(String.valueOf(row));
                         String cotis=String.valueOf(coti);
                         vistaGenerarReserva.txtCotizacion.setText(cotis);
+                        
+                        ctrBuscarHuesped.rowhues = modelo.getRowCount();
+                        for(int i=0;i<ctrBuscarHuesped.rowhues;i++){
+                            ctrBuscarHuesped.idhues[i]=String.valueOf(modelo.getValueAt(i,2));
+                        }
+                        
                     }
                 }
             }    
@@ -288,21 +292,22 @@ public class ctrGenerarReserva implements ActionListener{
                     mCtrBuscarCliente.loadData();
                     //mandar una interfaz que el caso de uso incluído (buscar cliente)
                     //ejecutará cuando se complete la búsqueda de un cliente
-                    mCtrBuscarCliente.setOnCompletedSearch(new Callback<String>(){
-                        /*
-                         *el parámetro "string[] cliente " devuelve los datos que el 
-                         *caso de uso buscar cliente quiere enviarme cuando termine de realizar su tarea.
-                         */
-                        @Override
-                        public void execute(String[] cliente) {
-                            
-                            //códgo a ejecutar
-                            vistaGenerarReserva.txtCodCliente.setText(cliente[0]);
-                            vistaGenerarReserva.txtNomCliente.setText(cliente[1]);
-                            vistaGenerarReserva.txtDocCliente.setText(cliente[2]);
-                        }
-                    });
                     
+                        mCtrBuscarCliente.setOnCompletedSearch(new Callback<String>(){
+                            /*
+                             *el parámetro "string[] cliente " devuelve los datos que el 
+                             *caso de uso buscar cliente quiere enviarme cuando termine de realizar su tarea.
+                             */
+                            @Override
+                            public void execute(String[] cliente) {
+                                if(cliente!=null){    
+                                    //códgo a ejecutar
+                                    vistaGenerarReserva.txtCodCliente.setText(cliente[0]);
+                                    vistaGenerarReserva.txtNomCliente.setText(cliente[1]);
+                                    vistaGenerarReserva.txtDocCliente.setText(cliente[2]);
+                                }
+                            }
+                        });
                     activo=true;
                 }else{
                     System.out.println("btnBuscarCliente");

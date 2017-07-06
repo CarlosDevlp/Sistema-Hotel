@@ -16,10 +16,8 @@ public class ctrBuscarHuesped implements ActionListener{
     
     private frmBuscarHuesped vistaBuscarHuesped;
     private frmGenerarReserva vistaGenerarReserva;
-    private ctrGenerarReserva mCtrGenerarReserva;
     private ArrayList<Huesped> mHuespedList;
     private DefaultTableModel mHuespedTableModel;
-    public DefaultTableModel model;
     private final String []USER_TABLE_COLUMN_NAMES={"Codigo","Nombres","DNI"};
     public static String idhues[]= new String[10];
     public static int rowhues;
