@@ -6,7 +6,7 @@
 package vista;
 
 import controlador.ctrBuscarHuesped;
-import controlador.ctrGenerarReserva;
+import controlador.ctrRegistrarReserva;
 import dao.BasicDao;
 
 /**

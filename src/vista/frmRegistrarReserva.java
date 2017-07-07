@@ -5,7 +5,7 @@
  */
 package vista;
 
-import controlador.ctrGenerarReserva;
+import controlador.ctrRegistrarReserva;
 import dao.BasicDao;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
@@ -14,11 +14,11 @@ import java.beans.PropertyChangeListener;
  *
  * @author Propietario
  */
-public class frmGenerarReserva extends StandardForm {
+public class frmRegistrarReserva extends StandardForm {
 
-    private ctrGenerarReserva mCtrGenerarReserva;
+    private ctrRegistrarReserva mCtrGenerarReserva;
     
-    public frmGenerarReserva() {
+    public frmRegistrarReserva() {
         initComponents();
     }
 
@@ -83,7 +83,7 @@ public class frmGenerarReserva extends StandardForm {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Generar Reserva");
+        setTitle("Registrar Reserva");
         setResizable(false);
 
         jLabel17.setText("Cod. Empleado");
@@ -700,14 +700,16 @@ public class frmGenerarReserva extends StandardForm {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmGenerarReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegistrarReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmGenerarReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegistrarReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmGenerarReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegistrarReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmGenerarReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegistrarReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -715,7 +717,7 @@ public class frmGenerarReserva extends StandardForm {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                final frmGenerarReserva  mFrmGenerarReserva= new frmGenerarReserva();
+                final frmRegistrarReserva  mFrmGenerarReserva= new frmRegistrarReserva();
                 mFrmGenerarReserva.setVisible(true);
                 mFrmGenerarReserva.createController();
                 
@@ -791,7 +793,7 @@ public class frmGenerarReserva extends StandardForm {
     
     @Override
     public void createController() {
-        mCtrGenerarReserva=new ctrGenerarReserva(this);
+        mCtrGenerarReserva=new ctrRegistrarReserva(this);
     }
     
     @Override

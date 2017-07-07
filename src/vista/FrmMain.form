@@ -122,7 +122,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MnGenerarReserva">
               <Properties>
-                <Property name="text" type="java.lang.String" value="GenerarReserva"/>
+                <Property name="text" type="java.lang.String" value="Registrar Reserva"/>
                 <Property name="name" type="java.lang.String" value="pGenerarReserva" noResource="true"/>
               </Properties>
               <AuxValues>

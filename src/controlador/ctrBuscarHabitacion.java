@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Habitacion;
 import vista.frmBuscarHabitacion;
-import vista.frmGenerarReserva;
+import vista.frmRegistrarReserva;
 
 /**
  *
@@ -21,7 +21,7 @@ import vista.frmGenerarReserva;
  */
 public class ctrBuscarHabitacion implements ActionListener{
     private frmBuscarHabitacion vistaBuscarHabitacion;
-    private frmGenerarReserva vistaGenerarReserva;
+    private frmRegistrarReserva vistaGenerarReserva;
     private ArrayList<Habitacion> mHabitacionList;
     private DefaultTableModel mHabitacionTableModel;
     private final String []USER_TABLE_COLUMN_NAMES={"Codigo","Numero","Tipo","Costo","Estado"};
@@ -104,7 +104,7 @@ public class ctrBuscarHabitacion implements ActionListener{
     
     public void hideFrmBuscarHabitacion(){
         this.vistaBuscarHabitacion.setVisible(false);
-        ctrGenerarReserva.activo=false;
+        ctrRegistrarReserva.activo=false;
     }
     
 }

@@ -74,7 +74,7 @@ public class ctrRegistrarHuesped implements ActionListener{
     
     public void hideFrmRegistrarHuesped(){
         this.vistaRegistrarHuesped.setVisible(false);
-        ctrGenerarReserva.activo=false;
+        ctrRegistrarReserva.activo=false;
     }
 
     public void loadData() {

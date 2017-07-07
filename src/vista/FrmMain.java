@@ -14,7 +14,7 @@ import controlador.CtrNReserva;
 import controlador.CtrNSeguridad;
 import controlador.CtrNServicio;
 import controlador.CtrlMantenerRDLH;
-import controlador.ctrGenerarReserva;
+import controlador.ctrRegistrarReserva;
 import controlador.CtrNReserva;
 import controlador.CtrlActualizarEstadoHabitacionADisponible;
 /**
@@ -40,7 +40,7 @@ public class FrmMain extends StandardForm {
        //controladora de negocio reserva
        /*
         CtrNReserva mCtrNReserva= new CtrNReserva();
-                ctrGenerarReserva ctrGenerarReservax=new ctrGenerarReserva(this);                
+                ctrRegistrarReserva ctrGenerarReservax=new ctrRegistrarReserva(this);                
                 ctrGenerarReservax.setVistaGenerarReserva(new frmGenerarReserva());
                 mCtrNReserva.setCtrGenerarReserva(ctrGenerarReservax);             
          mCtrMain.setCtrNReserva(mCtrNReserva);
@@ -177,7 +177,7 @@ public class FrmMain extends StandardForm {
         MnReserva.setEnabled(false);
         MnReserva.setName("preserva"); // NOI18N
 
-        MnGenerarReserva.setText("GenerarReserva");
+        MnGenerarReserva.setText("Registrar Reserva");
         MnGenerarReserva.setName("pGenerarReserva"); // NOI18N
         MnReserva.add(MnGenerarReserva);
 
@@ -227,11 +227,9 @@ public class FrmMain extends StandardForm {
         });
         MnMantenimiento.add(GenerarLLHP);
 
-
         formulario.setText("ActualizarEstado");
         formulario.setName("pActualizarE"); // NOI18N
         MnMantenimiento.add(formulario);
-
 
         jMenuBar1.add(MnMantenimiento);
 

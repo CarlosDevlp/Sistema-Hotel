@@ -46,6 +46,7 @@ public class frmBuscarHabitacion extends StandardForm {
         jLabel2 = new javax.swing.JLabel();
         txtFechaLlegada = new javax.swing.JTextField();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Buscar Habitacion");
         setAlwaysOnTop(true);
         setResizable(false);

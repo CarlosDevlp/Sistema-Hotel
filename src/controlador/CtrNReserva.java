@@ -13,25 +13,25 @@ package controlador;
  * @author Cristian
  */
 public class CtrNReserva {
-    private ctrGenerarReserva mCtrGenerarReserva;
+    private ctrRegistrarReserva mCtrGenerarReserva;
     public static boolean activo=false;
     
     //constructor
     public CtrNReserva() {
-        mCtrGenerarReserva=new ctrGenerarReserva();
+        mCtrGenerarReserva=new ctrRegistrarReserva();
     }
 
-    public ctrGenerarReserva getmCtrGenerarReserva() {
+    public ctrRegistrarReserva getmCtrGenerarReserva() {
         return mCtrGenerarReserva;
     }
 
-    public void setmCtrGenerarReserva(ctrGenerarReserva mCtrGenerarReserva) {
+    public void setmCtrGenerarReserva(ctrRegistrarReserva mCtrGenerarReserva) {
         this.mCtrGenerarReserva = mCtrGenerarReserva;
     }
     
     public void showFrmGenerarReserva(){
         if(activo==false){
-            mCtrGenerarReserva=new ctrGenerarReserva();
+            mCtrGenerarReserva=new ctrRegistrarReserva();
             mCtrGenerarReserva.showFrmGenerarReserva();
             mCtrGenerarReserva.loadData();
             activo=true;

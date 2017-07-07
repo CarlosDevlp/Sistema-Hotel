@@ -9,13 +9,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Huesped;
 import vista.frmBuscarHuesped;
-import vista.frmGenerarReserva;
+import vista.frmRegistrarReserva;
 
 
 public class ctrBuscarHuesped implements ActionListener{
     
     private frmBuscarHuesped vistaBuscarHuesped;
-    private frmGenerarReserva vistaGenerarReserva;
+    private frmRegistrarReserva vistaGenerarReserva;
     private ArrayList<Huesped> mHuespedList;
     private DefaultTableModel mHuespedTableModel;
     private final String []USER_TABLE_COLUMN_NAMES={"Codigo","Nombres","DNI"};
@@ -118,6 +118,6 @@ public class ctrBuscarHuesped implements ActionListener{
     
     public void hideFrmBuscarHuesped(){
         this.vistaBuscarHuesped.setVisible(false);
-        ctrGenerarReserva.activo=false;
+        ctrRegistrarReserva.activo=false;
     }  
 }

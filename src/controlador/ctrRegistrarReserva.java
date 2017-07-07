@@ -25,15 +25,15 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Callback;
 import modelo.DetalleReserva;
 import modelo.Habitacion;
-import vista.frmGenerarReserva;
+import vista.frmRegistrarReserva;
 import vista.*;
 /**
  *
  * @author Propietario
  */
-public class ctrGenerarReserva implements ActionListener{
+public class ctrRegistrarReserva implements ActionListener{
     
-    private frmGenerarReserva vistaGenerarReserva;
+    private frmRegistrarReserva vistaGenerarReserva;
     private frmBuscarHabitacion vistaBuscarHabitacion;
     
     private ctrBuscarHuesped mCtrBuscarHuesped;
@@ -51,10 +51,10 @@ public class ctrGenerarReserva implements ActionListener{
     String sal="";
     String cd="";
     
-    public ctrGenerarReserva() {
-        this(new frmGenerarReserva());
+    public ctrRegistrarReserva() {
+        this(new frmRegistrarReserva());
     }
-    public ctrGenerarReserva(frmGenerarReserva mfrmGenerarReserva) {
+    public ctrRegistrarReserva(frmRegistrarReserva mfrmGenerarReserva) {
         this.vistaGenerarReserva = mfrmGenerarReserva;
         this.vistaGenerarReserva.btnGrabarReserva.addActionListener(this);
         this.vistaGenerarReserva.btnBuscarHuesped.addActionListener(this);
@@ -483,7 +483,7 @@ public class ctrGenerarReserva implements ActionListener{
         try {
             date = formatter.parse(dateInString);
         } catch (ParseException ex) {
-            Logger.getLogger(ctrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ctrRegistrarReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
             
             return date;
@@ -503,7 +503,7 @@ public class ctrGenerarReserva implements ActionListener{
         try {
             date = formatter.parse(dateInString);
         } catch (ParseException ex) {
-            Logger.getLogger(ctrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ctrRegistrarReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
             
             return date;
@@ -523,7 +523,7 @@ public class ctrGenerarReserva implements ActionListener{
         try {
             date = formatter.parse(dateInString);
         } catch (ParseException ex) {
-            Logger.getLogger(ctrGenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ctrRegistrarReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
         return date;
     }

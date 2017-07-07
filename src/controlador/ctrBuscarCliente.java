@@ -118,7 +118,7 @@ public class ctrBuscarCliente implements ActionListener{
     
     public void hideFrmBuscarCliente(){
         this.vistaBuscarCliente.setVisible(false);
-        ctrGenerarReserva.activo=false;
+        ctrRegistrarReserva.activo=false;
     }
 
 }
