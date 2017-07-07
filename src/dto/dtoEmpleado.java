@@ -12,7 +12,6 @@ package dto;
  */
 public class dtoEmpleado {
         
-    protected String codigo;
     protected String dni;
     protected String nombre;
     protected String telefono;
@@ -21,15 +20,18 @@ public class dtoEmpleado {
     /**
      * @return the codigo
      */
-    public String getCodigo() {
-        return codigo;
-    }
-
+  
     /**
      * @param codigo the codigo to set
      */
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    
+    
+    
+    public dtoEmpleado(String dni, String nombre, String telefono, String horariolaboral) {    
+        this.dni = dni;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.horariolaboral = horariolaboral;
     }
 
     /**

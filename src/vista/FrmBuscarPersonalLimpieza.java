@@ -5,6 +5,14 @@
  */
 package vista;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Estudiante
@@ -27,102 +35,194 @@ public class FrmBuscarPersonalLimpieza extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtdni = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPersonal = new javax.swing.JTable();
         BtnAceptar = new javax.swing.JButton();
         btnCancelarP = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        BtnBuscar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        txtdnifiltro = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtTurno = new javax.swing.JTextField();
+        txtTurnofiltro = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtNombrefiltro = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnLimpiar = new javax.swing.JButton();
+        BtnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BUSCAR PERSONAL DE LIMPIEZA");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Buscar Personal de limpieza");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 480, 40));
-
-        txtdni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtdniActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 110, -1));
-
-        jLabel3.setText("CÓDIGO: ");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 20));
-
         tbPersonal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "CÓDIGO", "NOMBRE", "TELÉFONO"
+                "CÓDIGO", "NOMBRE", "TELÉFONO", "TURNO"
             }
         ));
         jScrollPane1.setViewportView(tbPersonal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 430, 120));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 540, 120));
 
-        BtnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
+        BtnAceptar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        BtnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agree 1.1.png"))); // NOI18N
         BtnAceptar.setText("ACEPTAR");
         BtnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(BtnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 150, 50));
+        getContentPane().add(BtnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, 140, 40));
 
-        btnCancelarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancel.Mantenimiento.png"))); // NOI18N
+        btnCancelarP.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnCancelarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelarMantenimiento.png"))); // NOI18N
         btnCancelarP.setText("CANCELAR");
-        getContentPane().add(btnCancelarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 140, 50));
+        getContentPane().add(btnCancelarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 140, 40));
 
-        jButton3.setText("LIMPIAR");
-        jButton3.setName("Limpiar"); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtdnifiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                txtdnifiltroActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 90, 30));
+        txtdnifiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdnifiltroKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtdnifiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 150, -1));
 
-        BtnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.Mantenimiento.png"))); // NOI18N
-        BtnBuscar.setText("BUSCAR");
-        getContentPane().add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 120, 40));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("CÓDIGO: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 20));
 
-        jLabel2.setText("NOMBRE:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 20));
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 110, -1));
-
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("TURNO:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 20));
-        getContentPane().add(txtTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 110, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, 20));
+
+        txtTurnofiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTurnofiltroKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtTurnofiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 150, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("NOMBRE:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 20));
+
+        txtNombrefiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombrefiltroKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtNombrefiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 150, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/search.png"))); // NOI18N
+        jLabel1.setText("Buscar Personal de limpieza");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 40));
+
+        jLabel4.setText("*Este formulario le permitirá buscar al personal de limpieza mediante filtros, usted podrá ir ");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+
+        jLabel6.setText("escribiendo y observar los datos que va mostrando el sistema.");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+
+        btnLimpiar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/clea.png"))); // NOI18N
+        btnLimpiar.setText("LIMPIAR");
+        btnLimpiar.setName("Limpiar"); // NOI18N
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 120, 40));
+
+        BtnBuscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        BtnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/filter.png"))); // NOI18N
+        BtnBuscar.setText("BUSCAR");
+        jPanel1.add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 120, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdniActionPerformed
+    private void txtdnifiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdnifiltroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtdniActionPerformed
+    }//GEN-LAST:event_txtdnifiltroActionPerformed
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtdnifiltro.setText("");
+        txtTurnofiltro.setText("");
+        txtNombrefiltro.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+ TableRowSorter trs = null;
+    private void txtdnifiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdnifiltroKeyTyped
+        
+       
+       txtdnifiltro.addKeyListener(new KeyAdapter() {
+           @Override
+           public void keyReleased(final KeyEvent evt){
+               trs.setRowFilter(RowFilter.regexFilter(txtdnifiltro.getText(), 0));
+           }
+       });
+       DefaultTableModel model = new DefaultTableModel();
+       model.setColumnIdentifiers(new Object[]{"N° DNI", "NOMBRE", "HORARIO", "TELEFONO"});
+      
+      model = (DefaultTableModel)tbPersonal.getModel();
+       trs= new TableRowSorter(model);
+       tbPersonal.setRowSorter(trs);
+   
+    }//GEN-LAST:event_txtdnifiltroKeyTyped
+
+    private void txtTurnofiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTurnofiltroKeyTyped
+      txtTurnofiltro.addKeyListener(new KeyAdapter() {
+          @Override
+          public void keyReleased(final KeyEvent e) {
+              trs.setRowFilter(RowFilter.regexFilter(txtTurnofiltro.getText(), 2));
+          }     
+      });
+        DefaultTableModel model = new DefaultTableModel();
+       model.setColumnIdentifiers(new Object[]{"N° DNI", "NOMBRE", "HORARIO", "TELEFONO"});
+      
+      model = (DefaultTableModel)tbPersonal.getModel();
+       trs= new TableRowSorter(model);
+       tbPersonal.setRowSorter(trs);
+   
+    }//GEN-LAST:event_txtTurnofiltroKeyTyped
+
+    private void txtNombrefiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrefiltroKeyTyped
+           txtNombrefiltro.addKeyListener(new KeyAdapter() {
+          @Override
+          public void keyReleased(final KeyEvent e) {
+              trs.setRowFilter(RowFilter.regexFilter(txtNombrefiltro.getText(), 1));
+          }     
+      });
+        DefaultTableModel model = new DefaultTableModel();
+       model.setColumnIdentifiers(new Object[]{"N° DNI", "NOMBRE", "HORARIO", "TELEFONO"});
+      
+      model = (DefaultTableModel)tbPersonal.getModel();
+       trs= new TableRowSorter(model);
+       tbPersonal.setRowSorter(trs);
+   
+    }//GEN-LAST:event_txtNombrefiltroKeyTyped
 
     /**
      * @param args the command line arguments
@@ -164,15 +264,18 @@ public class FrmBuscarPersonalLimpieza extends javax.swing.JFrame {
     public javax.swing.JButton BtnAceptar;
     public javax.swing.JButton BtnBuscar;
     public javax.swing.JButton btnCancelarP;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tbPersonal;
-    public javax.swing.JTextField txtNombre;
-    public javax.swing.JTextField txtTurno;
-    public javax.swing.JTextField txtdni;
+    public javax.swing.JTextField txtNombrefiltro;
+    public javax.swing.JTextField txtTurnofiltro;
+    public javax.swing.JTextField txtdnifiltro;
     // End of variables declaration//GEN-END:variables
 }

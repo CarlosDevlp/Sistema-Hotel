@@ -51,15 +51,19 @@ public class DAOHabitacion extends Conexion {
            
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
-        }catch(Exception e){
-            throw new RuntimeException("Error en el acceso a la tabla cliente");
+           
+        }finally{
+            if(st !=null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "ERROR EN SQL" + e);
+                }
+            }
         }
         return lista;
 }
-    
-    
-    
-    
+     
     
     public dtpEmpleadoDNI consultarPorCodigo(String codigo){
        empleadodni= new dtpEmpleadoDNI();
@@ -69,6 +73,9 @@ public class DAOHabitacion extends Conexion {
             rs= cs.executeQuery();
             if (rs.next()) {
                 empleadodni.setNombreEmpleado(rs.getString("Persona.FullNamePer"));
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se encontro a empleado");
             }
             rs.close();
             cs.close();
@@ -102,14 +109,30 @@ public class DAOHabitacion extends Conexion {
         
     }
     
+   public void ActualizarHab(int id){
+       try {
+           cs= conn.prepareCall("{call actualizarestadoaAsignar(?)}");
+           st.setInt(1, id);
+           int n= st.executeUpdate();
+           if (n>0) {
+               JOptionPane.showMessageDialog(null, "Los datos se han guardado exitosamente");
+           }
+           
+       } catch (SQLException e) {
+           JOptionPane.showMessageDialog(null, "ERROR EN SQL "+e);
+       }
+   }
+    
     public ArrayList<ListaDatosHabtacionPorPiso> obtenerTabla(Object piso){
+        System.out.println("Ingreso al OBTENER TABLA");
         ArrayList<ListaDatosHabtacionPorPiso> list = new ArrayList<ListaDatosHabtacionPorPiso>();
         try {
-            cs=conn.prepareCall("{call ListarHabitacionPorAsignar(?)}");
+            cs=conn.prepareCall("{call ListarHabitacionPorMantener(?)}");
             cs.setString(1, piso.toString());
             rs= cs.executeQuery();
             while (rs.next()) {                
                 listahab = new ListaDatosHabtacionPorPiso(
+                        rs.getString("Habitacion.idHab"),
                         rs.getInt("Habitacion.NumeroHab"), 
                         rs.getString("TipoHabitacion.DescripcionTHA"),
                         rs.getString("Habitacion.EstadoHab"));
@@ -129,6 +152,7 @@ public class DAOHabitacion extends Conexion {
             rs= cs.executeQuery();
             while (rs.next()) {                
                 listahab = new ListaDatosHabtacionPorPiso(
+                        rs.getString("Habitacion.idHab"),
                         rs.getInt("Habitacion.NumeroHab"), 
                         rs.getString("TipoHabitacion.DescripcionTHA"),
                         rs.getString("Habitacion.EstadoHab"));
@@ -139,8 +163,6 @@ public class DAOHabitacion extends Conexion {
         }
         return list;
     }
-    
-    
     
     
     

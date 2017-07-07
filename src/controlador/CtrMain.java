@@ -132,7 +132,6 @@ public class CtrMain implements ActionListener, WindowListener{
             case "pGenerarL":
                 this.mCtrGenerarLHPISO.showFrmGenerarlistaLHP();
                 break;
-
             case "pActualizarE":
              this.mCtrlActualizarEHabD.showFrmActualizarEstadoHabitacionADisponile();
             break;

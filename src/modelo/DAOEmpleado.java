@@ -6,7 +6,7 @@
 
 package modelo;
 
-import com.mysql.jdbc.MySQLConnection;
+
 import dto.dtoEmpleado;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import conexion.Conexion;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,29 +34,30 @@ public class DAOEmpleado extends Conexion {
         conn=this.getCon();
     }
     
-    public dtoEmpleado obtenerEmpleado(int dni)
+    public ArrayList<dtoEmpleado> obtenerEmpleado()
     {
-        Empleado=new dtoEmpleado();
         
+        ArrayList<dtoEmpleado> lista = new ArrayList<dtoEmpleado>();
         try{
-            cs=conn.prepareCall("{call ObtenerEmpleadobyDNI(?)}");
-            cs.setInt(1,dni);
+            cs=conn.prepareCall("{call ObtenerEmpleadobyDNI()}");
+            //cs.setInt(1,dni);
             rs=cs.executeQuery();
             
-            if(rs.next())
+            while(rs.next())
             {
-                Empleado.setCodigo(Integer.toString(rs.getInt(1)));
-                Empleado.setDni(Integer.toString(rs.getInt(2)));
-                Empleado.setNombre(rs.getString(3));
-                Empleado.setTelefono(Integer.toString(rs.getInt(4)));
-                Empleado.setHorariolaboral(rs.getString(5));
+                Empleado=new dtoEmpleado(Integer.toString(rs.getInt(1)),
+                        rs.getString(2), 
+                        rs.getString(3) ,
+                        rs.getString(4));
+
+                lista.add(Empleado);
             }
         }
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null,e.getMessage());
         }
-        return Empleado;
+        return lista;
     }
     
 }
