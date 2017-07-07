@@ -54,9 +54,13 @@ public class CtrAlojamiento {
         
          BasicDao.call("ActualizarHabitacion", new String[]{frmAlojamiento.txtidReserva.getText(),"'insert'","'Alojamiento'",CodEmpleado});
          
-       
+         BasicDao.call("ActualizarReserva", new String[]{frmAlojamiento.txtidReserva.getText(),"'update'","'Alojamiento'",CodEmpleado});
+              
 
         JOptionPane.showMessageDialog(null, "El registro se realizo satisfactoriamente");
+        
+        limpiar();
+        Limpiar_Tabla_huesped_alojamiento();
 
     }
 
@@ -239,6 +243,8 @@ public class CtrAlojamiento {
 
     }
 
+
+    
     /**
      * *********************************************************
      * @param idReserva
@@ -253,20 +259,20 @@ public class CtrAlojamiento {
      }
      }
      */
-    public void VCTextoIdR(String idReserva) {
+    public void VCTextoIdR() {
 
-        ArrayList<Map<String, String>> result = BasicDao.select("Reserva r", new String[]{"*"}, "r.idReserva='" + idReserva + "'");
+        ArrayList<Map<String, String>> result = BasicDao.select("Reserva r", new String[]{"*"}, "r.idReserva='" + frmAlojamiento.txtidReserva.getText() + "'");
+        
         boolean exists = result.size() > 0;
 
-        if (frmAlojamiento.txtidReserva.getText().length() == 00) {
-            JOptionPane.showMessageDialog(null, "Ingrese Código de Reserva");
-            frmAlojamiento.txtidReserva.requestFocus();
-        } else if (!exists) {
+         if (exists) {
             frmAlojamiento.txtidReserva.setText("");
             frmAlojamiento.txtidReserva.requestFocus();
-            JOptionPane.showMessageDialog(null, "No existe");
+            JOptionPane.showMessageDialog(null, "No existe o ya esta ");
         }
     }
+    
+
 
     public void VCTextoBIdR() {
         if (frmBuscarReserva.txtDatosReserva.getText().length() == 00) {

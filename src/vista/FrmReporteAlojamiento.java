@@ -46,7 +46,6 @@ public class FrmReporteAlojamiento extends javax.swing.JFrame {
         txtFecFinAloReport = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N

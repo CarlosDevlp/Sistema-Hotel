@@ -170,12 +170,14 @@ public class frmAlojamiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarCodigoResrevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarCodigoResrevaActionPerformed
-        
-        Alojamientov1.VCTextoIdR(txtidReserva.getText());
+         
+            //Alojamientov1.VCTextoIdR();
         try {
             // TODO add your handling code here:
+            //Alojamientov1.VCTextoIdR();
             Alojamientov1.Limpiar_Tabla_huesped_alojamiento();
             Alojamientov1.Conusltar_Reserva();
+            
         } catch (ParseException ex) {
             Logger.getLogger(frmAlojamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,7 +192,7 @@ public class frmAlojamiento extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
          this.setVisible(false);
-         System.exit(0);
+         
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void idRegistrar_AlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idRegistrar_AlojamientoActionPerformed
