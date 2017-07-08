@@ -18,17 +18,17 @@ import modelo.Pestana;
 public abstract class Constant {
     //constantes de datos de la app
     public final static String APP_NAME="Hotel Bica";
-    
+    //ícono
+    public final static String ICON_PATH="../assets/images/icono.png";    
     //constantes de la base de datos    
 
-    /*cloud
-*/
+    /*cloud*/
     public final static String DB_SERVER="sl-us-south-1-portal.2.dblayer.com:16643";
     public final static String DB_NAME="CalidadT3Oficial";
     public final static String DB_USER_NAME="admin";
     public final static String DB_USER_PASSWORD="LTKIKOECRZFJOEUM";
-
     
+
     
     
     /*
@@ -93,7 +93,8 @@ public abstract class Constant {
                                     {"ID","Nombre de usuario","Nombre de rol"} //alias
                                 };
     public final static String [][]ARRAY_ACTIVITY_TYPE_AND_ALIAS={
-                                        {"all","insertar", "actualizar", "eliminar"},//real activity type label
+                                        {"all","insertar", "actualizar", "eliminar",
+                                               "Insert","Update","Delete"},//real activity type label
                                         {"Todos","Insertar","Actualizar","Eliminar"}//alias                                        
                                     };
     //empleados
@@ -102,6 +103,7 @@ public abstract class Constant {
                                     {"Nombre y/o apellido","Dni/Ruc","Correo electrónico"} //alias
                                     
                                 };
+    
     
     
 

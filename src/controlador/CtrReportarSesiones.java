@@ -66,8 +66,16 @@ public class CtrReportarSesiones implements ActionListener{
                 CtrIncluido.getInstance().showForm(Constant.FORM_BUSCAR_USUARIO, OnCompleteSearch());
                 break;
             //botón para buscar los logs y sesiones del usuarios
-            case "btnFilter":
-                searchLogs();
+            case "btnFilter":                
+                this.mFrmReporteSesiones.lblCargando.setVisible(true);
+                this.mFrmReporteSesiones.lblEmptyTable.setVisible(false);
+                Thread thread=new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        searchLogs();
+                    }
+                });
+                thread.start();
                 break;
             //botón guardar al usuario y
             //botón actualizar al usuario
@@ -107,7 +115,7 @@ public class CtrReportarSesiones implements ActionListener{
      * Pre-cargar data en el formulario.
      */
     public void loadData(){        
-        
+        this.mFrmReporteSesiones.lblCargando.setVisible(false);        
         this.mFrmReporteSesiones.cmbActivity.setModel(new DefaultComboBoxModel(Constant.ARRAY_ACTIVITY_TYPE_AND_ALIAS[1]));
         clearTable();
     }
@@ -148,9 +156,14 @@ public class CtrReportarSesiones implements ActionListener{
      * fecha y tipo de actividad realizado (insertar, eliminar, actualizar, etc)
      */
     private void searchLogs(){
+        //vaciar la tabla
+        if(mSesionTableModel.getRowCount()>0) clearTable();
+        
+        //obtener sesiones
         
         int condCounter=0;
         String condSesion="";
+                
         
         if(mUser!=null) {
             condSesion+=" User_idUser="+mUser.getIdUser();
@@ -178,16 +191,16 @@ public class CtrReportarSesiones implements ActionListener{
         
                         
 
-        String condLog;
+        String condLog,condEnglishLog;
         condLog=Constant.ARRAY_ACTIVITY_TYPE_AND_ALIAS[0][this.mFrmReporteSesiones.cmbActivity.getSelectedIndex()];
-        
-        mSesionList=Sesion.getSesionList((condCounter==0? null:condSesion),(condLog.equals("all")? "":" AND DescripcionTHU='"+condLog+"'") );
+        condEnglishLog=Constant.ARRAY_ACTIVITY_TYPE_AND_ALIAS[0][3+this.mFrmReporteSesiones.cmbActivity.getSelectedIndex()];
+        mSesionList=Sesion.getSesionList((condCounter==0? null:condSesion),(condLog.equals("all")? "":" AND DescripcionTHU in ('"+condLog+"','"+condEnglishLog+"')") );
         
         //--------------------------------------------
         
-        //setear la vista
+        //setear la vista        
         
-        if(mSesionTableModel.getRowCount()>0) clearTable();
+        
         
         ArrayList<Sesion.Log> logList;
         for(Sesion sesion:mSesionList){
@@ -198,13 +211,15 @@ public class CtrReportarSesiones implements ActionListener{
             
             //mostrar los logs de la sesión
             logList=sesion.getLogList();
-            if(logList!=null)            
+            if(logList!=null){
                 for(Sesion.Log log:logList)
-                    mSesionTableModel.addRow(new Object[]{sesion.getIdSesion(),sesion.getUserName(),sesion.getTimeInitSes(),sesion.getTimesFinishSes(),log.getTipoActividad()+" - "+log.getTablaLUs()});
+                    mSesionTableModel.addRow(new Object[]{sesion.getIdSesion(),sesion.getUserName(),sesion.getTimeInitSes(),sesion.getTimesFinishSes(),log.getTipoActividad()+" - "+log.getTablaLUs()});                
+            }
         }
+                
+        this.mFrmReporteSesiones.lblEmptyTable.setVisible(mSesionTableModel.getRowCount()==0);
+        this.mFrmReporteSesiones.lblCargando.setVisible(false);
         
-        
-        this.mFrmReporteSesiones.lblEmptyTable.setVisible(mSesionList.isEmpty());
         
     }
     

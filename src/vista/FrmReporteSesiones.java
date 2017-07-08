@@ -33,6 +33,7 @@ public class FrmReporteSesiones extends StandardForm {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblEmptyTable = new javax.swing.JLabel();
+        lblCargando = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbLog = new javax.swing.JTable();
         btnSearchUser = new javax.swing.JButton();
@@ -68,6 +69,10 @@ public class FrmReporteSesiones extends StandardForm {
         lblEmptyTable.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         lblEmptyTable.setText("No hay datos para mostrar");
         jPanel2.add(lblEmptyTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
+
+        lblCargando.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblCargando.setText("Cargando....");
+        jPanel2.add(lblCargando, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
 
         tbLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -316,6 +321,7 @@ public class FrmReporteSesiones extends StandardForm {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JLabel lblCargando;
     public javax.swing.JLabel lblEmptyTable;
     public javax.swing.JTable tbLog;
     public javax.swing.JTextField txtName;

@@ -1,6 +1,7 @@
 /dist/
 /build/
 /nbproject/private/
+/nbproject/
 
 build/**
 

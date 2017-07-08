@@ -17,6 +17,7 @@ import controlador.CtrlMantenerRDLH;
 import controlador.ctrRegistrarReserva;
 import controlador.CtrNReserva;
 import controlador.CtrlActualizarEstadoHabitacionADisponible;
+import java.awt.Toolkit;
 /**
  * 
  * @author Carlos Chavez Laguna
